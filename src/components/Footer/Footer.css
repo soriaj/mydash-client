@@ -1,0 +1,10 @@
+.footer {
+    grid-area: footer;
+    text-align: center;
+    background-color: #f1f1f0;
+    height: 50px;
+    border-top: 1px solid rgb(214, 214, 214);
+}
+.footer span {
+    margin: 0 20px; 
+}
