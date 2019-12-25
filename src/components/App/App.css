@@ -1,0 +1,21 @@
+.grid {
+    position: relative;
+    display: grid;
+    grid-template-columns: 100%;
+    grid-template-rows: 50px 1fr 50px;
+    grid-template-areas: 'header' 'main' 'footer';
+    height: 100vh;
+    overflow-x: hidden;
+}
+.grid--noscroll {
+    overflow-y: hidden;
+}
+
+@media screen and (min-width: 768px) {
+    .grid {
+        grid-template-columns: 200px calc(100% - 200px);
+        grid-template-rows: 50px 1fr 50px;
+        grid-template-areas: 'sidenav header' 'sidenav main' 'sidenav footer';
+        height: 100vh;
+    }
+}
