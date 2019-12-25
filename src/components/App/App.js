@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import './App.css'
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
+import SideNav from '../SideNav/SideNav';
 
 class App extends Component {
   state = {
@@ -10,10 +11,11 @@ class App extends Component {
   }
   render() {
     return (
-      <main className='App grid'>
+      <div className='App grid'>
         <Header />
+        <SideNav />
         <Footer />
-      </main>
+      </div>
     );
   }
 }
