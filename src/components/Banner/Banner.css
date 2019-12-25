@@ -1,0 +1,42 @@
+.main {
+    grid-area: main;
+    background-color: rgb(241, 241, 241);
+    border-top: 1px solid rgb(255, 255, 255);
+}
+.main-banner {
+    display: flex;
+    justify-content: space-between;
+    height: 300px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-image: linear-gradient(rgba(19, 19, 19, 0.45), rgba(90, 90, 90, 0.45)), url('../../img/world-map.jpg');
+    /* filter: grayscale(50%); */
+    margin-bottom: 20px;
+    box-shadow: 1px 1px gray;
+}
+.main-banner-container {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    padding: 50px;
+}
+.banner-title-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.main-banner-title {
+    color: white;
+    font-size: 28px;
+    text-shadow: 1px 1px gray;
+    margin-bottom: 8px;
+    
+}
+
+@media screen and  (min-width: 768px) {
+    .main-banner-container {
+        flex-direction: row;
+    }
+}
