@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
-import { FaBars, FaUserAlt, FaSignOutAlt, FaSignInAlt, FaUserPlus } from 'react-icons/fa';
+import { FaBars, FaUserAlt, FaSignOutAlt, FaSignInAlt, FaUserPlus, FaChevronCircleDown } from 'react-icons/fa';
+import './Header.css'
 
 class Header extends Component {
     render() {
@@ -7,7 +8,7 @@ class Header extends Component {
             <header className='header' role='banner'>
                 <FaBars className='header-menu' />
                 <div className='header-dropdown-container'>
-                    <i className='fas fa-chevron-circle-down'></i>
+                    <FaChevronCircleDown className='fa-chevron-circle-down' />
                     <div className='header-dropdown-menu'>
                     <ul className='dropdown-list'>
                         <li className='dropdown-list-item'>
