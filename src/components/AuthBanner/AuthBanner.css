@@ -1,0 +1,26 @@
+.main-banner-items {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+.banner-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    color: whitesmoke;
+}
+.banner-item-total {
+    font-size: 20px;
+    padding-bottom: 20px;
+}
+.main-content {
+    margin: 10px 10px;
+}
+
+@media screen and (min-width: 768px) {
+    .main-banner-items {
+        width: 55%;
+        justify-content: space-around;
+    }
+}
