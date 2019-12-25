@@ -20,12 +20,12 @@ class Header extends Component {
                             <span className='dropdown-label'>Login</span>
                         </li>
                         {/* <li className='dropdown-list-item'>
-                            <span className='dropdown-icon'><FaUserAlt /></i></span>
-                            <span className='dropdown-label'>account</span>
-                        </li> */}
-                        {/* <li className='dropdown-list-item'>
-                        <span className='dropdown-icon'><FaSignOutAlt /></span>
-                        <span className='dropdown-label'>log out</span>
+                            <span className='dropdown-icon'><FaUserAlt /></span>
+                            <span className='dropdown-label'>Account</span>
+                        </li>
+                        <li className='dropdown-list-item'>
+                            <span className='dropdown-icon'><FaSignOutAlt /></span>
+                            <span className='dropdown-label'>Log Out</span>
                         </li>  */}
                     </ul>
                     </div>
