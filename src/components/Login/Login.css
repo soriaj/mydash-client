@@ -55,6 +55,7 @@ input, button {
     display: flex;
     align-items: center;
     top: 15px;
+    position: relative;
     padding-right: 5px;
     color: lightgray;
 }

@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
+import { FaUser, FaKey, FaMailBulk, FaEnvelope } from 'react-icons/fa';
 
 export default class Signup extends Component {
     render() {
@@ -11,25 +12,25 @@ export default class Signup extends Component {
                             <h1>Register</h1>
                         </div>
                         <div className='input-wrapper'>
-                            <i className="fa fa-user icon"></i>
+                            <FaUser className="fa fa-user icon"></FaUser>
                             <input type="text" name="username" id="username" placeholder='Username' className='input-field' />
                             <span className="focus-input-field"></span>
                         </div>
     
                         <div className='input-wrapper'>
-                            <i className="fa fa-key icon"></i> 
+                            <FaKey className="fa fa-key icon"></FaKey> 
                             <input type="password" name="password" id="password" placeholder="Password" className='input-field' />
                             <span className="focus-input-field"></span>
                         </div>
     
                         <div className='input-wrapper'>
-                            <i className="fa fa-key icon"></i> 
+                            <FaKey className="fa fa-key icon"></FaKey> 
                             <input type="password" name="password" id="password" placeholder="Re-enter Password" className='input-field' />
                             <span className="focus-input-field"></span>
                         </div>
                         
                         <div className='input-wrapper'>
-                            <i className="fa fa-envelope icon"></i> 
+                            <FaEnvelope className="fa fa-envelope icon"></FaEnvelope> 
                             <input type="email" name="email" id="email" placeholder="your.email@mail.com" className='input-field' />
                             <span className="focus-input-field"></span>
                         </div>                    
