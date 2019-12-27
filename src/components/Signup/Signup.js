@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
-import { FaUser, FaKey, FaMailBulk, FaEnvelope } from 'react-icons/fa';
+import { FaUser, FaKey, FaEnvelope } from 'react-icons/fa';
 
 export default class Signup extends Component {
     render() {
