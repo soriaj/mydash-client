@@ -9,7 +9,7 @@ export default class Signup extends Component {
                 <section className='form-container'>
                     <div className='login-form'>
                         <div>
-                            <h1>Register</h1>
+                            <h1>Sign Up</h1>
                         </div>
                         <div className='input-wrapper'>
                             <FaUser className="fa fa-user icon"></FaUser>
