@@ -110,7 +110,10 @@
     list-style: none;
 }
 .dropdown-list-item {
-    padding: 15px;
+    padding: 10px;
+    /* padding-top: 10px;
+    padding-left: 10px;
+    padding-right: 10px; */
     text-transform: capitalize;
 }
 .dropdown-list-item:hover {
@@ -118,6 +121,11 @@
 }
 .dropdown-label {
     margin-left: 15px;
+}
+.dropdown-icon {
+    font-size: 20px;
+    position: relative;
+    top: 4px;
 }
 
 @media screen and (min-width: 768px) {

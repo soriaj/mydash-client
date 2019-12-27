@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { faDeparture } from 'react-icons';
-import { FaThermometerHalf } from 'react-icons/fa';
+import { FaThermometerHalf, FaPlaneDeparture } from 'react-icons/fa';
 import './AuthBanner.css';
 
 
@@ -11,7 +10,7 @@ class AuthBanner extends Component {
                 <div className='banner-item'>
                     <div className='banner-item-total'>{'Trips'}</div>
                     <div>
-                        <span><faDeparture className='fa-plane-departure' /></span>
+                        <span><FaPlaneDeparture className='fa-plane-departure' /></span>
                         <span className='list-item-title'>Trips</span>
                     </div>
                 </div>

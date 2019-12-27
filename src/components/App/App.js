@@ -6,12 +6,14 @@ import Footer from '../Footer/Footer';
 import SideNav from '../SideNav/SideNav';
 import Login from '../Login/Login';
 import Banner from '../Banner/Banner';
-
+import Signup from '../Signup/Signup';
+import NotFound from '../NotFound/NotFound'
 
 class App extends Component {
   state = {
-    isAuthenticated: false
+    hasToken: false
   }
+  // need to conditionally render different header, sidenav and content on auth
   render() {
     return (
       <div className='App grid'>
@@ -20,9 +22,9 @@ class App extends Component {
         <main className='main'>
           <Banner />
           <Switch>
-            <Route>
-              <Login exact path='/login' />
-            </Route>
+            <Route exact path='/login' component={Login} />
+            <Route exact path='/signup' component={Signup} />
+            <Route component={NotFound} />
           </Switch>
         </main>
         <Footer />
