@@ -14,6 +14,16 @@ class Header extends Component {
             hasToken: false
         })
     }
+
+    handleSideNav = () => {
+        // alert('Display sidenav')
+        let showSideNav = document.getElementById('sidenav')
+        showSideNav.classList.add('sidenav-active')
+    }
+    handleArrowMenu = () => {
+        // alert('Show menu')
+
+    }
     renderLogin() {
         return (
             <>
@@ -47,9 +57,9 @@ class Header extends Component {
     render() {
         return (
             <header className='header' role='banner'>
-                <FaBars className='header-menu' />
+                <FaBars className='header-menu' onClick={this.handleSideNav} />
                 <div className='header-dropdown-container'>
-                    <FaChevronCircleDown className='fa-chevron-circle-down' />
+                    <FaChevronCircleDown className='fa-chevron-circle-down' onClick={this.handleArrowMenu}/>
                     <div className='header-dropdown-menu'>
                     <ul className='dropdown-list'>
                         {this.state.hasToken ? this.renderLogout() : this.renderLogin()}

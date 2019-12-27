@@ -4,12 +4,16 @@ import { FaUser, FaKey } from 'react-icons/fa';
 import './Login.css'
 
 class Login extends Component {
+    handleSubmit = ev => {
+        ev.preventDefault();
+        alert('Login has been clicked')
+    }
     render() {
         return (
             <article className='main-content'>
                 <section className='form-container'>
                     <div className='login-form'>
-                        <form className='form-field'>
+                        <form className='form-field' onSubmit={this.handleSubmit}>
                             <div>
                                 <h1>Login</h1>
                             </div>
