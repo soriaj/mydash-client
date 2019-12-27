@@ -5,7 +5,7 @@ import './Banner.css';
 class Banner extends Component {
     render() {
         return (
-            <article class='main-banner'>
+            <article className='main-banner'>
                 <section className='main-banner-container'>
                     <div className='banner-title-container'>
                         <div className='main-banner-title'>Welcome Traveler</div>
