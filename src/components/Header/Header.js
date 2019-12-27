@@ -13,27 +13,31 @@ class Header extends Component {
         this.setState({
             hasToken: false
         })
+        this.showMenu()
     }
 
-    handleSideNav = () => {
-        // alert('Display sidenav')
+    showSideNav = () => {
         let showSideNav = document.getElementById('sidenav')
         showSideNav.classList.add('sidenav-active')
     }
-    handleArrowMenu = () => {
-        // alert('Show menu')
+    showMenu = () => {
+        let showMenu = document.querySelector('.header-dropdown-menu')
+        showMenu.classList.toggle('header-dropdown-menu-active')
+    }
 
+    closeOnRouteChange = () => {
+        this.showMenu()
     }
     renderLogin() {
         return (
             <>
             <li className='dropdown-list-item'>
                 <span className='dropdown-icon'><FaUserPlus /></span>
-                <span className='dropdown-label'><Link to='/signup'>Sign Up</Link></span>
+                <span className='dropdown-label'><Link to='/signup' onClick={this.closeOnRouteChange}>Sign Up</Link></span>
             </li>
             <li className='dropdown-list-item'>
                 <span className='dropdown-icon'><FaSignInAlt /></span>
-                <span className='dropdown-label'><Link to='/login'>Login</Link></span>
+                <span className='dropdown-label'><Link to='/login' onClick={this.closeOnRouteChange}>Login</Link></span>
             </li>
             </>
         )
@@ -44,7 +48,7 @@ class Header extends Component {
             <>
             <li className='dropdown-list-item'>
                 <span className='dropdown-icon'><FaUserAlt /></span>
-                <span className='dropdown-label'><Link to='/account'>Account</Link></span>
+                <span className='dropdown-label'><Link to='/account' onClick={this.closeOnRouteChange}>Account</Link></span>
             </li>
             <li className='dropdown-list-item'>
                 <span className='dropdown-icon'><FaSignOutAlt /></span>
@@ -57,9 +61,9 @@ class Header extends Component {
     render() {
         return (
             <header className='header' role='banner'>
-                <FaBars className='header-menu' onClick={this.handleSideNav} />
+                <FaBars className='header-menu' onClick={this.showSideNav} />
                 <div className='header-dropdown-container'>
-                    <FaChevronCircleDown className='fa-chevron-circle-down' onClick={this.handleArrowMenu}/>
+                    <FaChevronCircleDown className='fa-chevron-circle-down' onClick={this.showMenu}/>
                     <div className='header-dropdown-menu'>
                     <ul className='dropdown-list'>
                         {this.state.hasToken ? this.renderLogout() : this.renderLogin()}
