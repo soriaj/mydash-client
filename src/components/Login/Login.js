@@ -4,9 +4,29 @@ import { FaUser, FaKey } from 'react-icons/fa';
 import './Login.css'
 
 class Login extends Component {
+    state = {
+        username: '',
+        password: ''
+    }
+    handleUserChange = ev => {
+        this.setState({
+            username: ev.target.value
+        })
+    }
+    handlePasswordChange = ev => {
+        this.setState({
+            password: ev.target.value
+        })
+    }
     handleSubmit = ev => {
         ev.preventDefault();
-        alert('Login has been clicked')
+        const credentials = {
+            username: this.state.username,
+            password: this.state.password
+        }
+        console.log(credentials)
+        
+
     }
     render() {
         return (
@@ -19,13 +39,27 @@ class Login extends Component {
                             </div>
                             <div className='input-wrapper'>
                                 <FaUser className="fa-user icon"></FaUser>
-                                <input type="text" name="username" id="username" placeholder='Username' className='input-field' />
+                                <input 
+                                    type="text" 
+                                    name="username" 
+                                    id="username" 
+                                    placeholder='Username' 
+                                    className='input-field'
+                                    value={this.state.username}
+                                    onChange={this.handleUserChange} />
                                 <span className="focus-input-field"></span>
                             </div>
         
                             <div className='input-wrapper'>
                                 <FaKey className="fa fa-key icon"></FaKey> 
-                                <input type="password" name="password" id="password" placeholder="Password" className='input-field' />
+                                <input 
+                                    type="password" 
+                                    name="password" 
+                                    id="password" 
+                                    placeholder="Password" 
+                                    className='input-field'
+                                    value={this.state.password}
+                                    onChange={this.handlePasswordChange} />
                                 <span className="focus-input-field"></span>
                             </div>
         
