@@ -15,7 +15,6 @@ class App extends Component {
   state = {
     hasToken: false
   }
-  // need to conditionally render different header, sidenav and content on auth
   static contextType = TravelerContext
 
   handleTokenChange = () => {
@@ -36,9 +35,13 @@ class App extends Component {
           <main className='main'>
             <Banner />
             <Switch>
-              <Route exact path='/login' component={Login} />
-              <Route exact path='/signup' component={Signup} />
               <Route exact path='/' component={Landing} />
+              {/* PUBLIC ROUTES */}
+              <Route path='/login' component={Login} />
+              <Route path='/signup' component={Signup} />
+              
+              
+              {/* NOT FOUND ROUTE */}
               <Route component={NotFound} />
             </Switch>
         </main>
