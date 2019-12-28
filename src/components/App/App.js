@@ -44,7 +44,7 @@ class App extends Component {
               {/* NOT FOUND ROUTE */}
               <Route component={NotFound} />
             </Switch>
-        </main>
+          </main>
         </TravelerContext.Provider>
         <Footer />
       </div>
