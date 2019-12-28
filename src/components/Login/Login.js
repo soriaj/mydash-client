@@ -3,17 +3,18 @@ import { Link } from 'react-router-dom';
 import { FaUser, FaKey } from 'react-icons/fa';
 import './Login.css'
 import TravelerContext from '../../context/TravlerContext'
+import Loading from '../Loading/Loading'
 
 class Login extends Component {
     state = {
         error: null,
-        username: '',
-        password: ''
+        loading: false
     }
     static contextType = TravelerContext
 
     handleSubmit = ev => {
         ev.preventDefault();
+        this.setState({ error: null, loading: true })
         const { handleTokenChange } = this.context
         const { username, password } = ev.target
         const credentials = {
@@ -23,10 +24,14 @@ class Login extends Component {
         console.log(credentials)
         username.value = ''
         password.value = ''
-        handleTokenChange()
+        
+        setTimeout(() => {
+            handleTokenChange()
+            this.setState({ loading: false })
+        }, 3000)
     }
     render() {
-        const { error } = this.state
+        const { error, loading } = this.state
         return (
             <article className='main-content'>
                 <section className='form-container'>
@@ -46,6 +51,7 @@ class Login extends Component {
                                     id="username" 
                                     placeholder='Username' 
                                     className='input-field'
+                                    required
                                     />
                                 <span className="focus-input-field"></span>
                             </div>
@@ -58,12 +64,16 @@ class Login extends Component {
                                     id="password" 
                                     placeholder="Password" 
                                     className='input-field'
+                                    required
                                     />
                                 <span className="focus-input-field"></span>
                             </div>
         
                             <div className="login-btn-container">
-                                <button className="login-btn">Login</button>
+                                {loading && (<Loading />)}
+                                {!loading &&
+                                    <button className="login-btn">Login</button>
+                                }
                             </div>
                             <div className='login-signup'>
                                 <p>Don't have an account?<span><Link to='/signup'>Sign Up</Link></span></p>

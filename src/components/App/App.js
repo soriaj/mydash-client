@@ -18,9 +18,7 @@ class App extends Component {
   static contextType = TravelerContext
 
   handleTokenChange = () => {
-    this.setState({
-      hasToken: !this.state.hasToken
-    })
+    this.setState({ hasToken: !this.state.hasToken })
   }
   render() {
     const contextValue = {
