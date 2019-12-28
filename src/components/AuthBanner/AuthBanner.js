@@ -1,11 +1,30 @@
 import React, { Component } from 'react';
 import { FaThermometerHalf, FaPlaneDeparture } from 'react-icons/fa';
 import './AuthBanner.css';
+import TravelerContet from '../../context/TravlerContext'
 
 
 class AuthBanner extends Component {
-    render() {
+    state = {
+        error: null,
+    }
+    static contextType = TravelerContet
+    componentDidMount() {
+        // Weather API
+    }
+    renderWelcome() {
         return (
+            <div className='banner-title-container'>
+                <div className='main-banner-title'>Welcome Traveler</div>
+            </div>
+        )
+    }
+    renderContent() {
+        return (
+            <>
+            <div className='banner-title-container'>
+                <div className='main-banner-title'>Welcome Username</div>
+            </div>
             <div className='main-banner-items'>
                 <div className='banner-item'>
                     <div className='banner-item-total'>{'Trips'}</div>
@@ -22,6 +41,15 @@ class AuthBanner extends Component {
                     </div>
                 </div>
             </div>
+            </>
+        )
+    }
+    render() {
+        const { hasToken } = this.context
+        return (
+            <>
+            {hasToken ? this.renderContent() : this.renderWelcome()}
+            </>
         );
     }
 }

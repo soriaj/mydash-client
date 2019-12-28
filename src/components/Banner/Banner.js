@@ -7,9 +7,6 @@ class Banner extends Component {
         return (
             <article className='main-banner'>
                 <section className='main-banner-container'>
-                    <div className='banner-title-container'>
-                        <div className='main-banner-title'>Welcome Traveler</div>
-                    </div>
                     <AuthBanner />
                 </section>
             </article>

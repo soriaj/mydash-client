@@ -2,31 +2,28 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { FaUser, FaKey } from 'react-icons/fa';
 import './Login.css'
+import TravelerContext from '../../context/TravlerContext'
 
 class Login extends Component {
     state = {
+        error: null,
         username: '',
         password: ''
     }
-    handleUserChange = ev => {
-        this.setState({
-            username: ev.target.value
-        })
-    }
-    handlePasswordChange = ev => {
-        this.setState({
-            password: ev.target.value
-        })
-    }
+    static contextType = TravelerContext
+
     handleSubmit = ev => {
         ev.preventDefault();
+        const { handleTokenChange } = this.context
+        const { username, password } = ev.target
         const credentials = {
-            username: this.state.username,
-            password: this.state.password
+            username: username.value,
+            password: password.value
         }
         console.log(credentials)
-        
-
+        username.value = ''
+        password.value = ''
+        handleTokenChange()
     }
     render() {
         return (
@@ -45,8 +42,7 @@ class Login extends Component {
                                     id="username" 
                                     placeholder='Username' 
                                     className='input-field'
-                                    value={this.state.username}
-                                    onChange={this.handleUserChange} />
+                                    />
                                 <span className="focus-input-field"></span>
                             </div>
         
@@ -58,8 +54,7 @@ class Login extends Component {
                                     id="password" 
                                     placeholder="Password" 
                                     className='input-field'
-                                    value={this.state.password}
-                                    onChange={this.handlePasswordChange} />
+                                    />
                                 <span className="focus-input-field"></span>
                             </div>
         
