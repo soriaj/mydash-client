@@ -2,17 +2,17 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import { FaBars, FaUserAlt, FaSignOutAlt, FaSignInAlt, FaUserPlus, FaChevronCircleDown } from 'react-icons/fa';
 import './Header.css'
+import TravelerContext from '../../context/TravlerContext'
 
 class Header extends Component {
     state = {
-        active: true,
-        hasToken: false
+        error: null,
     }
+    static contextType = TravelerContext;
 
     handleOnLogout = () => {
-        this.setState({
-            hasToken: false
-        })
+        const { handleTokenChange } = this.context
+        handleTokenChange()
         this.showMenu()
     }
 
@@ -59,6 +59,7 @@ class Header extends Component {
     }
 
     render() {
+        const { hasToken } = this.context
         return (
             <header className='header' role='banner'>
                 <FaBars className='header-menu' onClick={this.showSideNav} />
@@ -66,7 +67,7 @@ class Header extends Component {
                     <FaChevronCircleDown className='fa-chevron-circle-down' onClick={this.showMenu}/>
                     <div className='header-dropdown-menu'>
                     <ul className='dropdown-list'>
-                        {this.state.hasToken ? this.renderLogout() : this.renderLogin()}
+                        {hasToken ? this.renderLogout() : this.renderLogin()}
                     </ul>
                     </div>
                 </div>
