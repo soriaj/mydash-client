@@ -10,6 +10,8 @@ import Signup from '../Signup/Signup';
 import Landing from '../Landing/Landing';
 import NotFound from '../NotFound/NotFound';
 import TravelerContext from '../../context/TravlerContext'
+import PrivateRoute from '../../utils/PrivateRoute';
+import PrivateTest from '../PrivateTest/PrivateTest'
 
 class App extends Component {
   state = {
@@ -38,6 +40,8 @@ class App extends Component {
               <Route path='/login' component={Login} />
               <Route path='/signup' component={Signup} />
               
+              {/* PRIVATE ROUTE */}
+              <PrivateRoute path='/private' component={PrivateTest} />
               
               {/* NOT FOUND ROUTE */}
               <Route component={NotFound} />
