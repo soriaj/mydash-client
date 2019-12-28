@@ -7,7 +7,8 @@ import SideNav from '../SideNav/SideNav';
 import Login from '../Login/Login';
 import Banner from '../Banner/Banner';
 import Signup from '../Signup/Signup';
-import NotFound from '../NotFound/NotFound'
+import Landing from '../Landing/Landing';
+import NotFound from '../NotFound/NotFound';
 
 class App extends Component {
   state = {
@@ -24,6 +25,7 @@ class App extends Component {
           <Switch>
             <Route exact path='/login' component={Login} />
             <Route exact path='/signup' component={Signup} />
+            <Route exact path='/' component={Landing} />
             <Route component={NotFound} />
           </Switch>
         </main>
