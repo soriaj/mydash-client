@@ -25,7 +25,7 @@ export default class Signup extends Component {
     
                         <div className='input-wrapper'>
                             <FaKey className="fa fa-key icon"></FaKey> 
-                            <input type="password" name="password" id="password" placeholder="Re-enter Password" className='input-field' />
+                            <input type="password" name="repeat-password" id="repeat-password" placeholder="Re-enter Password" className='input-field' />
                             <span className="focus-input-field"></span>
                         </div>
                         

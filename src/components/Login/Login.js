@@ -26,6 +26,7 @@ class Login extends Component {
         handleTokenChange()
     }
     render() {
+        const { error } = this.state
         return (
             <article className='main-content'>
                 <section className='form-container'>
@@ -33,6 +34,9 @@ class Login extends Component {
                         <form className='form-field' onSubmit={this.handleSubmit}>
                             <div>
                                 <h1>Login</h1>
+                            </div>
+                            <div role='alert'>
+                                {error && <p className='red'>{error}</p>}
                             </div>
                             <div className='input-wrapper'>
                                 <FaUser className="fa-user icon"></FaUser>
