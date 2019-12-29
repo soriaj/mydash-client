@@ -47,8 +47,7 @@ class SideNav extends Component {
         )
     }
     render() {
-        const { hasToken, lists } = this.context
-        console.log(lists)
+        const { hasToken } = this.context
         return (
             <aside id='sidenav' className='sidenav'>
                 <div className='sidenav-logo'>

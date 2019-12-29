@@ -6,6 +6,8 @@ const TravelerContext = React.createContext({
     trips: [],
     events: [],
     handleTokenChange: () => {},
+    setListItem: () => {},
+    addListItem: () => {},
 })
 
 export default TravelerContext;
