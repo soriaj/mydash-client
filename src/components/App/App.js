@@ -15,7 +15,7 @@ import PrivateTest from '../PrivateTest/PrivateTest'
 
 class App extends Component {
   state = {
-    hasToken: false
+    hasToken: false,
   }
   static contextType = TravelerContext
 
@@ -41,7 +41,7 @@ class App extends Component {
               <Route path='/signup' component={Signup} />
               
               {/* PRIVATE ROUTE */}
-              <PrivateRoute exact path='/private' component={PrivateTest} />
+              <PrivateRoute exact path='/dashboard' component={PrivateTest} />
               
               {/* NOT FOUND ROUTE */}
               <Route component={NotFound} />

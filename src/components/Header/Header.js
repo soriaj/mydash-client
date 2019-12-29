@@ -52,7 +52,7 @@ class Header extends Component {
             </li>
             <li className='dropdown-list-item'>
                 <span className='dropdown-icon'><FaSignOutAlt /></span>
-                <span className='dropdown-label'><Link to='/' onClick={this.handleOnLogout}>Log Out</Link></span>
+                <span className='dropdown-label'><Link to='/login' onClick={this.handleOnLogout}>Log Out</Link></span>
             </li> 
             </>
         )

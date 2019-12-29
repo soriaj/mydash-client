@@ -8,12 +8,11 @@ import SideNavEvents from '../SideNavEvents/SideNavEvents'
 import SideNavTrips from '../SideNavTrips/SideNavTrips'
 
 class SideNav extends Component {
+    static contextType = TravelerContext
     closeSideNav = () => {
         let close = document.getElementById('sidenav')
         close.classList.remove('sidenav-active')
     }
-
-    static contextType = TravelerContext
     renderUser = () => {
         return (
             <>
@@ -48,12 +47,13 @@ class SideNav extends Component {
         )
     }
     render() {
-        const { hasToken } = this.context
+        const { hasToken, lists } = this.context
+        console.log(lists)
         return (
             <aside id='sidenav' className='sidenav'>
                 <div className='sidenav-logo'>
                     <FaGlobeAsia className='fas fa-globe-asia' />
-                    <Link to='/' className='sidenav-logo-link'>Traveler</Link>
+                    {hasToken ? <Link to='/private' className='sidenav-logo-link'>Traveler</Link> : <Link to='/' className='sidenav-logo-link'>Traveler</Link>}
                     <FaTimes id='sidenav-close' className='fas fa-times sidenav-close' onClick={this.closeSideNav} />
                 </div>
                 {hasToken ? this.renderUser() : this.renderWelcome()}

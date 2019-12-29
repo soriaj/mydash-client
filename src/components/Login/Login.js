@@ -17,18 +17,14 @@ class Login extends Component {
         this.setState({ error: null, loading: true })
         const { handleTokenChange } = this.context
         const { username, password } = ev.target
-        const credentials = {
-            username: username.value,
-            password: password.value
-        }
         username.value = ''
         password.value = ''
-        
+        // Mock API Login call
         setTimeout(() => {
             handleTokenChange()
             this.setState({ loading: false })
             const { location, history } = this.props
-            const destination = (location.state || {}).from || '/private'
+            const destination = (location.state || {}).from || '/dashboard'
             history.push(destination)
         }, 3000)
     }
