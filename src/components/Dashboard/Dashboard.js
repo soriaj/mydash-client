@@ -3,8 +3,10 @@ import './Dashboard.css'
 import { FaPlus } from 'react-icons/fa';
 import PlaneTicket from '../../img/plane-ticket.png'
 import DashboardLists from '../DashboardLists/DashboardLists';
+import TravelerContext from '../../context/TravlerContext'
 
 export default class Dashboard extends Component {
+    static contextType = TravelerContext 
     render() {
         return <>
         <article className='main-content'>

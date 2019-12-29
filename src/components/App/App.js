@@ -15,17 +15,28 @@ import Dashboard from '../Dashboard/Dashboard'
 
 class App extends Component {
   state = {
-    hasToken: true,
+    hasToken: false,
+    lists: [],
   }
   static contextType = TravelerContext
 
   handleTokenChange = () => {
     this.setState({ hasToken: !this.state.hasToken })
   }
+  setListItem = list => {
+    this.setState({ lists: list })
+  }
+  addListItem = list => {
+    this.setState({ lists: [...this.state.lists, list ]})
+  }
+
   render() {
     const contextValue = {
       hasToken: this.state.hasToken,
+      lists: this.state.lists,
       handleTokenChange: this.handleTokenChange,
+      setListItem: this.setListItem,
+      addListItem: this.addListItem,
     }
     return (
       <div className='App grid'>

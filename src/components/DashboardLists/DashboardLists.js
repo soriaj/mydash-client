@@ -1,9 +1,19 @@
 import React, { Component } from 'react';
-import { NavLink } from 'react-router-dom'
-import { FaPlus, FaFile } from 'react-icons/fa';
+import { NavLink } from 'react-router-dom';
+import { FaPlus } from 'react-icons/fa';
+import ListItems from '../ListItems/ListItems';
+import TravelerContext from '../../context/TravlerContext';
+import listData from '../../mockData/lists-data'
 
 class DashboardLists extends Component {
+    static contextType = TravelerContext
+    componentDidMount() {
+        const { lists } = listData
+        this.context.setListItem(lists)
+      }   
     render() {
+        const { lists } = this.context
+        console.log(lists)
         return (
             <section className='content list'>
                 <div className='content-header'>
@@ -15,42 +25,13 @@ class DashboardLists extends Component {
                         <FaPlus className='fas fa-plus'></FaPlus>
                     </div>
                 </div>
-                <div className='content-cards'>
-                    <div className='inner-content'>
-                        <FaFile className='fas fa-file'></FaFile>
-                    </div>
-                    <div className='inner-content-description'>
-                        <p className='content-heading'>{'List Title'}</p>
-                        <p className='content-description'>{'Description of list...'}</p>
-                    </div>
-                </div>
-                <div className='content-cards'>
-                    <div className='inner-content'>
-                        <FaFile className='fas fa-file'></FaFile>
-                    </div>
-                    <div className='inner-content-description'>
-                        <p className='content-heading'>{'List Title'}</p>
-                        <p className='content-description'>{'Description of list...'}</p>
-                    </div>
-                </div>
-                <div className='content-cards'>
-                    <div className='inner-content'>
-                        <FaFile className='fas fa-file'></FaFile>
-                    </div>
-                    <div className='inner-content-description'>
-                        <p className='content-heading'>{'List Title'}</p>
-                        <p className='content-description'>{'Description of list...'}</p>
-                    </div>
-                </div>
-                <div className='content-cards'>
-                    <div className='inner-content'>
-                        <FaFile className='fas fa-file'></FaFile>
-                    </div>
-                    <div className='inner-content-description'>
-                        <p className='content-heading'>{'List Title'}</p>
-                        <p className='content-description'>{'Description of list...'}</p>
-                    </div>
-                </div>
+                {lists.map(item => 
+                    <ListItems 
+                        key={item.id}
+                        name={item.name}    
+                        content={item.content}
+                    />
+                )}
             </section>
         );
     }
