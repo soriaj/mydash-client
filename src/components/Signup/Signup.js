@@ -22,7 +22,8 @@ export default class Signup extends Component {
         repeat_password.value = ''
         email.value = ''
         setTimeout(() => {
-            this.setState({ loading: false })
+            const { history } = this.props
+            history.push('/login')
         }, 2000)
 
     }
