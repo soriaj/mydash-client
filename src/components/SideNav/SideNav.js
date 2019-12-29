@@ -16,35 +16,33 @@ class SideNav extends Component {
     }
     renderUser = () => {
         const { lists } = this.context
-        return (
-            <>
-            <div className='sidenav-account'>
-                <div className='sidenav-account-title'>{'Username'}</div>
-            </div>
-            <div className='sidenav-list'>
-                <ul className='sidenav-list-items'>
-                    <li className='list-item-heading'>Lists <FaList className='fas fa-list'></FaList></li>
-                    <li className='list-sub-items'>
-                        {lists.map(item => 
-                            <SideNavLists 
-                                key={item.id}
-                                name={item.name}
-                                />
-                        )}
-                    </li>
+        return <>
+        <div className='sidenav-account'>
+            <div className='sidenav-account-title'>{'Username'}</div>
+        </div>
+        <div className='sidenav-list'>
+            <ul className='sidenav-list-items'>
+                <li className='list-item-heading'>Lists <FaList className='fas fa-list'></FaList></li>
+                <li className='list-sub-items'>
+                    {lists.map(item => 
+                        <SideNavLists 
+                            key={item.id}
+                            name={item.name}>
+                        </SideNavLists>
+                    )}
+                </li>
 
-                    <li className='list-item-heading'>Events <FaCalendar className='fas fa-calendar'></FaCalendar></li>
-                    <li className='list-sub-items'>
-                        <SideNavEvents />
-                    </li>
-                    <li className='list-item-heading'>Trips <FaPlaneDeparture className='fas fa-plane'></FaPlaneDeparture></li>
-                    <li className='list-sub-items'>
-                        <SideNavTrips />
-                    </li>
-                </ul>
-            </div>
-            </>
-        )
+                <li className='list-item-heading'>Events <FaCalendar className='fas fa-calendar'></FaCalendar></li>
+                <li className='list-sub-items'>
+                    <SideNavEvents />
+                </li>
+                <li className='list-item-heading'>Trips <FaPlaneDeparture className='fas fa-plane'></FaPlaneDeparture></li>
+                <li className='list-sub-items'>
+                    <SideNavTrips />
+                </li>
+            </ul>
+        </div>
+        </>;
     }
     renderWelcome = () => {
         return (
