@@ -21,7 +21,6 @@ class Login extends Component {
             username: username.value,
             password: password.value
         }
-        console.log(credentials)
         username.value = ''
         password.value = ''
         
