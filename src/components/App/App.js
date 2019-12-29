@@ -11,11 +11,11 @@ import Landing from '../Landing/Landing';
 import NotFound from '../NotFound/NotFound';
 import TravelerContext from '../../context/TravlerContext'
 import PrivateRoute from '../../utils/PrivateRoute';
-import PrivateTest from '../PrivateTest/PrivateTest'
+import Dashboard from '../Dashboard/Dashboard'
 
 class App extends Component {
   state = {
-    hasToken: false,
+    hasToken: true,
   }
   static contextType = TravelerContext
 
@@ -41,7 +41,7 @@ class App extends Component {
               <Route path='/signup' component={Signup} />
               
               {/* PRIVATE ROUTE */}
-              <PrivateRoute exact path='/dashboard' component={PrivateTest} />
+              <PrivateRoute exact path='/dashboard' component={Dashboard} />
               
               {/* NOT FOUND ROUTE */}
               <Route component={NotFound} />

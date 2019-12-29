@@ -53,7 +53,7 @@ class SideNav extends Component {
             <aside id='sidenav' className='sidenav'>
                 <div className='sidenav-logo'>
                     <FaGlobeAsia className='fas fa-globe-asia' />
-                    {hasToken ? <Link to='/private' className='sidenav-logo-link'>Traveler</Link> : <Link to='/' className='sidenav-logo-link'>Traveler</Link>}
+                    {hasToken ? <Link to={'/dashboard'} className='sidenav-logo-link'>Traveler</Link> : <Link to={'/'} className='sidenav-logo-link'>Traveler</Link>}
                     <FaTimes id='sidenav-close' className='fas fa-times sidenav-close' onClick={this.closeSideNav} />
                 </div>
                 {hasToken ? this.renderUser() : this.renderWelcome()}
