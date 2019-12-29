@@ -13,7 +13,6 @@ class DashboardLists extends Component {
       }   
     render() {
         const { lists } = this.context
-        console.log(lists)
         return (
             <section className='content list'>
                 <div className='content-header'>

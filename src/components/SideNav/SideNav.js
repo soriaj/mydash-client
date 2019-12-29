@@ -9,11 +9,13 @@ import SideNavTrips from '../SideNavTrips/SideNavTrips'
 
 class SideNav extends Component {
     static contextType = TravelerContext
+
     closeSideNav = () => {
         let close = document.getElementById('sidenav')
         close.classList.remove('sidenav-active')
     }
     renderUser = () => {
+        const { lists } = this.context
         return (
             <>
             <div className='sidenav-account'>
@@ -23,7 +25,12 @@ class SideNav extends Component {
                 <ul className='sidenav-list-items'>
                     <li className='list-item-heading'>Lists <FaList className='fas fa-list'></FaList></li>
                     <li className='list-sub-items'>
-                        <SideNavLists />
+                        {lists.map(item => 
+                            <SideNavLists 
+                                key={item.id}
+                                name={item.name}
+                                />
+                        )}
                     </li>
 
                     <li className='list-item-heading'>Events <FaCalendar className='fas fa-calendar'></FaCalendar></li>

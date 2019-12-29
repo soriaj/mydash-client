@@ -3,19 +3,13 @@ import { FaFileAlt } from 'react-icons/fa'
 
 class SideNavLists extends Component {
     render() {
+        const { name } = this.props
         return (
             <>
             <div className='list-item'>
                 <span><FaFileAlt className='fas fa-file'></FaFileAlt></span>
-                <span className='list-item-title'>{'List 01'}</span>
-            </div>
-            <div className='list-item'>
-                <span><FaFileAlt className='fas fa-file'></FaFileAlt></span>
-                <span className='list-item-title'>{'List 02'}</span>
-            </div>
-            <div className='list-item'>
-                <span><FaFileAlt className='fas fa-file'></FaFileAlt></span>
-                <span className='list-item-title'>{'List 03'}</span>
+                <span className='list-item-title'>{name}</span>
+                {/* Need to add NavLink for each id for a lists/:lists_id */}
             </div>
             </>
         );
