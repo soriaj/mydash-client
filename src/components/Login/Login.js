@@ -28,6 +28,9 @@ class Login extends Component {
         setTimeout(() => {
             handleTokenChange()
             this.setState({ loading: false })
+            const { location, history } = this.props
+            const destination = (location.state || {}).from || '/private'
+            history.push(destination)
         }, 3000)
     }
     render() {

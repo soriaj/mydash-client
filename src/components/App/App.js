@@ -41,7 +41,7 @@ class App extends Component {
               <Route path='/signup' component={Signup} />
               
               {/* PRIVATE ROUTE */}
-              <PrivateRoute path='/private' component={PrivateTest} />
+              <PrivateRoute exact path='/private' component={PrivateTest} />
               
               {/* NOT FOUND ROUTE */}
               <Route component={NotFound} />
