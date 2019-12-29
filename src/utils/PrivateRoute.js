@@ -5,7 +5,6 @@ import TravelerContext from '../context/TravlerContext'
 export default function PrivateRoute({ component, ...props }) {
   const Component = component
   const context = useContext(TravelerContext)
-  console.log(context)
   return (
     <Route
       {...props}
