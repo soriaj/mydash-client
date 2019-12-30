@@ -6,8 +6,6 @@
     height: 100%;
     transition: all .3s ease-in-out;
     transform: translateX(-205px);
-    /* background: rgb(36, 114, 240); */
-    /* background: #3361c5; */
     background-color: #3a4e7a;
     color: whitesmoke;
     line-height: 150%;
@@ -63,7 +61,6 @@
     padding-bottom: 12px;
     padding-left: 8px;
     padding-right: 8px;
-    /* color: white; */
     text-transform: uppercase;
     letter-spacing: 2px;
 }

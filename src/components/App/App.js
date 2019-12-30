@@ -11,21 +11,36 @@ import Landing from '../Landing/Landing';
 import NotFound from '../NotFound/NotFound';
 import TravelerContext from '../../context/TravlerContext'
 import PrivateRoute from '../../utils/PrivateRoute';
-import PrivateTest from '../PrivateTest/PrivateTest'
+import Dashboard from '../Dashboard/Dashboard'
 
 class App extends Component {
   state = {
     hasToken: false,
+    lists: [],
+    events: [],
+    trips: [],
   }
   static contextType = TravelerContext
 
   handleTokenChange = () => {
     this.setState({ hasToken: !this.state.hasToken })
   }
+  setItems = (list, event, trip) => {
+    this.setState({ lists: list, events: event, trips: trip })
+  }
+  addListItem = list => {
+    this.setState({ lists: [...this.state.lists, list ]})
+  }
+
   render() {
     const contextValue = {
       hasToken: this.state.hasToken,
+      lists: this.state.lists,
+      events: this.state.events,
+      trips: this.state.trips,
       handleTokenChange: this.handleTokenChange,
+      setItems: this.setItems,
+      addListItem: this.addListItem,
     }
     return (
       <div className='App grid'>
@@ -41,7 +56,7 @@ class App extends Component {
               <Route path='/signup' component={Signup} />
               
               {/* PRIVATE ROUTE */}
-              <PrivateRoute exact path='/dashboard' component={PrivateTest} />
+              <PrivateRoute exact path='/dashboard' component={Dashboard} />
               
               {/* NOT FOUND ROUTE */}
               <Route component={NotFound} />

@@ -182,3 +182,7 @@ input, button {
 .red {
     color: red;
 }
+.no-view {
+    visibility: hidden;
+    width: 0;
+}
