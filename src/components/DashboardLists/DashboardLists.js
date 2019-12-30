@@ -3,14 +3,9 @@ import { NavLink } from 'react-router-dom';
 import { FaPlus } from 'react-icons/fa';
 import ListItems from '../ListItems/ListItems';
 import TravelerContext from '../../context/TravlerContext';
-import data from '../../mockData/data'
 
-class DashboardLists extends Component {
-    static contextType = TravelerContext
-    componentDidMount() {
-        const { lists, events, trips } = data
-        this.context.setItems(lists, events, trips)
-      }   
+export default class DashboardLists extends Component { 
+    static contextType = TravelerContext  
     render() {
         const { lists } = this.context
         return (
@@ -35,5 +30,3 @@ class DashboardLists extends Component {
         );
     }
 }
-
-export default DashboardLists;
