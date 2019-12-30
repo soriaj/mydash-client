@@ -1,12 +1,13 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
-import { FaBars, FaUserAlt, FaSignOutAlt, FaSignInAlt, FaUserPlus, FaChevronCircleDown } from 'react-icons/fa';
+import { FaBars, FaUserAlt, FaSignOutAlt, FaSignInAlt, FaUserPlus, FaChevronCircleDown, FaChevronCircleUp } from 'react-icons/fa';
 import './Header.css'
 import TravelerContext from '../../context/TravlerContext'
 
 class Header extends Component {
     state = {
         error: null,
+        show: false
     }
     static contextType = TravelerContext;
 
@@ -21,6 +22,7 @@ class Header extends Component {
         showSideNav.classList.add('sidenav-active')
     }
     showMenu = () => {
+        this.setState({ show: !this.state.show })
         let showMenu = document.querySelector('.header-dropdown-menu')
         showMenu.classList.toggle('header-dropdown-menu-active')
     }
@@ -60,11 +62,15 @@ class Header extends Component {
 
     render() {
         const { hasToken } = this.context
+        const { show } = this.state
         return (
             <header className='header' role='banner'>
                 <FaBars className='header-menu' onClick={this.showSideNav} />
                 <div className='header-dropdown-container'>
-                    <FaChevronCircleDown className='fa-chevron-circle-down' onClick={this.showMenu}/>
+                    {show 
+                        ? <FaChevronCircleUp className='fa-chevron-circle-down' onClick={this.showMenu}/>
+                        : <FaChevronCircleDown className='fa-chevron-circle-down' onClick={this.showMenu}/>
+                    }
                     <div className='header-dropdown-menu'>
                     <ul className='dropdown-list'>
                         {hasToken ? this.renderLogout() : this.renderLogin()}
