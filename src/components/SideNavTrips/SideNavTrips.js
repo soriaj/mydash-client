@@ -5,7 +5,7 @@ import SideNavTripsItems from '../SideNavTripsItems/SideNavTripsItems'
 
 class SideNavTrips extends Component {
     state = {
-        showItems: this
+        showItems: true
     }
     static contextType = TravelerContext
     renderTripsItems = () => {
