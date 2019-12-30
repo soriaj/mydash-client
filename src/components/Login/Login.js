@@ -43,26 +43,28 @@ class Login extends Component {
                             </div>
                             <div className='input-wrapper'>
                                 <FaUser className="fa-user icon"></FaUser>
+                                <label htmlFor="username" className='no-view'>Username</label>
                                 <input 
                                     type="text" 
                                     name="username" 
                                     id="username" 
                                     placeholder='Username' 
                                     className='input-field'
-                                    required
+                                    // required
                                     />
                                 <span className="focus-input-field"></span>
                             </div>
         
                             <div className='input-wrapper'>
                                 <FaKey className="fa fa-key icon"></FaKey> 
+                                <label htmlFor="password" className='no-view'>Password</label>
                                 <input 
                                     type="password" 
                                     name="password" 
                                     id="password" 
                                     placeholder="Password" 
                                     className='input-field'
-                                    required
+                                    // required
                                     />
                                 <span className="focus-input-field"></span>
                             </div>
