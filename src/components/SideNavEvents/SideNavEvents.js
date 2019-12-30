@@ -1,22 +1,32 @@
 import React, { Component } from 'react';
-import { FaCalendarDay } from 'react-icons/fa'
+import { FaCalendar } from 'react-icons/fa'
+import TravelerContext from  '../../context/TravlerContext'
+import SideNavEventsItems from '../SideNavEventsItems/SideNavEventsItems'
 
 class SideNavEvents extends Component {
+    state = {
+        showItems: false
+    }
+    static contextType = TravelerContext
+    renderEventsItems = () => {
+        this.setState({ showItems: !this.state.showItems })
+    }
     render() {
+        const { events } = this.context
+        const { showItems } = this.state
         return (
             <>
-            <div className='list-item'>
-                <span><FaCalendarDay className='fas fa-calendar-day'></FaCalendarDay></span>
-                <span className='list-item-title'>{'Event 01'}</span>
-            </div>
-            <div className='list-item'>
-                <span><FaCalendarDay className='fas fa-calendar-day'></FaCalendarDay></span>
-                <span className='list-item-title'>{'Event 02'}</span>
-            </div>
-            <div className='list-item'>
-                <span><FaCalendarDay className='fas fa-calendar-day'></FaCalendarDay></span>
-                <span className='list-item-title'>{'Event 03'}</span>
-            </div>
+            <li className='list-item-heading' onClick={this.renderEventsItems}>
+                Events<FaCalendar className='fas fa-calendar'></FaCalendar></li>
+            {showItems && <li className='list-sub-items'>
+                {events.map(item => 
+                    <SideNavEventsItems
+                        key={item.id}
+                        name={item.name}
+                        date={item.date}>
+                    </SideNavEventsItems>
+                )}
+            </li>}
             </>
         );
     }

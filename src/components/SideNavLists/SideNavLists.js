@@ -1,16 +1,32 @@
 import React, { Component } from 'react';
-import { FaFileAlt } from 'react-icons/fa'
+import { FaList } from 'react-icons/fa'
+import TravelerContext from  '../../context/TravlerContext'
+import SideNavListsItems from '../SideNavListsItems/SideNavListsItems';
 
 class SideNavLists extends Component {
+    state = {
+        showItems: false
+    }
+    static contextType = TravelerContext
+    renderListsItems = () => {
+        this.setState({ showItems: !this.state.showItems })
+    }
     render() {
-        const { name } = this.props
+        const { lists } = this.context
+        const { showItems } = this.state
         return (
             <>
-            <div className='list-item'>
-                <span><FaFileAlt className='fas fa-file'></FaFileAlt></span>
-                <span className='list-item-title'>{name}</span>
-                {/* Need to add NavLink for each id for a lists/:lists_id */}
-            </div>
+            <li className='list-item-heading' onClick={this.renderListsItems}>
+                Lists<FaList className='fas fa-list'></FaList>
+            </li>
+            {showItems && <li className='list-sub-items'>
+                {lists.map(item => 
+                    <SideNavListsItems
+                        key={item.id}
+                        name={item.name}>
+                    </SideNavListsItems>
+                )}
+            </li>}
             </>
         );
     }
