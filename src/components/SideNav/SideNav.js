@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { FaGlobeAsia, FaTimes, FaList, FaCalendar, FaPlaneDeparture } from 'react-icons/fa';
+import { FaGlobeAsia, FaTimes } from 'react-icons/fa';
 import './SideNav.css';
 import TravelerContext from '../../context/TravlerContext'
 import SideNavLists from '../SideNavLists/SideNavLists'
@@ -8,6 +8,9 @@ import SideNavEvents from '../SideNavEvents/SideNavEvents'
 import SideNavTrips from '../SideNavTrips/SideNavTrips'
 
 class SideNav extends Component {
+    state = {
+        listsShown: false
+    }
     static contextType = TravelerContext
 
     closeSideNav = () => {
@@ -15,34 +18,21 @@ class SideNav extends Component {
         close.classList.remove('sidenav-active')
     }
     renderUser = () => {
-        const { lists } = this.context
-        return <>
-        <div className='sidenav-account'>
-            <div className='sidenav-account-title'>{'Username'}</div>
-        </div>
-        <div className='sidenav-list'>
-            <ul className='sidenav-list-items'>
-                <li className='list-item-heading'>Lists <FaList className='fas fa-list'></FaList></li>
-                <li className='list-sub-items'>
-                    {lists.map(item => 
-                        <SideNavLists 
-                            key={item.id}
-                            name={item.name}>
-                        </SideNavLists>
-                    )}
-                </li>
-
-                <li className='list-item-heading'>Events <FaCalendar className='fas fa-calendar'></FaCalendar></li>
-                <li className='list-sub-items'>
-                    <SideNavEvents />
-                </li>
-                <li className='list-item-heading'>Trips <FaPlaneDeparture className='fas fa-plane'></FaPlaneDeparture></li>
-                <li className='list-sub-items'>
-                    <SideNavTrips />
-                </li>
-            </ul>
-        </div>
-        </>;
+        return (
+            <>
+                <div className='sidenav-account'>
+                    <div className='sidenav-account-title'>{'Username'}</div>
+                </div>
+                <div className='sidenav-list'>
+                    <ul className='sidenav-list-items'>
+                        <SideNavLists />
+                        <SideNavEvents />
+                        <SideNavTrips />
+                        
+                    </ul>
+                </div>
+            </>
+        )
     }
     renderWelcome = () => {
         return (

@@ -1,0 +1,66 @@
+{
+    "lists": [
+        {
+            "id": 1,
+            "name": "Packing Items",
+            "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+        },
+        {
+            "id": 2,
+            "name": "Emergency Contacts",
+            "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+        },
+        {
+            "id": 3,
+            "name": "Restaurants",
+            "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+        },
+        {
+            "id": 4,
+            "name": "ToDo",
+            "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+        }
+    ],
+    "events": [
+        {
+            "id": 1,
+            "name": "NYE Party",
+            "date": "12/31/19"
+        },
+        {
+            "id": 2,
+            "name": "Dinner with Joe",
+            "date": "12/30/19"
+        },
+        {
+            "id": 3,
+            "name": "Business Planning",
+            "date": "12/19/19"
+        },
+        {
+            "id": 4,
+            "name": "Charity Dinner",
+            "date": "11/30/19"
+        }
+    ],
+    "trips": [
+        {
+            "id": 1,
+            "name": "Business Trip",
+            "destination": "Paris",
+            "deptCity": "Los Angles",
+            "departure":"06:00 AM",
+            "arrCity":"Paris",
+            "arrival":"11:00 PM"
+        },
+        {
+            "id": 2,
+            "name": "Vacation",
+            "destination": "Hawaii",
+            "deptCity": "Los Angles",
+            "departure":"09:00 AM",
+            "arrCity":"Hawaii",
+            "arrival":"02:00 PM"
+        }
+    ]
+}

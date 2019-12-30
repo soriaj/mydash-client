@@ -1,22 +1,33 @@
 import React, { Component } from 'react'
 import { FaPlaneDeparture } from 'react-icons/fa'
+import TravelerContext from '../../context/TravlerContext'
+import SideNavTripsItems from '../SideNavTripsItems/SideNavTripsItems'
 
 class SideNavTrips extends Component {
+    state = {
+        showItems: false
+    }
+    static contextType = TravelerContext
+    renderTripsItems = () => {
+        this.setState({ showItems: !this.state.showItems })
+    }
     render() {
+        const { trips } = this.context
+        const { showItems } = this.state
         return (
             <>
-            <div className='list-item'>
-                <span><FaPlaneDeparture className='fas fa-plane-departure'></FaPlaneDeparture></span>
-                <span className='list-item-title'>{'Flight 01'}</span>
-            </div>
-            <div className='list-item'>
-                <span><FaPlaneDeparture className='fas fa-plane-departure'></FaPlaneDeparture></span>
-                <span  className='list-item-title'>{'Flight 02'}</span>
-            </div>
-            <div className='list-item'>
-                <span><FaPlaneDeparture className='fas fa-plane-departure'></FaPlaneDeparture></span>
-                <span className='list-item-title'>{'Flight 03'}</span>
-            </div>
+            <li className='list-item-heading' onClick={this.renderTripsItems}>
+                Trips<FaPlaneDeparture className='fas fa-plane'></FaPlaneDeparture></li>
+            {showItems && <li className='list-sub-items'>
+                {trips.map(item => 
+                    <SideNavTripsItems
+                        key={item.id}
+                        name={item.name}
+                        destination={item.destination}
+                        deptCity={item.deptCity}>
+                    </SideNavTripsItems>
+                )}
+            </li>}
             </>
         );
     }
