@@ -80,6 +80,20 @@
     padding-left: 7px;
     font-size: 17px;
 }
+.fade-enter {
+    transition: all .3s ease-in-out;
+    transform: translateX(-205px);
+}
+.fade-enter.fade-enter-active {
+    transform: translateX(0);
+}
+.fade-exit {
+    transform: translateX(0px);
+}
+.fade-exit.fade-exit-active {
+    transform: translateX(-205px);
+    transition: all .3s ease-in-out;
+}
 
 @media screen and (min-width: 768px) {
     .sidenav {
