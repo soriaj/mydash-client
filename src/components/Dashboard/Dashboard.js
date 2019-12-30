@@ -1,12 +1,17 @@
-import React, { Component } from 'react'
-import './Dashboard.css'
+import React, { Component } from 'react';
+import './Dashboard.css';
 import { FaPlus } from 'react-icons/fa';
-import PlaneTicket from '../../img/plane-ticket.png'
 import DashboardLists from '../DashboardLists/DashboardLists';
-import TravelerContext from '../../context/TravlerContext'
+import DashboardTrips from '../DashboardTrips/DashboardTrips';
+import TravelerContext from '../../context/TravlerContext';
+import data from '../../mockData/data';
 
 export default class Dashboard extends Component {
-    static contextType = TravelerContext 
+    static contextType = TravelerContext
+    componentDidMount() {
+        const { lists, events, trips } = data
+        this.context.setItems(lists, events, trips)
+    }
     render() {
         return <>
         <article className='main-content'>
@@ -94,63 +99,7 @@ export default class Dashboard extends Component {
                             </div>
                         </div>
                     </div>
-                    <div className='content trips-section'>
-                        <div className='content-header'>
-                            <div className='content-titles'>
-                                <h3 className='content-header-title'>Trips</h3>
-                                <a href='/trips'>View All</a>
-                            </div>
-                            <div className='add-icon'>
-                                <FaPlus className='fas fa-plus'></FaPlus>
-                            </div>
-                        </div>
-
-                        <div className='trip-tickets'>
-                            <div className='ticket-card'>
-                                <h4>{'Trip Name'}</h4>
-                                <div className='ticket-details'>
-                                    <img src={PlaneTicket} alt='plane ticket' loading='lazy' />
-                                    <p>{'Distination'}</p>
-                                </div>
-                            </div>
-
-                            <div className='ticket-card'>
-                                <h4>{'Trip Name'}</h4>
-                                <div className='ticket-details'>
-                                    <img src={PlaneTicket} alt='plane ticket' loading='lazy' />
-                                    <p>{'Distination'}</p>
-                                </div>
-                            </div>
-                            <div className='ticket-card'>
-                                <h4>{'Trip Name'}</h4>
-                                <div className='ticket-details'>
-                                    <img src={PlaneTicket} alt='plane ticket' loading='lazy'/>
-                                    <p>{'Distination'}</p>
-                                </div>
-                            </div>
-                            <div className='ticket-card'>
-                                <h4>{'Trip Name'}</h4>
-                                <div className='ticket-details'>
-                                    <img src={PlaneTicket} alt='plane ticket' loading='lazy' />
-                                    <p>{'Distination'}</p>
-                                </div>
-                            </div>
-                            <div className='ticket-card'>
-                                <h4>{'Trip Name'}</h4>
-                                <div className='ticket-details'>
-                                    <img src={PlaneTicket} alt='plane ticket' loading='lazy' />
-                                    <p>{'Distination'}</p>
-                                </div>
-                            </div>
-                            <div className='ticket-card'>
-                                <h4>{'Trip Name'}</h4>
-                                <div className='ticket-details'>
-                                    <img src={PlaneTicket} alt='plane ticket' loading='lazy' />
-                                    <p>{'Distination'}</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <DashboardTrips />
                 </div>
             </section>
         </article>
