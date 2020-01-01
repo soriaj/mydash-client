@@ -12,6 +12,7 @@ import NotFound from '../NotFound/NotFound';
 import TravelerContext from '../../context/TravlerContext'
 import PrivateRoute from '../../utils/PrivateRoute';
 import Dashboard from '../Dashboard/Dashboard'
+import ListItemDetails from  '../ListItemDetails/ListItemDetails'
 
 class App extends Component {
   state = {
@@ -57,6 +58,7 @@ class App extends Component {
               
               {/* PRIVATE ROUTE */}
               <PrivateRoute exact path='/dashboard' component={Dashboard} />
+              <PrivateRoute path='/lists/:list_id' component={ListItemDetails} />
               
               {/* NOT FOUND ROUTE */}
               <Route component={NotFound} />
