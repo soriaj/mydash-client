@@ -23,6 +23,7 @@
     ],
     "events": [
         {
+            "id": "12",
             "month": "December",
             "event": [
                 {
@@ -42,6 +43,37 @@
                 },
                 {
                     "event_date": "12/30/19",
+                    "event_details": [
+                        {
+                            "id": 1,
+                            "name": "Date Night",
+                            "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "11",
+            "month": "November",
+            "event": [
+                {
+                    "event_date": "11/20/19",
+                    "event_details": [
+                        {
+                            "id": 1,
+                            "name": "NYE Party",
+                            "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+                        },
+                        {
+                            "id": 2,
+                            "name": "NYE Dinner",
+                            "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."                    
+                        }
+                    ]
+                },
+                {
+                    "event_date": "11/15/19",
                     "event_details": [
                         {
                             "id": 1,

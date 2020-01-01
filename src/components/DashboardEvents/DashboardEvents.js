@@ -2,9 +2,12 @@ import React, { Component } from 'react'
 import { NavLink } from 'react-router-dom'
 import { FaPlus } from 'react-icons/fa'
 import EventsTimeLine from '../EventsTimeLine/EventsTimeLine'
+import TravlerContext from  '../../context/TravlerContext'
 
 export default class DashboardEvents extends Component {
+    static contextType = TravlerContext
     render() {
+        const { events } = this.context
         return (
             <div className='content events-section'>
                 <div className='content-header'>
@@ -17,7 +20,12 @@ export default class DashboardEvents extends Component {
                     </div>
                 </div>
                 <div className='events-timeline'>
-                    <EventsTimeLine />
+                    {events.map((event, index) => (
+                        <EventsTimeLine 
+                            key={index}
+                            event={event}
+                        />
+                    ))}
                 </div>
             </div>
         )
