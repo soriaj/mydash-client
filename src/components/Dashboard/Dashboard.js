@@ -15,7 +15,7 @@ export default class Dashboard extends Component {
     render() {
         return <>
         <article className='main-content'>
-            <DashboardLists />
+            <DashboardLists history={this.props.history} />
 
             <section className='content events trips'>
                 <div className='main-content-events'>

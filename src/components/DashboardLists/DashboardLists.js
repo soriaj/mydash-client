@@ -22,8 +22,10 @@ export default class DashboardLists extends Component {
                 {lists.map(item => 
                     <ListItems 
                         key={item.id}
+                        id={item.id}
                         name={item.name}    
                         content={item.content}
+                        history={this.props.history}
                     />
                 )}
             </section>

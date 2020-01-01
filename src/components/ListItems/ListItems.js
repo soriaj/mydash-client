@@ -2,11 +2,14 @@ import React, { Component } from 'react';
 import { FaFile } from 'react-icons/fa';
 
 class ListItems extends Component {
+    viewListItemDetails = () => {
+        this.props.history.push(`/lists/${this.props.id}`)
+    }
     render() {
         const { name, content } = this.props
         return (
             <>
-                <div className='content-cards'>
+                <div className='content-cards' onClick={this.viewListItemDetails}>
                     <div className='inner-content'>
                         <FaFile className='fas fa-file'></FaFile>
                     </div>
