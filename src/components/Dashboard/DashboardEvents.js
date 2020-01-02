@@ -3,9 +3,15 @@ import { NavLink } from 'react-router-dom'
 import { FaPlus } from 'react-icons/fa'
 import EventsTimeLine from '../EventsTimeLine/EventsTimeLine'
 import TravlerContext from  '../../context/TravlerContext'
+import data from '../../mockData/data.json'
 
 export default class DashboardEvents extends Component {
     static contextType = TravlerContext
+    componentDidMount() {
+        const { all_events } = data
+        this.context.setEventItems(all_events)
+
+    } 
     render() {
         const { all_events } = this.context
         return (
