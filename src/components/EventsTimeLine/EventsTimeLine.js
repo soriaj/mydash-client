@@ -7,7 +7,7 @@ class EventsTimeLine extends Component {
 
     render() {
         const { all_events } = this.props
-        // console.log(all_events)
+        console.log(all_events)
         return (
             <div className='timeline'>
                 <div className='timeline-month'><strong>{all_events.month}</strong></div>

@@ -4,14 +4,14 @@ class EventTimeLIneCard extends Component {
     render() {
         const { name, description } = this.props
         return (
-            <>
-              <div className='card-title'>
+            <div className='timeline-card'>
+                <div className='card-title'>
                     {name}
                 </div>
                 <div className='card-details'>
                     <p>{description}</p>
                 </div>  
-            </>
+            </div>
         );
     }
 }

@@ -201,6 +201,10 @@
 .timeline-card:hover {
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
 }
+.event-card {
+    margin-bottom: 25px;
+    border-bottom: 1px solid black;
+}
 .card-title {
     background-color: rgba(1, 101, 141, 0.897);
     color: whitesmoke;
