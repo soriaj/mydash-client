@@ -7,15 +7,14 @@ class EventsTimeLine extends Component {
 
     render() {
         const { all_events } = this.props
-        // console.log(event)
+        // console.log(all_events)
         return (
             <div className='timeline'>
                 <div className='timeline-month'><strong>{all_events.month}</strong></div>
-                {all_events.month_events.map((month_events, idx) => (
+                {all_events.month_events.map((cur, idx) => (
                     <EventDates 
-                        key={month_events.id}
-                        date={month_events.date}
-                        events={month_events.events}
+                        key={cur.id}
+                        month_events={cur}
                     />
                 ))}
             </div>

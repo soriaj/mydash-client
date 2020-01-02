@@ -27,7 +27,7 @@
             "month": "December",
             "month_events": [
                 {
-                    "id": "31",
+                    "id": 31,
                     "date": "12/31/19",
                     "events": [
                         {
@@ -50,7 +50,7 @@
             "month_events": [
                 {
                     "id": 25,
-                    "date": "12/25/19",
+                    "date": "11/25/19",
                     "events": [
                         {
                             "id": 1,

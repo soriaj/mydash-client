@@ -14,16 +14,15 @@ class SideNavEvents extends Component {
         this.setState({ showItems: !this.state.showItems, show: !this.state.show })
     }
     render() {
-        const { events } = this.context
-        const eventsList = events.map((cur, idx) => (
-            cur.event
-        ))
-        const eventItems = [].concat(...eventsList).map(cur => (
-            cur.event_details
-        ))
-        const event = [].concat(...eventItems)
+        const { all_events } = this.context
+        // const eventsList = all_events.map((cur, idx) => (
+        //     cur.event
+        // ))
+        // const eventItems = [].concat(...eventsList).map(cur => (
+        //     cur.event_details
+        // ))
+        // const event = [].concat(...eventItems)
         const { showItems, show } = this.state
-        // event.forEach(cur => console.log(cur.name))
         return (
             <>
             <li className='list-item-heading' onClick={this.renderEventsItems}>
@@ -41,7 +40,7 @@ class SideNavEvents extends Component {
                     timeout={{enter: 300, exit: 500}}
                     classNames="fade"
                 ><li className='list-sub-items'>
-                    {events.map((event, idx) => 
+                    {all_events.map((event, idx) => 
                         <SideNavEventsItems
                             key={idx}
                             event={event}
