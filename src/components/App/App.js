@@ -15,6 +15,7 @@ import Dashboard from '../Dashboard/Dashboard';
 import ListItemDetails from  '../ListItemDetails/ListItemDetails';
 import EventItemDetails from '../EventItemDetails/EventItemDetails';
 import data from '../../mockData/data';
+import TripItemDetails from '../TripItemDetails/TripItemDetails';
 
 class App extends Component {
   state = {
@@ -65,6 +66,7 @@ class App extends Component {
               <PrivateRoute exact path='/dashboard' component={Dashboard} />
               <PrivateRoute path='/dashboard/lists/:list_id' component={ListItemDetails} />
               <PrivateRoute path='/dashboard/events/:date/:event_id' component={EventItemDetails} />
+              <PrivateRoute path='/dashboard/trips/:trip_id' component={TripItemDetails} />
               
               {/* NOT FOUND ROUTE */}
               <Route component={NotFound} />

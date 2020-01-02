@@ -10,15 +10,13 @@ class EventDates extends Component {
                 {month_events.date}
             </div>
             <div className='timeline-section'>
-                <div className='timeline-card'>
-                    {month_events.events.map((event, idx) => (
-                        <EventTimeLineCard 
-                            key={event.id}
-                            name={event.name}
-                            description={event.description}
-                        />
-                    ))}
-                </div>
+                {month_events.events.map((event, idx) => (
+                    <EventTimeLineCard 
+                        key={event.id}
+                        name={event.name}
+                        description={event.description}
+                    />
+                ))}
             </div>
             </>
         );

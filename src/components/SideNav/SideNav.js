@@ -17,7 +17,7 @@ class SideNav extends Component {
         let close = document.getElementById('sidenav')
         close.classList.remove('sidenav-active')
     }
-    renderUser = () => {
+    renderUser(){
         return (
             <>
                 <div className='sidenav-account'>
@@ -28,13 +28,12 @@ class SideNav extends Component {
                         <SideNavLists />
                         <SideNavEvents />
                         <SideNavTrips />
-                        
                     </ul>
                 </div>
             </>
         )
     }
-    renderWelcome = () => {
+    renderWelcome() {
         return (
             <div className='sidenav-account'>
                 <div className='sidenav-account-title'>Welcome</div>
