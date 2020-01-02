@@ -3,9 +3,9 @@ import { Link } from 'react-router-dom';
 import { FaGlobeAsia, FaTimes } from 'react-icons/fa';
 import './SideNav.css';
 import TravelerContext from '../../context/TravlerContext'
-import SideNavLists from '../SideNavLists/SideNavLists'
-import SideNavEvents from '../SideNavEvents/SideNavEvents'
-import SideNavTrips from '../SideNavTrips/SideNavTrips'
+import SideNavLists from './SideNavLists'
+import SideNavEvents from './SideNavEvents'
+import SideNavTrips from './SideNavTrips'
 
 class SideNav extends Component {
     state = {
