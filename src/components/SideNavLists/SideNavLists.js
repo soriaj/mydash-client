@@ -33,10 +33,12 @@ class SideNavLists extends Component {
                     timeout={{enter: 300, exit: 500}}
                     classNames="fade"
                 ><li className='list-sub-items'>
-                    {lists.map(item => 
+                    {lists.map(list => 
                         <SideNavListsItems
-                            key={item.id}
-                            name={item.name}>
+                            key={list.id}
+                            list_id={list.id}
+                            name={list.name}
+                            >
                         </SideNavListsItems>
                     )}
                 </li></CSSTransition>}</TransitionGroup>

@@ -10,7 +10,7 @@ class SideNavTrips extends Component {
         show: false
     }
     static contextType = TravelerContext
-    renderTripsItems = () => {
+    showTripsItems = () => {
         this.setState({ showItems: !this.state.showItems, show: !this.state.show })
     }
     render() {
@@ -18,7 +18,7 @@ class SideNavTrips extends Component {
         const { showItems, show } = this.state
         return (
             <>
-            <li className='list-item-heading' onClick={this.renderTripsItems}>
+            <li className='list-item-heading' onClick={this.showTripsItems}>
                 Trips{show 
                     ? <FaChevronCircleUp className='fas fa-calendar'></FaChevronCircleUp>
                     : <FaChevronCircleDown className='fas fa-calendar'></FaChevronCircleDown>
@@ -33,12 +33,12 @@ class SideNavTrips extends Component {
                     timeout={{enter: 300, exit: 500}}
                     classNames="fade"
                 ><li className='list-sub-items'>
-                    {trips.map(item => 
+                    {trips.map(trip => 
                         <SideNavTripsItems
-                            key={item.id}
-                            name={item.name}
-                            destination={item.destination}
-                            deptCity={item.deptCity}>
+                            key={trip.id}
+                            trip_id={trip.id}
+                            name={trip.name}
+                        >
                         </SideNavTripsItems>
                     )}
                 </li></CSSTransition>}</TransitionGroup>
