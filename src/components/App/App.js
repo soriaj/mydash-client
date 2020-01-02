@@ -14,7 +14,6 @@ import PrivateRoute from '../../utils/PrivateRoute';
 import Dashboard from '../Dashboard/Dashboard';
 import ListItemDetails from  '../ListItemDetails/ListItemDetails';
 import EventItemDetails from '../EventItemDetails/EventItemDetails';
-import data from '../../mockData/data';
 import TripItemDetails from '../TripItemDetails/TripItemDetails';
 
 class App extends Component {
@@ -25,18 +24,21 @@ class App extends Component {
     trips: [],
   }
   static contextType = TravelerContext
-  componentDidMount() {
-    const { lists, all_events, trips } = data
-    this.setItems(lists, all_events, trips)
-  }
+
   handleTokenChange = () => {
     this.setState({ hasToken: !this.state.hasToken })
   }
-  setItems = (list, event, trip) => {
-    this.setState({ lists: list, all_events: event, trips: trip })
+  setListItems = list => {
+    this.setState({ lists: list })
   }
   addListItem = list => {
     this.setState({ lists: [...this.state.lists, list ]})
+  }
+  setEventItems = event => {
+    this.setState({ all_events: event })
+  }
+  setTripItems = trip => {
+    this.setState({ trips: trip })
   }
 
   render() {
@@ -46,7 +48,9 @@ class App extends Component {
       all_events: this.state.all_events,
       trips: this.state.trips,
       handleTokenChange: this.handleTokenChange,
-      setItems: this.setItems,
+      setListItems: this.setListItems,
+      setEventItems: this.setEventItems,
+      setTripItems: this.setTripItems,
       addListItem: this.addListItem,
     }
     return (

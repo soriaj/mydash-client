@@ -2,11 +2,16 @@ import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
 import { FaPlus } from 'react-icons/fa';
 import ListItems from '../ListItems/ListItems';
-// import TravelerContext from '../../../context/TravlerContext';
 import TravelerContext from '../../context/TravlerContext'
+import data from '../../mockData/data';
 
 export default class DashboardLists extends Component { 
-    static contextType = TravelerContext  
+    static contextType = TravelerContext 
+    componentDidMount() {
+        const { lists } = data
+        this.context.setListItems(lists)
+
+    } 
     render() {
         const { lists } = this.context
         return (
