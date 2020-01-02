@@ -179,6 +179,12 @@ input, button {
 .login-signup span {
     padding: 5px;
 }
+.login-signup span a {
+    color: rgb(30, 121, 240);
+}
+.login-signup span a:hover {
+    color: rgb(0, 66, 153);
+}
 .red {
     color: red;
 }
