@@ -21,26 +21,45 @@
             "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
         }
     ],
-    "events": [
+    "all_events": [
         {
-            "id": 1,
-            "name": "NYE Party",
-            "date": "12/31/19"
+            "id": 12,
+            "month": "December",
+            "month_events": [
+                {
+                    "id": 31,
+                    "date": "12-31-19",
+                    "events": [
+                        {
+                            "id": 1,
+                            "name": "NYE Party",
+                            "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+                        },
+                        {
+                            "id": 2,
+                            "name": "NYE Dinner",
+                            "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."                    
+                        }
+                    ]
+                }
+            ]
         },
         {
-            "id": 2,
-            "name": "Dinner with Joe",
-            "date": "12/30/19"
-        },
-        {
-            "id": 3,
-            "name": "Business Planning",
-            "date": "12/19/19"
-        },
-        {
-            "id": 4,
-            "name": "Charity Dinner",
-            "date": "11/30/19"
+            "id": 11,
+            "month": "November",
+            "month_events": [
+                {
+                    "id": 20,
+                    "date": "11-20-19",
+                    "events": [
+                        {
+                            "id": 1,
+                            "name": "Birthday",
+                            "description":"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+                        }
+                    ]
+                }
+            ]
         }
     ],
     "trips": [

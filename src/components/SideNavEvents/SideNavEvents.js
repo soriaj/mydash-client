@@ -10,15 +10,31 @@ class SideNavEvents extends Component {
         show: false
     }
     static contextType = TravelerContext
-    renderEventsItems = () => {
+    showEventNavList = () => {
         this.setState({ showItems: !this.state.showItems, show: !this.state.show })
     }
+    renderNavEventsItems = () => {
+        const { all_events } = this.context
+        return (
+            all_events.map(cur => (
+                cur.month_events.map(month => (
+                    month.events.map(event => (
+                        <SideNavEventsItems 
+                            key={event.id}
+                            event_id={event.id}
+                            day={month.date}
+                            name={event.name}
+                        />
+                    ))
+                ))
+            ))
+        )
+    }
     render() {
-        const { events } = this.context
         const { showItems, show } = this.state
         return (
             <>
-            <li className='list-item-heading' onClick={this.renderEventsItems}>
+            <li className='list-item-heading' onClick={this.showEventNavList}>
                 Events{show 
                     ? <FaChevronCircleUp className='fas fa-calendar'></FaChevronCircleUp>
                     : <FaChevronCircleDown className='fas fa-calendar'></FaChevronCircleDown>
@@ -33,13 +49,7 @@ class SideNavEvents extends Component {
                     timeout={{enter: 300, exit: 500}}
                     classNames="fade"
                 ><li className='list-sub-items'>
-                    {events.map(item => 
-                        <SideNavEventsItems
-                            key={item.id}
-                            name={item.name}
-                            date={item.date}>
-                        </SideNavEventsItems>
-                    )}
+                    {this.renderNavEventsItems()}
                 </li></CSSTransition>}</TransitionGroup>
             </>
         );

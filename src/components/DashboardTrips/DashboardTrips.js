@@ -21,9 +21,11 @@ class DashboardTrips extends Component {
 
                 {trips.map(trip => 
                     <TripItems 
-                        key={trip.id}    
+                        key={trip.id} 
+                        trip_id={trip.id}   
                         name={trip.name}
                         destination={trip.destination}
+                        history={this.props.history}
                     >
                     </TripItems> 
                 )}

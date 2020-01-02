@@ -94,6 +94,7 @@
     transform: translateX(-205px);
     transition: all .3s ease-in-out;
 }
+a { color: inherit; } 
 
 @media screen and (min-width: 768px) {
     .sidenav {
