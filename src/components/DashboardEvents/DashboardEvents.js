@@ -7,7 +7,7 @@ import TravlerContext from  '../../context/TravlerContext'
 export default class DashboardEvents extends Component {
     static contextType = TravlerContext
     render() {
-        const { events } = this.context
+        const { all_events } = this.context
         return (
             <div className='content events-section'>
                 <div className='content-header'>
@@ -20,10 +20,10 @@ export default class DashboardEvents extends Component {
                     </div>
                 </div>
                 <div className='events-timeline'>
-                    {events.map((event, index) => (
+                    {all_events.map((events, index) => (
                         <EventsTimeLine 
                             key={index}
-                            event={event}
+                            all_events={events}
                         />
                     ))}
                 </div>

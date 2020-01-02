@@ -18,7 +18,7 @@ class App extends Component {
   state = {
     hasToken: false,
     lists: [],
-    events: [],
+    all_events: [],
     trips: [],
   }
   static contextType = TravelerContext
@@ -27,7 +27,7 @@ class App extends Component {
     this.setState({ hasToken: !this.state.hasToken })
   }
   setItems = (list, event, trip) => {
-    this.setState({ lists: list, events: event, trips: trip })
+    this.setState({ lists: list, all_events: event, trips: trip })
   }
   addListItem = list => {
     this.setState({ lists: [...this.state.lists, list ]})
@@ -37,7 +37,7 @@ class App extends Component {
     const contextValue = {
       hasToken: this.state.hasToken,
       lists: this.state.lists,
-      events: this.state.events,
+      all_events: this.state.all_events,
       trips: this.state.trips,
       handleTokenChange: this.handleTokenChange,
       setItems: this.setItems,
