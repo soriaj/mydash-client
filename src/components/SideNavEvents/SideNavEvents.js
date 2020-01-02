@@ -10,22 +10,32 @@ class SideNavEvents extends Component {
         show: false
     }
     static contextType = TravelerContext
-    renderEventsItems = () => {
+    showEventNavList = () => {
         this.setState({ showItems: !this.state.showItems, show: !this.state.show })
     }
-    render() {
+    renderNavEventsItems = () => {
         const { all_events } = this.context
-        // const eventsList = all_events.map((cur, idx) => (
-        //     cur.event
-        // ))
-        // const eventItems = [].concat(...eventsList).map(cur => (
-        //     cur.event_details
-        // ))
-        // const event = [].concat(...eventItems)
+        return (
+            all_events.map(cur => (
+                cur.month_events.map(month => (
+                    month.events.map(event => (
+                        <SideNavEventsItems 
+                            key={event.id}
+                            event_id={event.id}
+                            day={month.date}
+                            name={event.name}
+                        />
+                    ))
+                ))
+            ))
+        )
+        
+    }
+    render() {
         const { showItems, show } = this.state
         return (
             <>
-            <li className='list-item-heading' onClick={this.renderEventsItems}>
+            <li className='list-item-heading' onClick={this.showEventNavList}>
                 Events{show 
                     ? <FaChevronCircleUp className='fas fa-calendar'></FaChevronCircleUp>
                     : <FaChevronCircleDown className='fas fa-calendar'></FaChevronCircleDown>
@@ -40,14 +50,7 @@ class SideNavEvents extends Component {
                     timeout={{enter: 300, exit: 500}}
                     classNames="fade"
                 ><li className='list-sub-items'>
-                    {all_events.map((event, idx) => 
-                        <SideNavEventsItems
-                            key={idx}
-                            event={event}
-                            // date={item.date}
-                        >
-                        </SideNavEventsItems>
-                    )}
+                    {this.renderNavEventsItems()}
                 </li></CSSTransition>}</TransitionGroup>
             </>
         );
