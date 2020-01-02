@@ -3,16 +3,16 @@ import EventTimeLineCard from '../EventTimeLineCard/EventTimeLIneCard'
 
 class EventDates extends Component {
     render() {
-        const { dates, events } = this.props
-        // console.log(event_detail)
+        const { month_events } = this.props
+        console.log(month_events)
         return (
             <>
             <div className='timeline-date arrow'>
-                {dates}
+                {month_events.date}
             </div>
             <div className='timeline-section'>
                 <div className='timeline-card'>
-                    {events.map((event, idx) => (
+                    {month_events.events.map((event, idx) => (
                         <EventTimeLineCard 
                             key={event.id}
                             name={event.name}
