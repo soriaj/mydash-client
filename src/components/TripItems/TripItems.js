@@ -8,7 +8,6 @@ class TripItems extends Component {
         this.props.history.push(`${location}/trips/${trip_id}`)
     }
     render() {
-        console.log(this.props.test)
         const { name, destination } = this.props
         return (
             <div className='trip-tickets'>
