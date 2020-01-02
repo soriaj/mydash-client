@@ -4,14 +4,14 @@ import DashboardLists from '../DashboardLists/DashboardLists';
 import DashboardTrips from '../DashboardTrips/DashboardTrips';
 import DashboardEvents from '../DashboardEvents/DashboardEvents';
 import TravelerContext from '../../context/TravlerContext';
-import data from '../../mockData/data';
+// import data from '../../mockData/data';
 
 export default class Dashboard extends Component {
     static contextType = TravelerContext
-    componentDidMount() {
-        const { lists, all_events, trips } = data
-        this.context.setItems(lists, all_events, trips)
-    }
+    // componentDidMount() {
+    //     const { lists, all_events, trips } = data
+    //     this.context.setItems(lists, all_events, trips)
+    // }
     render() {
         return <>
         <article className='main-content'>

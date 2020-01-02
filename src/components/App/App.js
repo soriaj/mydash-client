@@ -9,10 +9,12 @@ import Banner from '../Banner/Banner';
 import Signup from '../Signup/Signup';
 import Landing from '../Landing/Landing';
 import NotFound from '../NotFound/NotFound';
-import TravelerContext from '../../context/TravlerContext'
+import TravelerContext from '../../context/TravlerContext';
 import PrivateRoute from '../../utils/PrivateRoute';
-import Dashboard from '../Dashboard/Dashboard'
-import ListItemDetails from  '../ListItemDetails/ListItemDetails'
+import Dashboard from '../Dashboard/Dashboard';
+import ListItemDetails from  '../ListItemDetails/ListItemDetails';
+import EventItemDetails from '../EventItemDetails/EventItemDetails';
+import data from '../../mockData/data';
 
 class App extends Component {
   state = {
@@ -22,7 +24,10 @@ class App extends Component {
     trips: [],
   }
   static contextType = TravelerContext
-
+  componentDidMount() {
+    const { lists, all_events, trips } = data
+    this.setItems(lists, all_events, trips)
+  }
   handleTokenChange = () => {
     this.setState({ hasToken: !this.state.hasToken })
   }
@@ -58,7 +63,8 @@ class App extends Component {
               
               {/* PRIVATE ROUTE */}
               <PrivateRoute exact path='/dashboard' component={Dashboard} />
-              <PrivateRoute path='/lists/:list_id' component={ListItemDetails} />
+              <PrivateRoute path='/dashboard/lists/:list_id' component={ListItemDetails} />
+              <PrivateRoute path='/dashboard/events/:date/:event_id' component={EventItemDetails} />
               
               {/* NOT FOUND ROUTE */}
               <Route component={NotFound} />

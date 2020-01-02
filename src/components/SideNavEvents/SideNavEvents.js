@@ -29,7 +29,6 @@ class SideNavEvents extends Component {
                 ))
             ))
         )
-        
     }
     render() {
         const { showItems, show } = this.state
