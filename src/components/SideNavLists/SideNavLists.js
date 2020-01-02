@@ -14,6 +14,7 @@ class SideNavLists extends Component {
         this.setState({ showItems: !this.state.showItems, show: !this.state.show })
     }
     render() {
+        console.log(this.props)
         const { lists } = this.context
         const { showItems, show } = this.state
         return (
@@ -36,7 +37,9 @@ class SideNavLists extends Component {
                     {lists.map(item => 
                         <SideNavListsItems
                             key={item.id}
-                            name={item.name}>
+                            id={item.id}
+                            name={item.name}
+                            >
                         </SideNavListsItems>
                     )}
                 </li></CSSTransition>}</TransitionGroup>
