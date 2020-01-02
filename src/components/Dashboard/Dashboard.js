@@ -19,8 +19,8 @@ export default class Dashboard extends Component {
 
             <section className='content events trips'>
                 <div className='main-content-events'>
-                    <DashboardEvents />
-                    <DashboardTrips />
+                    <DashboardEvents history={this.props.history} />
+                    <DashboardTrips history={this.props.history} />
                 </div>
             </section>
         </article>
