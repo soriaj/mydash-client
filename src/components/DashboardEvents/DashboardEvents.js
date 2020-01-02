@@ -8,7 +8,6 @@ export default class DashboardEvents extends Component {
     static contextType = TravlerContext
     render() {
         const { all_events } = this.context
-        console.log(this.props)
         return (
             <div className='content events-section'>
                 <div className='content-header'>
@@ -25,6 +24,7 @@ export default class DashboardEvents extends Component {
                         <EventsTimeLine 
                             key={index}
                             all_events={events}
+                            history={this.props.history}
                         />
                     ))}
                 </div>

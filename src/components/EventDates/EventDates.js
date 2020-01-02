@@ -13,8 +13,11 @@ class EventDates extends Component {
                 {month_events.events.map((event, idx) => (
                     <EventTimeLineCard 
                         key={event.id}
+                        event_id={event.id}
+                        date={month_events.date}
                         name={event.name}
                         description={event.description}
+                        history={this.props.history}
                     />
                 ))}
             </div>
