@@ -21,14 +21,15 @@
             "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
         }
     ],
-    "events": [
+    "all_events": [
         {
-            "id": "12",
+            "id": 12,
             "month": "December",
-            "event": [
+            "month_events": [
                 {
-                    "event_date": "12/31/19",
-                    "event_details": [
+                    "id": "31",
+                    "date": "12/31/19",
+                    "events": [
                         {
                             "id": 1,
                             "name": "NYE Party",
@@ -38,47 +39,23 @@
                             "id": 2,
                             "name": "NYE Dinner",
                             "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."                    
-                        }
-                    ]
-                },
-                {
-                    "event_date": "12/30/19",
-                    "event_details": [
-                        {
-                            "id": 1,
-                            "name": "Date Night",
-                            "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
                         }
                     ]
                 }
             ]
         },
         {
-            "id": "11",
+            "id": 11,
             "month": "November",
-            "event": [
+            "month_events": [
                 {
-                    "event_date": "11/20/19",
-                    "event_details": [
+                    "id": 25,
+                    "date": "12/25/19",
+                    "events": [
                         {
                             "id": 1,
-                            "name": "NYE Party",
-                            "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-                        },
-                        {
-                            "id": 2,
-                            "name": "NYE Dinner",
-                            "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."                    
-                        }
-                    ]
-                },
-                {
-                    "event_date": "11/15/19",
-                    "event_details": [
-                        {
-                            "id": 1,
-                            "name": "NYE Party",
-                            "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+                            "name": "Birthday",
+                            "description":"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
                         }
                     ]
                 }

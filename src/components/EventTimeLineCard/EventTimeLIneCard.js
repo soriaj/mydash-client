@@ -2,14 +2,14 @@ import React, { Component } from 'react';
 
 class EventTimeLIneCard extends Component {
     render() {
-        const { details } = this.props
+        const { name, description } = this.props
         return (
             <>
               <div className='card-title'>
-                    {details.name}
+                    {name}
                 </div>
                 <div className='card-details'>
-                    <p>{details.description}</p>
+                    <p>{description}</p>
                 </div>  
             </>
         );

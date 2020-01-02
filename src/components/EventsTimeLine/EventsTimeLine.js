@@ -6,16 +6,16 @@ class EventsTimeLine extends Component {
     static contextType = TravelerContext
 
     render() {
-        const { event } = this.props
-        console.log(event)
+        const { all_events } = this.props
+        // console.log(event)
         return (
             <div className='timeline'>
-                <div className='timeline-month'><strong>{event.month}</strong></div>
-                {event.event.map((events, idx) => (
+                <div className='timeline-month'><strong>{all_events.month}</strong></div>
+                {all_events.month_events.map((month_events, idx) => (
                     <EventDates 
-                        key={idx}
-                        dates={events.event_date}
-                        event_detail={events.event_details}
+                        key={month_events.id}
+                        date={month_events.date}
+                        events={month_events.events}
                     />
                 ))}
             </div>

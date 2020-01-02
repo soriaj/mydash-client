@@ -9,8 +9,8 @@ import data from '../../mockData/data';
 export default class Dashboard extends Component {
     static contextType = TravelerContext
     componentDidMount() {
-        const { lists, events, trips } = data
-        this.context.setItems(lists, events, trips)
+        const { lists, all_events, trips } = data
+        this.context.setItems(lists, all_events, trips)
     }
     render() {
         return <>

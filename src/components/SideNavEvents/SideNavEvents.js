@@ -15,7 +15,15 @@ class SideNavEvents extends Component {
     }
     render() {
         const { events } = this.context
+        const eventsList = events.map((cur, idx) => (
+            cur.event
+        ))
+        const eventItems = [].concat(...eventsList).map(cur => (
+            cur.event_details
+        ))
+        const event = [].concat(...eventItems)
         const { showItems, show } = this.state
+        // event.forEach(cur => console.log(cur.name))
         return (
             <>
             <li className='list-item-heading' onClick={this.renderEventsItems}>
@@ -33,11 +41,12 @@ class SideNavEvents extends Component {
                     timeout={{enter: 300, exit: 500}}
                     classNames="fade"
                 ><li className='list-sub-items'>
-                    {events.map(item => 
+                    {events.map((event, idx) => 
                         <SideNavEventsItems
-                            key={item.id}
-                            name={item.name}
-                            date={item.date}>
+                            key={idx}
+                            event={event}
+                            // date={item.date}
+                        >
                         </SideNavEventsItems>
                     )}
                 </li></CSSTransition>}</TransitionGroup>

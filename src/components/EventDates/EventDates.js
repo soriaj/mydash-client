@@ -3,8 +3,8 @@ import EventTimeLineCard from '../EventTimeLineCard/EventTimeLIneCard'
 
 class EventDates extends Component {
     render() {
-        const { dates, event_detail } = this.props
-        console.log(event_detail)
+        const { dates, events } = this.props
+        // console.log(event_detail)
         return (
             <>
             <div className='timeline-date arrow'>
@@ -12,10 +12,11 @@ class EventDates extends Component {
             </div>
             <div className='timeline-section'>
                 <div className='timeline-card'>
-                    {event_detail.map((cur, idx) => (
+                    {events.map((event, idx) => (
                         <EventTimeLineCard 
-                            key={idx}
-                            details={cur}
+                            key={event.id}
+                            name={event.name}
+                            description={event.description}
                         />
                     ))}
                 </div>
