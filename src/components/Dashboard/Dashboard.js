@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import './Dashboard.css';
-import DashboardLists from '../DashboardLists/DashboardLists';
-import DashboardTrips from '../DashboardTrips/DashboardTrips';
-import DashboardEvents from '../DashboardEvents/DashboardEvents';
+import DashboardLists from './DashboardLists'
+import DashboardTrips from './DashboardTrips';
+import DashboardEvents from './DashboardEvents';
 import TravelerContext from '../../context/TravlerContext';
 // import data from '../../mockData/data';
 

@@ -14,7 +14,6 @@ export default class ListItemDetails extends Component {
         }, 2000)
     }
     render() {
-        console.log(this.props.match)
         const { loading } = this.state
         return (
             <div>
