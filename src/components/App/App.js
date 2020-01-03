@@ -15,6 +15,7 @@ import Dashboard from '../Dashboard/Dashboard';
 import ListItemDetails from  '../ListItemDetails/ListItemDetails';
 import EventItemDetails from '../EventItemDetails/EventItemDetails';
 import TripItemDetails from '../TripItemDetails/TripItemDetails';
+import NewListForm from '../NewListForm/NewListForm'
 
 class App extends Component {
   state = {
@@ -68,9 +69,15 @@ class App extends Component {
               
               {/* PRIVATE ROUTE */}
               <PrivateRoute exact path='/dashboard' component={Dashboard} />
-              <PrivateRoute path='/dashboard/lists/:list_id' component={ListItemDetails} />
-              <PrivateRoute path='/dashboard/events/:date/:event_id' component={EventItemDetails} />
-              <PrivateRoute path='/dashboard/trips/:trip_id' component={TripItemDetails} />
+              {/* LIST COMPONENT ROUTES */}
+              <PrivateRoute path='/lists/:list_id' component={ListItemDetails} />
+              <PrivateRoute path='/add-list' component={NewListForm} />
+
+              {/* EVENT COMPONENT ROUTES */}
+              <PrivateRoute path='/events/:date/:event_id' component={EventItemDetails} />
+
+              {/* TRIP COMPONENT ROUTES */}
+              <PrivateRoute path='/trips/:trip_id' component={TripItemDetails} />
               
               {/* NOT FOUND ROUTE */}
               <Route component={NotFound} />
