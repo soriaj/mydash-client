@@ -15,7 +15,8 @@ import Dashboard from '../Dashboard/Dashboard';
 import ListItemDetails from  '../ListItemDetails/ListItemDetails';
 import EventItemDetails from '../EventItemDetails/EventItemDetails';
 import TripItemDetails from '../TripItemDetails/TripItemDetails';
-import NewListForm from '../NewListForm/NewListForm'
+import NewListForm from '../NewListForm/NewListForm';
+import NewEventForm from '../NewEventForm/NewEventForm';
 
 class App extends Component {
   state = {
@@ -37,6 +38,12 @@ class App extends Component {
   }
   setEventItems = event => {
     this.setState({ all_events: event })
+  }
+  addEvent = event => {
+    /*
+    if event matches day (ie. id: 12) then add to month_events.events
+    */
+    this.setState({ events: [...this.state.events, event ]})
   }
   setTripItems = trip => {
     this.setState({ trips: trip })
@@ -75,6 +82,7 @@ class App extends Component {
 
               {/* EVENT COMPONENT ROUTES */}
               <PrivateRoute path='/events/:date/:event_id' component={EventItemDetails} />
+              <PrivateRoute path='/add-event' component={NewEventForm} />
 
               {/* TRIP COMPONENT ROUTES */}
               <PrivateRoute path='/trips/:trip_id' component={TripItemDetails} />
