@@ -8,7 +8,7 @@ class SideNavTripsItems extends Component {
         return (
             <div className='list-item'>
                 <span><FaPlaneDeparture className='fas fa-plane-departure'></FaPlaneDeparture></span>
-                <span className='list-item-title'><NavLink to={`/dashboard/trips/${trip_id}`} >{name}</NavLink></span>
+                <span className='list-item-title'><NavLink to={`/trips/${trip_id}`} >{name}</NavLink></span>
             </div>
         );
     }

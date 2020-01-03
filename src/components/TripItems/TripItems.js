@@ -3,9 +3,8 @@ import PlaneTicket from '../../img/plane-ticket.png'
 
 class TripItems extends Component {
     viewTripDetails = () => {
-        const location = this.props.history.location.pathname
         const { trip_id } = this.props
-        this.props.history.push(`${location}/trips/${trip_id}`)
+        this.props.history.push(`/trips/${trip_id}`)
     }
     render() {
         const { name, destination } = this.props

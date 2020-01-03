@@ -10,8 +10,10 @@ export default class DashboardLists extends Component {
     componentDidMount() {
         const { lists } = data
         this.context.setListItems(lists)
-
-    } 
+    }
+    addNewList = () => {
+        this.props.history.push(`/new-list`)
+    }
     render() {
         const { lists } = this.context
         return (
@@ -21,7 +23,7 @@ export default class DashboardLists extends Component {
                         <h3 className='content-header-title'>Lists</h3>
                         <NavLink to={'/lists'}>View All</NavLink>
                     </div>
-                    <div className='add-icon'>
+                    <div className='add-icon' onClick={this.addNewList}>
                         <FaPlus className='fas fa-plus'></FaPlus>
                     </div>
                 </div>

@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 class EventTimeLIneCard extends Component {
     viewEventDetails = () => {
         const { event_id, date } = this.props
-        this.props.history.push(`/dashboard/events/${date}/${event_id}`)
+        this.props.history.push(`/events/${date}/${event_id}`)
     }
     render() {
         const { name, description } = this.props

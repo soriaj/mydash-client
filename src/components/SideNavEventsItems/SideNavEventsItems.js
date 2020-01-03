@@ -8,7 +8,7 @@ export default class SideNavEventsItems extends Component {
         return (
             <div className='list-item'>
                 <span><FaCalendarDay className='fas fa-calendar-day'></FaCalendarDay></span>
-                <span className='list-item-title'><NavLink to={`/dashboard/events/${day}/${event_id}`}>{name}</NavLink></span>
+                <span className='list-item-title'><NavLink to={`/events/${day}/${event_id}`}>{name}</NavLink></span>
             </div>
         )
     }
