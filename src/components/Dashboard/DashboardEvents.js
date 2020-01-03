@@ -10,8 +10,10 @@ export default class DashboardEvents extends Component {
     componentDidMount() {
         const { all_events } = data
         this.context.setEventItems(all_events)
-
-    } 
+    }
+    addNewEvent = () => {
+        this.props.history.push(`/add-event`)
+    }
     render() {
         const { all_events } = this.context
         return (
@@ -22,7 +24,7 @@ export default class DashboardEvents extends Component {
                         <NavLink to='/events'>View All</NavLink>
                     </div>
                     <div className='add-icon'>
-                        <FaPlus className='fas fa-plus'></FaPlus>
+                        <FaPlus className='fas fa-plus' onClick={this.addNewEvent}></FaPlus>
                     </div>
                 </div>
                 <div className='events-timeline'>

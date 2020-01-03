@@ -12,7 +12,7 @@ export default class DashboardLists extends Component {
         this.context.setListItems(lists)
     }
     addNewList = () => {
-        this.props.history.push(`/new-list`)
+        this.props.history.push(`/add-list`)
     }
     render() {
         const { lists } = this.context
