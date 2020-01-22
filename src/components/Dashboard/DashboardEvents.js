@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import { NavLink } from 'react-router-dom'
 import { FaPlus } from 'react-icons/fa'
-import EventsTimeLine from '../EventsTimeLine/EventsTimeLine'
+// import EventsTimeLine from '../EventsTimeLine.old/EventsTimeLine'
+import EventsTimeline from '../EventsTimeline/EventsTimeline'
 import TravlerContext from  '../../context/TravlerContext'
 import data from '../../mockData/data.json'
 
@@ -28,13 +29,22 @@ export default class DashboardEvents extends Component {
                     </div>
                 </div>
                 <div className='events-timeline'>
-                    {all_events.map((events, index) => (
+                    <ul className='timeline-list'>
+                        {all_events.map((events, idx) => (
+                            <EventsTimeline 
+                                key={idx}
+                                all_events={events}
+                                history={this.props.history}
+                            />
+                        ))}
+                    </ul>
+                    {/* {all_events.map((events, index) => (
                         <EventsTimeLine 
                             key={index}
                             all_events={events}
                             history={this.props.history}
                         />
-                    ))}
+                    ))} */}
                 </div>
             </div>
         )
