@@ -7,10 +7,10 @@ import data from '../../mockData/data';
 
 export default class DashboardLists extends Component { 
     static contextType = TravelerContext 
-    componentDidMount() {
-        const { lists } = data
-        this.context.setListItems(lists)
-    }
+    // componentDidMount() {
+    //     const { lists } = data
+    //     this.context.setListItems(lists)
+    // }
     addNewList = () => {
         this.props.history.push(`/add-list`)
     }

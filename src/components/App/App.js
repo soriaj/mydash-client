@@ -15,30 +15,40 @@ import Dashboard from '../Dashboard/Dashboard';
 import ListItemDetails from  '../ListItemDetails/ListItemDetails';
 import EventItemDetails from '../EventItemDetails/EventItemDetails';
 import TripItemDetails from '../TripItemDetails/TripItemDetails';
-import NewListForm from '../NewListForm/NewListForm';
-import NewEventForm from '../NewEventForm/NewEventForm';
+import AddListForm from '../AddListForm/AddListForm';
+import AddEventForm from '../AddEventForm/AddEventForm';
+import TokenService from '../../services/token-service'
 
 class App extends Component {
   state = {
-    hasToken: false,
+    hastToken: TokenService.hasAuthToken(),
     lists: [],
     all_events: [],
     trips: [],
   }
   static contextType = TravelerContext
-
   handleTokenChange = () => {
-    this.setState({ hasToken: !this.state.hasToken })
+    // this.setState({ hasToken: !this.state.hasToken })
+    this.setState({ hasToken: TokenService.hasAuthToken() })
+  }
+  setupItems = (list, event, trip) => {
+    this.setState({
+      lists: list,
+      all_events: event,
+      trips: trip
+    })
   }
   setListItems = list => {
     this.setState({ lists: list })
   }
   addListItem = list => {
+    console.log(list)
     this.setState({ lists: [...this.state.lists, list ]})
   }
   setEventItems = event => {
     this.setState({ all_events: event })
   }
+
   addEvent = event => {
     /*
     if event matches day (ie. id: 12) then add to month_events.events
@@ -60,6 +70,7 @@ class App extends Component {
       setEventItems: this.setEventItems,
       setTripItems: this.setTripItems,
       addListItem: this.addListItem,
+      setupItems: this.setupItems
     }
     return (
       <div className='App grid'>
@@ -78,11 +89,11 @@ class App extends Component {
               <PrivateRoute exact path='/dashboard' component={Dashboard} />
               {/* LIST COMPONENT ROUTES */}
               <PrivateRoute path='/lists/:list_id' component={ListItemDetails} />
-              <PrivateRoute path='/add-list' component={NewListForm} />
+              <PrivateRoute path='/add-list' component={AddListForm} />
 
               {/* EVENT COMPONENT ROUTES */}
               <PrivateRoute path='/events/:date/:event_id' component={EventItemDetails} />
-              <PrivateRoute path='/add-event' component={NewEventForm} />
+              <PrivateRoute path='/add-event' component={AddEventForm} />
 
               {/* TRIP COMPONENT ROUTES */}
               <PrivateRoute path='/trips/:trip_id' component={TripItemDetails} />

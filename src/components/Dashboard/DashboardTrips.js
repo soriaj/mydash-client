@@ -6,11 +6,10 @@ import data from '../../mockData/data.json'
 
 class DashboardTrips extends Component {
     static contextType = TravelerContext
-    componentDidMount() {
-        const { trips } = data
-        this.context.setTripItems(trips)
-
-    } 
+    // componentDidMount() {
+    //     const { trips } = data
+    //     this.context.setTripItems(trips)
+    // } 
     render() {
         const { trips } = this.context
         return (
