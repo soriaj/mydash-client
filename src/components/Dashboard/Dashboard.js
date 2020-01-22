@@ -17,8 +17,9 @@ export default class Dashboard extends Component {
     componentDidMount() {
         // const { lists, all_events, trips, setupItems } = this.context
         const { setupItems } = this.context
-        const { lists, all_events, trips } = data
-        setupItems(lists, all_events, trips)
+        // const { lists, all_events, trips } = data
+        const { lists, new_events, trips } = data
+        setupItems(lists, new_events, trips)
     }
     render() {
         return <>
