@@ -21,6 +21,36 @@
             "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
         }
     ],
+    "new_events": [
+        {
+            "id": 1,
+            "date": "12-31-19",
+            "event-name": "NYE Party",
+            "event-loc": "Los Angeles",
+            "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+        },
+        {
+            "id": 2,
+            "date": "12-31-19",
+            "event-name": "NYE Dinner",
+            "event-loc": "Los Angeles",
+            "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+        },
+        {
+            "id": 1,
+            "date": "12-29-19",
+            "event-name": "Business Lunch",
+            "event-loc": "Sacramento",
+            "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+        },
+        {
+            "id": 1,
+            "date": "12-28-19",
+            "event-name": "Customer Meeting",
+            "event-loc": "Sacramento",
+            "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+        }
+    ],
     "all_events": [
         {
             "id": 12,

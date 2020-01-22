@@ -7,10 +7,10 @@ import data from '../../mockData/data.json'
 
 export default class DashboardEvents extends Component {
     static contextType = TravlerContext
-    componentDidMount() {
-        const { all_events } = data
-        this.context.setEventItems(all_events)
-    }
+    // componentDidMount() {
+    //     const { all_events } = data
+    //     this.context.setEventItems(all_events)
+    // }
     addNewEvent = () => {
         this.props.history.push(`/add-event`)
     }

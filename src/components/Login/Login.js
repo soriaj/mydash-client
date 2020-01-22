@@ -4,6 +4,7 @@ import { FaUser, FaKey } from 'react-icons/fa';
 import './Login.css'
 import TravelerContext from '../../context/TravlerContext'
 import Loading from '../Loading/Loading'
+import TokenService from '../../services/token-service'
 
 class Login extends Component {
     state = {
@@ -15,22 +16,25 @@ class Login extends Component {
     handleSubmit = ev => {
         ev.preventDefault();
         this.setState({ error: null, loading: true })
-        const { handleTokenChange } = this.context
         const { username, password } = ev.target
+        TokenService.saveAuthToken(TokenService.makeBasicAuthToken(username.value, password.value))
+        const { handleTokenChange } = this.context
+
         username.value = ''
         password.value = ''
         // Mock API Login call
         setTimeout(() => {
-            handleTokenChange()
+            // handleTokenChange()
             this.setState({ loading: false })
             const { location, history } = this.props
             const destination = (location.state || {}).from || '/dashboard'
             history.push(destination)
-        }, 3000)
+        }, 1000)
     }
     render() {
         const { error, loading } = this.state
         return (
+            <>
             <article className='main-content'>
                 <section className='form-container'>
                     <div className='login-form'>
@@ -82,6 +86,7 @@ class Login extends Component {
                     </div>
                 </section>
             </article>
+            </>
         );
     }
 }

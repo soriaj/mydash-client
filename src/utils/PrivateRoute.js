@@ -1,15 +1,14 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import { Route, Redirect } from 'react-router-dom'
-import TravelerContext from '../context/TravlerContext'
+import TokenService from '../services/token-service'
 
 export default function PrivateRoute({ component, ...props }) {
   const Component = component
-  const context = useContext(TravelerContext)
   return (
     <Route
       {...props}
       render={componentProps => (
-        context.hasToken
+        TokenService.hasAuthToken()
           ? <Component {...componentProps} />
           : <Redirect
               to={{

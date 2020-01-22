@@ -6,10 +6,11 @@ import TravelerContext from '../../context/TravlerContext'
 import SideNavLists from './SideNavLists'
 import SideNavEvents from './SideNavEvents'
 import SideNavTrips from './SideNavTrips'
+import TokenService from '../../services/token-service'
 
 class SideNav extends Component {
     state = {
-        listsShown: false
+        listsShown: false,
     }
     static contextType = TravelerContext
 
@@ -41,15 +42,20 @@ class SideNav extends Component {
         )
     }
     render() {
-        const { hasToken } = this.context
         return (
             <aside id='sidenav' className='sidenav'>
                 <div className='sidenav-logo'>
                     <FaGlobeAsia className='fas fa-globe-asia' />
-                    {hasToken ? <Link to={'/dashboard'} className='sidenav-logo-link'>Traveler</Link> : <Link to={'/'} className='sidenav-logo-link'>Traveler</Link>}
+                    {TokenService.hasAuthToken()
+                        ? <Link to={'/dashboard'} className='sidenav-logo-link'>Traveler</Link> 
+                        : <Link to={'/'} className='sidenav-logo-link'>Traveler</Link>
+                    }
                     <FaTimes id='sidenav-close' className='fas fa-times sidenav-close' onClick={this.closeSideNav} />
                 </div>
-                {hasToken ? this.renderUser() : this.renderWelcome()}
+                {TokenService.hasAuthToken()
+                    ? this.renderUser() 
+                    : this.renderWelcome()
+                }
             </aside>
         );
     }
