@@ -15,9 +15,9 @@ export default class Dashboard extends Component {
     }
     static contextType = TravelerContext
     componentDidMount() {
-        const { lists, all_events, trips, setupItems } = this.context
-        // const { setupItems } = this.context
-        // const { lists, all_events, trips } = data
+        // const { lists, all_events, trips, setupItems } = this.context
+        const { setupItems } = this.context
+        const { lists, all_events, trips } = data
         setupItems(lists, all_events, trips)
     }
     render() {
