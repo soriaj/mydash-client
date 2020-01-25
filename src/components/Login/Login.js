@@ -24,7 +24,7 @@ class Login extends Component {
         password.value = ''
         // Mock API Login call
         setTimeout(() => {
-            // handleTokenChange()
+            handleTokenChange()
             this.setState({ loading: false })
             const { location, history } = this.props
             const destination = (location.state || {}).from || '/dashboard'

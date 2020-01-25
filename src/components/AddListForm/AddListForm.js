@@ -2,6 +2,9 @@ import React, { Component } from 'react'
 import { FaList, FaKeyboard } from 'react-icons/fa'
 import TravelerContext from '../../context/TravlerContext'
 import Loading from '../Loading/Loading'
+import config from '../../config'
+
+const uuidv4 = require('uuid/v4')
 
 export default class NewListForm extends Component {
     state = {
@@ -9,20 +12,55 @@ export default class NewListForm extends Component {
         loading: false
     }
     static contextType = TravelerContext
+    addList(newList) {
+        return fetch(`${config.API_ENDPOINT}/lists`, {
+           method: 'POST',
+           body: JSON.stringify(newList),
+           headers: {
+            'content-type': 'application/json',
+           }
+        })
+        .then(res => 
+           (!res.ok)
+           ? res.json().then(e => Promise.reject(e))
+           : res.json()
+        )
+     }
 
     handleSubmit = ev => {
         ev.preventDefault()
         const { name, content } = ev.target
         const { addListItem } = this.context
         const newList = {
-            id: 5,
+            id: uuidv4(),
             name: name.value,
             content: content.value
         }
+        console.log(newList)
         this.setState({ error: null })
-        addListItem(newList)
-        name.value = ''
-        this.props.history.push('/dashboard')
+
+        // fetch(`${config.API_ENDPOINT}/lists`, {
+        //     method: 'POST',
+        //     body: JSON.stringify(newList),
+        //     headers: {
+        //         'content-type': 'application/json',
+        //     }
+        //  })
+        //  .then(res => {
+        //     if(!res.ok) {
+        //         res.json().then(e => Promise.reject(e))
+        //     }
+        //     return res.json()
+        // })
+        this.addList(newList)
+        .then(data => {
+            console.log(data)
+            name.value = ''
+            content.value = ''
+            addListItem(data)
+            this.props.history.push('/dashboard')
+        })
+        .catch(error => this.setState({ error }))
     }
     render() {
         const { error, loading } = this.state

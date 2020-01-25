@@ -27,8 +27,9 @@ class App extends Component {
     trips: [],
   }
   static contextType = TravelerContext
+
+
   handleTokenChange = () => {
-    // this.setState({ hasToken: !this.state.hasToken })
     this.setState({ hasToken: TokenService.hasAuthToken() })
   }
   setupItems = (list, event, trip) => {
@@ -39,22 +40,21 @@ class App extends Component {
     })
   }
   setListItems = list => {
+    console.log(this.state.list)
     this.setState({ lists: list })
   }
   addListItem = list => {
     console.log(list)
-    this.setState({ lists: [...this.state.lists, list ]})
+    this.setState({ lists: [list, ...this.state.lists ]})
   }
+
   setEventItems = event => {
     this.setState({ all_events: event })
   }
-
-  addEvent = event => {
-    /*
-    if event matches day (ie. id: 12) then add to month_events.events
-    */
-    this.setState({ events: [...this.state.events, event ]})
+  addEventItem = event => {
+    this.setState({ all_events: [event, ...this.state.all_events ]})
   }
+
   setTripItems = trip => {
     this.setState({ trips: trip })
   }
@@ -70,8 +70,10 @@ class App extends Component {
       setEventItems: this.setEventItems,
       setTripItems: this.setTripItems,
       addListItem: this.addListItem,
+      addEventItem: this.addEventItem,
       setupItems: this.setupItems
     }
+    // console.log(this.state)
     return (
       <div className='App grid'>
         <TravelerContext.Provider value={contextValue}>

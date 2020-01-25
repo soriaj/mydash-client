@@ -16,18 +16,26 @@ class SideNavEvents extends Component {
     renderNavEventsItems = () => {
         const { all_events } = this.context
         return (
-            all_events.map(cur => (
-                cur.month_events.map(month => (
-                    month.events.map(event => (
-                        <SideNavEventsItems 
-                            key={event.id}
-                            event_id={event.id}
-                            day={month.date}
-                            name={event.name}
-                        />
-                    ))
-                ))
+            all_events.map(event => (
+                <SideNavEventsItems
+                    key={event.id}
+                    event_id={event.id}
+                    date={event.date}
+                    name={event.event_name}
+                />
             ))
+            // all_events.map(cur => (
+            //     cur.month_events.map(month => (
+            //         month.events.map(event => (
+            //             <SideNavEventsItems 
+            //                 key={event.id}
+            //                 event_id={event.id}
+            //                 day={month.date}
+            //                 name={event.name}
+            //             />
+            //         ))
+            //     ))
+            // ))
         )
     }
     render() {
