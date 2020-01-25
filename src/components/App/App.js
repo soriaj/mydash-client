@@ -4,20 +4,22 @@ import './App.css'
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
 import SideNav from '../SideNav/SideNav';
-import Login from '../Login/Login';
 import Banner from '../Banner/Banner';
 import Signup from '../Signup/Signup';
-import Landing from '../Landing/Landing';
 import NotFound from '../NotFound/NotFound';
 import TravelerContext from '../../context/TravlerContext';
 import PrivateRoute from '../../utils/PrivateRoute';
+import PublicRoute from '../../utils/PublicRoute';
 import Dashboard from '../Dashboard/Dashboard';
 import ListItemDetails from  '../ListItemDetails/ListItemDetails';
 import EventItemDetails from '../EventItemDetails/EventItemDetails';
 import TripItemDetails from '../TripItemDetails/TripItemDetails';
 import AddListForm from '../AddListForm/AddListForm';
 import AddEventForm from '../AddEventForm/AddEventForm';
+import LoginPage from '../../routes/LoginPage';
 import TokenService from '../../services/token-service'
+import LandingPage from '../../routes/LandingPage';
+
 
 class App extends Component {
   state = {
@@ -39,12 +41,10 @@ class App extends Component {
       trips: trip
     })
   }
-  setListItems = list => {
-    console.log(this.state.list)
-    this.setState({ lists: list })
-  }
+  // setListItems = list => {
+  //   this.setState({ lists: list })
+  // }
   addListItem = list => {
-    console.log(list)
     this.setState({ lists: [list, ...this.state.lists ]})
   }
 
@@ -73,7 +73,6 @@ class App extends Component {
       addEventItem: this.addEventItem,
       setupItems: this.setupItems
     }
-    // console.log(this.state)
     return (
       <div className='App grid'>
         <TravelerContext.Provider value={contextValue}>
@@ -82,10 +81,11 @@ class App extends Component {
           <main className='main'>
             <Banner />
             <Switch>
-              <Route exact path='/' component={Landing} />
+              <Route exact path='/' component={LandingPage} />
+              
               {/* PUBLIC ROUTES */}
-              <Route path='/login' component={Login} />
-              <Route path='/signup' component={Signup} />
+              <PublicRoute path='/login' component={LoginPage} />
+              <PublicRoute path='/signup' component={Signup} />
               
               {/* PRIVATE ROUTE */}
               <PrivateRoute exact path='/dashboard' component={Dashboard} />

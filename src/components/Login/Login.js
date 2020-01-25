@@ -7,6 +7,9 @@ import Loading from '../Loading/Loading'
 import TokenService from '../../services/token-service'
 
 class Login extends Component {
+    static defaultProps = {
+        onLoginSuccess: () => {}
+    }
     state = {
         error: null,
         loading: false
@@ -16,20 +19,21 @@ class Login extends Component {
     handleSubmit = ev => {
         ev.preventDefault();
         this.setState({ error: null, loading: true })
+        const { handleTokenChange } = this.context
         const { username, password } = ev.target
         TokenService.saveAuthToken(TokenService.makeBasicAuthToken(username.value, password.value))
-        const { handleTokenChange } = this.context
 
         username.value = ''
         password.value = ''
-        // Mock API Login call
+        
         setTimeout(() => {
             handleTokenChange()
+            this.props.onLoginSuccess()
             this.setState({ loading: false })
-            const { location, history } = this.props
-            const destination = (location.state || {}).from || '/dashboard'
-            history.push(destination)
         }, 1000)
+    }
+    componentWillUnmount() {
+        clearTimeout()
     }
     render() {
         const { error, loading } = this.state
