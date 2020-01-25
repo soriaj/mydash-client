@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { FaThermometerHalf, FaPlaneDeparture } from 'react-icons/fa';
 import './AuthBanner.css';
 import TravelerContet from '../../context/TravlerContext'
+import TokenService from '../../services/token-service'
 
 
 class AuthBanner extends Component {
@@ -45,10 +46,9 @@ class AuthBanner extends Component {
         )
     }
     render() {
-        const { hasToken } = this.context
         return (
             <>
-            {hasToken ? this.renderContent() : this.renderWelcome()}
+            {TokenService.hasAuthToken() ? this.renderContent() : this.renderWelcome()}
             </>
         );
     }
