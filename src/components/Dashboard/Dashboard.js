@@ -9,11 +9,6 @@ import TravelerContext from '../../context/TravlerContext'
 import config from '../../config'
 
 export default class Dashboard extends Component {
-    state = {
-        lists: [],
-        all_events: [],
-        trips: []
-    }
     static contextType = TravelerContext
     componentDidMount() {
         Promise.all([

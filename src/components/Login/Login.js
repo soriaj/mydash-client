@@ -29,11 +29,10 @@ class Login extends Component {
         setTimeout(() => {
             handleTokenChange()
             this.props.onLoginSuccess()
-            this.setState({ loading: false })
         }, 1000)
     }
     componentWillUnmount() {
-        clearTimeout()
+        this.setState({ loading: false })
     }
     render() {
         const { error, loading } = this.state
