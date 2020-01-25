@@ -36,25 +36,10 @@ export default class NewListForm extends Component {
             name: name.value,
             content: content.value
         }
-        console.log(newList)
         this.setState({ error: null })
 
-        // fetch(`${config.API_ENDPOINT}/lists`, {
-        //     method: 'POST',
-        //     body: JSON.stringify(newList),
-        //     headers: {
-        //         'content-type': 'application/json',
-        //     }
-        //  })
-        //  .then(res => {
-        //     if(!res.ok) {
-        //         res.json().then(e => Promise.reject(e))
-        //     }
-        //     return res.json()
-        // })
         this.addList(newList)
         .then(data => {
-            console.log(data)
             name.value = ''
             content.value = ''
             addListItem(data)

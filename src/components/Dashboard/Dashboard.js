@@ -40,7 +40,6 @@ export default class Dashboard extends Component {
         })
     }
     render() {
-        console.log(this.context)
         return <>
             <article className='main-content'>
                 <DashboardLists history={this.props.history} />
