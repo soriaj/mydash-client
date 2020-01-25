@@ -5,23 +5,42 @@ import DashboardTrips from './DashboardTrips';
 import DashboardEvents from './DashboardEvents';
 // import LoadingDashboard from '../LoadingDashboard/LoadingDashboard';
 import TravelerContext from '../../context/TravlerContext'
-import data from '../../mockData/data.json'
+// import data from '../../mockData/data.json'
+import config from '../../config'
 
 export default class Dashboard extends Component {
     state = {
         lists: [],
-        events: [],
+        all_events: [],
         trips: []
     }
     static contextType = TravelerContext
     componentDidMount() {
-        // const { lists, all_events, trips, setupItems } = this.context
-        const { setupItems } = this.context
-        // const { lists, all_events, trips } = data
-        const { lists, new_events, trips } = data
-        setupItems(lists, new_events, trips)
+        Promise.all([
+            fetch(`${config.API_ENDPOINT}/lists`),
+            fetch(`${config.API_ENDPOINT}/new_events`),
+            fetch(`${config.API_ENDPOINT}/trips`)
+        ])
+        .then(([listsRes, new_eventsRes, tripsRes]) => {
+            if(!listsRes.ok)
+                return listsRes.json().then(e => Promise.reject(e));
+            if(!new_eventsRes.ok)
+                return new_eventsRes.json().then(e => Promise.reject(e));
+            if(!tripsRes.ok)
+                return tripsRes.json().then(e => Promise.reject(e));
+            return Promise.all([listsRes.json(), new_eventsRes.json(), tripsRes.json()]);
+        })
+        .then(([lists, all_events, trips]) => {
+            // this.setState({ lists, all_events, trips});
+            const { setupItems } = this.context
+            setupItems(lists, all_events, trips)
+        })
+        .catch( error => {
+            console.log(error)
+        })
     }
     render() {
+        console.log(this.context)
         return <>
             <article className='main-content'>
                 <DashboardLists history={this.props.history} />

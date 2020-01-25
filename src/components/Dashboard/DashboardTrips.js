@@ -2,14 +2,10 @@ import React, { Component } from 'react';
 import { FaPlus } from 'react-icons/fa';
 import TripItems from '../TripItems/TripItems'
 import TravelerContext from '../../context/TravlerContext'
-import data from '../../mockData/data.json'
+// import data from '../../mockData/data.json'
 
 class DashboardTrips extends Component {
     static contextType = TravelerContext
-    // componentDidMount() {
-    //     const { trips } = data
-    //     this.context.setTripItems(trips)
-    // } 
     render() {
         const { trips } = this.context
         return (

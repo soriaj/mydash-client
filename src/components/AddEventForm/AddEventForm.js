@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { FaCalendarPlus } from 'react-icons/fa'
 import TravelerContext from '../../context/TravlerContext'
 import Loading from '../Loading/Loading'
+const uuidv4 = require('uuid/v4')
 
 export default class NewListForm extends Component {
     state = {
@@ -12,10 +13,24 @@ export default class NewListForm extends Component {
 
     onSubmit = ev => {
         ev.preventDefault()
-        console.log('form submitted')
-        const { date } = ev.target
-        console.log(date)
-        date.value = ''
+        const { event_name, event_loc, description } = ev.target
+        const { addEventItem } = this.context
+        const day = new Intl.DateTimeFormat("en-US", {
+            year: "numeric",
+            month: "long",
+            day: "2-digit",
+            hour: "2-digit",
+            minute: "2-digit",
+            second: "2-digit"
+          }).format(new Date())
+        const newEvent = {
+            id: uuidv4(),
+            date: day,
+            event_name: event_name.value,
+            event_loc: 'Sacramento',
+            description: 'Lorum Ipsum'
+        }
+        addEventItem(newEvent)
         this.props.history.push(`/dashboard`)
         
     }
@@ -34,12 +49,12 @@ export default class NewListForm extends Component {
                             </div>
                             <div className='input-wrapper'>
                                 <FaCalendarPlus className="fa-user icon"></FaCalendarPlus>
-                                <label htmlFor="date" className='no-view'>Date</label>
+                                <label htmlFor="event_name" className='no-view'>Event Name</label>
                                 <input 
                                     type="text" 
-                                    name="date" 
-                                    id="date" 
-                                    placeholder='Enter Date' 
+                                    name="event_name" 
+                                    id="event_name" 
+                                    placeholder='Enter Event Name' 
                                     className='input-field'
                                     // required
                                     />
