@@ -315,4 +315,7 @@
     .trip-tickets {
         width: calc(100% - 50px);
     }
+    .main-content-events content .trips-section {
+        flex-direction: row;
+    }
 }

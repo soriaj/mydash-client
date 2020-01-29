@@ -64,9 +64,10 @@ export default class Dashboard extends Component {
         )
     }
     render() {
+        const { loading } = this.state
         return (
             <article className='main-content'>
-                {this.state.loading ? <LoadingSpinner /> : this.renderDashboard()}
+                {loading ? <LoadingSpinner /> : this.renderDashboard()}
             </article>
         )
     }
