@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import './Weather.css'
-import LoadingSpinner from '../LoadingSpinner/LoadingSpinner'
 
 export default class Weather extends Component {
     state = {
@@ -53,7 +52,7 @@ export default class Weather extends Component {
         return (
             <div className='banner-weather-container'>
                 <div className='weather-details'>
-                    <img src={`http://openweathermap.org/img/wn/${this.state.icon}.png`} alt={this.state.description} ></img>
+                    <img src={`http://openweathermap.org/img/w/${this.state.icon}.png`} alt={this.state.description} className='weather-icon' ></img>
                     <p className='weather-temp'>{this.state.temp === '' ? '' : `${Math.round(this.state.temp)}`}&deg;</p>
                 </div>
                 <div className='weather-name'>

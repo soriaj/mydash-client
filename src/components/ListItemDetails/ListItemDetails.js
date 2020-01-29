@@ -13,11 +13,16 @@ export default class ListItemDetails extends Component {
             this.setState({ loading: false })
         }, 1000)
     }
+    renderListItems() {
+        return (
+            <h1>Hello From the List details</h1>
+        )
+    }
     render() {
         const { loading } = this.state
         return (
             <div>
-                {loading ? <LoadingSpinner />: <h1>Hello From the List details</h1>}
+                {loading ? <LoadingSpinner />: this.renderListItems}
             </div>
         )
     }
