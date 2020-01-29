@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import TravelerContext from '../../context/TravlerContext'
-import Loading from '../Loading/Loading'
+import LoadingSpinner from '../LoadingSpinner/LoadingSpinner'
 
 export default class ListItemDetails extends Component {
     state = {
@@ -11,13 +11,13 @@ export default class ListItemDetails extends Component {
         this.setState({ error: null, loading: true })
         setTimeout(() => {
             this.setState({ loading: false })
-        }, 2000)
+        }, 1000)
     }
     render() {
         const { loading } = this.state
         return (
             <div>
-                {loading ? <Loading />: <h1>Hello From the List details</h1>}
+                {loading ? <LoadingSpinner />: <h1>Hello From the List details</h1>}
             </div>
         )
     }
