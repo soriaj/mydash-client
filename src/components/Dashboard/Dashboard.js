@@ -7,8 +7,12 @@ import DashboardEvents from './DashboardEvents';
 import TravelerContext from '../../context/TravlerContext'
 // import data from '../../mockData/data.json'
 import config from '../../config'
+import LoadingSpinner from '../LoadingSpinner/LoadingSpinner';
 
 export default class Dashboard extends Component {
+    state = {
+        loading: false
+    }
     static contextType = TravelerContext
     componentDidMount() {
         Promise.all([
@@ -17,26 +21,37 @@ export default class Dashboard extends Component {
             fetch(`${config.API_ENDPOINT}/trips`)
         ])
         .then(([listsRes, new_eventsRes, tripsRes]) => {
-            if(!listsRes.ok)
+            this.setState({ loading: true })
+            
+            if(!listsRes.ok) {
                 return listsRes.json().then(e => Promise.reject(e));
-            if(!new_eventsRes.ok)
+            }
+            if(!new_eventsRes.ok) {
                 return new_eventsRes.json().then(e => Promise.reject(e));
-            if(!tripsRes.ok)
+            }
+            if(!tripsRes.ok) {
                 return tripsRes.json().then(e => Promise.reject(e));
+            }
             return Promise.all([listsRes.json(), new_eventsRes.json(), tripsRes.json()]);
         })
         .then(([lists, all_events, trips]) => {
             // this.setState({ lists, all_events, trips});
             const { setupItems } = this.context
             setupItems(lists, all_events, trips)
+            this.updateLoadingState()
         })
         .catch( error => {
             console.log(error)
         })
     }
-    render() {
-        return <>
-            <article className='main-content'>
+    updateLoadingState() {
+        setTimeout(() => {
+            this.setState({ loading: false })
+        }, 1000)
+    }
+    renderDashboard() {
+        return (
+            <>
                 <DashboardLists history={this.props.history} />
 
                 <section className='content events trips'>
@@ -45,7 +60,14 @@ export default class Dashboard extends Component {
                         <DashboardTrips history={this.props.history} />
                     </div>
                 </section>
+            </>
+        )
+    }
+    render() {
+        return (
+            <article className='main-content'>
+                {this.state.loading ? <LoadingSpinner /> : this.renderDashboard()}
             </article>
-        </>;
+        )
     }
 }
