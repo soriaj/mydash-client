@@ -1,7 +1,8 @@
-import React, { Component } from 'react';
-import { FaChevronCircleDown, FaChevronCircleUp } from 'react-icons/fa'
+import React, { Component } from 'react'
+import { NavLink } from 'react-router-dom'
+import { FaChevronCircleDown, FaChevronCircleUp, FaCalendarDay } from 'react-icons/fa'
 import TravelerContext from  '../../context/TravlerContext'
-import SideNavEventsItems from '../SideNavEventsItems/SideNavEventsItems'
+// import SideNavEventsItems from '../SideNavEventsItems/SideNavEventsItems'
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import config from '../../config'
 
@@ -21,7 +22,6 @@ class SideNavEvents extends Component {
             const { setEventItems } = this.context
             const eventsAPI = await fetch(`${config.API_ENDPOINT}/new_events`)
             const eventsRes = await eventsAPI.json()
-            // this.setState({ new_events: eventsRes })
             setEventItems(eventsRes)
          } catch (error) {
             console.log(error)
@@ -29,29 +29,13 @@ class SideNavEvents extends Component {
     }
     renderNavEventsItems = () => {
         const { all_events } = this.context
-        // const {new_events } = this.state
-        // console.log(all_events)
         return (
             all_events.map(event => (
-                <SideNavEventsItems
-                    key={event.id}
-                    event_id={event.id}
-                    date={event.date}
-                    name={event.event_name}
-                />
+                <div key={event.id} className='list-item'>
+                    <span><FaCalendarDay className='fas fa-calendar-day'></FaCalendarDay></span>
+                    <span className='list-item-title'><NavLink to={`/events/${event.id}`}>{event.event_name}</NavLink></span>
+                </div>
             ))
-            // all_events.map(cur => (
-            //     cur.month_events.map(month => (
-            //         month.events.map(event => (
-            //             <SideNavEventsItems 
-            //                 key={event.id}
-            //                 event_id={event.id}
-            //                 day={month.date}
-            //                 name={event.name}
-            //             />
-            //         ))
-            //     ))
-            // ))
         )
     }
     render() {

@@ -1,15 +1,44 @@
 import React, { Component } from 'react';
-import { FaFile } from 'react-icons/fa';
+import { FaFile, FaTrash } from 'react-icons/fa';
+import config from '../../config'
+import TravelerContext from '../../context/TravlerContext'
+
 
 class ListItems extends Component {
+    static contextType = TravelerContext
     viewListItemDetails = () => {
         this.props.history.push(`/lists/${this.props.id}`)
     }
+
+    deleteList(list_id) {
+        return fetch(`${config.API_ENDPOINT}/lists/${list_id}`, {
+            method: 'DELETE',
+            headers: {
+                'content-type': 'application/json',
+            }
+        })
+        .then(res => {
+            if(!res.ok) {
+                return Promise.reject(res.error)
+            }
+        })
+    }
+
+    handleDeleteListItem = ev => {
+        ev.stopPropagation()
+        const list_id = this.props.id
+        this.deleteList(list_id)
+            .then(() => {
+                this.context.deleteListItem(list_id)
+            })
+    }
+
     render() {
         const { name, content } = this.props
         return (
             <>
                 <div className='content-cards' onClick={this.viewListItemDetails}>
+                <FaTrash className='lists-delete' onClick={this.handleDeleteListItem}></FaTrash>
                     <div className='inner-content'>
                         <FaFile className='fas fa-file'></FaFile>
                     </div>
