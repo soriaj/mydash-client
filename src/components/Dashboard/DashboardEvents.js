@@ -21,7 +21,7 @@ export default class DashboardEvents extends Component {
                 <div className='content-header'>
                     <div className='content-titles'>
                         <h3 className='content-header-title'>Events</h3>
-                        <NavLink to='/events'>View All</NavLink>
+                        {/* <NavLink to='/events'>View All</NavLink> */}
                     </div>
                     <div className='add-icon'>
                         <FaPlus className='fas fa-plus' onClick={this.addNewEvent}></FaPlus>
@@ -32,7 +32,10 @@ export default class DashboardEvents extends Component {
                         {all_events.map((events, idx) => (
                             <EventsTimeline 
                                 key={idx}
-                                all_events={events}
+                                id={events.id}
+                                name={events.event_name}
+                                date={events.date}
+                                description={events.description}
                                 history={this.props.history}
                             />
                         ))}

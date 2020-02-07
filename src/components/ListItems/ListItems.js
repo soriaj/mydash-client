@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { FaFile, FaTrash } from 'react-icons/fa';
 import config from '../../config'
 import TravelerContext from '../../context/TravlerContext'
+import './ListItems.css'
 
 
 class ListItems extends Component {
@@ -38,7 +39,6 @@ class ListItems extends Component {
         return (
             <>
                 <div className='content-cards' onClick={this.viewListItemDetails}>
-                <FaTrash className='lists-delete' onClick={this.handleDeleteListItem}></FaTrash>
                     <div className='inner-content'>
                         <FaFile className='fas fa-file'></FaFile>
                     </div>
@@ -46,6 +46,7 @@ class ListItems extends Component {
                         <p className='content-heading'>{name}</p>
                         <p className='content-description'>{content.substr(0, 15)}{`...`}</p>
                     </div>
+                    <FaTrash className='list-delete' onClick={this.handleDeleteListItem}></FaTrash>
                 </div>
             </>
         );

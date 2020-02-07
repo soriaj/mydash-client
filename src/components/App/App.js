@@ -66,6 +66,13 @@ class App extends Component {
   addEventItem = event => {
     this.setState({ all_events: [event, ...this.state.all_events ]})
   }
+  deleteEventItem = event_id => {
+    const currrentEvents = this.state.all_events
+    const newEvents = currrentEvents.filter(event => event.id !== event_id)
+    setTimeout(() => {
+      this.setState({ all_events: newEvents })
+    }, 200)
+  }
 
   // Trip methods to update state
   setTripItems = trip => {
@@ -86,6 +93,7 @@ class App extends Component {
       addEventItem: this.addEventItem,
       setupItems: this.setupItems,
       deleteListItem: this.deleteListItem,
+      deleteEventItem: this.deleteEventItem,
     }
     return (
       <div className='App grid'>

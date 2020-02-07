@@ -61,3 +61,13 @@
 .block-content-padding {
     padding-left: 20px;
 }
+.timeline-block-content .event-delete {
+    opacity: 0;
+    transition: opacity 200ms ease-out;
+    z-index: 0;
+}
+.timeline-block-content:hover .event-delete {
+    z-index: 1;
+    opacity: 1;
+    transition: opacity 0.3s ease-in;
+}
