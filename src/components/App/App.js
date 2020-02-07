@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route, Switch, Redirect } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import './App.css'
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
@@ -42,6 +42,8 @@ class App extends Component {
       trips: trip
     })
   }
+
+  // List methods to update state
   setListItems = list => {
     this.setState({ lists: list })
   }
@@ -50,6 +52,14 @@ class App extends Component {
     this.setState({ lists: [list, ...this.state.lists ]})
   }
 
+  deleteListItem = list_id => {
+    const currrentLists = this.state.lists
+    const newLists = currrentLists.filter(list => list.id !== list_id)
+    setTimeout(() => {
+      this.setState({ lists: newLists })
+    }, 200)
+  }
+  // Event methods to update state
   setEventItems = event => {
     this.setState({ all_events: event })
   }
@@ -57,6 +67,7 @@ class App extends Component {
     this.setState({ all_events: [event, ...this.state.all_events ]})
   }
 
+  // Trip methods to update state
   setTripItems = trip => {
     this.setState({ trips: trip })
   }
@@ -73,7 +84,8 @@ class App extends Component {
       setTripItems: this.setTripItems,
       addListItem: this.addListItem,
       addEventItem: this.addEventItem,
-      setupItems: this.setupItems
+      setupItems: this.setupItems,
+      deleteListItem: this.deleteListItem,
     }
     return (
       <div className='App grid'>
@@ -83,9 +95,7 @@ class App extends Component {
           <main className='main'>
             <Banner />
             <Switch>
-              <Route exact path='/' component={LandingPage} >
-                {/* <Redirect to='/home'/> */}
-              </Route>
+              <Route exact path='/' component={LandingPage} />
               
               {/* PUBLIC ROUTES */}
               <PublicRoute path='/login' component={LoginPage} />
