@@ -21,6 +21,23 @@
             "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
         }
     ],
+    "lists_items": [
+        {
+            "id": 1,
+            "name": "1 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor",
+            "list_id": 1
+        },
+        {
+            "id": 1,
+            "name": "2 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor",
+            "list_id": 1
+        },
+        {
+            "id": 1,
+            "name": "1 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor adadfasd adfda fsdafadsfd",
+            "list_id": 2
+        }
+    ],
     "new_events": [
         {
             "id": 1,

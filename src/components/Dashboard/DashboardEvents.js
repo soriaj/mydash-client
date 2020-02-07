@@ -7,10 +7,10 @@ import TravlerContext from  '../../context/TravlerContext'
 
 export default class DashboardEvents extends Component {
     static contextType = TravlerContext
-    componentDidMount() {
-        const { all_events } = this.context
-        this.context.setEventItems(all_events)
-    }
+    // componentDidMount() {
+    //     const { all_events } = this.context
+    //     this.context.setEventItems(all_events)
+    // }
     addNewEvent = () => {
         this.props.history.push(`/add-event`)
     }

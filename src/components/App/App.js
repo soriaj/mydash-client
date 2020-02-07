@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, Redirect } from 'react-router-dom';
 import './App.css'
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
@@ -16,6 +16,7 @@ import EventItemDetails from '../EventItemDetails/EventItemDetails';
 import TripItemDetails from '../TripItemDetails/TripItemDetails';
 import AddListForm from '../AddListForm/AddListForm';
 import AddEventForm from '../AddEventForm/AddEventForm';
+import AddTripsForm from '../AddTripsForm/AddTripsForm'
 import LoginPage from '../../routes/LoginPage';
 import TokenService from '../../services/token-service'
 import LandingPage from '../../routes/LandingPage';
@@ -41,9 +42,10 @@ class App extends Component {
       trips: trip
     })
   }
-  // setListItems = list => {
-  //   this.setState({ lists: list })
-  // }
+  setListItems = list => {
+    this.setState({ lists: list })
+  }
+
   addListItem = list => {
     this.setState({ lists: [list, ...this.state.lists ]})
   }
@@ -81,7 +83,9 @@ class App extends Component {
           <main className='main'>
             <Banner />
             <Switch>
-              <Route exact path='/' component={LandingPage} />
+              <Route exact path='/' component={LandingPage} >
+                {/* <Redirect to='/home'/> */}
+              </Route>
               
               {/* PUBLIC ROUTES */}
               <PublicRoute path='/login' component={LoginPage} />
@@ -94,11 +98,12 @@ class App extends Component {
               <PrivateRoute path='/add-list' component={AddListForm} />
 
               {/* EVENT COMPONENT ROUTES */}
-              <PrivateRoute path='/events/:date/:event_id' component={EventItemDetails} />
+              <PrivateRoute path='/events/:event_id' component={EventItemDetails} />
               <PrivateRoute path='/add-event' component={AddEventForm} />
 
               {/* TRIP COMPONENT ROUTES */}
               <PrivateRoute path='/trips/:trip_id' component={TripItemDetails} />
+              <PrivateRoute path='/add-trips' component={AddTripsForm} />
               
               {/* NOT FOUND ROUTE */}
               <Route component={NotFound} />
