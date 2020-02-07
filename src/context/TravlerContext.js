@@ -12,7 +12,8 @@ const TravelerContext = React.createContext({
     setEventItems: () => {},
     setTripItems: () => {},
     addEventItem: () => {},
-    setupItems: () => {}
+    setupItems: () => {},
+    deleteEventItem: () => {},
 })
 
 export default TravelerContext;
