@@ -6,7 +6,6 @@ import TravelerContext from '../../context/TravlerContext'
 
 export default class DashboardLists extends Component { 
     static contextType = TravelerContext 
-    
     addNewList = () => {
         this.props.history.push(`/add-list`)
     }

@@ -18,6 +18,7 @@ class SideNav extends Component {
         let close = document.getElementById('sidenav')
         close.classList.remove('sidenav-active')
     }
+
     renderUser(){
         return (
             <>

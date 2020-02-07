@@ -14,41 +14,32 @@ export default class Dashboard extends Component {
         loading: false
     }
     static contextType = TravelerContext
-    componentDidMount() {
-        Promise.all([
-            fetch(`${config.API_ENDPOINT}/lists`),
-            fetch(`${config.API_ENDPOINT}/new_events`),
-            fetch(`${config.API_ENDPOINT}/trips`)
-        ])
-        .then(([listsRes, new_eventsRes, tripsRes]) => {
-            this.setState({ loading: true })
-            
-            if(!listsRes.ok) {
-                return listsRes.json().then(e => Promise.reject(e));
+    
+    async componentDidMount() {
+        this.setState({ loading: true })
+        try {
+            const listsAPI = await fetch(`${config.API_ENDPOINT}/lists`)
+            if(!listsAPI.ok) {
+                throw Error(listsAPI.statusText)
             }
-            if(!new_eventsRes.ok) {
-                return new_eventsRes.json().then(e => Promise.reject(e));
+            const tripsAPI = await fetch(`${config.API_ENDPOINT}/trips`)
+            if(!tripsAPI.ok) {
+                throw Error(tripsAPI.statusText)
             }
-            if(!tripsRes.ok) {
-                return tripsRes.json().then(e => Promise.reject(e));
+            const eventsAPI = await fetch(`${config.API_ENDPOINT}/new_events`)
+            if(!eventsAPI.ok) {
+                throw Error(eventsAPI.statusText)
             }
-            return Promise.all([listsRes.json(), new_eventsRes.json(), tripsRes.json()]);
-        })
-        .then(([lists, all_events, trips]) => {
-            // this.setState({ lists, all_events, trips});
+            const listsRes = await listsAPI.json()
+            const tripsRes = await tripsAPI.json()
+            const eventsRes = await eventsAPI.json()
             const { setupItems } = this.context
-            setupItems(lists, all_events, trips)
-            this.updateLoadingState()
-        })
-        .catch( error => {
-            console.log(error)
-        })
-    }
-    updateLoadingState() {
-        setTimeout(() => {
+            setupItems(listsRes, eventsRes, tripsRes)
             this.setState({ loading: false })
-        }, 1000)
-    }
+        } catch (error) {
+            console.log(error)
+        }
+   }
     renderDashboard() {
         return (
             <>

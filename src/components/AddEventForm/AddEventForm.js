@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
-import { FaCalendarPlus } from 'react-icons/fa'
+import { FaCalendarPlus, FaLocationArrow, FaEdit } from 'react-icons/fa'
 import TravelerContext from '../../context/TravlerContext'
 import Loading from '../Loading/Loading'
+import config from '../../config'
+
 const uuidv4 = require('uuid/v4')
 
 export default class NewListForm extends Component {
@@ -11,6 +13,20 @@ export default class NewListForm extends Component {
     }
     static contextType = TravelerContext
 
+    addEvent(newEvent) {
+        return fetch(`${config.API_ENDPOINT}/new_events`, {
+            method: 'POST',
+            body: JSON.stringify(newEvent),
+            headers: {
+                'content-type': 'application/json',
+            }
+        })
+        .then(res => 
+            (!res.ok)
+            ? res.json().then(e => Promise.reject(e))
+            : res.json()
+        )
+    }
     onSubmit = ev => {
         ev.preventDefault()
         const { event_name, event_loc, description } = ev.target
@@ -27,10 +43,14 @@ export default class NewListForm extends Component {
             id: uuidv4(),
             date: day,
             event_name: event_name.value,
-            event_loc: 'Sacramento',
-            description: 'Lorum Ipsum'
+            event_loc: event_loc.value,
+            description: description.value
         }
-        addEventItem(newEvent)
+        this.setState({ error: null })
+        this.addEvent(newEvent)
+        .then(data => {
+            addEventItem(data)
+        })
         this.props.history.push(`/dashboard`)
         
     }
@@ -55,6 +75,34 @@ export default class NewListForm extends Component {
                                     name="event_name" 
                                     id="event_name" 
                                     placeholder='Enter Event Name' 
+                                    className='input-field'
+                                    // required
+                                    />
+                                <span className="focus-input-field"></span>
+                            </div>
+
+                            <div className='input-wrapper'>
+                                <FaLocationArrow className="fa-user icon"></FaLocationArrow>
+                                <label htmlFor="event_loc" className='no-view'>Event Location</label>
+                                <input 
+                                    type="text" 
+                                    name="event_loc" 
+                                    id="event_loc" 
+                                    placeholder='Enter Location Name' 
+                                    className='input-field'
+                                    // required
+                                    />
+                                <span className="focus-input-field"></span>
+                            </div>
+
+                            <div className='input-wrapper'>
+                                <FaEdit className="fa-user icon"></FaEdit>
+                                <label htmlFor="description" className='no-view'>Event Description</label>
+                                <textarea 
+                                    type="text" 
+                                    name="description" 
+                                    id="description" 
+                                    placeholder='Enter Description of Event' 
                                     className='input-field'
                                     // required
                                     />

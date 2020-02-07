@@ -3,7 +3,7 @@ import { FaFile } from 'react-icons/fa';
 
 class ListItems extends Component {
     viewListItemDetails = () => {
-        this.props.history.push(`/lists/${this.props.name}`)
+        this.props.history.push(`/lists/${this.props.id}`)
     }
     render() {
         const { name, content } = this.props

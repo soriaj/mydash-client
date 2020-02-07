@@ -3,18 +3,34 @@ import { FaChevronCircleDown, FaChevronCircleUp } from 'react-icons/fa'
 import TravelerContext from  '../../context/TravlerContext'
 import SideNavEventsItems from '../SideNavEventsItems/SideNavEventsItems'
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
+import config from '../../config'
 
 class SideNavEvents extends Component {
     state = {
         showItems: false,
         show: false
     }
+
     static contextType = TravelerContext
     showEventNavList = () => {
         this.setState({ showItems: !this.state.showItems, show: !this.state.show })
     }
+
+    async componentDidMount() {
+        try {
+            const { setEventItems } = this.context
+            const eventsAPI = await fetch(`${config.API_ENDPOINT}/new_events`)
+            const eventsRes = await eventsAPI.json()
+            // this.setState({ new_events: eventsRes })
+            setEventItems(eventsRes)
+         } catch (error) {
+            console.log(error)
+         }
+    }
     renderNavEventsItems = () => {
         const { all_events } = this.context
+        // const {new_events } = this.state
+        // console.log(all_events)
         return (
             all_events.map(event => (
                 <SideNavEventsItems
