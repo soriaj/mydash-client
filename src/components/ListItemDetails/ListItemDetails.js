@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { FaEdit, FaPlus, FaPencilAlt, FaRegCheckSquare, FaRegSquare } from 'react-icons/fa'
+import { FaPlus, FaPencilAlt, FaRegCheckSquare, FaRegSquare } from 'react-icons/fa'
 import TravelerContext from '../../context/TravlerContext'
 import LoadingSpinner from '../LoadingSpinner/LoadingSpinner'
 import config from '../../config'
@@ -10,8 +10,6 @@ export default class ListItemDetails extends Component {
         loading: false,
         error: null,
         items: [],
-        checked: null,
-        selected: null
     }
 
     static contextType = TravelerContext
@@ -41,11 +39,8 @@ export default class ListItemDetails extends Component {
 
     // Update List Item if it has been completed or not
     completedListItem = (e, data) => {
-
         const udpateTask = {
-            id: data.id,
-            name: data.name,
-            list_id: data.list_id,
+            ...data,
             isComplete: !data.isComplete
         }
         // Make API call to update id with update tasks
@@ -56,7 +51,7 @@ export default class ListItemDetails extends Component {
     editItemAPI = async (listId, udpateTask) => {
         try {
             await fetch(`${config.API_ENDPOINT}/lists_items/${listId}`, {
-                method: 'PUT',
+                method: 'PATCH',
                 body: JSON.stringify(udpateTask),
                 headers: {
                     'content-type': 'application/json',
@@ -81,7 +76,7 @@ export default class ListItemDetails extends Component {
         return listName
     }
     renderListsItemDetails() {
-        const { loading, items, checked } = this.state
+        const { loading, items } = this.state
 
         return (
             <>
@@ -95,10 +90,10 @@ export default class ListItemDetails extends Component {
                     <FaPlus className='fa-plus-list'/><span className='fa-plus-title'>{'Add Item'}</span>
                     <ul className='list-container'>
                         {items.map((cur, idx) => (
-                            <li key={cur.id} id={cur.id} className={`list-items-container ${cur.isComplete ? 'complete': ''}`}>
+                            <li key={cur.id} id={cur.id} className={`list-items-container`}>
                                 <div className={`check-box`} onClick={(e) => this.completedListItem(e, cur)}>{cur.isComplete ? <FaRegCheckSquare /> : <FaRegSquare />}</div>
-                                <div className={`list-items-content ${checked && "complete"}`}>
-                                    <p>{cur.name}</p>
+                                <div className={`list-items-content`}>
+                                    <p className={`${cur.isComplete ? 'complete' : ''}`}>{cur.name}</p>
                                 </div>
                                 <div className='control-bar' onClick={this.editListItemDetailsPage}><FaPencilAlt className='fa-pencil-title'/><span>{'Edit'}</span></div>
                             </li>
