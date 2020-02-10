@@ -20,7 +20,7 @@ import AddTripsForm from '../AddTripsForm/AddTripsForm'
 import LoginPage from '../../routes/LoginPage';
 import TokenService from '../../services/token-service'
 import LandingPage from '../../routes/LandingPage';
-
+import EditListItemDetails from '../EditListItemDetails/EditListItemDetails'
 
 class App extends Component {
   state = {
@@ -114,6 +114,7 @@ class App extends Component {
               {/* LIST COMPONENT ROUTES */}
               <PrivateRoute path='/lists/:list_id' component={ListItemDetails} />
               <PrivateRoute path='/add-list' component={AddListForm} />
+              <PrivateRoute path='/edit/:list_id' component={EditListItemDetails} />
 
               {/* EVENT COMPONENT ROUTES */}
               <PrivateRoute path='/events/:event_id' component={EventItemDetails} />
