@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { FaPlus, FaPencilAlt, FaRegCheckSquare, FaRegSquare, FaSubscript } from 'react-icons/fa'
+import { FaPlus, FaPencilAlt, FaRegCheckSquare, FaRegSquare } from 'react-icons/fa'
 import TravelerContext from '../../context/TravlerContext'
 import LoadingSpinner from '../LoadingSpinner/LoadingSpinner'
 import config from '../../config'
@@ -18,7 +18,9 @@ export default class ListItemDetails extends Component {
         try {
             let response = await fetch(`${config.API_ENDPOINT}/lists_items`)
             let data = await response.json()
-            this.setState({ items: data.filter(list => list.list_id === parseInt(listId) ? list : '') })
+            this.setState({ 
+                items: data.filter(list => list.list_id === parseInt(listId) ? list : '')
+            })
         }
         catch (error) {
             console.log(error)
@@ -39,32 +41,61 @@ export default class ListItemDetails extends Component {
 
     // Update List Item if it has been completed or not
     completedListItem = (todo) => {
-        const udpateTask = {
+        const markItem = {
             ...todo,
             isComplete: !todo.isComplete
         }
         // Make API call to update id with update tasks
-        this.callItemAPI(todo.id, udpateTask)
-        this.setState({ items: this.state.items.map(item => (item.id !== todo.id) ? item : udpateTask ) })
+        this.patchItemAPI(todo.id, markItem)
+        this.setState({ items: this.state.items.map(item => (item.id !== todo.id) ? item : markItem ) })
     }
 
-    callItemAPI = async (listId, udpateTask) => {
+    patchItemAPI = async (listId, markItem) => {
         try {
             await fetch(`${config.API_ENDPOINT}/lists_items/${listId}`, {
                 method: 'PATCH',
-                body: JSON.stringify(udpateTask),
+                body: JSON.stringify(markItem),
                 headers: {
                     'content-type': 'application/json',
                 }
             })
-            .then(data => console.log(data))
+            // .then(data => console.log(data))
         } catch (error) {
             console.log(error)
         }
     }
 
-    handleAddListItem() {
-        alert('add item clicked')
+    handleAddListItem = ev => {
+        ev.preventDefault();
+        // Get current lists items
+        const { list_id } = this.props.match.params
+        // Create new item object with list_id equal to params id
+        const { new_item } = ev.target
+        const newItem = {
+            id: Math.floor(Math.random() * 100),
+            name: new_item.value,
+            list_id: Number(list_id),
+            isComplete: false
+        }
+        // Make API call to PUT new item into items
+        this.postItemAPI(newItem)
+        // Update state
+        this.setState({ items: [...this.state.items, newItem] })
+    }
+
+    postItemAPI = async (newItem) => {
+        try {
+            await fetch(`${config.API_ENDPOINT}/lists_items`, {
+                method: 'POST',
+                body: JSON.stringify(newItem),
+                headers: {
+                    'content-type': 'application/json',
+                }
+            })
+            // .then(result => console.log(result))
+        } catch(error) {
+            console.log(error)
+        }
     }
     editListItemDetailsPage = ev => {
         // console.log(ev)
@@ -94,11 +125,11 @@ export default class ListItemDetails extends Component {
                         <form className='form-field' onSubmit={this.handleAddListItem}>
                             <div className='input-wrapper'>
                                 <FaPlus className="fa-plus icon"></FaPlus>
-                                <label htmlFor="add_item" className='no-view'>Add Item</label>
+                                <label htmlFor="new_item" className='no-view'>Add Item</label>
                                 <input 
                                     type="text" 
-                                    name="add_item" 
-                                    id="add_item" 
+                                    name="new_item" 
+                                    id="new_item" 
                                     placeholder='Add item to list' 
                                     className='input-field'
                                     />
@@ -111,7 +142,7 @@ export default class ListItemDetails extends Component {
                     <div className='list-container'>
                         <ul>
                             {items.map((todo, idx) => (
-                                <li key={todo.id} id={todo.id} className={`list-items-container`}>
+                                <li key={idx} id={todo.id} className={`list-items-container`}>
                                     <div className={`check-box`} onClick={() => this.completedListItem(todo)}>{todo.isComplete ? <FaRegCheckSquare className='fa-reg-check'/> : <FaRegSquare className='fa-reg-square'/>}</div>
                                     <div className={`list-items-content`}>
                                         <p className={`${todo.isComplete ? 'complete' : ''}`}>{todo.name}</p>
@@ -135,7 +166,8 @@ export default class ListItemDetails extends Component {
     }
     render() {
         // const { loading, error, items } = this.state
-        const { error } = this.state
+        const { error, items } = this.state
+        console.log(items)
         return (
             <article>
                 {error ? this.renderError() : this.renderListsItemDetails() }
