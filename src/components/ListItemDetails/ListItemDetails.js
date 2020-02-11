@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { FaPlus, FaPencilAlt, FaRegCheckSquare, FaRegSquare } from 'react-icons/fa'
+import { FaPlus, FaPencilAlt, FaRegCheckSquare, FaRegSquare, FaSubscript } from 'react-icons/fa'
 import TravelerContext from '../../context/TravlerContext'
 import LoadingSpinner from '../LoadingSpinner/LoadingSpinner'
 import config from '../../config'
@@ -63,7 +63,7 @@ export default class ListItemDetails extends Component {
         }
     }
 
-    addListItem() {
+    handleAddListItem() {
         alert('add item clicked')
     }
     editListItemDetailsPage = ev => {
@@ -90,10 +90,25 @@ export default class ListItemDetails extends Component {
                     <div className='list-details-title'>
                         <h3>{this.getListsTitle()}</h3>
                     </div>
+                    <div className='add-list-item'>
+                        <form className='form-field' onSubmit={this.handleAddListItem}>
+                            <div className='input-wrapper'>
+                                <FaPlus className="fa-plus icon"></FaPlus>
+                                <label htmlFor="add_item" className='no-view'>Add Item</label>
+                                <input 
+                                    type="text" 
+                                    name="add_item" 
+                                    id="add_item" 
+                                    placeholder='Add item to list' 
+                                    className='input-field'
+                                    />
+                                <span className="focus-input-field"></span>
+                                <button className='add-item-btn'>Submit</button>
+                            </div>
+                        </form>
+                    </div>
+                        
                     <div className='list-container'>
-                        <div className='add-list-item'>
-                            <FaPlus className='fa-plus-list' onClick={this.addListItem}/><span className='fa-plus-title'>{'Add Item'}</span>
-                        </div>
                         <ul>
                             {items.map((todo, idx) => (
                                 <li key={todo.id} id={todo.id} className={`list-items-container`}>
