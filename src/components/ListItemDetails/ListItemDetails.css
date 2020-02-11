@@ -14,11 +14,11 @@
    list-style: none;
    margin-bottom: 150px;
    margin-top: 25px;
-   padding-left: 5px;
-   padding-right: 5px;
-   display: flex;
-   justify-content: center;
-   flex-direction: column;
+   margin-left: auto;
+   margin-right: auto;
+}
+.list-container ul {
+   padding: 10px;
 }
 .list-items-container {
    display: flex;
@@ -30,15 +30,14 @@
    display: flex;
    align-items: center;
    padding: 10px;
-   /* background-color: red; */
 }
 .list-items-content {
    margin-left: 10px;
    margin-right: 10px;
 }
 .control-bar {
-   border: 1px solid purple;
    padding-left: 10px;
+   padding-right: 10px;
    display: flex;
    align-items: center;
 }
@@ -49,17 +48,31 @@
    font-size: 14px;
    padding: 5px;
 }
+.fa-reg-check,
+.fa-reg-square {
+   font-size: 20px;
+   color: rgb(46, 46, 46);
+}
+.fa-reg-check {
+   color: gray;
+}
+.add-list-item {
+   padding: 5px;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+}
 .complete {
    text-decoration: line-through;
+   color: gray;
+}
+
+@media screen and (min-width: 1000px) {
+   .list-container {
+      width: 800px;
+   }
 }
 
 @media screen and (min-width: 768px) {
-   .list-container {
-      margin-left: 20px;
-      margin-right: 20px;
-   }
-   /* .list-items-content {
-      margin-left: 10px;
-      margin-right: 10px;
-   } */
+
 }

@@ -38,17 +38,17 @@ export default class ListItemDetails extends Component {
     }
 
     // Update List Item if it has been completed or not
-    completedListItem = (e, data) => {
+    completedListItem = (todo) => {
         const udpateTask = {
-            ...data,
-            isComplete: !data.isComplete
+            ...todo,
+            isComplete: !todo.isComplete
         }
         // Make API call to update id with update tasks
-        this.editItemAPI(data.id, udpateTask)
-        this.setState({ items: this.state.items.map(item => (item.id !== data.id) ? item : udpateTask ) })
+        this.callItemAPI(todo.id, udpateTask)
+        this.setState({ items: this.state.items.map(item => (item.id !== todo.id) ? item : udpateTask ) })
     }
 
-    editItemAPI = async (listId, udpateTask) => {
+    callItemAPI = async (listId, udpateTask) => {
         try {
             await fetch(`${config.API_ENDPOINT}/lists_items/${listId}`, {
                 method: 'PATCH',
@@ -63,6 +63,9 @@ export default class ListItemDetails extends Component {
         }
     }
 
+    addListItem() {
+        alert('add item clicked')
+    }
     editListItemDetailsPage = ev => {
         // console.log(ev)
         // this.props.history.push(`/edit/${this.props.match.params.list_id}`)
@@ -87,18 +90,22 @@ export default class ListItemDetails extends Component {
                     <div className='list-details-title'>
                         <h3>{this.getListsTitle()}</h3>
                     </div>
-                    <FaPlus className='fa-plus-list'/><span className='fa-plus-title'>{'Add Item'}</span>
-                    <ul className='list-container'>
-                        {items.map((cur, idx) => (
-                            <li key={cur.id} id={cur.id} className={`list-items-container`}>
-                                <div className={`check-box`} onClick={(e) => this.completedListItem(e, cur)}>{cur.isComplete ? <FaRegCheckSquare /> : <FaRegSquare />}</div>
-                                <div className={`list-items-content`}>
-                                    <p className={`${cur.isComplete ? 'complete' : ''}`}>{cur.name}</p>
-                                </div>
-                                <div className='control-bar' onClick={this.editListItemDetailsPage}><FaPencilAlt className='fa-pencil-title'/><span>{'Edit'}</span></div>
-                            </li>
-                        ))}
-                    </ul>
+                    <div className='list-container'>
+                        <div className='add-list-item'>
+                            <FaPlus className='fa-plus-list' onClick={this.addListItem}/><span className='fa-plus-title'>{'Add Item'}</span>
+                        </div>
+                        <ul>
+                            {items.map((todo, idx) => (
+                                <li key={todo.id} id={todo.id} className={`list-items-container`}>
+                                    <div className={`check-box`} onClick={() => this.completedListItem(todo)}>{todo.isComplete ? <FaRegCheckSquare className='fa-reg-check'/> : <FaRegSquare className='fa-reg-square'/>}</div>
+                                    <div className={`list-items-content`}>
+                                        <p className={`${todo.isComplete ? 'complete' : ''}`}>{todo.name}</p>
+                                    </div>
+                                    <div className='control-bar' onClick={this.editListItemDetailsPage}><FaPencilAlt className='fa-pencil-title'/><span>{'Edit'}</span></div>
+                                </li>
+                            ))}
+                        </ul>
+                    </div> 
                     </>
                 )
             }
