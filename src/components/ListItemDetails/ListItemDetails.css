@@ -56,11 +56,27 @@
 .fa-reg-check {
    color: gray;
 }
-.add-list-item {
-   padding: 5px;
-   display: flex;
-   justify-content: center;
-   align-items: center;
+.add-item-btn {
+   width: 150px;
+   color: #fff;
+   background-color: #57b846;
+   text-transform: uppercase;
+   transition: all 0.4s;
+}
+.add-item-btn:hover {
+   background-color: #333333;
+   color: whitesmoke;
+   box-shadow: 0 10px 30px 0px rgba(51, 51, 51, 0.5);
+}
+.add-list-item .input-wrapper {
+   margin-left: auto;
+   margin-right: auto;
+}
+.add-list-item .input-wrapper input[type='text'] {
+   font-size: 16px;
+}
+.add-list-item .input-wrapper .fa-plus {
+   padding: 2px;
 }
 .complete {
    text-decoration: line-through;
@@ -70,6 +86,11 @@
 @media screen and (min-width: 1000px) {
    .list-container {
       width: 800px;
+   }
+   .add-list-item {
+      width: 800px;
+      margin-left: auto;
+      margin-right: auto;
    }
 }
 
