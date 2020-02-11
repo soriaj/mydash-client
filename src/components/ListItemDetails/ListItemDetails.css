@@ -34,15 +34,23 @@
 .list-items-content {
    margin-left: 10px;
    margin-right: 10px;
+   flex: 1;
 }
 .control-bar {
    padding-left: 10px;
    padding-right: 10px;
    display: flex;
    align-items: center;
+   margin-left: auto;
+   text-transform: uppercase;
 }
-.fa-pencil-title {
-   font-size: 15px;
+.control-bar:hover {
+   background-color: red;
+   color: whitesmoke;
+   transition: all 0.4s ease-in-out;
+}
+.fa-trash-title {
+   font-size: 18px;
 }
 .control-bar span {
    font-size: 14px;

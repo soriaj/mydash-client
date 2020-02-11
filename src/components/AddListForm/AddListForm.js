@@ -4,7 +4,7 @@ import TravelerContext from '../../context/TravlerContext'
 import Loading from '../Loading/Loading'
 import config from '../../config'
 
-const uuidv4 = require('uuid/v4')
+// const uuidv4 = require('uuid/v4')
 
 export default class NewListForm extends Component {
     state = {

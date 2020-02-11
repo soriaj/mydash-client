@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { FaPlus, FaPencilAlt, FaRegCheckSquare, FaRegSquare } from 'react-icons/fa'
+import { FaPlus, FaPencilAlt, FaRegCheckSquare, FaRegSquare, FaRegTrashAlt } from 'react-icons/fa'
 import TravelerContext from '../../context/TravlerContext'
 import LoadingSpinner from '../LoadingSpinner/LoadingSpinner'
 import config from '../../config'
@@ -65,6 +65,34 @@ export default class ListItemDetails extends Component {
         }
     }
 
+    postItemAPI = async (newItem) => {
+        try {
+            await fetch(`${config.API_ENDPOINT}/lists_items`, {
+                method: 'POST',
+                body: JSON.stringify(newItem),
+                headers: {
+                    'content-type': 'application/json',
+                }
+            })
+        } catch(error) {
+            console.log(error)
+        }
+    }
+
+    removeItemAPI = async (list_id) => {
+        return await fetch(`${config.API_ENDPOINT}/lists_items/${list_id}`, {
+            method: 'DELETE',
+            headers: {
+                'content-type': 'application/json',
+            }
+        })
+        .then(res => {
+            if(!res.ok){
+                return Promise.reject(res.error)
+            }
+        })
+    }
+
     handleAddListItem = ev => {
         ev.preventDefault();
         // Get current lists items
@@ -84,23 +112,13 @@ export default class ListItemDetails extends Component {
         this.setState({ items: [...this.state.items, newItem] })
     }
 
-    postItemAPI = async (newItem) => {
-        try {
-            await fetch(`${config.API_ENDPOINT}/lists_items`, {
-                method: 'POST',
-                body: JSON.stringify(newItem),
-                headers: {
-                    'content-type': 'application/json',
-                }
-            })
-        } catch(error) {
-            console.log(error)
-        }
-    }
-    editListItemDetailsPage = ev => {
-        // console.log(ev)
-        // this.props.history.push(`/edit/${this.props.match.params.list_id}`)
-        // console.log(`You clicked: `, this.props.list_id)
+    removeItem = (list_id) => {
+        const currentItems = this.state.items
+        const newItems = currentItems.filter(item => item.id !== list_id)
+        this.removeItemAPI(list_id)
+        .then(() => {
+            this.setState({ items: newItems })
+        })
     }
 
     getListsTitle() {
@@ -147,7 +165,7 @@ export default class ListItemDetails extends Component {
                                     <div className={`list-items-content`}>
                                         <p className={`${todo.isComplete ? 'complete' : ''}`}>{todo.name}</p>
                                     </div>
-                                    <div className='control-bar' onClick={this.editListItemDetailsPage}><FaPencilAlt className='fa-pencil-title'/><span>{'Edit'}</span></div>
+                                    <div className='control-bar' onClick={() => this.removeItem(todo.id)}><FaRegTrashAlt className='fa-trash-title'/><span>{'Remove'}</span></div>
                                 </li>
                             ))}
                         </ul>
