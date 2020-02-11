@@ -72,13 +72,14 @@ export default class ListItemDetails extends Component {
         // Create new item object with list_id equal to params id
         const { new_item } = ev.target
         const newItem = {
-            id: Math.floor(Math.random() * 100),
+            id: Math.floor(Math.random() * 1000),
             name: new_item.value,
             list_id: Number(list_id),
             isComplete: false
         }
         // Make API call to PUT new item into items
         this.postItemAPI(newItem)
+        new_item.value = ''
         // Update state
         this.setState({ items: [...this.state.items, newItem] })
     }
@@ -92,7 +93,6 @@ export default class ListItemDetails extends Component {
                     'content-type': 'application/json',
                 }
             })
-            // .then(result => console.log(result))
         } catch(error) {
             console.log(error)
         }
@@ -166,8 +166,7 @@ export default class ListItemDetails extends Component {
     }
     render() {
         // const { loading, error, items } = this.state
-        const { error, items } = this.state
-        console.log(items)
+        const { error } = this.state
         return (
             <article>
                 {error ? this.renderError() : this.renderListsItemDetails() }

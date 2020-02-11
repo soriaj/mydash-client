@@ -31,8 +31,10 @@ export default class NewListForm extends Component {
         ev.preventDefault()
         const { name, content } = ev.target
         const { addListItem } = this.context
+        let count = Math.floor(Math.random() * 10000)
+        console.log(count)
         const newList = {
-            id: uuidv4(),
+            id: count,
             name: name.value,
             content: content.value
         }
