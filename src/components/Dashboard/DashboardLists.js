@@ -17,7 +17,6 @@ export default class DashboardLists extends Component {
                 <div className='content-header'>
                     <div className='content-titles'>
                         <h3 className='content-header-title'>Lists</h3>
-                        {/* <NavLink to={'/lists'}>View All</NavLink> */}
                     </div>
                     <div className='add-icon' onClick={this.addNewList}>
                         <FaPlus className='fas fa-plus'></FaPlus>

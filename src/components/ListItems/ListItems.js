@@ -29,9 +29,9 @@ class ListItems extends Component {
         ev.stopPropagation()
         const list_id = this.props.id
         this.deleteList(list_id)
-            .then(() => {
-                this.context.deleteListItem(list_id)
-            })
+        .then(() => {
+            this.context.deleteListItem(list_id)
+        })
     }
 
     render() {
