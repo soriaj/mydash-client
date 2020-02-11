@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { NavLink } from 'react-router-dom'
+// import { NavLink } from 'react-router-dom'
 import { FaPlus } from 'react-icons/fa'
 import EventsTimeline from '../EventsTimeline/EventsTimeline'
 import TravlerContext from  '../../context/TravlerContext'
@@ -21,7 +21,6 @@ export default class DashboardEvents extends Component {
                 <div className='content-header'>
                     <div className='content-titles'>
                         <h3 className='content-header-title'>Events</h3>
-                        {/* <NavLink to='/events'>View All</NavLink> */}
                     </div>
                     <div className='add-icon'>
                         <FaPlus className='fas fa-plus' onClick={this.addNewEvent}></FaPlus>

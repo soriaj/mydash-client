@@ -24,7 +24,7 @@ class Header extends Component {
         showSideNav.classList.add('sidenav-active')
     }
     showMenu = () => {
-        this.setState({ show: !this.state.show })
+        this.setState({ show: !!this.state.show })
         let showMenu = document.querySelector('.header-dropdown-menu')
         showMenu.classList.toggle('header-dropdown-menu-active')
     }
