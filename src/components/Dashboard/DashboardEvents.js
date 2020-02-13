@@ -15,7 +15,7 @@ export default class DashboardEvents extends Component {
         this.props.history.push(`/add-event`)
     }
     render() {
-        const { all_events } = this.context
+        const { events } = this.context
         return (
             <div className='content events-section'>
                 <div className='content-header'>
@@ -28,13 +28,14 @@ export default class DashboardEvents extends Component {
                 </div>
                 <div className='events-timeline'>
                     <ul className='timeline-list'>
-                        {all_events.map((events, idx) => (
+                        {events.map((event, idx) => (
                             <EventsTimeline 
                                 key={idx}
-                                id={events.id}
-                                name={events.event_name}
-                                date={events.date}
-                                description={events.description}
+                                id={event.id}
+                                name={event.event_name}
+                                date={event.date}
+                                event_loc={event.event_loc}
+                                description={event.description}
                                 history={this.props.history}
                             />
                         ))}

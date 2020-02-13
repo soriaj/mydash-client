@@ -1,9 +1,11 @@
 import React, { Component } from 'react'
-import { FaPlus, FaPencilAlt, FaRegCheckSquare, FaRegSquare, FaRegTrashAlt } from 'react-icons/fa'
+import { FaPlus, FaPencilAlt, FaRegCheckSquare, FaRegSquare, FaRegTrashAlt, FaArrowLeft } from 'react-icons/fa'
 import TravelerContext from '../../context/TravlerContext'
 import LoadingSpinner from '../LoadingSpinner/LoadingSpinner'
 import config from '../../config'
 import './ListItemDetails.css'
+import BackToDashboard from '../BackToDashboard/BackToDashboard'
+import SaveButton from '../SaveButton/SaveButton'
 
 export default class ListItemDetails extends Component {
     state = {
@@ -127,6 +129,11 @@ export default class ListItemDetails extends Component {
         const listName = lists.filter(list => list.id === parseInt(list_id)).map(item => item.name)
         return listName
     }
+
+    backToDashboard = () => {
+        this.props.history.push('/dashboard')
+    }
+
     renderListsItemDetails() {
         const { loading, items } = this.state
 
@@ -142,6 +149,9 @@ export default class ListItemDetails extends Component {
                     <div className='add-list-item'>
                         <form className='form-field' onSubmit={this.handleAddListItem}>
                             <div className='input-wrapper'>
+                                <div className='back-to-dashboard'>
+                                    <BackToDashboard backToDashboard={this.backToDashboard}/>
+                                </div>
                                 <FaPlus className="fa-plus icon"></FaPlus>
                                 <label htmlFor="new_item" className='no-view'>Add Item</label>
                                 <input 
@@ -152,7 +162,8 @@ export default class ListItemDetails extends Component {
                                     className='input-field'
                                     />
                                 <span className="focus-input-field"></span>
-                                <button className='add-item-btn'>Submit</button>
+                                {/* <button className='add-item-btn'>Save</button> */}
+                                <SaveButton />
                             </div>
                         </form>
                     </div>
@@ -165,7 +176,7 @@ export default class ListItemDetails extends Component {
                                     <div className={`list-items-content`}>
                                         <p className={`${todo.isComplete ? 'complete' : ''}`}>{todo.name}</p>
                                     </div>
-                                    <div className='control-bar' onClick={() => this.removeItem(todo.id)}><FaRegTrashAlt className='fa-trash-title'/><span>{'Remove'}</span></div>
+                                    <div className={`control-bar ${todo.isComplete ? 'complete' : ''}`} onClick={() => this.removeItem(todo.id)}><FaRegTrashAlt className='fa-trash-title'/><span>{'Remove'}</span></div>
                                 </li>
                             ))}
                         </ul>
@@ -183,7 +194,6 @@ export default class ListItemDetails extends Component {
         )
     }
     render() {
-        // const { loading, error, items } = this.state
         const { error } = this.state
         return (
             <article>

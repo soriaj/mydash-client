@@ -1,8 +1,11 @@
 import React, { Component } from 'react'
-import { FaCalendarPlus, FaLocationArrow, FaEdit } from 'react-icons/fa'
+import { FaCalendarPlus, FaLocationArrow, FaEdit, FaSave, FaRegSave } from 'react-icons/fa'
 import TravelerContext from '../../context/TravlerContext'
 import Loading from '../Loading/Loading'
 import config from '../../config'
+import BackToDashboard from '../BackToDashboard/BackToDashboard'
+import './AddEventForm.css'
+import SaveButton from '../SaveButton/SaveButton'
 
 const uuidv4 = require('uuid/v4')
 
@@ -14,7 +17,7 @@ export default class NewListForm extends Component {
     static contextType = TravelerContext
 
     addEvent(newEvent) {
-        return fetch(`${config.API_ENDPOINT}/new_events`, {
+        return fetch(`${config.API_ENDPOINT}/events`, {
             method: 'POST',
             body: JSON.stringify(newEvent),
             headers: {
@@ -53,6 +56,10 @@ export default class NewListForm extends Component {
         })
         this.props.history.push(`/dashboard`)
         
+    }
+
+    backToDashboard = () => {
+        this.props.history.push('/dashboard')
     }
     render() {
         const { error, loading } = this.state
@@ -110,11 +117,12 @@ export default class NewListForm extends Component {
                             </div>
         
         
-                            <div className="login-btn-container">
+                            <div className="btn-container">
                                 {loading && (<Loading />)}
-                                {!loading &&
-                                    <button className="login-btn">Submit</button>
-                                }
+                                {!loading && <>
+                                    <BackToDashboard backToDashboard={this.backToDashboard}/>
+                                    <SaveButton />
+                                </>}
                             </div>
                         </form>
                     </div>
