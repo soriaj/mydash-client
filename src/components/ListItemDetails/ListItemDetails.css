@@ -70,6 +70,8 @@
    background-color: #57b846;
    text-transform: uppercase;
    transition: all 0.4s;
+   border-radius: 25px;
+   padding: 0 20px;
 }
 .add-item-btn:hover {
    background-color: #333333;
@@ -89,6 +91,16 @@
 .complete {
    text-decoration: line-through;
    color: gray;
+}
+.control-bar.complete {
+   color: gray;
+   text-decoration: none;
+}
+.control-bar.complete:hover {
+   color: whitesmoke;
+}
+.back-to-dashboard {
+   margin-right: 10px;
 }
 
 @media screen and (min-width: 1000px) {

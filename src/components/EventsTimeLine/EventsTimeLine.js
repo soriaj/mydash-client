@@ -1,14 +1,18 @@
 import React, { Component } from 'react'
 import TravelerContext from '../../context/TravlerContext'
-import { FaCalendarDay, FaTrashAlt } from 'react-icons/fa'
+import { FaCalendarDay, FaRegTrashAlt, FaPencilAlt } from 'react-icons/fa'
 import './EventsTimeline.css'
 import config from '../../config'
 
 export default class EventsTimeline extends Component {
+    state = {
+        contentEditable: true,
+        dscription: ''
+    }
     static contextType = TravelerContext
 
     deleteEvent(event_id) {
-        return fetch(`${config.API_ENDPOINT}/new_events/${event_id}`, {
+        return fetch(`${config.API_ENDPOINT}/events/${event_id}`, {
             method: 'DELETE',
             headers: {
                 'content-type': 'application/json',
@@ -31,19 +35,26 @@ export default class EventsTimeline extends Component {
 
     }
     render() {
-        const { name, date, description } = this.props
+        const { name, date, description, event_loc } = this.props
         return (
             <li className='timeline-block'>
                 <div className='timeline-icon'>
                     <FaCalendarDay className='fas fa-calendar-day icon-space'></FaCalendarDay>
                 </div>
                 <div className='timeline-block-content'>
-                    <h1 className='block-content-title block-content-padding'>{name}</h1>
+                    <h1 className='block-content-title block-content-padding'>{name} - {date}</h1>
                     <p className='block-content-details block-content-padding'>
-                        {description}
+                        <span>{description}</span>
                     </p>
-                    <p className='block-content-date block-content-padding'>{date}</p>
-                    <FaTrashAlt onClick={this.handleDeleteEvent} className='event-delete'/>
+                    <p className='block-content-date block-content-padding'><strong>Location:</strong> {event_loc}</p>
+                    <div className='event-control-bar'>
+                        <div className='control-bar-delete' onClick={this.handleDeleteEvent}>
+                            <FaRegTrashAlt className='fa-trash-title' /><span className='control-bar-titles'>{'Remove'}</span>
+                        </div>
+                        <div className='control-bar-edit'>
+                            <FaPencilAlt className='fa-pencil-title' /><span className='control-bar-titles'>{'Edit'}</span>
+                        </div>
+                    </div>
                 </div>
             </li>
         )

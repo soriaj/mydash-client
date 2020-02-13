@@ -3,6 +3,8 @@ import { FaList, FaKeyboard } from 'react-icons/fa'
 import TravelerContext from '../../context/TravlerContext'
 import Loading from '../Loading/Loading'
 import config from '../../config'
+import BackToDashboard from '../BackToDashboard/BackToDashboard'
+import SaveButton from '../SaveButton/SaveButton'
 
 // const uuidv4 = require('uuid/v4')
 
@@ -91,11 +93,18 @@ export default class NewListForm extends Component {
                             </div>
         
         
-                            <div className="login-btn-container">
+                            {/* <div className="login-btn-container">
                                 {loading && (<Loading />)}
                                 {!loading &&
                                     <button className="login-btn">Submit</button>
                                 }
+                            </div> */}
+                            <div className="btn-container">
+                                {loading && (<Loading />)}
+                                {!loading && <>
+                                    <BackToDashboard backToDashboard={this.backToDashboard}/>
+                                    <SaveButton />
+                                </>}
                             </div>
                         </form>
                     </div>

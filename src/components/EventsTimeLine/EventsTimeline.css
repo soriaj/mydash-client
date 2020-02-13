@@ -39,13 +39,13 @@
     font-size: 14px;
 }
 .timeline-block-content {
-    margin-left: 20px;
+    margin-left: 15px;
     width: 85%;
     padding-right: 20px;
     transition: all 0.3s ease-in-out; 
 }
 .timeline-block-content:hover {
-    margin-left: 25px;
+    margin-left: 20px;
     background-color: rgb(214, 214, 214);
 }
 .block-content-title {
@@ -58,6 +58,10 @@
     margin-top: -5px;
     font-size: 15px;
 }
+p span {
+    white-space: pre-line;
+    white-space: pre-wrap;
+}
 .block-content-padding {
     padding-left: 20px;
 }
@@ -66,8 +70,45 @@
     transition: opacity 200ms ease-out;
     z-index: 0;
 }
-.timeline-block-content:hover .event-delete {
-    z-index: 1;
-    opacity: 1;
-    transition: opacity 0.3s ease-in;
+.event-control-bar {
+    padding-left: 20px;
+    display: flex;
+    align-content: center;
+    align-items: center;
+    justify-content: space-between;
+    width: 250x;
+    margin-bottom: 10px;
+}
+.control-bar-delete,
+.control-bar-edit {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    padding: 3.5px;
+    width: 100px;
+    transition: all 200ms ease-out;
+    border-radius: 25px;
+}
+.control-bar-delete:hover {
+    background-color: red;
+    color: whitesmoke;
+    transition: all 200ms ease-in;
+}
+.control-bar-edit:hover {
+    background-color: royalblue;
+    color: whitesmoke;
+    transition: all 200ms ease-in;
+}
+.control-bar-titles {
+    padding: 5px;
+}
+@media screen and (min-width: 1356px) {
+    .timeline-block-content {
+        max-width: 80%;
+    }
+}
+@media screen and (min-width: 768px) {
+    .timeline-block-content {
+        max-width: 90%;
+    }
 }

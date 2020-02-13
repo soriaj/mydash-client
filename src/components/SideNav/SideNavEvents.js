@@ -20,7 +20,7 @@ class SideNavEvents extends Component {
     async componentDidMount() {
         try {
             const { setEventItems } = this.context
-            const eventsAPI = await fetch(`${config.API_ENDPOINT}/new_events`)
+            const eventsAPI = await fetch(`${config.API_ENDPOINT}/events`)
             const eventsRes = await eventsAPI.json()
             setEventItems(eventsRes)
          } catch (error) {
@@ -28,9 +28,9 @@ class SideNavEvents extends Component {
          }
     }
     renderNavEventsItems = () => {
-        const { all_events } = this.context
+        const { events } = this.context
         return (
-            all_events.map(event => (
+            events.map(event => (
                 <div key={event.id} className='list-item'>
                     <span><FaCalendarDay className='fas fa-calendar-day'></FaCalendarDay></span>
                     <span className='list-item-title'><NavLink to={`/events/${event.id}`}>{event.event_name}</NavLink></span>

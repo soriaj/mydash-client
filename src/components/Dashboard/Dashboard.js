@@ -26,7 +26,7 @@ export default class Dashboard extends Component {
             if(!tripsAPI.ok) {
                 throw Error(tripsAPI.statusText)
             }
-            const eventsAPI = await fetch(`${config.API_ENDPOINT}/new_events`)
+            const eventsAPI = await fetch(`${config.API_ENDPOINT}/events`)
             if(!eventsAPI.ok) {
                 throw Error(eventsAPI.statusText)
             }

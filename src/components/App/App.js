@@ -26,7 +26,7 @@ class App extends Component {
   state = {
     hastToken: TokenService.hasAuthToken(),
     lists: [],
-    all_events: [],
+    events: [],
     trips: [],
   }
   static contextType = TravelerContext
@@ -38,7 +38,7 @@ class App extends Component {
   setupItems = (list, event, trip) => {
     this.setState({
       lists: list,
-      all_events: event,
+      events: event,
       trips: trip
     })
   }
@@ -61,16 +61,16 @@ class App extends Component {
   }
   // Event methods to update state
   setEventItems = event => {
-    this.setState({ all_events: event })
+    this.setState({ events: event })
   }
   addEventItem = event => {
-    this.setState({ all_events: [event, ...this.state.all_events ]})
+    this.setState({ events: [event, ...this.state.events ]})
   }
   deleteEventItem = event_id => {
-    const currrentEvents = this.state.all_events
+    const currrentEvents = this.state.events
     const newEvents = currrentEvents.filter(event => event.id !== event_id)
     setTimeout(() => {
-      this.setState({ all_events: newEvents })
+      this.setState({ events: newEvents })
     }, 200)
   }
 
@@ -83,7 +83,7 @@ class App extends Component {
     const contextValue = {
       hasToken: this.state.hasToken,
       lists: this.state.lists,
-      all_events: this.state.all_events,
+      events: this.state.events,
       trips: this.state.trips,
       handleTokenChange: this.handleTokenChange,
       setListItems: this.setListItems,

@@ -22,16 +22,16 @@ class SideNav extends Component {
     renderUser(){
         return (
             <>
-                <div className='sidenav-account'>
-                    <div className='sidenav-account-title'>{'Username'}</div>
-                </div>
-                <div className='sidenav-list'>
-                    <ul className='sidenav-list-items'>
-                        <SideNavLists />
-                        <SideNavEvents />
-                        <SideNavTrips />
-                    </ul>
-                </div>
+            <div className='sidenav-account'>
+                <div className='sidenav-account-title'>{'Username'}</div>
+            </div>
+            <div className='sidenav-list'>
+                <ul className='sidenav-list-items'>
+                    <SideNavLists />
+                    <SideNavEvents />
+                    <SideNavTrips />
+                </ul>
+            </div>
             </>
         )
     }
