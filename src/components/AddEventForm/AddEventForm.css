@@ -15,6 +15,8 @@
 .react-datepicker__tab-loop {
    display: flex;
 }
-.react-datepicker__input-container {
-   background-color: red;
+.react-datepicker-wrapper > .react-datepicker__input-container > input[type='text'] {
+   background-color: transparent;
+   padding: 12px;
+   font-size: 16px;
 }

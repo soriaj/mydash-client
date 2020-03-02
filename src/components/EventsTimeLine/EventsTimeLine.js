@@ -34,10 +34,14 @@ export default class EventsTimeline extends Component {
             })
 
     }
+    handleEditEvent = ev => {
+        const event_id = this.props.id
+        this.props.history.push(`/events/${event_id}`)
+    }
     render() {
         const { name, date, description, event_loc } = this.props
         return (
-            <li className='timeline-block'>
+            <li className='timeline-block' onClick={this.handleEditEvent}>
                 <div className='timeline-icon'>
                     <FaCalendarDay className='fas fa-calendar-day icon-space'></FaCalendarDay>
                 </div>

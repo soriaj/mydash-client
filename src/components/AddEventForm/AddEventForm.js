@@ -7,7 +7,7 @@ import BackToDashboard from '../BackToDashboard/BackToDashboard'
 import './AddEventForm.css'
 import SaveButton from '../SaveButton/SaveButton'
 import DatePicker from 'react-datepicker'
-// import "react-datepicker/dist/react-datepicker.css";
+import "react-datepicker/dist/react-datepicker.css";
 
 
 const uuidv4 = require('uuid/v4')
@@ -36,12 +36,13 @@ export default class NewListForm extends Component {
     }
     onSubmit = ev => {
         ev.preventDefault()
-        const { event_name, event_date, event_loc, description } = ev.target
+        const { event_name, event_loc, description } = ev.target
         const { startDate } = this.state
+        console.log(startDate)
         const { addEventItem } = this.context
         const newEvent = {
             id: uuidv4(),
-            date: startDate,
+            date: startDate.toDateString(),
             event_name: event_name.value,
             event_loc: event_loc.value,
             description: description.value
@@ -64,7 +65,7 @@ export default class NewListForm extends Component {
     }
 
     render() {
-        const { error, loading } = this.state
+        const { error, loading} = this.state
         return (
             <article className='main-content'>
                 <section className='form-container'>
