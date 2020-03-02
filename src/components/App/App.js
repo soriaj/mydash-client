@@ -80,6 +80,7 @@ class App extends Component {
   }
 
   render() {
+    // Global context for App
     const contextValue = {
       hasToken: this.state.hasToken,
       lists: this.state.lists,
