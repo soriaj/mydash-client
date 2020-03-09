@@ -21,6 +21,7 @@ import LoginPage from '../../routes/LoginPage';
 import TokenService from '../../services/token-service'
 import LandingPage from '../../routes/LandingPage';
 import EditListItemDetails from '../EditListItemDetails/EditListItemDetails'
+import EditEventItem from '../EditEventItem/EditEventItem';
 
 class App extends Component {
   state = {
@@ -73,6 +74,13 @@ class App extends Component {
       this.setState({ events: newEvents })
     }, 200)
   }
+  editEventItem = updatedEvent => {
+    this.setState({
+      events: this.state.events.map(event => 
+        (event.id != updatedEvent.id) ? event : updatedEvent  
+      )
+    })
+  }
 
   // Trip methods to update state
   setTripItems = trip => {
@@ -95,6 +103,7 @@ class App extends Component {
       setupItems: this.setupItems,
       deleteListItem: this.deleteListItem,
       deleteEventItem: this.deleteEventItem,
+      editEventItem: this.editEventItem,
     }
     return (
       <div className='App grid'>
@@ -118,7 +127,8 @@ class App extends Component {
               <PrivateRoute path='/edit/:list_id' component={EditListItemDetails} />
 
               {/* EVENT COMPONENT ROUTES */}
-              <PrivateRoute path='/events/:event_id' component={EventItemDetails} />
+              {/* <PrivateRoute path='/events/:event_id' component={EventItemDetails} /> */}
+              <PrivateRoute path='/events/:event_id' component={EditEventItem} />
               <PrivateRoute path='/add-event' component={AddEventForm} />
 
               {/* TRIP COMPONENT ROUTES */}
