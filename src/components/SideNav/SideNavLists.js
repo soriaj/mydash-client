@@ -1,17 +1,31 @@
 import React, { Component } from 'react';
-import { FaChevronCircleUp, FaChevronCircleDown } from 'react-icons/fa'
+import { NavLink } from 'react-router-dom'
+import { FaChevronCircleUp, FaChevronCircleDown, FaList } from 'react-icons/fa'
 import TravelerContext from  '../../context/TravlerContext'
-import SideNavListsItems from '../SideNavListsItems/SideNavListsItems';
+// import SideNavListsItems from '../SideNavListsItems/SideNavListsItems';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
+import config from '../../config'
 
 class SideNavLists extends Component {
     state = {
         showItems: false,
-        show: false
+        show: false,
     }
     static contextType = TravelerContext
     renderListsItems = () => {
         this.setState({ showItems: !this.state.showItems, show: !this.state.show })
+    }
+
+    async componentDidMount() {
+        try {
+            const { setListItems } = this.context
+            const listsAPI = await fetch(`${config.API_ENDPOINT}/lists`)
+            const listsRes = await listsAPI.json()
+            // this.setState({ lists: listsRes })
+            setListItems(listsRes)
+         } catch (error) {
+            console.log(error)
+         }
     }
     render() {
         const { lists } = this.context
@@ -26,7 +40,8 @@ class SideNavLists extends Component {
             </li>
             <TransitionGroup
                 component={null}
-            >{showItems && 
+            >
+            {showItems && 
                 <CSSTransition
                     key={0}
                     in={show}
@@ -34,14 +49,17 @@ class SideNavLists extends Component {
                     classNames="fade"
                 ><li className='list-sub-items'>
                     {lists.map(list => 
-                        <SideNavListsItems
-                            key={list.id}
-                            list_id={list.id}
-                            name={list.name}
-                            >
-                        </SideNavListsItems>
+                        <div key={list.id} className='list-item'>
+                            <span><FaList className='fas fa-file'></FaList></span>
+                            <span className='list-item-title'>
+                                <NavLink to={`/lists/${list.id}`}>
+                                    {list.name}
+                                </NavLink>
+                            </span>
+                        </div>
                     )}
-                </li></CSSTransition>}</TransitionGroup>
+                </li></CSSTransition>}
+            </TransitionGroup>
             </>
         );
     }

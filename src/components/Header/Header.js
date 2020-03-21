@@ -3,16 +3,18 @@ import { Link } from 'react-router-dom'
 import { FaBars, FaUserAlt, FaSignOutAlt, FaSignInAlt, FaUserPlus, FaChevronCircleDown, FaChevronCircleUp } from 'react-icons/fa';
 import './Header.css'
 import TravelerContext from '../../context/TravlerContext'
+import TokenService from '../../services/token-service'
 
 class Header extends Component {
     state = {
         error: null,
-        show: false
+        show: false,
     }
     static contextType = TravelerContext;
 
     handleOnLogout = () => {
         const { handleTokenChange } = this.context
+        TokenService.clearAuthToken()
         handleTokenChange()
         this.showMenu()
     }
@@ -22,7 +24,7 @@ class Header extends Component {
         showSideNav.classList.add('sidenav-active')
     }
     showMenu = () => {
-        this.setState({ show: !this.state.show })
+        this.setState({ show: !!this.state.show })
         let showMenu = document.querySelector('.header-dropdown-menu')
         showMenu.classList.toggle('header-dropdown-menu-active')
     }
@@ -61,7 +63,6 @@ class Header extends Component {
     }
 
     render() {
-        const { hasToken } = this.context
         const { show } = this.state
         return (
             <header className='header' role='banner'>
@@ -73,7 +74,10 @@ class Header extends Component {
                     }
                     <div className='header-dropdown-menu'>
                     <ul className='dropdown-list'>
-                        {hasToken ? this.renderLogout() : this.renderLogin()}
+                        {TokenService.hasAuthToken() 
+                            ? this.renderLogout() 
+                            : this.renderLogin()
+                        }
                     </ul>
                     </div>
                 </div>

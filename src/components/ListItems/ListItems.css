@@ -1,0 +1,8 @@
+.content-cards .list-delete {
+   opacity: 0;
+   transition: opacity 200ms ease-out;
+}
+.content-cards:hover .list-delete {
+   opacity: 1;
+   transition: opacity 200ms ease-in;
+}

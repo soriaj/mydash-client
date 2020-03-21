@@ -1,6 +1,6 @@
 .main-banner-items {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     width: 100%;
 }
 .banner-item {
@@ -10,7 +10,7 @@
     flex-direction: column;
     color: whitesmoke;
 }
-.banner-item-total {
+.banner-item-title {
     font-size: 20px;
     padding-bottom: 20px;
 }

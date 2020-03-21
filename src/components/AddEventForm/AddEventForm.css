@@ -1,0 +1,22 @@
+.btn-container {
+   display: flex;
+   justify-content: space-around;
+}
+.input-wrapper input[type='text'] {
+   font-size: 16px;
+}
+.input-field {
+   font-size: 16px;
+}
+.react-datepicker-wrapper {
+   display: flex;
+   justify-content: flex-end;
+}
+.react-datepicker__tab-loop {
+   display: flex;
+}
+.react-datepicker-wrapper > .react-datepicker__input-container > input[type='text'] {
+   background-color: transparent;
+   padding: 12px;
+   font-size: 16px;
+}
