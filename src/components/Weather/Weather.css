@@ -1,0 +1,22 @@
+.banner-weather-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.weather-temp {
+    font-size: 45px;
+}
+.weather-details {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-right: 20px;
+}
+.weather-name {
+    font-size: 18px;
+    margin-top: -35px;
+}
+img.weather-icon {
+    width: 70px;
+}

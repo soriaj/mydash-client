@@ -192,3 +192,6 @@ input, button {
     visibility: hidden;
     width: 0;
 }
+textarea {
+    border: none;
+}

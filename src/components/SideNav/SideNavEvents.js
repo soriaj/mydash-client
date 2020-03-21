@@ -1,32 +1,40 @@
-import React, { Component } from 'react';
-import { FaChevronCircleDown, FaChevronCircleUp } from 'react-icons/fa'
+import React, { Component } from 'react'
+import { NavLink } from 'react-router-dom'
+import { FaChevronCircleDown, FaChevronCircleUp, FaCalendarDay } from 'react-icons/fa'
 import TravelerContext from  '../../context/TravlerContext'
-import SideNavEventsItems from '../SideNavEventsItems/SideNavEventsItems'
+// import SideNavEventsItems from '../SideNavEventsItems/SideNavEventsItems'
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
+import config from '../../config'
 
 class SideNavEvents extends Component {
     state = {
         showItems: false,
         show: false
     }
+
     static contextType = TravelerContext
     showEventNavList = () => {
         this.setState({ showItems: !this.state.showItems, show: !this.state.show })
     }
+
+    async componentDidMount() {
+        try {
+            const { setEventItems } = this.context
+            const eventsAPI = await fetch(`${config.API_ENDPOINT}/events`)
+            const eventsRes = await eventsAPI.json()
+            setEventItems(eventsRes)
+         } catch (error) {
+            console.log(error)
+         }
+    }
     renderNavEventsItems = () => {
-        const { all_events } = this.context
+        const { events } = this.context
         return (
-            all_events.map(cur => (
-                cur.month_events.map(month => (
-                    month.events.map(event => (
-                        <SideNavEventsItems 
-                            key={event.id}
-                            event_id={event.id}
-                            day={month.date}
-                            name={event.name}
-                        />
-                    ))
-                ))
+            events.map(event => (
+                <div key={event.id} className='list-item'>
+                    <span><FaCalendarDay className='fas fa-calendar-day'></FaCalendarDay></span>
+                    <span className='list-item-title'><NavLink to={`/events/${event.id}`}>{event.event_name}</NavLink></span>
+                </div>
             ))
         )
     }

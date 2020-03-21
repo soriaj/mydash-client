@@ -34,7 +34,7 @@
     justify-content: space-between;
     padding-right: 5px;
     width: 85%;
-    height: 100px;
+    /* height: 100px; */
     background-color: rgb(234, 234, 234);
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
     margin-top: 10px;
@@ -263,6 +263,10 @@
     top: -25px;
     font-size: 12px;
 }
+.lists-delete:hover {
+    color: red;
+}
+
 
 @media screen and (min-width: 1356px) {
     .main-content-events {
@@ -275,7 +279,7 @@
         margin-right: 5px;
     }
     .events-section {
-        flex: 2;
+        flex: 1.5;
     }
     .trips-section {
         flex: 1;
@@ -313,5 +317,8 @@
     }
     .trip-tickets {
         width: calc(100% - 50px);
+    }
+    .main-content-events content .trips-section {
+        flex-direction: row;
     }
 }

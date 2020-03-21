@@ -1,0 +1,119 @@
+.list-details-title {
+   display: flex;
+   justify-content: center;
+   font-size: 25px;
+   color: gray;
+}
+.fa-plus-list {
+   padding-left: 20px;
+}
+.fa-plus-title {
+   padding-left: 15px;
+}
+.list-container {
+   list-style: none;
+   margin-bottom: 150px;
+   margin-top: 25px;
+   margin-left: auto;
+   margin-right: auto;
+}
+.list-container ul {
+   padding: 10px;
+}
+.list-items-container {
+   display: flex;
+   margin-bottom: 20px;
+   font-size: 18px;
+   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+}
+.check-box {
+   display: flex;
+   align-items: center;
+   padding: 10px;
+}
+.list-items-content {
+   margin-left: 10px;
+   margin-right: 10px;
+   flex: 1;
+}
+.control-bar {
+   padding-left: 10px;
+   padding-right: 10px;
+   display: flex;
+   align-items: center;
+   margin-left: auto;
+   text-transform: uppercase;
+}
+.control-bar:hover {
+   background-color: red;
+   color: whitesmoke;
+   transition: all 0.4s ease-in-out;
+}
+.fa-trash-title {
+   font-size: 18px;
+}
+.control-bar span {
+   font-size: 14px;
+   padding: 5px;
+}
+.fa-reg-check,
+.fa-reg-square {
+   font-size: 20px;
+   color: rgb(46, 46, 46);
+}
+.fa-reg-check {
+   color: gray;
+}
+.add-item-btn {
+   width: 150px;
+   color: #fff;
+   background-color: #57b846;
+   text-transform: uppercase;
+   transition: all 0.4s;
+   border-radius: 25px;
+   padding: 0 20px;
+}
+.add-item-btn:hover {
+   background-color: #333333;
+   color: whitesmoke;
+   box-shadow: 0 10px 30px 0px rgba(51, 51, 51, 0.5);
+}
+.add-list-item .input-wrapper {
+   margin-left: auto;
+   margin-right: auto;
+}
+.add-list-item .input-wrapper input[type='text'] {
+   font-size: 16px;
+}
+.add-list-item .input-wrapper .fa-plus {
+   padding: 2px;
+}
+.complete {
+   text-decoration: line-through;
+   color: gray;
+}
+.control-bar.complete {
+   color: gray;
+   text-decoration: none;
+}
+.control-bar.complete:hover {
+   color: whitesmoke;
+}
+.back-to-dashboard {
+   margin-right: 10px;
+}
+
+@media screen and (min-width: 1000px) {
+   .list-container {
+      width: 800px;
+   }
+   .add-list-item {
+      width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+   }
+}
+
+@media screen and (min-width: 768px) {
+
+}

@@ -21,6 +21,53 @@
             "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
         }
     ],
+    "lists_items": [
+        {
+            "id": 1,
+            "name": "1 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor",
+            "list_id": 1
+        },
+        {
+            "id": 2,
+            "name": "2 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor",
+            "list_id": 1
+        },
+        {
+            "id": 3,
+            "name": "1 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor adadfasd adfda fsdafadsfd",
+            "list_id": 2
+        }
+    ],
+    "new_events": [
+        {
+            "id": 1,
+            "date": "12-31-19",
+            "event_name": "NYE Party",
+            "event_loc": "Los Angeles",
+            "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+        },
+        {
+            "id": 2,
+            "date": "12-31-19",
+            "event_name": "NYE Dinner",
+            "event_loc": "Los Angeles",
+            "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+        },
+        {
+            "id": 3,
+            "date": "12-29-19",
+            "event_name": "Business Lunch",
+            "event_loc": "Sacramento",
+            "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+        },
+        {
+            "id": 4,
+            "date": "12-28-19",
+            "event_name": "Customer Meeting",
+            "event_loc": "Sacramento",
+            "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+        }
+    ],
     "all_events": [
         {
             "id": 12,
