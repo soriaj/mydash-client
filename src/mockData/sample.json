@@ -1,0 +1,52 @@
+{
+    "coord": {
+        "lon": -121.24,
+        "lat": 38.56
+    },
+    "weather": [
+        {
+            "id": 500,
+            "main": "Rain",
+            "description": "light rain",
+            "icon": "10n"
+        },
+        {
+            "id": 701,
+            "main": "Mist",
+            "description": "mist",
+            "icon": "50n"
+        }
+    ],
+    "base": "stations",
+    "main": {
+        "temp": 284.59,
+        "feels_like": 281.51,
+        "temp_min": 282.04,
+        "temp_max": 286.15,
+        "pressure": 1019,
+        "humidity": 93
+    },
+    "visibility": 8047,
+    "wind": {
+        "speed": 4.6,
+        "deg": 170
+    },
+    "rain": {
+        "1h": 0.83
+    },
+    "clouds": {
+        "all": 90
+    },
+    "dt": 1580049099,
+    "sys": {
+        "type": 1,
+        "id": 5867,
+        "country": "US",
+        "sunrise": 1580051730,
+        "sunset": 1580087947
+    },
+    "timezone": -28800,
+    "id": 5371068,
+    "name": "Mather Field",
+    "cod": 200
+}
