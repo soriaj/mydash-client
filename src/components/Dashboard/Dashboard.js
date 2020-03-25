@@ -11,7 +11,7 @@ import LoadingSpinner from '../LoadingSpinner/LoadingSpinner';
 
 export default class Dashboard extends Component {
     state = {
-        loading: false
+        loading: false,
     }
     static contextType = TravelerContext
     

@@ -38,7 +38,7 @@ class ListItems extends Component {
         const { name } = this.props
         return (
             <>
-                <li key={this.props.key} id={this.props.id} className='list-items-container'>
+                <li key={this.props.key} id={this.props.id} className='dashboard-list-items-container'>
                     <div className='inner-content'>
                         <FaFile className='fas fa-file'></FaFile>
                     </div>

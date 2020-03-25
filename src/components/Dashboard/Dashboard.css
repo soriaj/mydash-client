@@ -40,6 +40,9 @@
     margin-bottom: 25px;
     box-shadow: 0 3px 6px 0 rgba(0,0,0,0.2);
 }
+.show-list {
+    display: none;
+}
 .list-wrapper {
     display: flex;
     flex-wrap: wrap;
