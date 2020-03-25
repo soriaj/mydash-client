@@ -10,6 +10,14 @@
 .fa-plus-title {
    padding-left: 15px;
 }
+.list-detail-controls {
+   display: flex;
+   justify-content: space-between;
+   padding: 5px;
+   margin-bottom: 15px;
+   margin-left: auto;
+   margin-right: auto;
+}
 .list-container {
    list-style: none;
    margin-bottom: 150px;
@@ -106,6 +114,10 @@
 @media screen and (min-width: 1000px) {
    .list-container {
       width: 800px;
+   }
+   .list-detail-controls {
+      width: 800px;
+      /* justify-content: space-between; */
    }
    .add-list-item {
       width: 800px;

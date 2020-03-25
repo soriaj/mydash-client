@@ -1,6 +1,8 @@
 .btn-container {
    display: flex;
-   justify-content: space-around;
+   justify-content: space-between;
+   padding: 5px;
+   margin-bottom: 15px;
 }
 .input-wrapper input[type='text'] {
    font-size: 16px;

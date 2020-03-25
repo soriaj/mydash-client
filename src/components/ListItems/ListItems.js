@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { FaFile, FaTrash } from 'react-icons/fa';
+import { FaFile, FaRegTrashAlt } from 'react-icons/fa';
 import config from '../../config'
 import TravelerContext from '../../context/TravlerContext'
 import './ListItems.css'
@@ -35,19 +35,32 @@ class ListItems extends Component {
     }
 
     render() {
-        const { name, content } = this.props
+        const { name } = this.props
         return (
             <>
-                <div className='content-cards' onClick={this.viewListItemDetails}>
+                <li key={this.props.key} id={this.props.id} className='list-items-container'>
+                    <div className='inner-content'>
+                        <FaFile className='fas fa-file'></FaFile>
+                    </div>
+                    <div className='inner-content-description' onClick={this.viewListItemDetails}>
+                        <p className='content-heading'>{name}</p>
+                    </div>
+                    <div className='dashboard-control-bar' onClick={this.handleDeleteListItem}>
+                        <FaRegTrashAlt className='fa-trash-title'/><span>{'Remove'}</span>
+                    </div>
+                </li>
+                {/* <div className='content-cards' onClick={this.viewListItemDetails}>
                     <div className='inner-content'>
                         <FaFile className='fas fa-file'></FaFile>
                     </div>
                     <div className='inner-content-description'>
                         <p className='content-heading'>{name}</p>
-                        <p className='content-description'>{content.substr(0, 15)}{`...`}</p>
                     </div>
-                    <FaTrash className='list-delete' onClick={this.handleDeleteListItem}></FaTrash>
-                </div>
+                    <div className='control-bar'>
+                        <FaRegTrashAlt className='list-delete' onClick={this.handleDeleteListItem} /><span className='list-bar-remove'>{'Remove'}</span>
+                    </div>
+                </div> */}
+                
             </>
         );
     }
