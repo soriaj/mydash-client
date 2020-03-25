@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 // import { NavLink } from 'react-router-dom'
 import { FaPlus } from 'react-icons/fa'
-import EventsTimeline from '../EventsTimeline/EventsTimeline'
+import EventsTimeline from '../EventsTimeline/EventsTimeLine'
 import TravlerContext from  '../../context/TravlerContext'
 // import data from '../../mockData/data.json'
 

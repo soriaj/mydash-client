@@ -146,12 +146,16 @@ export default class ListItemDetails extends Component {
                     <div className='list-details-title'>
                         <h3>{this.getListsTitle()}</h3>
                     </div>
+
                     <div className='add-list-item'>
                         <form className='form-field' onSubmit={this.handleAddListItem}>
-                            <div className='input-wrapper'>
+                            <div className='list-detail-controls'>
                                 <div className='back-to-dashboard'>
-                                    <BackToDashboard backToDashboard={this.backToDashboard}/>
+                                    <BackToDashboard backToDashboard={this.backToDashboard}/>       
                                 </div>
+                                <SaveButton />
+                            </div>
+                            <div className='input-wrapper'>
                                 <FaPlus className="fa-plus icon"></FaPlus>
                                 <label htmlFor="new_item" className='no-view'>Add Item</label>
                                 <input 
@@ -162,8 +166,6 @@ export default class ListItemDetails extends Component {
                                     className='input-field'
                                     />
                                 <span className="focus-input-field"></span>
-                                {/* <button className='add-item-btn'>Save</button> */}
-                                <SaveButton />
                             </div>
                         </form>
                     </div>

@@ -13,7 +13,7 @@ export default class DashboardLists extends Component {
     render() {
         const { lists } = this.context
         return (
-            <section className='content list'>
+            <section className='content'>
                 <div className='content-header'>
                     <div className='content-titles'>
                         <h3 className='content-header-title'>Lists</h3>
@@ -22,7 +22,7 @@ export default class DashboardLists extends Component {
                         <FaPlus className='fas fa-plus'></FaPlus>
                     </div>
                 </div>
-                {lists.map(item => 
+                {/* {lists.map(item => 
                     <ListItems 
                         key={item.id}
                         id={item.id}
@@ -30,7 +30,20 @@ export default class DashboardLists extends Component {
                         content={item.content}
                         history={this.props.history}
                     />
-                )}
+                )} */}
+                <div className='dashboard-list-container'>
+                    <ul className='list-wrapper'>
+                        {lists.map(item => 
+                            <ListItems 
+                                key={item.id}
+                                id={item.id}
+                                name={item.name}    
+                                content={item.content}
+                                history={this.props.history}
+                            />
+                        )}
+                    </ul>
+                </div>
             </section>
         );
     }
