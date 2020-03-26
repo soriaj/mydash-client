@@ -6,7 +6,7 @@ import TravelerContext from '../../context/TravlerContext'
 
 export default class DashboardLists extends Component { 
     state = {
-        showLists: false
+        showLists: true
     }
     static contextType = TravelerContext 
     addNewList = () => {
@@ -29,7 +29,7 @@ export default class DashboardLists extends Component {
                         <FaPlus className='fas fa-plus'></FaPlus>
                     </div>
                 </div>
-                <div className={this.state.showLists && 'show-list'}>
+                <div className={this.state.showLists ? '' : 'show-list' }>
                     <ul className='list-wrapper'>
                         {lists.map(item => 
                             <ListItems 

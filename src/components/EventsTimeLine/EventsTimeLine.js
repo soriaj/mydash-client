@@ -41,7 +41,7 @@ export default class EventsTimeline extends Component {
     render() {
         const { name, date, description, event_loc } = this.props
         return (
-            <li className='timeline-block' onClick={this.handleEditEvent}>
+            <li className='timeline-block'>
                 <div className='timeline-icon'>
                     <FaCalendarDay className='fas fa-calendar-day icon-space'></FaCalendarDay>
                 </div>
@@ -55,7 +55,7 @@ export default class EventsTimeline extends Component {
                         <div className='control-bar-delete' onClick={this.handleDeleteEvent}>
                             <FaRegTrashAlt className='fa-trash-title' /><span className='control-bar-titles'>{'Remove'}</span>
                         </div>
-                        <div className='control-bar-edit'>
+                        <div className='control-bar-edit' onClick={this.handleEditEvent}>
                             <FaPencilAlt className='fa-pencil-title' /><span className='control-bar-titles'>{'Edit'}</span>
                         </div>
                     </div>
