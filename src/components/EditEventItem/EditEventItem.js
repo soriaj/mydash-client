@@ -7,6 +7,7 @@ import SaveButton from '../SaveButton/SaveButton'
 import Loading from '../Loading/Loading'
 import config from '../../config'
 
+
 class EditEventItem extends Component {
    static defaultProps = {
       editEventItem: () => {}
@@ -33,10 +34,9 @@ class EditEventItem extends Component {
             : res.json()
       )
       .then(event => {
-         // let currentDate = event.date.to 
          this.setState({
             id: event.id,
-            // startDate: currentDate,
+            // startDate: moment(),
             event_name: event.event_name,
             event_loc: event.event_loc,
             description: event.description,
@@ -139,7 +139,11 @@ class EditEventItem extends Component {
                               className='input-field'
                               required
                               /> */}
-                              <DatePicker selected={this.state.startDate} onChange={this.handleDateChange} />
+                              <DatePicker 
+                                 selected={this.state.startDate}
+                                 onChange={this.handleDateChange}
+                                 name="startDate"
+                                 dateFormat="MM/DD/YYYY" />
                            <span className="focus-input-field"></span>
                         </div>
 
