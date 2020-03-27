@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { FaList, FaKeyboard } from 'react-icons/fa'
+import { FaList } from 'react-icons/fa'
 import TravelerContext from '../../context/TravlerContext'
 import Loading from '../Loading/Loading'
 import config from '../../config'

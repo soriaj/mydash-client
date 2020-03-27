@@ -12,7 +12,6 @@ import PrivateRoute from '../../utils/PrivateRoute';
 import PublicRoute from '../../utils/PublicRoute';
 import Dashboard from '../Dashboard/Dashboard';
 import ListItemDetails from  '../ListItemDetails/ListItemDetails';
-import EventItemDetails from '../EventItemDetails/EventItemDetails';
 import TripItemDetails from '../TripItemDetails/TripItemDetails';
 import AddListForm from '../AddListForm/AddListForm';
 import AddEventForm from '../AddEventForm/AddEventForm';
