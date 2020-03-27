@@ -3,6 +3,7 @@ import TravelerContext from '../../context/TravlerContext'
 import { FaCalendarDay, FaRegTrashAlt, FaPencilAlt } from 'react-icons/fa'
 import './EventsTimeline.css'
 import config from '../../config'
+// import moment from 'moment'
 
 export default class EventsTimeline extends Component {
     state = {
@@ -40,7 +41,6 @@ export default class EventsTimeline extends Component {
     }
     render() {
         const { name, date, description, event_loc } = this.props
-        console.log(date)
         return (
             <li className='timeline-block'>
                 <div className='timeline-icon'>

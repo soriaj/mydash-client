@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { FaPlus, FaPencilAlt, FaRegCheckSquare, FaRegSquare, FaRegTrashAlt, FaArrowLeft } from 'react-icons/fa'
+import { FaPlus, FaRegCheckSquare, FaRegSquare, FaRegTrashAlt } from 'react-icons/fa'
 import TravelerContext from '../../context/TravlerContext'
 import LoadingSpinner from '../LoadingSpinner/LoadingSpinner'
 import config from '../../config'
