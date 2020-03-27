@@ -40,6 +40,7 @@ export default class EventsTimeline extends Component {
     }
     render() {
         const { name, date, description, event_loc } = this.props
+        console.log(date)
         return (
             <li className='timeline-block'>
                 <div className='timeline-icon'>

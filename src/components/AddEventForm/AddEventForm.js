@@ -102,7 +102,10 @@ export default class NewListForm extends Component {
                                     className='input-field'
                                     required
                                     /> */}
-                                    <DatePicker selected={this.state.startDate} onChange={this.handleDateChange} />
+                                    <DatePicker 
+                                        selected={this.state.startDate} 
+                                        onChange={this.handleDateChange}
+                                        dateFormat="MM/dd/yyyy" />
                                 <span className="focus-input-field"></span>
                             </div>
 

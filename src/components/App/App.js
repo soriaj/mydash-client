@@ -77,7 +77,7 @@ class App extends Component {
   editEventItem = updatedEvent => {
     this.setState({
       events: this.state.events.map(event => 
-        (event.id != updatedEvent.id) ? event : updatedEvent  
+        (event.id !== updatedEvent.id) ? event : updatedEvent  
       )
     })
   }

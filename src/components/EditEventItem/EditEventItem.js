@@ -7,7 +7,6 @@ import SaveButton from '../SaveButton/SaveButton'
 import Loading from '../Loading/Loading'
 import config from '../../config'
 
-
 class EditEventItem extends Component {
    static defaultProps = {
       editEventItem: () => {}
@@ -17,6 +16,7 @@ class EditEventItem extends Component {
    state = {
       loading: false,
       error: null,
+      startDate: new Date()
    }
 
    componentDidMount() {
@@ -36,7 +36,6 @@ class EditEventItem extends Component {
       .then(event => {
          this.setState({
             id: event.id,
-            // startDate: moment(),
             event_name: event.event_name,
             event_loc: event.event_loc,
             description: event.description,
@@ -99,7 +98,7 @@ class EditEventItem extends Component {
    }
 
    render() {
-      const { loading, error, event_name, event_loc, description } = this.state
+      const { loading, error, event_name, event_loc, description, startDate } = this.state
       return (
          <article className='main-content'>
             <section className='form-container'>
@@ -134,16 +133,19 @@ class EditEventItem extends Component {
                               type="text" 
                               name="event_date" 
                               id="event_date" 
-                              placeholder='MM-DD-YYYY'
-                              value={startDate} 
+                              placeholder='MM/DD/YYYY'
+                              value={startDate}
+                              onChange={this.handleDateChange} 
                               className='input-field'
                               required
                               /> */}
-                              <DatePicker 
+                              <DatePicker
+                                 value={this.state.startDate} 
                                  selected={this.state.startDate}
                                  onChange={this.handleDateChange}
                                  name="startDate"
-                                 dateFormat="MM/DD/YYYY" />
+                                 dateFormat="MM/dd/yyyy" 
+                              />
                            <span className="focus-input-field"></span>
                         </div>
 
