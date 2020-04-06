@@ -38,7 +38,7 @@ class App extends Component {
   setupItems = (list, event, trip) => {
     this.setState({
       lists: list,
-      events: event,
+      events: event.sort((a, b) => b - a),
       trips: trip
     })
   }
