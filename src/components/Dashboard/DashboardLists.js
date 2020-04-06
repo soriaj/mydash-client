@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-// import { NavLink } from 'react-router-dom';
-import { FaPlus } from 'react-icons/fa';
+import { FaPlus, FaChevronCircleDown, FaChevronCircleUp } from 'react-icons/fa';
 import ListItems from '../ListItems/ListItems';
 import TravelerContext from '../../context/TravlerContext'
 
@@ -19,17 +18,23 @@ export default class DashboardLists extends Component {
     }
     render() {
         const { lists } = this.context
+        const { showLists } = this.state
         return (
             <section className='content'>
                 <div className='content-header'>
                     <div className='content-titles'>
-                        <h3 className='content-header-title' onClick={this.showListItems}>Lists</h3>
+                        <h3 
+                            className='content-header-title' 
+                            onClick={this.showListItems}>
+                            {showLists ? <FaChevronCircleUp className='title-chevron'/> : <FaChevronCircleDown className='title-chevron'/>}
+                            List 
+                        </h3>
                     </div>
                     <div className='add-icon' onClick={this.addNewList}>
                         <FaPlus className='fas fa-plus'></FaPlus>
                     </div>
                 </div>
-                <div className={this.state.showLists ? '' : 'show-list' }>
+                <div className={showLists ? '' : 'show-list' }>
                     <ul className='list-wrapper'>
                         {lists.map(item => 
                             <ListItems 
