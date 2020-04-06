@@ -17,6 +17,7 @@ class EditEventItem extends Component {
    state = {
       loading: false,
       error: null,
+      startDate: new Date()
    }
 
    componentDidMount() {
@@ -143,6 +144,7 @@ class EditEventItem extends Component {
                                  onChange={this.handleDateChange}
                                  name='date'
                                  dateFormat='MM/dd/yyyy'
+                                 placeholderText='Enter an event date'
                                  required 
                               />
                            <span className='focus-input-field'></span>

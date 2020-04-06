@@ -52,6 +52,9 @@
    color: whitesmoke;
    transition: all 0.4s ease-in-out;
 }
+.dashboard-control-bar span {
+   padding: 5px;
+}
 @media screen and (min-width: 768px) {
    .dashboard-list-items-container {
       width: 400px;

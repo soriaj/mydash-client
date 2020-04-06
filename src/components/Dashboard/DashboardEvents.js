@@ -1,9 +1,7 @@
 import React, { Component } from 'react'
-// import { NavLink } from 'react-router-dom'
-import { FaPlus } from 'react-icons/fa'
+import { FaPlus, FaChevronCircleDown, FaChevronCircleUp } from 'react-icons/fa'
 import EventsTimeline from '../EventsTimeline/EventsTimeLine'
 import TravlerContext from  '../../context/TravlerContext'
-// import data from '../../mockData/data.json'
 
 export default class DashboardEvents extends Component {
     state = {
@@ -21,17 +19,23 @@ export default class DashboardEvents extends Component {
     }
     render() {
         const { events } = this.context
+        const { showEvents } = this.state
         return (
             <div className='content events-section'>
                 <div className='content-header'>
                     <div className='content-titles'>
-                        <h3 className='content-header-title' onClick={this.showEventItems}>Events</h3>
+                        <h3 
+                            className='content-header-title' 
+                            onClick={this.showEventItems}>
+                            {showEvents ? <FaChevronCircleUp className='title-chevron'/> : <FaChevronCircleDown className='title-chevron'/>}
+                            Events
+                        </h3>
                     </div>
                     <div className='add-icon'>
                         <FaPlus className='fas fa-plus' onClick={this.addNewEvent}></FaPlus>
                     </div>
                 </div>
-                <div className={`events-timeline ${this.state.showEvents ? '' : 'show-list' }`}>
+                <div className={`events-timeline ${showEvents ? '' : 'show-list' }`}>
                     {/* Add Filter option here */}
                     <ul className='timeline-list'>
                         {events.map((event, idx) => (

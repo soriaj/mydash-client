@@ -105,7 +105,7 @@ export default class NewListForm extends Component {
                                     <DatePicker 
                                         selected={this.state.startDate} 
                                         onChange={this.handleDateChange}
-                                        dateFormat='MM/dd/yyyy'
+                                        placeholderText="Enter event date"
                                         name='date'
                                         required />
                                 <span className='focus-input-field'></span>
