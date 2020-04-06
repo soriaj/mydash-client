@@ -3,7 +3,7 @@ import TravelerContext from '../../context/TravlerContext'
 import { FaCalendarDay, FaRegTrashAlt, FaPencilAlt } from 'react-icons/fa'
 import './EventsTimeline.css'
 import config from '../../config'
-// import moment from 'moment'
+import moment from 'moment'
 
 export default class EventsTimeline extends Component {
     state = {
@@ -41,13 +41,14 @@ export default class EventsTimeline extends Component {
     }
     render() {
         const { name, date, description, event_loc } = this.props
+        let formatDates = moment(date).format("MM/DD/YY")
         return (
             <li className='timeline-block'>
                 <div className='timeline-icon'>
                     <FaCalendarDay className='fas fa-calendar-day icon-space'></FaCalendarDay>
                 </div>
                 <div className='timeline-block-content'>
-                    <h1 className='block-content-title block-content-padding'>{name} - {date}</h1>
+                    <h1 className='block-content-title block-content-padding'>{name} - {formatDates}</h1>
                     <p className='block-content-details block-content-padding'>
                         <span>{description}</span>
                     </p>
