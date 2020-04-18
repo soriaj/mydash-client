@@ -18,7 +18,7 @@ export default class ListItemDetails extends Component {
 
     loadAllData = async (listId) => {
         try {
-            let response = await fetch(`${config.API_ENDPOINT}/lists_items`)
+            let response = await fetch(`${process.env.REACT_APP_API_ENDPOINT}/lists_items`)
             let data = await response.json()
             this.setState({ 
                 items: data.filter(list => list.list_id === parseInt(listId) ? list : '')
@@ -54,7 +54,7 @@ export default class ListItemDetails extends Component {
 
     patchItemAPI = async (listId, markItem) => {
         try {
-            await fetch(`${config.API_ENDPOINT}/lists_items/${listId}`, {
+            await fetch(`${process.env.REACT_APP_API_ENDPOINT}/lists_items/${listId}`, {
                 method: 'PATCH',
                 body: JSON.stringify(markItem),
                 headers: {
@@ -69,7 +69,7 @@ export default class ListItemDetails extends Component {
 
     postItemAPI = async (newItem) => {
         try {
-            await fetch(`${config.API_ENDPOINT}/lists_items`, {
+            await fetch(`${process.env.REACT_APP_API_ENDPOINT}/lists_items`, {
                 method: 'POST',
                 body: JSON.stringify(newItem),
                 headers: {
@@ -82,7 +82,7 @@ export default class ListItemDetails extends Component {
     }
 
     removeItemAPI = async (list_id) => {
-        return await fetch(`${config.API_ENDPOINT}/lists_items/${list_id}`, {
+        return await fetch(`${process.env.REACT_APP_API_ENDPOINT}/lists_items/${list_id}`, {
             method: 'DELETE',
             headers: {
                 'content-type': 'application/json',

@@ -19,7 +19,7 @@ class SideNavLists extends Component {
     async componentDidMount() {
         try {
             const { setListItems } = this.context
-            const listsAPI = await fetch(`${config.API_ENDPOINT}/lists`)
+            const listsAPI = await fetch(`${process.env.REACT_APP_API_ENDPOINT}/lists`)
             const listsRes = await listsAPI.json()
             // this.setState({ lists: listsRes })
             setListItems(listsRes)

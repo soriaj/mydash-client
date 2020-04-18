@@ -21,7 +21,8 @@ export default class NewListForm extends Component {
     static contextType = TravelerContext
 
     addEvent(newEvent) {
-        return fetch(`${config.API_ENDPOINT}/events`, {
+        // return fetch(`${config.API_ENDPOINT}/events`, {
+        return fetch(`${process.env.REACT_APP_API_ENDPOINT}/events`, {
             method: 'POST',
             body: JSON.stringify(newEvent),
             headers: {

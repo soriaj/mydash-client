@@ -23,7 +23,7 @@ class EditEventItem extends Component {
    componentDidMount() {
       const { event_id } = this.props.match.params
       this.setState({ loading: true })
-      fetch(`${config.API_ENDPOINT}/events/${event_id}`, {
+      fetch(`${process.env.REACT_APP_API_ENDPOINT}/events/${event_id}`, {
          medhtod: 'GET',
          headers: {
             'content-type': 'application/json',
@@ -82,7 +82,7 @@ class EditEventItem extends Component {
          description,
       }
 
-      fetch(`${config.API_ENDPOINT}/events/${event_id}`, {
+      fetch(`${process.env.REACT_APP_API_ENDPOINT}/events/${event_id}`, {
          method: 'PATCH',
          body: JSON.stringify(updatedEvent),
          headers: {

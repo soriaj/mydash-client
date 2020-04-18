@@ -36,7 +36,7 @@ class Header extends Component {
         return (
             <>
             <li className='dropdown-list-item'>
-                <span className='dropdown-icon'><FaUserPlus /></span>
+                <span className='dropdown-i'><FaUserPlus /></span>
                 <span className='dropdown-label'><Link to='/signup' onClick={this.closeOnRouteChange}>Sign Up</Link></span>
             </li>
             <li className='dropdown-list-item'>

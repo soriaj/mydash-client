@@ -12,7 +12,7 @@ class ListItems extends Component {
     }
 
     deleteList(list_id) {
-        return fetch(`${config.API_ENDPOINT}/lists/${list_id}`, {
+        return fetch(`${process.env.REACT_APP_API_ENDPOINT}/lists/${list_id}`, {
             method: 'DELETE',
             headers: {
                 'content-type': 'application/json',

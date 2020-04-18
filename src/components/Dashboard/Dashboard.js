@@ -18,15 +18,15 @@ export default class Dashboard extends Component {
     async componentDidMount() {
         this.setState({ loading: true })
         try {
-            const listsAPI = await fetch(`${config.API_ENDPOINT}/lists`)
+            const listsAPI = await fetch(`${process.env.REACT_APP_API_ENDPOINT}/lists`)
             if(!listsAPI.ok) {
                 throw Error(listsAPI.statusText)
             }
-            const tripsAPI = await fetch(`${config.API_ENDPOINT}/trips`)
+            const tripsAPI = await fetch(`${process.env.REACT_APP_API_ENDPOINT}/trips`)
             if(!tripsAPI.ok) {
                 throw Error(tripsAPI.statusText)
             }
-            const eventsAPI = await fetch(`${config.API_ENDPOINT}/events`)
+            const eventsAPI = await fetch(`${process.env.REACT_APP_API_ENDPOINT}/events`)
             if(!eventsAPI.ok) {
                 throw Error(eventsAPI.statusText)
             }
