@@ -19,7 +19,7 @@ class SideNavTrips extends Component {
     async componentDidMount() {
         try {
             const { setTripItems } = this.context
-            const tripsAPI = await fetch(`${config.API_ENDPOINT}/trips`)
+            const tripsAPI = await fetch(`${process.env.REACT_APP_API_ENDPOINT}/trips`)
             const tripsRes = await tripsAPI.json()
             // this.setState({ new_events: eventsRes })
             setTripItems(tripsRes)

@@ -15,7 +15,8 @@ export default class NewListForm extends Component {
     }
     static contextType = TravelerContext
     addList(newList) {
-        return fetch(`${config.API_ENDPOINT}/lists`, {
+        // return fetch(`${config.API_ENDPOINT}/lists`, {
+        return fetch(`${process.env.REACT_APP_API_ENDPOINT}/lists`, {
            method: 'POST',
            body: JSON.stringify(newList),
            headers: {

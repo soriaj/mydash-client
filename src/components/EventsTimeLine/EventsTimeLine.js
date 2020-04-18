@@ -13,7 +13,7 @@ export default class EventsTimeline extends Component {
     static contextType = TravelerContext
 
     deleteEvent(event_id) {
-        return fetch(`${config.API_ENDPOINT}/events/${event_id}`, {
+        return fetch(`${process.env.REACT_APP_API_ENDPOINT}/events/${event_id}`, {
             method: 'DELETE',
             headers: {
                 'content-type': 'application/json',
