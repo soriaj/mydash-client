@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { FaList } from 'react-icons/fa'
 import TravelerContext from '../../context/TravlerContext'
 import Loading from '../Loading/Loading'
-import config from '../../config'
+// import config from '../../config'
 import BackToDashboard from '../BackToDashboard/BackToDashboard'
 import SaveButton from '../SaveButton/SaveButton'
 

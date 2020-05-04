@@ -4,7 +4,7 @@ import { FaChevronCircleDown, FaChevronCircleUp, FaCalendarDay } from 'react-ico
 import TravelerContext from  '../../context/TravlerContext'
 // import SideNavEventsItems from '../SideNavEventsItems/SideNavEventsItems'
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
-import config from '../../config'
+// import config from '../../config'
 
 class SideNavEvents extends Component {
     state = {

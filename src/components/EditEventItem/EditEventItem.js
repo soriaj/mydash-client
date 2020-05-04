@@ -5,7 +5,7 @@ import DatePicker from 'react-datepicker'
 import BackToDashboard from '../BackToDashboard/BackToDashboard'
 import SaveButton from '../SaveButton/SaveButton'
 import Loading from '../Loading/Loading'
-import config from '../../config'
+// import config from '../../config'
 // import moment from 'moment';
 
 class EditEventItem extends Component {
