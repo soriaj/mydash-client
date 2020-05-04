@@ -9,47 +9,76 @@ import Loading from '../Loading/Loading'
 // import moment from 'moment';
 
 class EditEventItem extends Component {
+   state = {
+      loading: false,
+      error: null,
+      startDate: new Date(),
+      events: []
+   }
+
    static defaultProps = {
       editEventItem: () => {}
    }
    static contextType = TravelerContext
 
-   state = {
-      loading: false,
-      error: null,
-      startDate: new Date()
+   loadAllData = async (eventId) => {
+      try {
+         let response = await fetch(`${process.env.REACT_APP_API_ENDPOINT}/events/${eventId}`)
+         let data = await response.json()
+         this.setState({
+            // events: data.filter(event => event.event_id === parseInt(eventId) ? event : '')
+            events: {...data}
+         })
+      }
+      catch (error) {
+         console.log(error)
+      }
    }
 
    componentDidMount() {
       const { event_id } = this.props.match.params
-      this.setState({ loading: true })
-      fetch(`${process.env.REACT_APP_API_ENDPOINT}/events/${event_id}`, {
-         medhtod: 'GET',
-         headers: {
-            'content-type': 'application/json',
-         }
-      })
-      .then(res =>
-         (!res.ok)
-            ? res.json().then(e => Promise.reject(e))
-            : res.json()
-      )
-      .then(event => {
-         this.setState({
-            id: event.id,
-            event_name: event.event_name,
-            event_loc: event.event_loc,
-            description: event.description,
-            loading: false
-         })
-      })
-      .catch(error => this.setState({ error: error }))
+      this.loadAllData(event_id)
    }
+
+   componentDidUpdate(prevProps) {
+      const { event_id } = this.props.match.params
+      if(prevProps.match.params.event_id !== event_id) {
+         this.loadAllData(event_id)
+      }
+   }
+
+   // componentDidMount() {
+   //    const { event_id } = this.props.match.params
+   //    this.setState({ loading: true })
+   //    fetch(`${process.env.REACT_APP_API_ENDPOINT}/events/${event_id}`, {
+   //       medhtod: 'GET',
+   //       headers: {
+   //          'content-type': 'application/json',
+   //       }
+   //    })
+   //    .then(res =>
+   //       (!res.ok)
+   //          ? res.json().then(e => Promise.reject(e))
+   //          : res.json()
+   //    )
+   //    .then(event => {
+   //       this.setState({
+   //          id: event.id,
+   //          event_name: event.event_name,
+   //          event_loc: event.event_loc,
+   //          description: event.description,
+   //          loading: false
+   //       })
+   //    })
+   //    .catch(error => this.setState({ error: error }))
+   // }
+
+
    handleEventNameChange = e => {
       this.setState({ event_name: e.target.value })
    }
-   handleDateChange = date => {
-      this.setState({ startDate: date })
+   handleDateChange = (date, e) => {
+      this.setState({ startDate: date, date: e.target.value })
    }
    handleEventLocationChange = e => {
       this.setState({ event_loc: e.target.value })
@@ -108,7 +137,9 @@ class EditEventItem extends Component {
    }
 
    render() {
-      const { loading, error, event_name, event_loc, description } = this.state
+      // const { loading, error, event_name, event_loc, description } = this.state
+      const { error, loading } = this.state
+      const { event_name, event_loc, description, date } = this.state.events
       return (
          <article className='main-content'>
             <section className='form-container'>
@@ -141,6 +172,7 @@ class EditEventItem extends Component {
                            <label htmlFor='date' className='no-view'>Date</label>
                               <DatePicker
                                  selected={this.state.startDate}
+                                 // value={date}
                                  onChange={this.handleDateChange}
                                  name='date'
                                  dateFormat='MM/dd/yyyy'
