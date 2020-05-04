@@ -49,8 +49,10 @@ export default class NewListForm extends Component {
         const { startDate } = this.state
         const formattedDate = this.formatNewDate(startDate)
         const { addEventItem } = this.context
+        let count = Math.floor(Math.random() * 10000)
         const newEvent = {
-            id: uuidv4(),
+            // id: uuidv4(),
+            id: count,
             date: formattedDate,
             event_name: event_name.value,
             event_loc: event_loc.value,

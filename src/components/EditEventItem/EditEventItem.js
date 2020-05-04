@@ -139,7 +139,7 @@ class EditEventItem extends Component {
    render() {
       // const { loading, error, event_name, event_loc, description } = this.state
       const { error, loading } = this.state
-      const { event_name, event_loc, description, date } = this.state.events
+      const { event_name, event_loc, description } = this.state.events
       return (
          <article className='main-content'>
             <section className='form-container'>
