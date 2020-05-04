@@ -47,13 +47,14 @@ export default class NewListForm extends Component {
         ev.preventDefault()
         const { event_name, event_loc, description } = ev.target
         const { startDate } = this.state
-        const formattedDate = this.formatNewDate(startDate)
+        // const formattedDate = this.formatNewDate(startDate)
         const { addEventItem } = this.context
         let count = Math.floor(Math.random() * 10000)
         const newEvent = {
             // id: uuidv4(),
             id: count,
-            date: formattedDate,
+            // date: formattedDate,
+            date: startDate.toISOString(),
             event_name: event_name.value,
             event_loc: event_loc.value,
             description: description.value

@@ -13,7 +13,9 @@ class EditEventItem extends Component {
       loading: false,
       error: null,
       startDate: new Date(),
-      events: []
+      event_name: '', 
+      event_loc: '', 
+      description: ''
    }
 
    static defaultProps = {
@@ -27,7 +29,9 @@ class EditEventItem extends Component {
          let data = await response.json()
          this.setState({
             // events: data.filter(event => event.event_id === parseInt(eventId) ? event : '')
-            events: {...data}
+            event_name: data.event_name,
+            event_loc: data.event_loc,
+            description: data.description
          })
       }
       catch (error) {
@@ -103,10 +107,11 @@ class EditEventItem extends Component {
       e.preventDefault()
       const { event_id } = this.props.match.params
       const { event_name, startDate, event_loc, description } = this.state
-      const formattedDate = this.formatNewDate(startDate)
+      // const formattedDate = this.formatNewDate(startDate)
       const updatedEvent = {
          event_name,
-         date: formattedDate,
+         // date: formattedDate,
+         date: startDate.toISOString(),
          event_loc,
          description,
       }
@@ -137,9 +142,7 @@ class EditEventItem extends Component {
    }
 
    render() {
-      // const { loading, error, event_name, event_loc, description } = this.state
-      const { error, loading } = this.state
-      const { event_name, event_loc, description } = this.state.events
+      const { loading, error, event_name, event_loc, description } = this.state
       return (
          <article className='main-content'>
             <section className='form-container'>
