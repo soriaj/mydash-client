@@ -5,7 +5,7 @@ import TravlerContext from  '../../context/TravlerContext'
 
 export default class DashboardEvents extends Component {
     state = {
-        showEvents: true
+        showEvents: true,
     }
     static contextType = TravlerContext
 
@@ -17,8 +17,10 @@ export default class DashboardEvents extends Component {
             showEvents: !this.state.showEvents
         })
     }
+
     render() {
         const { events } = this.context
+        const displayEventSorted = events.sort((a,b) => new Date(a.date) - new Date(b.date))
         const { showEvents } = this.state
         return (
             <div className='content events-section'>
@@ -38,7 +40,7 @@ export default class DashboardEvents extends Component {
                 <div className={`events-timeline ${showEvents ? '' : 'show-list' }`}>
                     {/* Add Filter option here */}
                     <ul className='timeline-list'>
-                        {events.map((event, idx) => (
+                        {displayEventSorted.map((event, idx) => (
                             <EventsTimeline 
                                 key={idx}
                                 id={event.id}
