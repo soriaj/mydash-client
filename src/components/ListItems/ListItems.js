@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { FaFile, FaRegTrashAlt } from 'react-icons/fa';
-import config from '../../config'
+// import config from '../../config'
 import TravelerContext from '../../context/TravlerContext'
 import './ListItems.css'
 

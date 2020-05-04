@@ -3,7 +3,7 @@ import { FaChevronCircleUp, FaChevronCircleDown } from 'react-icons/fa'
 import TravelerContext from '../../context/TravlerContext'
 import SideNavTripsItems from '../SideNavTripsItems/SideNavTripsItems'
 import { CSSTransition, TransitionGroup } from 'react-transition-group'
-import config from '../../config'
+// import config from '../../config'
 
 class SideNavTrips extends Component {
     state = {

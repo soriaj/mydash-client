@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import TravelerContext from '../../context/TravlerContext'
 import { FaCalendarDay, FaRegTrashAlt, FaPencilAlt } from 'react-icons/fa'
 import './EventsTimeline.css'
-import config from '../../config'
+// import config from '../../config'
 import moment from 'moment'
 
 export default class EventsTimeline extends Component {
