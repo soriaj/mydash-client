@@ -10,7 +10,7 @@ import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css';
 // import moment from 'moment'
 
-const uuidv4 = require('uuid/v4')
+// const uuidv4 = require('uuid/v4')
 
 export default class NewListForm extends Component {
     state = {
