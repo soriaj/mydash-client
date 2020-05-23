@@ -2,10 +2,12 @@ import React, { Component } from 'react'
 import { FaPlus, FaChevronCircleDown, FaChevronCircleUp } from 'react-icons/fa'
 import EventsTimeline from '../EventsTimeline/EventsTimeLine'
 import TravlerContext from  '../../context/TravlerContext'
+import SearchBox from '../SearchBox/SearchBox'
 
 export default class DashboardEvents extends Component {
     state = {
         showEvents: true,
+        searchTerm: ''
     }
     static contextType = TravlerContext
 
@@ -18,10 +20,14 @@ export default class DashboardEvents extends Component {
         })
     }
 
+    updateSearchTerm = term => {
+        this.setState({ searchTerm: term })
+    }
+
     render() {
         const { events } = this.context
         const displayEventSorted = events.sort((a,b) => new Date(a.date) - new Date(b.date))
-        const { showEvents } = this.state
+        const { showEvents, searchTerm } = this.state
         return (
             <div className='content events-section'>
                 <div className='content-header'>
@@ -38,9 +44,14 @@ export default class DashboardEvents extends Component {
                     </div>
                 </div>
                 <div className={`events-timeline ${showEvents ? '' : 'show-list' }`}>
-                    {/* Add Filter option here */}
+                    <SearchBox
+                        searchTerm={searchTerm}
+                        handleUpdate={term => this.updateSearchTerm(term)}
+                    >
+                    </SearchBox>
                     <ul className='timeline-list'>
-                        {displayEventSorted.map((event, idx) => (
+                        {displayEventSorted.filter(item => item.event_name.toLowerCase().includes(searchTerm.toLocaleLowerCase()))
+                        .map((event,idx) =>
                             <EventsTimeline 
                                 key={idx}
                                 id={event.id}
@@ -50,7 +61,18 @@ export default class DashboardEvents extends Component {
                                 description={event.description}
                                 history={this.props.history}
                             />
-                        ))}
+                        )}
+                        {/* {displayEventSorted.map((event, idx) => (
+                            <EventsTimeline 
+                                key={idx}
+                                id={event.id}
+                                name={event.event_name}
+                                date={event.date}
+                                event_loc={event.event_loc}
+                                description={event.description}
+                                history={this.props.history}
+                            />
+                        ))} */}
                     </ul>
                 </div>
             </div>
