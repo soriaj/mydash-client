@@ -26,7 +26,7 @@ export default class DashboardEvents extends Component {
 
     render() {
         const { events } = this.context
-        const displayEventSorted = events.sort((a,b) => new Date(a.date) - new Date(b.date))
+        const displayEventSorted = events.sort((a,b) => new Date(b.date) - new Date(a.date))
         const { showEvents, searchTerm } = this.state
         return (
             <div className='content events-section'>
