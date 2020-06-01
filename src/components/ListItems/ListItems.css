@@ -9,6 +9,10 @@
 .dashboard-list-items-container:hover {
    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
 }
+.dashboard-list-items-container:focus {
+   outline: none;
+   box-shadow: 0 8px 16px 0 rgba(0,0,0,0.4);
+}
 .inner-content {
    display: flex;
    background-color: rgba(1, 101, 141, 0.897);
@@ -42,12 +46,17 @@
    padding-left: 10px;
    padding-right: 10px;
    height: 120px;
-   /* margin-left: auto; */
    display: flex;
    align-items: center;
    text-transform: uppercase;
 }
 .dashboard-control-bar:hover {
+   background-color: red;
+   color: whitesmoke;
+   transition: all 0.4s ease-in-out;
+}
+.dashboard-control-bar:focus {
+   outline: none;
    background-color: red;
    color: whitesmoke;
    transition: all 0.4s ease-in-out;

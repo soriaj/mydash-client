@@ -10,6 +10,11 @@ class ListItems extends Component {
     viewListItemDetails = () => {
         this.props.history.push(`/lists/${this.props.id}`)
     }
+    viewListItemDetailsbyKey = ev => {
+        if(ev.charCode === parseInt('13') || ev.charCode === parseInt('32')){
+            this.viewListItemDetails(ev)
+        }
+    }
 
     deleteList(list_id) {
         return fetch(`${process.env.REACT_APP_API_ENDPOINT}/lists/${list_id}`, {
@@ -34,18 +39,23 @@ class ListItems extends Component {
         })
     }
 
+    handleDeleteListItemByKey = ev => {
+        if(ev.charCode === parseInt('13') || ev.charCode === parseInt('32')){
+            this.handleDeleteListItem(ev)
+        }
+    }
     render() {
         const { name } = this.props
         return (
             <>
-                <li id={this.props.id} className='dashboard-list-items-container'>
+                <li id={this.props.id} tabIndex='0' className='dashboard-list-items-container' onKeyPress={(ev) => this.viewListItemDetailsbyKey(ev)}>
                     <div className='inner-content'>
                         <FaFile className='fas fa-file'></FaFile>
                     </div>
                     <div className='inner-content-description' onClick={this.viewListItemDetails}>
                         <p className='content-heading'>{name}</p>
                     </div>
-                    <div className='dashboard-control-bar' onClick={this.handleDeleteListItem}>
+                    <div className='dashboard-control-bar' tabIndex='0' onClick={this.handleDeleteListItem} onKeyPress={(ev) => this.handleDeleteListItemByKey(ev)}>
                         <FaRegTrashAlt className='fa-trash-title'/><span>{'Remove'}</span>
                     </div>
                 </li>
