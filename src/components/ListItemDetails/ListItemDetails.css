@@ -10,6 +10,14 @@
 .fa-plus-title {
    padding-left: 15px;
 }
+.list-detail-controls {
+   display: flex;
+   justify-content: space-between;
+   padding: 5px;
+   margin-bottom: 15px;
+   margin-left: auto;
+   margin-right: auto;
+}
 .list-container {
    list-style: none;
    margin-bottom: 150px;
@@ -26,10 +34,18 @@
    font-size: 18px;
    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
 }
+.list-items-container:focus {
+   outline: none;
+   transition: all 0.4s;
+   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.8);
+}
 .check-box {
    display: flex;
    align-items: center;
    padding: 10px;
+}
+.check-box:focus {
+   outline: none;
 }
 .list-items-content {
    margin-left: 10px;
@@ -48,6 +64,12 @@
    background-color: red;
    color: whitesmoke;
    transition: all 0.4s ease-in-out;
+}
+.control-bar:focus {
+   background-color: red;
+   color: whitesmoke;
+   transition: all 0.4s ease-in-out;
+   outline: none;
 }
 .fa-trash-title {
    font-size: 18px;
@@ -106,6 +128,10 @@
 @media screen and (min-width: 1000px) {
    .list-container {
       width: 800px;
+   }
+   .list-detail-controls {
+      width: 800px;
+      /* justify-content: space-between; */
    }
    .add-list-item {
       width: 800px;

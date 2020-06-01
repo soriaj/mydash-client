@@ -83,7 +83,7 @@ p span {
 .control-bar-edit {
     display: flex;
     align-items: center;
-    justify-content: space-evenly;
+    justify-content: center;
     padding: 3.5px;
     width: 100px;
     transition: all 200ms ease-out;
@@ -94,12 +94,25 @@ p span {
     color: whitesmoke;
     transition: all 200ms ease-in;
 }
+.control-bar-delete:focus {
+    outline: none;
+    background-color: red;
+    color: whitesmoke;
+    transition: all 200ms ease-in;
+}
 .control-bar-edit:hover {
     background-color: royalblue;
     color: whitesmoke;
     transition: all 200ms ease-in;
 }
-.control-bar-titles {
+.control-bar-edit:focus {
+    outline: none;
+    background-color: royalblue;
+    color: whitesmoke;
+    transition: all 200ms ease-in;
+}
+.control-bar-delete .control-bar-titles,
+.control-bar-edit .control-bar-titles {
     padding: 5px;
 }
 @media screen and (min-width: 1356px) {
