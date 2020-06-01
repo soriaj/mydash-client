@@ -2,16 +2,13 @@ import React, { Component } from 'react'
 import { FaCalendarPlus, FaLocationArrow, FaEdit, FaClock } from 'react-icons/fa'
 import TravelerContext from '../../context/TravlerContext'
 import Loading from '../Loading/Loading'
-// import config from '../../config'
 import BackToDashboard from '../BackToDashboard/BackToDashboard'
 import './AddEventForm.css'
 import SaveButton from '../SaveButton/SaveButton'
 import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css';
-// import moment from 'moment'
 
-// const uuidv4 = require('uuid/v4')
-
+// Form to enter new events into calendar
 export default class NewListForm extends Component {
     state = {
         error: null,
@@ -21,7 +18,6 @@ export default class NewListForm extends Component {
     static contextType = TravelerContext
 
     addEvent(newEvent) {
-        // return fetch(`${config.API_ENDPOINT}/events`, {
         return fetch(`${process.env.REACT_APP_API_ENDPOINT}/events`, {
             method: 'POST',
             body: JSON.stringify(newEvent),
@@ -47,13 +43,10 @@ export default class NewListForm extends Component {
         ev.preventDefault()
         const { event_name, event_loc, description } = ev.target
         const { startDate } = this.state
-        // const formattedDate = this.formatNewDate(startDate)
         const { addEventItem } = this.context
         let count = Math.floor(Math.random() * 10000)
         const newEvent = {
-            // id: uuidv4(),
             id: count,
-            // date: formattedDate,
             date: startDate.toISOString(),
             event_name: event_name.value,
             event_loc: event_loc.value,
@@ -64,8 +57,7 @@ export default class NewListForm extends Component {
         .then(data => {
             addEventItem(data)
         })
-        this.props.history.push(`/dashboard`)
-        
+        this.props.history.push(`/dashboard`)   
     }
 
     backToDashboard = () => {
@@ -106,12 +98,12 @@ export default class NewListForm extends Component {
                             <div className='input-wrapper'>
                                 <FaClock className='fa-user icon'></FaClock>
                                 <label htmlFor='date' className='no-view'>Date</label>
-                                    <DatePicker 
-                                        selected={this.state.startDate} 
-                                        onChange={this.handleDateChange}
-                                        placeholderText="Enter event date"
-                                        name='date'
-                                        required />
+                                        <DatePicker 
+                                            selected={this.state.startDate} 
+                                            onChange={this.handleDateChange}
+                                            placeholderText="Enter event date"
+                                            name='date'
+                                            required />
                                 <span className='focus-input-field'></span>
                             </div>
 
