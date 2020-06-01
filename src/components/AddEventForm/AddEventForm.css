@@ -15,6 +15,9 @@
 .input-field {
    font-size: 16px;
 }
+textarea {
+   outline: none;
+}
 .react-datepicker-wrapper {
    display: flex;
    justify-content: flex-end;
