@@ -54,10 +54,10 @@ export default class EventsTimeline extends Component {
                     </p>
                     <p className='block-content-date block-content-padding'><strong>Location:</strong> {event_loc}</p>
                     <div className='event-control-bar'>
-                        <div className='control-bar-delete' onClick={this.handleDeleteEvent}>
+                        <div tabIndex='0' className='control-bar-delete' onKeyPress={this.handleDeleteEvent} onClick={this.handleDeleteEvent}>
                             <FaRegTrashAlt className='fa-trash-title' /><span className='control-bar-titles'>{'Remove'}</span>
                         </div>
-                        <div className='control-bar-edit' onClick={this.handleEditEvent}>
+                        <div tabIndex='0' className='control-bar-edit' onKeyPress={this.handleEditEvent} onClick={this.handleEditEvent}>
                             <FaPencilAlt className='fa-pencil-title' /><span className='control-bar-titles'>{'Edit'}</span>
                         </div>
                     </div>

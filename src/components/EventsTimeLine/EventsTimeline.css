@@ -94,7 +94,19 @@ p span {
     color: whitesmoke;
     transition: all 200ms ease-in;
 }
+.control-bar-delete:focus {
+    outline: none;
+    background-color: red;
+    color: whitesmoke;
+    transition: all 200ms ease-in;
+}
 .control-bar-edit:hover {
+    background-color: royalblue;
+    color: whitesmoke;
+    transition: all 200ms ease-in;
+}
+.control-bar-edit:focus {
+    outline: none;
     background-color: royalblue;
     color: whitesmoke;
     transition: all 200ms ease-in;
