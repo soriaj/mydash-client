@@ -1,8 +1,7 @@
 import React, { Component } from 'react'
-import { FaPlus, FaPencilAlt, FaRegCheckSquare, FaRegSquare, FaRegTrashAlt, FaArrowLeft } from 'react-icons/fa'
+import { FaPlus, FaRegCheckSquare, FaRegSquare, FaRegTrashAlt } from 'react-icons/fa'
 import TravelerContext from '../../context/TravlerContext'
 import LoadingSpinner from '../LoadingSpinner/LoadingSpinner'
-import config from '../../config'
 import './ListItemDetails.css'
 import BackToDashboard from '../BackToDashboard/BackToDashboard'
 import SaveButton from '../SaveButton/SaveButton'
@@ -18,7 +17,7 @@ export default class ListItemDetails extends Component {
 
     loadAllData = async (listId) => {
         try {
-            let response = await fetch(`${config.API_ENDPOINT}/lists_items`)
+            let response = await fetch(`${process.env.REACT_APP_API_ENDPOINT}/lists_items`)
             let data = await response.json()
             this.setState({ 
                 items: data.filter(list => list.list_id === parseInt(listId) ? list : '')
@@ -28,19 +27,16 @@ export default class ListItemDetails extends Component {
             console.log(error)
         }
     }
-
     componentDidMount() {
         const { list_id } = this.props.match.params
         this.loadAllData(list_id)
     }
- 
     componentDidUpdate(prevProps) { 
         const { list_id } = this.props.match.params
         if(prevProps.match.params.list_id !== list_id) {
             this.loadAllData(list_id)
         }
     }
-
     // Update List Item if it has been completed or not
     completedListItem = (todo) => {
         const markItem = {
@@ -51,25 +47,27 @@ export default class ListItemDetails extends Component {
         this.patchItemAPI(todo.id, markItem)
         this.setState({ items: this.state.items.map(item => (item.id !== todo.id) ? item : markItem ) })
     }
-
+    completedListItemByKey = (ev, todo) => {
+        if(ev.charCode === parseInt('13') || ev.charCode === parseInt('32')){
+            this.completedListItem(todo)
+        }
+    }
     patchItemAPI = async (listId, markItem) => {
         try {
-            await fetch(`${config.API_ENDPOINT}/lists_items/${listId}`, {
+            await fetch(`${process.env.REACT_APP_API_ENDPOINT}/lists_items/${listId}`, {
                 method: 'PATCH',
                 body: JSON.stringify(markItem),
                 headers: {
                     'content-type': 'application/json',
                 }
             })
-            // .then(data => console.log(data))
         } catch (error) {
             console.log(error)
         }
     }
-
     postItemAPI = async (newItem) => {
         try {
-            await fetch(`${config.API_ENDPOINT}/lists_items`, {
+            await fetch(`${process.env.REACT_APP_API_ENDPOINT}/lists_items`, {
                 method: 'POST',
                 body: JSON.stringify(newItem),
                 headers: {
@@ -80,9 +78,8 @@ export default class ListItemDetails extends Component {
             console.log(error)
         }
     }
-
     removeItemAPI = async (list_id) => {
-        return await fetch(`${config.API_ENDPOINT}/lists_items/${list_id}`, {
+        return await fetch(`${process.env.REACT_APP_API_ENDPOINT}/lists_items/${list_id}`, {
             method: 'DELETE',
             headers: {
                 'content-type': 'application/json',
@@ -94,7 +91,6 @@ export default class ListItemDetails extends Component {
             }
         })
     }
-
     handleAddListItem = ev => {
         ev.preventDefault();
         // Get current lists items
@@ -113,7 +109,6 @@ export default class ListItemDetails extends Component {
         // Update state
         this.setState({ items: [...this.state.items, newItem] })
     }
-
     removeItem = (list_id) => {
         const currentItems = this.state.items
         const newItems = currentItems.filter(item => item.id !== list_id)
@@ -122,18 +117,20 @@ export default class ListItemDetails extends Component {
             this.setState({ items: newItems })
         })
     }
-
+    removeItemByKeyPress = (ev, id) => {
+        if(ev.charCode === parseInt('13') || ev.charCode === parseInt('32')){
+            this.removeItem(id)
+        }
+    }
     getListsTitle() {
         const { lists } = this.context
         const { list_id } = this.props.match.params
         const listName = lists.filter(list => list.id === parseInt(list_id)).map(item => item.name)
         return listName
     }
-
     backToDashboard = () => {
         this.props.history.push('/dashboard')
     }
-
     renderListsItemDetails() {
         const { loading, items } = this.state
 
@@ -146,12 +143,16 @@ export default class ListItemDetails extends Component {
                     <div className='list-details-title'>
                         <h3>{this.getListsTitle()}</h3>
                     </div>
+
                     <div className='add-list-item'>
                         <form className='form-field' onSubmit={this.handleAddListItem}>
-                            <div className='input-wrapper'>
+                            <div className='list-detail-controls'>
                                 <div className='back-to-dashboard'>
-                                    <BackToDashboard backToDashboard={this.backToDashboard}/>
+                                    <BackToDashboard backToDashboard={this.backToDashboard}/>       
                                 </div>
+                                <SaveButton />
+                            </div>
+                            <div className='input-wrapper'>
                                 <FaPlus className="fa-plus icon"></FaPlus>
                                 <label htmlFor="new_item" className='no-view'>Add Item</label>
                                 <input 
@@ -162,8 +163,6 @@ export default class ListItemDetails extends Component {
                                     className='input-field'
                                     />
                                 <span className="focus-input-field"></span>
-                                {/* <button className='add-item-btn'>Save</button> */}
-                                <SaveButton />
                             </div>
                         </form>
                     </div>
@@ -171,12 +170,22 @@ export default class ListItemDetails extends Component {
                     <div className='list-container'>
                         <ul>
                             {items.map((todo, idx) => (
-                                <li key={idx} id={todo.id} className={`list-items-container`}>
-                                    <div className={`check-box`} onClick={() => this.completedListItem(todo)}>{todo.isComplete ? <FaRegCheckSquare className='fa-reg-check'/> : <FaRegSquare className='fa-reg-square'/>}</div>
+                                <li key={idx} id={todo.id} tabIndex="0" className={`list-items-container`} onKeyPress={(ev) => this.completedListItemByKey(ev,todo)}>
+                                    <div className={`check-box`} onClick={() => this.completedListItem(todo)} >
+                                        {todo.isComplete ? 
+                                            <FaRegCheckSquare className='fa-reg-check'/>
+                                            : <FaRegSquare className='fa-reg-square'/>}
+                                    </div>
                                     <div className={`list-items-content`}>
                                         <p className={`${todo.isComplete ? 'complete' : ''}`}>{todo.name}</p>
                                     </div>
-                                    <div className={`control-bar ${todo.isComplete ? 'complete' : ''}`} onClick={() => this.removeItem(todo.id)}><FaRegTrashAlt className='fa-trash-title'/><span>{'Remove'}</span></div>
+                                    <div tabIndex="0" className={`control-bar ${todo.isComplete ? 'complete' : ''}`} 
+                                        onClick={() => this.removeItem(todo.id)}
+                                        onKeyPress={(ev) => this.removeItemByKeyPress(ev, todo.id)}
+                                    >
+                                        <FaRegTrashAlt className='fa-trash-title'/>
+                                        <span>{'Remove'}</span>
+                                    </div>
                                 </li>
                             ))}
                         </ul>

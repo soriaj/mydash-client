@@ -12,7 +12,6 @@ import PrivateRoute from '../../utils/PrivateRoute';
 import PublicRoute from '../../utils/PublicRoute';
 import Dashboard from '../Dashboard/Dashboard';
 import ListItemDetails from  '../ListItemDetails/ListItemDetails';
-import EventItemDetails from '../EventItemDetails/EventItemDetails';
 import TripItemDetails from '../TripItemDetails/TripItemDetails';
 import AddListForm from '../AddListForm/AddListForm';
 import AddEventForm from '../AddEventForm/AddEventForm';
@@ -39,7 +38,7 @@ class App extends Component {
   setupItems = (list, event, trip) => {
     this.setState({
       lists: list,
-      events: event,
+      events: event.sort((a, b) => b - a),
       trips: trip
     })
   }
@@ -77,7 +76,7 @@ class App extends Component {
   editEventItem = updatedEvent => {
     this.setState({
       events: this.state.events.map(event => 
-        (event.id != updatedEvent.id) ? event : updatedEvent  
+        (event.id !== updatedEvent.id) ? event : updatedEvent  
       )
     })
   }

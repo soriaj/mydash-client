@@ -4,7 +4,7 @@ import { FaChevronCircleDown, FaChevronCircleUp, FaCalendarDay } from 'react-ico
 import TravelerContext from  '../../context/TravlerContext'
 // import SideNavEventsItems from '../SideNavEventsItems/SideNavEventsItems'
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
-import config from '../../config'
+// import config from '../../config'
 
 class SideNavEvents extends Component {
     state = {
@@ -20,7 +20,7 @@ class SideNavEvents extends Component {
     async componentDidMount() {
         try {
             const { setEventItems } = this.context
-            const eventsAPI = await fetch(`${config.API_ENDPOINT}/events`)
+            const eventsAPI = await fetch(`${process.env.REACT_APP_API_ENDPOINT}/events`)
             const eventsRes = await eventsAPI.json()
             setEventItems(eventsRes)
          } catch (error) {

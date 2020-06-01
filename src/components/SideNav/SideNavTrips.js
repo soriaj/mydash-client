@@ -3,7 +3,7 @@ import { FaChevronCircleUp, FaChevronCircleDown } from 'react-icons/fa'
 import TravelerContext from '../../context/TravlerContext'
 import SideNavTripsItems from '../SideNavTripsItems/SideNavTripsItems'
 import { CSSTransition, TransitionGroup } from 'react-transition-group'
-import config from '../../config'
+// import config from '../../config'
 
 class SideNavTrips extends Component {
     state = {
@@ -19,7 +19,7 @@ class SideNavTrips extends Component {
     async componentDidMount() {
         try {
             const { setTripItems } = this.context
-            const tripsAPI = await fetch(`${config.API_ENDPOINT}/trips`)
+            const tripsAPI = await fetch(`${process.env.REACT_APP_API_ENDPOINT}/trips`)
             const tripsRes = await tripsAPI.json()
             // this.setState({ new_events: eventsRes })
             setTripItems(tripsRes)
