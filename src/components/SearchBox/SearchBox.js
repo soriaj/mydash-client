@@ -1,26 +1,33 @@
-import React from 'react'
-import { FaSearch } from 'react-icons/fa'
+import React, { Component } from 'react'
+import { FaClock } from 'react-icons/fa'
+import DatePicker from 'react-datepicker'
 
-export default function SearchBox(props) {
+export default class SearchBox extends Component {
+   state = {
+      startDate: new Date(),
+   }
+   handleDateChange = date => {
+      this.setState({ startDate: date })
+      this.props.handleDateFilter(date)
+  }
+
+   render() {
       return (
-         // <div className='form-container'>
-            <div className='login-form'>
-               <form className='form-field' >
-                  <div className='input-wrapper'>
-                     <FaSearch className='fa-search icon'></FaSearch>
-                     <label htmlFor='search' className='no-view'>Search</label>
-                     <input
-                        className='input-field'
-                        type='text'
-                        placeholder='Search Title...'
-                        name='search'
-                        value={props.term}
-                        onChange={e => props.handleUpdate(e.target.value)}
-                     />
-                     <span className="focus-input-field"></span>
-                  </div>
-               </form>
-            </div>
-         // </div>
+         <div className='login-form'>
+            <form className='form-field'>
+               <div className='input-wrapper'>
+               <FaClock className='fa-user icon'></FaClock>
+                  <label htmlFor='date' className='no-view'>Date</label>
+                     <DatePicker 
+                        selected={this.state.startDate} 
+                        onChange={this.handleDateChange}
+                        placeholderText="Enter event date"
+                        name='date'>
+                     </DatePicker>
+                  <span className='focus-input-field'></span>
+               </div>
+            </form>
+         </div>
       )
+   }
 }
