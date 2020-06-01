@@ -38,7 +38,7 @@ class ListItems extends Component {
         const { name } = this.props
         return (
             <>
-                <li  id={this.props.id} className='dashboard-list-items-container'>
+                <li id={this.props.id} className='dashboard-list-items-container'>
                     <div className='inner-content'>
                         <FaFile className='fas fa-file'></FaFile>
                     </div>
@@ -49,17 +49,6 @@ class ListItems extends Component {
                         <FaRegTrashAlt className='fa-trash-title'/><span>{'Remove'}</span>
                     </div>
                 </li>
-                {/* <div className='content-cards' onClick={this.viewListItemDetails}>
-                    <div className='inner-content'>
-                        <FaFile className='fas fa-file'></FaFile>
-                    </div>
-                    <div className='inner-content-description'>
-                        <p className='content-heading'>{name}</p>
-                    </div>
-                    <div className='control-bar'>
-                        <FaRegTrashAlt className='list-delete' onClick={this.handleDeleteListItem} /><span className='list-bar-remove'>{'Remove'}</span>
-                    </div>
-                </div> */}
                 
             </>
         );

@@ -31,8 +31,7 @@ export default class Weather extends Component {
         catch (error) {
             console.log(error)
         }
-    }
-    
+    }    
     componentDidMount() {
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(position => {

@@ -34,10 +34,18 @@
    font-size: 18px;
    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
 }
+.list-items-container:focus {
+   outline: none;
+   transition: all 0.4s;
+   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.8);
+}
 .check-box {
    display: flex;
    align-items: center;
    padding: 10px;
+}
+.check-box:focus {
+   outline: none;
 }
 .list-items-content {
    margin-left: 10px;
@@ -56,6 +64,12 @@
    background-color: red;
    color: whitesmoke;
    transition: all 0.4s ease-in-out;
+}
+.control-bar:focus {
+   background-color: red;
+   color: whitesmoke;
+   transition: all 0.4s ease-in-out;
+   outline: none;
 }
 .fa-trash-title {
    font-size: 18px;
