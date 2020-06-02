@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { FaGlobeAsia, FaTimes } from 'react-icons/fa';
+import { FaTimes } from 'react-icons/fa';
 import './SideNav.css';
 import TravelerContext from '../../context/TravlerContext'
 import SideNavLists from './SideNavLists'
@@ -18,12 +18,14 @@ class SideNav extends Component {
         let close = document.getElementById('sidenav')
         close.classList.remove('sidenav-active')
     }
-
+    
     renderUser(){
         return (
             <>
             <div className='sidenav-account'>
-                <div className='sidenav-account-title'>{'Username'}</div>
+                <div className='sidenav-account-title'>
+                    <Link to={'/dashboard'}><h1 className='sidenav-heading'>{'Hi Username'}</h1></Link>
+                </div>
             </div>
             <div className='sidenav-list'>
                 <ul className='sidenav-list-items'>
@@ -38,19 +40,16 @@ class SideNav extends Component {
     renderWelcome() {
         return (
             <div className='sidenav-account'>
-                <div className='sidenav-account-title'>Welcome</div>
+                <div className='sidenav-account-title'>
+                    <h1 className='sidenav-heading'>{'Welcome'}</h1>
+                </div>
             </div>
         )
     }
     render() {
         return (
-            <aside id='sidenav' className='sidenav'>
+            <aside id='sidenav' className='sidenav' onClick={this.handleClick} ref={node => { this.node = node; }}>
                 <div className='sidenav-logo'>
-                    <FaGlobeAsia className='fas fa-globe-asia' />
-                    {TokenService.hasAuthToken()
-                        ? <Link to={'/dashboard'} className='sidenav-logo-link'>Traveler</Link> 
-                        : <Link to={'/'} className='sidenav-logo-link'>Traveler</Link>
-                    }
                     <FaTimes id='sidenav-close' className='fas fa-times sidenav-close' onClick={this.closeSideNav} />
                 </div>
                 {TokenService.hasAuthToken()
