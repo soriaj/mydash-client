@@ -36,7 +36,7 @@ export default class DashboardEvents extends Component {
                         <h3 
                             className='content-header-title' 
                             onClick={this.showEventItems}>
-                            {showEvents ? <FaChevronCircleUp className='title-chevron'/> : <FaChevronCircleDown className='title-chevron'/>}
+                            {showEvents ? <FaChevronCircleUp className='title-chevron hide-chevron'/> : <FaChevronCircleDown className='title-chevron hide-chevron'/>}
                             Events
                         </h3>
                     </div>
