@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
 import { NavLink } from 'react-router-dom'
-import { FaChevronCircleDown, FaChevronCircleUp, FaCalendarDay } from 'react-icons/fa'
+// import { FaChevronCircleDown, FaChevronCircleUp, FaCalendarDay } from 'react-icons/fa'
+import { FaChevronCircleDown, FaCalendarDay } from 'react-icons/fa'
 import TravelerContext from  '../../context/TravlerContext'
 // import SideNavEventsItems from '../SideNavEventsItems/SideNavEventsItems'
-import { CSSTransition, TransitionGroup } from 'react-transition-group';
+// import { CSSTransition, TransitionGroup } from 'react-transition-group';
 // import config from '../../config'
 
 class SideNavEvents extends Component {
@@ -39,10 +40,13 @@ class SideNavEvents extends Component {
         )
     }
     render() {
-        const { showItems, show } = this.state
+        // const { showItems, show } = this.state
         return (
             <>
             <li className='list-item-heading' onClick={this.showEventNavList}>
+                <NavLink to={'/events'} >All Events</NavLink><FaChevronCircleDown className='fas fa-calendar'></FaChevronCircleDown>
+            </li>
+            {/* <li className='list-item-heading' onClick={this.showEventNavList}>
                 Events{show 
                     ? <FaChevronCircleUp className='fas fa-calendar'></FaChevronCircleUp>
                     : <FaChevronCircleDown className='fas fa-calendar'></FaChevronCircleDown>
@@ -58,7 +62,7 @@ class SideNavEvents extends Component {
                     classNames="fade"
                 ><li className='list-sub-items'>
                     {this.renderNavEventsItems()}
-                </li></CSSTransition>}</TransitionGroup>
+                </li></CSSTransition>}</TransitionGroup> */}
             </>
         );
     }

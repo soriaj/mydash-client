@@ -21,4 +21,7 @@ a {
         grid-template-areas: 'sidenav header' 'sidenav main' 'sidenav footer';
         height: 100vh;
     }
+    .main {
+        margin-left: 20px;
+    }
 }

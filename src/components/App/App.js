@@ -21,6 +21,7 @@ import TokenService from '../../services/token-service'
 import LandingPage from '../../routes/LandingPage';
 import EditListItemDetails from '../EditListItemDetails/EditListItemDetails'
 import EditEventItem from '../EditEventItem/EditEventItem';
+import Events from '../Events/Events'
 
 class App extends Component {
   state = {
@@ -30,7 +31,6 @@ class App extends Component {
     trips: [],
   }
   static contextType = TravelerContext
-
 
   handleTokenChange = () => {
     this.setState({ hasToken: TokenService.hasAuthToken() })
@@ -127,6 +127,7 @@ class App extends Component {
 
               {/* EVENT COMPONENT ROUTES */}
               {/* <PrivateRoute path='/events/:event_id' component={EventItemDetails} /> */}
+              <PrivateRoute exact path='/events' component={Events} />
               <PrivateRoute path='/events/:event_id' component={EditEventItem} />
               <PrivateRoute path='/add-event' component={AddEventForm} />
 

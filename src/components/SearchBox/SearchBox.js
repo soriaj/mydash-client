@@ -13,6 +13,7 @@ export default class SearchBox extends Component {
 
    render() {
       return (
+         <>
          <div className='login-form'>
             <form className='form-field'>
                <div className='input-wrapper'>
@@ -28,6 +29,7 @@ export default class SearchBox extends Component {
                </div>
             </form>
          </div>
+         </>
       )
    }
 }

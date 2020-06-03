@@ -26,7 +26,7 @@ export default class DashboardLists extends Component {
                         <h3 
                             className='content-header-title' 
                             onClick={this.showListItems}>
-                            {showLists ? <FaChevronCircleUp className='title-chevron'/> : <FaChevronCircleDown className='title-chevron'/>}
+                            {showLists ? <FaChevronCircleUp className='title-chevron hide-chevron'/> : <FaChevronCircleDown className='title-chevron hide-chevron'/>}
                             List 
                         </h3>
                     </div>
