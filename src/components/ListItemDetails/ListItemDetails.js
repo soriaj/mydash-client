@@ -170,8 +170,8 @@ export default class ListItemDetails extends Component {
                     <div className='list-container'>
                         <ul>
                             {items.map((todo, idx) => (
-                                <li key={idx} id={todo.id} tabIndex="0" className={`list-items-container`} onKeyPress={(ev) => this.completedListItemByKey(ev,todo)}>
-                                    <div className={`check-box`} onClick={() => this.completedListItem(todo)} >
+                                <li key={idx} id={todo.id} tabIndex="0" onClick={() => this.completedListItem(todo)} className={`list-items-container`} onKeyPress={(ev) => this.completedListItemByKey(ev,todo)}>
+                                    <div className={`check-box`}  >
                                         {todo.isComplete ? 
                                             <FaRegCheckSquare className='fa-reg-check'/>
                                             : <FaRegSquare className='fa-reg-square'/>}
