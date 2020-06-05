@@ -3,6 +3,7 @@ import { FaPlus, FaChevronCircleDown, FaChevronCircleUp } from 'react-icons/fa'
 import EventsTimeline from '../EventsTimeline/EventsTimeLine'
 import TravlerContext from  '../../context/TravlerContext'
 import SearchBox from '../SearchBox/SearchBox'
+import moment from 'moment'
 
 export default class DashboardEvents extends Component {
     state = {
@@ -50,17 +51,18 @@ export default class DashboardEvents extends Component {
                     <SearchBox handleDateFilter={selected => this.handleDateChange(selected)} />
                     <ul className='timeline-list'>
                         {/* filter sorted evets array and only show events that match selected date */}
-                        {displayEventSorted.filter(item => item.date.includes(startDate.toISOString().substr(0,10)))
-                        .map((event,idx) =>
-                            <EventsTimeline 
-                                key={idx}
-                                id={event.id}
-                                name={event.event_name}
-                                date={event.date}
-                                event_loc={event.event_loc}
-                                description={event.description}
-                                history={this.props.history}
-                            />
+                        {/* {displayEventSorted.filter(item => item.date.includes(startDate.toISOString().slice(0,10))) */}
+                        {displayEventSorted.filter(item => item.date.includes(moment(startDate).utc().format("YYYY-MM-DD")))
+                            .map((event,idx) =>
+                                <EventsTimeline 
+                                    key={idx}
+                                    id={event.id}
+                                    name={event.event_name}
+                                    date={event.date}
+                                    event_loc={event.event_loc}
+                                    description={event.description}
+                                    history={this.props.history}
+                                />
                         )}
                     </ul>
                 </div>

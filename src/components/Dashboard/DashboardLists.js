@@ -34,7 +34,7 @@ export default class DashboardLists extends Component {
                         <FaPlus className='fas fa-plus'></FaPlus>
                     </div>
                 </div>
-                <div className={showLists ? '' : 'show-list' }>
+                <div className={showLists ? 'show-lists-visible' : 'show-list' }>
                     <ul className='list-wrapper'>
                         {lists.map(item => 
                             <ListItems 

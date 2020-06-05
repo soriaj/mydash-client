@@ -7,6 +7,7 @@ import './AddEventForm.css'
 import SaveButton from '../SaveButton/SaveButton'
 import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css';
+import moment from 'moment'
 
 // Form to enter new events into calendar
 export default class NewListForm extends Component {
@@ -47,7 +48,8 @@ export default class NewListForm extends Component {
         let count = Math.floor(Math.random() * 10000)
         const newEvent = {
             id: count,
-            date: startDate.toISOString(),
+            // date: startDate.toISOString(),
+            date: moment(startDate),
             event_name: event_name.value,
             event_loc: event_loc.value,
             description: description.value
