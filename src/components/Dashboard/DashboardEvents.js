@@ -31,7 +31,7 @@ export default class DashboardEvents extends Component {
         const displayEventSorted = events.sort((a,b) => new Date(b.date) - new Date(a.date))
         const { showEvents, startDate } = this.state
         return (
-            <div className='content events-section'>
+            <section className='content events-section'>
                 <div className='content-header'>
                     <div className='content-titles'>
                         <h3 
@@ -41,9 +41,9 @@ export default class DashboardEvents extends Component {
                             Events
                         </h3>
                     </div>
-                    <div className='add-icon'>
-                        <FaPlus className='fas fa-plus' onClick={this.addNewEvent}></FaPlus>
-                    </div>
+                    <div className='add-icon event-add' onClick={this.addNewEvent}>
+                        <FaPlus className='fas fa-plus'></FaPlus>
+                    </div>                    
                 </div>
                 <div className={`events-timeline ${showEvents ? '' : 'show-list' }`}>
                     {/* Filter selector based on date, defaults to current date */}
@@ -51,7 +51,6 @@ export default class DashboardEvents extends Component {
                     <SearchBox handleDateFilter={selected => this.handleDateChange(selected)} />
                     <ul className='timeline-list'>
                         {/* filter sorted evets array and only show events that match selected date */}
-                        {/* {displayEventSorted.filter(item => item.date.includes(startDate.toISOString().slice(0,10))) */}
                         {displayEventSorted.filter(item => item.date.includes(moment(startDate).utc().format("YYYY-MM-DD")))
                             .map((event,idx) =>
                                 <EventsTimeline 
@@ -65,8 +64,13 @@ export default class DashboardEvents extends Component {
                                 />
                         )}
                     </ul>
+                    <div className='add-icon-container event-add'>
+                        <div className='add-icon-cir'>
+                            <FaPlus className='fas fa-plus-cir' onClick={this.addNewEvent}></FaPlus>
+                        </div>
+                    </div>
                 </div>
-            </div>
+            </section>
         )
     }
 }

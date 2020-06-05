@@ -30,11 +30,11 @@ export default class DashboardLists extends Component {
                             List 
                         </h3>
                     </div>
-                    <div className='add-icon' onClick={this.addNewList}>
+                    <div className='add-icon list-add' onClick={this.addNewList}>
                         <FaPlus className='fas fa-plus'></FaPlus>
                     </div>
                 </div>
-                <div className={showLists ? 'show-lists-visible' : 'show-list' }>
+                <div className={showLists ? '' : 'show-list' }>
                     <ul className='list-wrapper'>
                         {lists.map(item => 
                             <ListItems 
@@ -46,6 +46,12 @@ export default class DashboardLists extends Component {
                             />
                         )}
                     </ul>
+                    <div className='add-icon-container list-add'>
+                        <div className='add-icon-cir list-add'>
+                            <FaPlus className='fas fa-plus-alt' onClick={this.addNewList}></FaPlus>
+                        </div>
+                    </div>
+                    <div></div>
                 </div>
             </section>
         );
