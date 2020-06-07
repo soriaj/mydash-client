@@ -41,7 +41,7 @@ export default class EventsTimeline extends Component {
     }
     render() {
         const { name, date, description, event_loc } = this.props
-        let formatDates = moment(date).utc().local().format("MM/DD/YYYY")
+        let formatDates = moment(date).utc()    .format("MM/DD/YYYY")
         return (
             <li className='timeline-block'>
                 <div className='timeline-icon'>

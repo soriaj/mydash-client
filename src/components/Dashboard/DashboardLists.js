@@ -6,8 +6,36 @@ import TravelerContext from '../../context/TravlerContext'
 export default class DashboardLists extends Component { 
     state = {
         showLists: true,
+        isDesktop: false
     }
-    static contextType = TravelerContext 
+    static contextType = TravelerContext
+    componentDidMount() {
+        this.updatePredicate();
+        window.addEventListener("resize", this.updatePredicate);
+    }
+
+    componentWillUnmount() {
+        window.removeEventListener("resize", this.updatePredicate);
+    }
+    
+    updatePredicate = () => {
+        this.setState({ isDesktop: window.innerWidth > 1450 });
+    }
+    enableChevronClick = () => {
+        return (
+            <h3 
+                className='content-header-title' 
+                onClick={this.showListItems}>
+                {this.state.showLists ? <FaChevronCircleUp className='title-chevron'/> : <FaChevronCircleDown className='title-chevron'/>}
+                List 
+            </h3>
+        )
+    }
+    disableChevronClick = () => {
+        return (
+            <h3 className='content-header-title'>Lists</h3>            
+        )
+    }
     addNewList = () => {
         this.props.history.push(`/add-list`)
     }
@@ -20,15 +48,13 @@ export default class DashboardLists extends Component {
         const { lists } = this.context
         const { showLists } = this.state
         return (
-            <section className='content'> 
+            <section className={`content ${showLists ? 'content-visible': ''}`}> 
                 <div className='content-header'>
                     <div className='content-titles'>
-                        <h3 
-                            className='content-header-title' 
-                            onClick={this.showListItems}>
-                            {showLists ? <FaChevronCircleUp className='title-chevron hide-chevron'/> : <FaChevronCircleDown className='title-chevron hide-chevron'/>}
-                            List 
-                        </h3>
+                        {this.state.isDesktop
+                            ? this.disableChevronClick()
+                            : this.enableChevronClick()
+                        }
                     </div>
                     <div className={`add-icon ${showLists ? 'list-add' : ''}`} onClick={this.addNewList}>
                         <FaPlus className='fas fa-plus'></FaPlus>
