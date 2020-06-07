@@ -23,7 +23,6 @@ export default class Events extends Component {
    }
    render() {
       const { loading, searchTerm } = this.state
-      console.log(this.state.searchTerm2)
       const { events } = this.context
       const displayEventSorted = events.sort((a,b) => new Date(b.date) - new Date(a.date))
       return (
