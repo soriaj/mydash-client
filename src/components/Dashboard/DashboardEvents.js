@@ -15,14 +15,14 @@ export default class DashboardEvents extends Component {
     addNewEvent = () => {
         this.props.history.push(`/add-event`)
     }
-    // On click handler to change state of showing events list or not
+    // On click handler to change state of showing events
     showEventItems = () => {
         this.setState({
             showEvents: !this.state.showEvents
         })
     }
     // Handles selected date filter selection
-    handleDateChange = date => {
+    handleDateChange = (date) => {
         this.setState({ startDate: date })
     }
     render() {
@@ -41,17 +41,17 @@ export default class DashboardEvents extends Component {
                             Events
                         </h3>
                     </div>
-                    <div className='add-icon event-add' onClick={this.addNewEvent}>
+                    <div className={`add-icon ${showEvents ? 'event-add' : ''}`} onClick={this.addNewEvent}>
                         <FaPlus className='fas fa-plus'></FaPlus>
                     </div>                    
                 </div>
-                <div className={`events-timeline ${showEvents ? '' : 'show-list' }`}>
-                    {/* Filter selector based on date, defaults to current date */}
+                <div className={`events-timeline ${showEvents ? 'event-cards-visible' : 'event-cards-hidden'}`}>
+                {/* Filter selector based on date, defaults to current date */}
                     <h4>Filter By Date:</h4>
                     <SearchBox handleDateFilter={selected => this.handleDateChange(selected)} />
                     <ul className='timeline-list'>
                         {/* filter sorted evets array and only show events that match selected date */}
-                        {displayEventSorted.filter(item => item.date.includes(moment(startDate).utc().format("YYYY-MM-DD")))
+                        {displayEventSorted.filter(item => item.date.includes(moment(startDate).utc().local().format().slice(0,10)))
                             .map((event,idx) =>
                                 <EventsTimeline 
                                     key={idx}

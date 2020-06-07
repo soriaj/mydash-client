@@ -5,7 +5,7 @@ import TravelerContext from '../../context/TravlerContext'
 
 export default class DashboardLists extends Component { 
     state = {
-        showLists: true
+        showLists: true,
     }
     static contextType = TravelerContext 
     addNewList = () => {
@@ -20,7 +20,7 @@ export default class DashboardLists extends Component {
         const { lists } = this.context
         const { showLists } = this.state
         return (
-            <section className='content'>
+            <section className='content'> 
                 <div className='content-header'>
                     <div className='content-titles'>
                         <h3 
@@ -30,11 +30,11 @@ export default class DashboardLists extends Component {
                             List 
                         </h3>
                     </div>
-                    <div className='add-icon list-add' onClick={this.addNewList}>
+                    <div className={`add-icon ${showLists ? 'list-add' : ''}`} onClick={this.addNewList}>
                         <FaPlus className='fas fa-plus'></FaPlus>
                     </div>
                 </div>
-                <div className={showLists ? '' : 'show-list' }>
+                <div className={`content-list-cards ${showLists ? 'list-cards-visible' : 'list-cards-hidden'}`}>
                     <ul className='list-wrapper'>
                         {lists.map(item => 
                             <ListItems 
@@ -51,8 +51,7 @@ export default class DashboardLists extends Component {
                             <FaPlus className='fas fa-plus-alt' onClick={this.addNewList}></FaPlus>
                         </div>
                     </div>
-                    <div></div>
-                </div>
+                </div>                    
             </section>
         );
     }
