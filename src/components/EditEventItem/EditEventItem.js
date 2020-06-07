@@ -5,8 +5,9 @@ import DatePicker from 'react-datepicker'
 import BackToDashboard from '../BackToDashboard/BackToDashboard'
 import SaveButton from '../SaveButton/SaveButton'
 import Loading from '../Loading/Loading'
+import moment from 'moment';
 // import config from '../../config'
-// import moment from 'moment';
+
 
 class EditEventItem extends Component {
    state = {
@@ -94,24 +95,22 @@ class EditEventItem extends Component {
    backToDashboard = () => {
       this.props.history.push('/dashboard')
    }
-   formatNewDate = date => {
-      let year = date.getFullYear()
-      let month = (1 + date.getMonth()).toString()
-      month = month.length > 1 ? month : `0${month}`
-      let day = date.getDate().toString()
-      day = day.length > 1 ? day : `0${day}`
-      return `${month}/${day}/${year}`
-   }
+   // formatNewDate = date => {
+   //    let year = date.getFullYear()
+   //    let month = (1 + date.getMonth()).toString()
+   //    month = month.length > 1 ? month : `0${month}`
+   //    let day = date.getDate().toString()
+   //    day = day.length > 1 ? day : `0${day}`
+   //    return `${month}/${day}/${year}`
+   // }
 
    handleEditEvent = e => {
       e.preventDefault()
       const { event_id } = this.props.match.params
       const { event_name, startDate, event_loc, description } = this.state
-      // const formattedDate = this.formatNewDate(startDate)
       const updatedEvent = {
          event_name,
-         // date: formattedDate,
-         date: startDate.toISOString(),
+         date: moment(startDate).utc().local().format(),
          event_loc,
          description,
       }
@@ -175,7 +174,6 @@ class EditEventItem extends Component {
                            <label htmlFor='date' className='no-view'>Date</label>
                               <DatePicker
                                  selected={this.state.startDate}
-                                 // value={date}
                                  onChange={this.handleDateChange}
                                  name='date'
                                  dateFormat='MM/dd/yyyy'

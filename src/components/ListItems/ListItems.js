@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { FaFile, FaRegTrashAlt } from 'react-icons/fa';
+import { FaRegTrashAlt, FaList } from 'react-icons/fa';
 // import config from '../../config'
 import TravelerContext from '../../context/TravlerContext'
 import './ListItems.css'
@@ -50,7 +50,7 @@ class ListItems extends Component {
             <>
                 <li id={this.props.id} tabIndex='0' className='dashboard-list-items-container' onKeyPress={(ev) => this.viewListItemDetailsbyKey(ev)}>
                     <div className='inner-content'>
-                        <FaFile className='fas fa-file'></FaFile>
+                        <FaList className='fas fa-file'></FaList>
                     </div>
                     <div className='inner-content-description' onClick={this.viewListItemDetails}>
                         <p className='content-heading'>{name}</p>

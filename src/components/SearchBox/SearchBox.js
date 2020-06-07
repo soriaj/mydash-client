@@ -6,12 +6,13 @@ export default class SearchBox extends Component {
    state = {
       startDate: new Date(),
    }
-   handleDateChange = date => {
+   handleDateChange = (date) => {
       this.setState({ startDate: date })
       this.props.handleDateFilter(date)
   }
 
    render() {
+      // console.log(this.state.startDate)
       return (
          <>
          <div className='login-form'>

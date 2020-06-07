@@ -39,14 +39,18 @@
 .content {
     margin-bottom: 25px;
     box-shadow: 0 3px 6px 0 rgba(0,0,0,0.2);
+
 }
-.show-lists-visible {
+.list-cards-visible,
+.event-cards-visible {
     opacity: 1;
+    height: auto;
 }
-.show-list {
-    display: none;
+.list-cards-hidden,
+.event-cards-hidden {
+    max-height: 0;
     opacity: 0;
-    transition: opacity 0.4s ease-in;
+    display: none;
 }
 .list-wrapper {
     display: flex;
@@ -78,10 +82,6 @@
     display: flex;
     align-items: center;
 }
-.content.events-section,
-.content.trips-section {
-    margin-top: 10px;
-}
 .add-icon {
     padding-right: 10px;
 }
@@ -90,19 +90,21 @@
 .add-icon.trips-add {
     display: none;
 }
-/**** ADD BUTTON CHANGE ***/
 .add-icon-container {
     display: flex;
     justify-content: flex-end;
 }
 .add-icon-container.list-add {
-    margin-top: 35px;
-    top: -35px;
+    /* margin-top: 35px; */
+    /* top: -35px; */
+    top: -10px;
+    right: 10px;
     position: relative;
 }
 .add-icon-container.event-add {
-    margin-bottom: 65px;
-    top: 30px;
+    /* margin-bottom: 65px; */
+    top: 20px;
+    right: 10px;
     position: relative;
 }
 .add-icon-cir {
@@ -114,7 +116,7 @@
     background-color: #3a4e7a;
     border-radius: 50%;
     color: white;
-    position: absolute;    
+    position: relative;
     box-shadow: 3px 0 5px 1px rgba(51, 51, 51, .3);
 }
 .add-icon-cir.all-events-add {
@@ -124,8 +126,6 @@
     background-color: rgba(32, 35, 39, 0.897);
     box-shadow: 3px 0 5px 3px rgba(51, 51, 51, .3);
 }
-
-/**** ADD BUTTON CHANGE ***/
 .content-header-title {
     display: flex;
     align-items: center;
@@ -143,9 +143,10 @@
     justify-content: flex-end;
 }
 .events-timeline {
-    margin-left: 20px;
+    margin-left: 10px;
     margin-top: 20px;
     margin-bottom: 30px;
+    padding-left: 10px;
 }
 .timeline {
     position: relative;
@@ -319,6 +320,9 @@
     .add-icon.trip-add {
         display: block;
     }
+    /* .hide-chevron {
+        display: none;
+    } */
 }
 @media screen and (min-width: 768px) {
     .list-wrapper {
@@ -340,8 +344,5 @@
     }
     .main-content-events content .trips-section {
         flex-direction: row;
-    }
-    .hide-chevron {
-        display: none;
     }
 }

@@ -14,24 +14,6 @@ class SideNav extends Component {
     }
     static contextType = TravelerContext
 
-    // componentWillMount() {
-    //     document.addEventListener('click', this.handleClick, false)
-    // }
-    
-    // componentWillUnmount() {
-    //     document.removeEventListener('click', this.handleClick, false)
-    // }
-    // handleClick = e => {
-    //     if(this.node.contains(e.target)){
-    //         return;
-    //     }
-    //     this.handleOutsideClick()
-    // }
-    // handleOutsideClick = () => {
-    //     alert('you clicked outside')
-    //     // this.closeSideNav()
-    // }
-
     closeSideNav = () => {
         let close = document.getElementById('sidenav')
         close.classList.remove('sidenav-active')
@@ -65,7 +47,7 @@ class SideNav extends Component {
     }
     render() {
         return (
-            <aside id='sidenav' className='sidenav' ref={node => this.node = node}>
+            <aside id='sidenav' className='sidenav'>
                 <div className='sidenav-logo'>
                     <FaTimes id='sidenav-close' className='fas fa-times sidenav-close' onClick={this.closeSideNav} />
                 </div>
