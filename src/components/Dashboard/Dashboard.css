@@ -38,19 +38,25 @@
 }
 .content {
     margin-bottom: 25px;
+}
+.content-visible {
     box-shadow: 0 3px 6px 0 rgba(0,0,0,0.2);
-
 }
 .list-cards-visible,
 .event-cards-visible {
     opacity: 1;
+    visibility: visible;
     height: auto;
+    max-height: 5000px;
+    transition: opacity 0.5s ease-in, visibility 0.5s ease-in, max-height 0.5s ease-in;
+    
 }
 .list-cards-hidden,
 .event-cards-hidden {
     max-height: 0;
     opacity: 0;
-    display: none;
+    visibility: hidden;
+    transition: opacity 0.2s ease-in, visibility 0.2s ease-in, max-height 0.2s ease-in;
 }
 .list-wrapper {
     display: flex;
@@ -320,9 +326,6 @@
     .add-icon.trip-add {
         display: block;
     }
-    /* .hide-chevron {
-        display: none;
-    } */
 }
 @media screen and (min-width: 768px) {
     .list-wrapper {

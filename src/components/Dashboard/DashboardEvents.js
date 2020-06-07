@@ -9,9 +9,35 @@ export default class DashboardEvents extends Component {
     state = {
         showEvents: true,
         startDate: new Date(),
+        isDesktop: false
     }
     static contextType = TravlerContext
-
+    
+    componentDidMount() {
+        this.updatePredicate();
+        window.addEventListener("resize", this.updatePredicate);
+    }
+    componentWillUnmount() {
+        window.removeEventListener("resize", this.updatePredicate);
+    }
+    updatePredicate = () => {
+        this.setState({ isDesktop: window.innerWidth > 1450 });
+    }
+    enableChevronClick = () => {
+        return (
+            <h3 
+                className='content-header-title' 
+                onClick={this.showEventItems}>
+                {this.state.showEvents ? <FaChevronCircleUp className='title-chevron'/> : <FaChevronCircleDown className='title-chevron'/>}
+                Events
+            </h3>
+        )
+    }
+    disableChevronClick = () => {
+        return (
+            <h3 className='content-header-title'>Events</h3>            
+        )
+    }
     addNewEvent = () => {
         this.props.history.push(`/add-event`)
     }
@@ -31,15 +57,13 @@ export default class DashboardEvents extends Component {
         const displayEventSorted = events.sort((a,b) => new Date(b.date) - new Date(a.date))
         const { showEvents, startDate } = this.state
         return (
-            <section className='content events-section'>
+            <section className={`content events-section ${showEvents ? 'content-visible' : ''}`}>
                 <div className='content-header'>
                     <div className='content-titles'>
-                        <h3 
-                            className='content-header-title' 
-                            onClick={this.showEventItems}>
-                            {showEvents ? <FaChevronCircleUp className='title-chevron hide-chevron'/> : <FaChevronCircleDown className='title-chevron hide-chevron'/>}
-                            Events
-                        </h3>
+                        {this.state.isDesktop 
+                            ? this.disableChevronClick()
+                            : this.enableChevronClick()
+                        }
                     </div>
                     <div className={`add-icon ${showEvents ? 'event-add' : ''}`} onClick={this.addNewEvent}>
                         <FaPlus className='fas fa-plus'></FaPlus>
