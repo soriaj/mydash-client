@@ -5,7 +5,6 @@ import './SideNav.css';
 import TravelerContext from '../../context/TravlerContext'
 import SideNavLists from './SideNavLists'
 import SideNavEvents from './SideNavEvents'
-import SideNavTrips from './SideNavTrips'
 import TokenService from '../../services/token-service'
 
 class SideNav extends Component {
@@ -30,7 +29,6 @@ class SideNav extends Component {
                 <ul className='sidenav-list-items'>
                     <SideNavLists />
                     <SideNavEvents />
-                    <SideNavTrips />
                 </ul>
             </div>
             </>

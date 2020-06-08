@@ -19,7 +19,7 @@ export default class DashboardLists extends Component {
     }
     
     updatePredicate = () => {
-        this.setState({ isDesktop: window.innerWidth > 1450 });
+        this.setState({ isDesktop: window.innerWidth > 1024 });
     }
     enableChevronClick = () => {
         return (
@@ -60,7 +60,8 @@ export default class DashboardLists extends Component {
                         <FaPlus className='fas fa-plus'></FaPlus>
                     </div>
                 </div>
-                <div className={`content-list-cards ${showLists ? 'list-cards-visible' : 'list-cards-hidden'}`}>
+                {/* <div className={`content-list-cards ${showLists ? 'list-cards-visible' : 'list-cards-hidden'}`}> */}
+                <div className={showLists ? 'list-cards-visible' : 'list-cards-hidden'}>
                     <ul className='list-wrapper'>
                         {lists.map(item => 
                             <ListItems 

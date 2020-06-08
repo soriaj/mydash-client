@@ -12,34 +12,34 @@ import PrivateRoute from '../../utils/PrivateRoute';
 import PublicRoute from '../../utils/PublicRoute';
 import Dashboard from '../Dashboard/Dashboard';
 import ListItemDetails from  '../ListItemDetails/ListItemDetails';
-import TripItemDetails from '../TripItemDetails/TripItemDetails';
 import AddListForm from '../AddListForm/AddListForm';
 import AddEventForm from '../AddEventForm/AddEventForm';
-import AddTripsForm from '../AddTripsForm/AddTripsForm'
 import LoginPage from '../../routes/LoginPage';
 import TokenService from '../../services/token-service'
 import LandingPage from '../../routes/LandingPage';
 import EditListItemDetails from '../EditListItemDetails/EditListItemDetails'
 import EditEventItem from '../EditEventItem/EditEventItem';
 import Events from '../Events/Events'
+import Finance from '../Finance/Finance'
+import AddFinanceTransaction from '../AddFinanceTransaction/AddFinanceTransaction'
 
 class App extends Component {
   state = {
     hastToken: TokenService.hasAuthToken(),
     lists: [],
     events: [],
-    trips: [],
+    finances: [],
   }
   static contextType = TravelerContext
 
   handleTokenChange = () => {
     this.setState({ hasToken: TokenService.hasAuthToken() })
   }
-  setupItems = (list, event, trip) => {
+  setupItems = (list, event, finance) => {
     this.setState({
       lists: list,
       events: event.sort((a, b) => b - a),
-      trips: trip
+      finances: finance
     })
   }
 
@@ -81,9 +81,8 @@ class App extends Component {
     })
   }
 
-  // Trip methods to update state
-  setTripItems = trip => {
-    this.setState({ trips: trip })
+  setFinanceItems = finanace => {
+    this.setState({ finances: finanace })
   }
 
   render() {
@@ -92,11 +91,11 @@ class App extends Component {
       hasToken: this.state.hasToken,
       lists: this.state.lists,
       events: this.state.events,
-      trips: this.state.trips,
+      finances: this.state.finances,
       handleTokenChange: this.handleTokenChange,
       setListItems: this.setListItems,
       setEventItems: this.setEventItems,
-      setTripItems: this.setTripItems,
+      setFinanceItems: this.setFinanceItems,
       addListItem: this.addListItem,
       addEventItem: this.addEventItem,
       setupItems: this.setupItems,
@@ -132,8 +131,12 @@ class App extends Component {
               <PrivateRoute path='/add-event' component={AddEventForm} />
 
               {/* TRIP COMPONENT ROUTES */}
-              <PrivateRoute path='/trips/:trip_id' component={TripItemDetails} />
-              <PrivateRoute path='/add-trips' component={AddTripsForm} />
+              {/* <PrivateRoute path='/trips/:trip_id' component={TripItemDetails} />
+              <PrivateRoute path='/add-trips' component={AddTripsForm} /> */}
+              
+              {/* FINANCE COMPONENT ROUTES */}
+              <PrivateRoute exact path='/finances' component={Finance} />
+              <PrivateRoute path='/add-transaction' component={AddFinanceTransaction} />
               
               {/* NOT FOUND ROUTE */}
               <Route component={NotFound} />
