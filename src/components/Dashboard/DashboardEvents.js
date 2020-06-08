@@ -21,7 +21,7 @@ export default class DashboardEvents extends Component {
         window.removeEventListener("resize", this.updatePredicate);
     }
     updatePredicate = () => {
-        this.setState({ isDesktop: window.innerWidth > 1450 });
+        this.setState({ isDesktop: window.innerWidth > 1024 });
     }
     enableChevronClick = () => {
         return (
