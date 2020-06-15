@@ -3,10 +3,7 @@ import './Dashboard.css';
 import DashboardLists from './DashboardLists'
 import DashboardFinances from './DashboardFinances'
 import DashboardEvents from './DashboardEvents';
-// import LoadingDashboard from '../LoadingDashboard/LoadingDashboard';
 import TravelerContext from '../../context/TravlerContext'
-// import data from '../../mockData/data.json'
-// import config from '../../config'
 import LoadingSpinner from '../LoadingSpinner/LoadingSpinner';
 
 export default class Dashboard extends Component {
@@ -39,18 +36,18 @@ export default class Dashboard extends Component {
         } catch (error) {
             console.log(error)
         }
-   }
+    }
     renderDashboard() {
         return (
             <>
-                <DashboardLists history={this.props.history} />
+            <DashboardLists history={this.props.history} />
 
-                <section className='content events finances'>
-                    <div className='main-content-events'>
-                        <DashboardEvents history={this.props.history} />
-                        <DashboardFinances history={this.props.history} />
-                    </div>
-                </section>
+            <section className='content events finances'>
+                <div className='main-content-events'>
+                    <DashboardEvents history={this.props.history} />
+                    <DashboardFinances history={this.props.history} />
+                </div>
+            </section>
             </>
         )
     }
