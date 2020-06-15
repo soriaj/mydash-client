@@ -1,0 +1,21 @@
+.select-options {
+   appearance: none;
+}
+.input-wrapper.custom-select > .input-field.select-options {
+   border: none;
+}
+.input-wrapper.custom-select > .input-field.select-options:focus {
+   border: none;
+   outline: transparent;
+}
+/* Chrome */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}

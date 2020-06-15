@@ -35,6 +35,7 @@ class App extends Component {
   handleTokenChange = () => {
     this.setState({ hasToken: TokenService.hasAuthToken() })
   }
+
   setupItems = (list, event, finance) => {
     this.setState({
       lists: list,
@@ -84,8 +85,26 @@ class App extends Component {
   setFinanceItems = finanace => {
     this.setState({ finances: finanace })
   }
+  addFinananceItem = transaction => {
+    const currentFinances = this.state.finances
+    const currentBalance = currentFinances[0].balance
+    
+    if(transaction.type === 'debit') {
+      this.setState({ finances: [
+        {
+          balance: currentBalance - transaction.amount,
+          transactions: [...this.state.finances[0].transactions, transaction]
+        }] 
+      })
+    } else {
+      console.log('hello')
+    }
+    // console.log(transaction)
+
+  }
 
   render() {
+    // console.log(this.state.finances)
     // Global context for App
     const contextValue = {
       hasToken: this.state.hasToken,
@@ -98,6 +117,7 @@ class App extends Component {
       setFinanceItems: this.setFinanceItems,
       addListItem: this.addListItem,
       addEventItem: this.addEventItem,
+      addFinananceItem: this.addFinananceItem,
       setupItems: this.setupItems,
       deleteListItem: this.deleteListItem,
       deleteEventItem: this.deleteEventItem,

@@ -16,10 +16,11 @@ export default function FinanaceItems(props) {
                <p className=''>{moment(items.date).utc().local().format("MM/DD")}</p>
             </div>
             <div className='finance-item-type'>
-               <p>{items.type}</p>
+               <p>{items.description}</p>
             </div>
             <div className='finance-item-amount'>
-               <p>${`${items.amount.toFixed(2)}`}</p>
+               {/* <p>${`${items.amount.toFixed(2)}`}</p> */}
+               <p>{`${new Intl.NumberFormat("en-US", { style: "currency", currency: "USD" }).format(items.amount)}`}</p>
             </div>
          </li>
       ))}

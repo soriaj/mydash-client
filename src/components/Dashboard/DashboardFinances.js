@@ -36,7 +36,7 @@ class DashboardFinances extends Component {
       )
    }
    addItem = () => {
-      this.props.history.push(`/add-finance`)
+      this.props.history.push(`/add-transaction`)
    }
    showFinanceItems = () => {
       this.setState({
