@@ -44,16 +44,18 @@ class DashboardFinances extends Component {
       })
    }
    render() {
-      const { finances } = this.context
+      const { finances, balances } = this.context
+      const filteredBalance = balances.filter(data => data.user_id === 1 ? data : '')
+      const displayFinancesSorted = finances.sort((a,b) => new Date(a.date) - new Date(b.date))
       const { showFinance } = this.state
       return (
             <section className={`content finances-section ${showFinance ? 'content-visible' : ''}`}> 
                <div className='content-header'>
                   <div className='content-titles'>
-                        {this.state.isDesktop
-                           ? this.disableChevronClick()
-                           : this.enableChevronClick()
-                        }
+                     {this.state.isDesktop
+                        ? this.disableChevronClick()
+                        : this.enableChevronClick()
+                     }
                   </div>
                   <div className={`add-icon ${showFinance ? 'list-add' : ''}`} onClick={this.addItem}>
                         <FaPlus className='fas fa-plus'></FaPlus>
@@ -61,17 +63,26 @@ class DashboardFinances extends Component {
                </div>
                <div className={`content-finance-cards ${showFinance ? 'finance-cards-visible' : 'finance-cards-hidden'}`}>
                   <div className='list-details-title'>
-                        {finances.map((item,idx) => (
-                           <p key={idx} className='finance-current-balance'>Current Balance: ${`${item.balance.toFixed(2)}`}</p>)
-                        )}
+                     {filteredBalance.map((item, idx) => (
+                        <p key={idx}>Current Balance: {`${new Intl.NumberFormat("en-US", { style: "currency", currency: "USD" }).format(item.balance)}`}</p>
+                     ))}
                   </div>
                   <ul className='finanaces-wrapper'>
-                     {finances.map((items, idx) => (
+                     <li className='finance-item-header'>
+                        <div className='date-header'>Date</div>
+                        <div className='type-header'>Transaction</div>
+                        <div className='amount-header'>Amount</div>
+                     </li>
+                     {displayFinancesSorted.map((transaction, idx) => 
                         <FinanceItems
                            key={idx}
-                           transactions={items.transactions}
+                           id={transaction.id}
+                           date={transaction.date}
+                           type={transaction.type}
+                           description={transaction.description}
+                           amount={transaction.amount}
                         />
-                     ))}
+                     )}
                   </ul>
                   <div className='add-icon-container list-add'>
                      <div className='add-icon-cir list-add'>

@@ -29,6 +29,7 @@ class App extends Component {
     lists: [],
     events: [],
     finances: [],
+    balances: []
   }
   static contextType = TravelerContext
 
@@ -36,11 +37,13 @@ class App extends Component {
     this.setState({ hasToken: TokenService.hasAuthToken() })
   }
 
-  setupItems = (list, event, finance) => {
+  setupItems = (list, event, finance, balance) => {
     this.setState({
       lists: list,
-      events: event.sort((a, b) => b - a),
-      finances: finance
+      // events: event.sort((a, b) => a - b),
+      events: event,
+      finances: finance,
+      balances: balance
     })
   }
 
@@ -65,7 +68,7 @@ class App extends Component {
     this.setState({ events: event })
   }
   addEventItem = event => {
-    this.setState({ events: [event, ...this.state.events ]})
+    this.setState({ events: [...this.state.events, event ]})
   }
   deleteEventItem = event_id => {
     const currrentEvents = this.state.events
@@ -86,21 +89,10 @@ class App extends Component {
     this.setState({ finances: finanace })
   }
   addFinananceItem = transaction => {
-    const currentFinances = this.state.finances
-    const currentBalance = currentFinances[0].balance
-    
-    if(transaction.type === 'debit') {
-      this.setState({ finances: [
-        {
-          balance: currentBalance - transaction.amount,
-          transactions: [...this.state.finances[0].transactions, transaction]
-        }] 
-      })
-    } else {
-      console.log('hello')
-    }
-    // console.log(transaction)
-
+    this.setState({ finances: [...this.state.finances, transaction] })
+  }
+  updateBalanceItem = balance => {
+    console.log(balance)
   }
 
   render() {
@@ -111,6 +103,7 @@ class App extends Component {
       lists: this.state.lists,
       events: this.state.events,
       finances: this.state.finances,
+      balances: this.state.balances,
       handleTokenChange: this.handleTokenChange,
       setListItems: this.setListItems,
       setEventItems: this.setEventItems,

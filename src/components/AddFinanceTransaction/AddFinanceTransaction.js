@@ -33,24 +33,55 @@ export default class AddFinanceTransaction extends Component {
       )
    }
 
+   updateCurrentBalance(updatedBalance) {
+      const { balances } =  this.context
+      return fetch(`${process.env.REACT_APP_API_ENDPOINT}/balances/${balances[0].user_id}`, {
+         method: 'PATCH',
+         body: JSON.stringify(updatedBalance),
+         headers: {
+            'content-type': 'application/json',
+            'Accept': 'application/json'
+         }
+      })
+      .then(res => 
+         (!res.ok)   
+         ? res.json().then(e => Promise.reject(e))
+         : res.json()
+      )
+   }
+
    handleSubmit = ev => {
       ev.preventDefault()
       const { description, amount } = ev.target
       const { startDate, option } = this.state
-      const { addFinananceItem } = this.context
+      const { addFinananceItem, balances } = this.context
       let count = Math.floor(Math.random() * 10000)
       const newTrasaction = {
          id: count,
          date: moment(startDate).utc().local().format(),
          type: option,
          description: description.value,
-         amount: Number(amount.value)
+         amount: Number(amount.value),
+         user_id: 1
       }
       this.setState({ error: null })
       this.addTransaction(newTrasaction)
       .then(data => {
          addFinananceItem(data)
       })
+      if(option === 'debit') {
+         let updatedBalance = {
+            balance: Number(balances[0].balance - Number(amount.value))
+         }
+         this.updateCurrentBalance(updatedBalance)
+      }
+      if(option === 'credit') {
+         let updatedBalance = {
+            balance: Number(balances[0].balance + Number(amount.value))
+         }
+         this.updateCurrentBalance(updatedBalance)
+      }
+      
       this.props.history.push(`/dashboard`)       
    }
    
