@@ -75,7 +75,8 @@ export default class DashboardEvents extends Component {
                     <SearchBox handleDateFilter={selected => this.handleDateChange(selected)} />
                     <ul className='timeline-list'>
                         {/* filter sorted evets array and only show events that match selected date */}
-                        {displayEventSorted.filter(item => item.date.includes(moment(startDate).utc().local().format().slice(0,10)))
+                        {/* {displayEventSorted.filter(item => item.date.includes(moment(startDate).utc().local().format().slice(0,10))) */}
+                        {events.filter(item => item.date.includes(moment(startDate).utc().local().format().slice(0,10)))
                             .map((event,idx) =>
                                 <EventsTimeline 
                                     key={idx}

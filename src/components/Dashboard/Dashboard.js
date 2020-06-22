@@ -23,15 +23,20 @@ export default class Dashboard extends Component {
             if(!financesAPI.ok) {
                 throw Error(financesAPI.statusText)
             }
+            const balancesAPI = await fetch(`${process.env.REACT_APP_API_ENDPOINT}/balances`)
+            if(!balancesAPI.ok) {
+                throw Error(balancesAPI.statusText)
+            }
             const eventsAPI = await fetch(`${process.env.REACT_APP_API_ENDPOINT}/events`)
             if(!eventsAPI.ok) {
                 throw Error(eventsAPI.statusText)
             }
             const listsRes = await listsAPI.json()
             const financesRes = await financesAPI.json()
+            const balancesRes = await balancesAPI.json()
             const eventsRes = await eventsAPI.json()
             const { setupItems } = this.context
-            setupItems(listsRes, eventsRes, financesRes)
+            setupItems(listsRes, eventsRes, financesRes, balancesRes)
             this.setState({ loading: false })
         } catch (error) {
             console.log(error)

@@ -5,6 +5,7 @@ const TravelerContext = React.createContext({
     lists: [],
     events: [],
     finances: [],
+    balances: [],
     handleTokenChange: () => {},
     setupItems: () => {},
     setListItems: () => {},
