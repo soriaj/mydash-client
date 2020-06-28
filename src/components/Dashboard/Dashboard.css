@@ -64,7 +64,7 @@
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    padding-left: 10px;
+    padding-left: 8px;
     align-content: center;
 }
 .finances-wrapper {
@@ -287,6 +287,9 @@
 .lists-delete:hover {
     color: red;
 }
+.current-balance {
+    font-size: 20px;
+}
 
 @media screen and (min-width: 1356px) {
     .main-content-events {
@@ -342,6 +345,7 @@
     .list-wrapper {
         flex-direction: row;
         justify-content: space-evenly;
+        padding-left: 10px;
     }
     .content-cards {
         width: 400px;
@@ -361,5 +365,8 @@
     }
     .content-finance-cards {
         padding-bottom: 50px;
+    }
+    .current-balance {
+        font-size: 24px;
     }    
 }

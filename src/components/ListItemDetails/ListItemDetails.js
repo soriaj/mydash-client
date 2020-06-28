@@ -109,7 +109,9 @@ export default class ListItemDetails extends Component {
         // Update state
         this.setState({ items: [...this.state.items, newItem] })
     }
-    removeItem = (list_id) => {
+    removeItem = (e, list_id) => {
+        e.stopPropagation();
+        alert('Are you sure you want to delete this item?')
         const currentItems = this.state.items
         const newItems = currentItems.filter(item => item.id !== list_id)
         this.removeItemAPI(list_id)
@@ -119,7 +121,7 @@ export default class ListItemDetails extends Component {
     }
     removeItemByKeyPress = (ev, id) => {
         if(ev.charCode === parseInt('13') || ev.charCode === parseInt('32')){
-            this.removeItem(id)
+            this.removeItem(ev, id)
         }
     }
     getListsTitle() {
@@ -180,7 +182,7 @@ export default class ListItemDetails extends Component {
                                         <p className={`${todo.isComplete ? 'complete' : ''}`}>{todo.name}</p>
                                     </div>
                                     <div tabIndex="0" className={`control-bar ${todo.isComplete ? 'complete' : ''}`} 
-                                        onClick={() => this.removeItem(todo.id)}
+                                        onClick={(ev) => this.removeItem(ev, todo.id)}
                                         onKeyPress={(ev) => this.removeItemByKeyPress(ev, todo.id)}
                                     >
                                         <FaRegTrashAlt className='fa-trash-title'/>
