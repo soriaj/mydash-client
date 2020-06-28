@@ -29,7 +29,6 @@ class EditEventItem extends Component {
          let response = await fetch(`${process.env.REACT_APP_API_ENDPOINT}/events/${eventId}`)
          let data = await response.json()
          this.setState({
-            // events: data.filter(event => event.event_id === parseInt(eventId) ? event : '')
             event_name: data.event_name,
             event_loc: data.event_loc,
             description: data.description
@@ -52,33 +51,6 @@ class EditEventItem extends Component {
       }
    }
 
-   // componentDidMount() {
-   //    const { event_id } = this.props.match.params
-   //    this.setState({ loading: true })
-   //    fetch(`${process.env.REACT_APP_API_ENDPOINT}/events/${event_id}`, {
-   //       medhtod: 'GET',
-   //       headers: {
-   //          'content-type': 'application/json',
-   //       }
-   //    })
-   //    .then(res =>
-   //       (!res.ok)
-   //          ? res.json().then(e => Promise.reject(e))
-   //          : res.json()
-   //    )
-   //    .then(event => {
-   //       this.setState({
-   //          id: event.id,
-   //          event_name: event.event_name,
-   //          event_loc: event.event_loc,
-   //          description: event.description,
-   //          loading: false
-   //       })
-   //    })
-   //    .catch(error => this.setState({ error: error }))
-   // }
-
-
    handleEventNameChange = e => {
       this.setState({ event_name: e.target.value })
    }
@@ -95,14 +67,6 @@ class EditEventItem extends Component {
    backToDashboard = () => {
       this.props.history.push('/dashboard')
    }
-   // formatNewDate = date => {
-   //    let year = date.getFullYear()
-   //    let month = (1 + date.getMonth()).toString()
-   //    month = month.length > 1 ? month : `0${month}`
-   //    let day = date.getDate().toString()
-   //    day = day.length > 1 ? day : `0${day}`
-   //    return `${month}/${day}/${year}`
-   // }
 
    handleEditEvent = e => {
       e.preventDefault()

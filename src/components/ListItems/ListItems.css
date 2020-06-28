@@ -17,7 +17,6 @@
 }
 .inner-content {
    display: flex;
-   /* background-color: rgba(1, 101, 141, 0.897); */
    background-color: rgba(32, 35, 39, 0.897);
    line-height: 25%;
    height: 120px;

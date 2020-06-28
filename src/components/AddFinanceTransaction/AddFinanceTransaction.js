@@ -13,9 +13,25 @@ export default class AddFinanceTransaction extends Component {
       error: null,
       loading: false,
       startDate: new Date(),
-      option: 'debit'
+      option: 'debit',
+      balances: []
    }
    static contextType = TravelerContext
+
+   async componentDidMount(){
+      this.setState({ loading: true })
+      try {
+         const balancesAPI = await fetch(`${process.env.REACT_APP_API_ENDPOINT}/balances`)
+         if(!balancesAPI.ok) {
+               throw Error(balancesAPI.statusText)
+         }
+         const balancesRes = await balancesAPI.json()
+         this.setState({ balances: [...balancesRes], loading: false })
+      }
+      catch (error) {
+         console.log(error)
+      }
+   }
 
    addTransaction(newTrasaction) {
       return fetch(`${process.env.REACT_APP_API_ENDPOINT}/finances`, {
@@ -34,7 +50,8 @@ export default class AddFinanceTransaction extends Component {
    }
 
    updateCurrentBalance(updatedBalance) {
-      const { balances } =  this.context
+      // const { balances } =  this.context
+      const { balances } =  this.state
       return fetch(`${process.env.REACT_APP_API_ENDPOINT}/balances/${balances[0].user_id}`, {
          method: 'PATCH',
          body: JSON.stringify(updatedBalance),
@@ -53,8 +70,8 @@ export default class AddFinanceTransaction extends Component {
    handleSubmit = ev => {
       ev.preventDefault()
       const { description, amount } = ev.target
-      const { startDate, option } = this.state
-      const { addFinananceItem, balances } = this.context
+      const { startDate, option, balances } = this.state
+      const { addFinananceItem } = this.context
       let count = Math.floor(Math.random() * 10000)
       const newTrasaction = {
          id: count,
@@ -81,7 +98,6 @@ export default class AddFinanceTransaction extends Component {
          }
          this.updateCurrentBalance(updatedBalance)
       }
-      
       this.props.history.push(`/dashboard`)       
    }
    

@@ -1,12 +1,17 @@
 import React, { Component } from 'react';
 import { FaRegTrashAlt, FaList } from 'react-icons/fa';
-// import config from '../../config'
 import TravelerContext from '../../context/TravlerContext'
 import './ListItems.css'
 
+/*
+ListItems displays the card of List titles
+allows a user select the list and then view contents
+or remove the item
+*/
 
 class ListItems extends Component {
     static contextType = TravelerContext
+    // view List Item Details moves the user the the ListItemDetails Component
     viewListItemDetails = () => {
         this.props.history.push(`/lists/${this.props.id}`)
     }

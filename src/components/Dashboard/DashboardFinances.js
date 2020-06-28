@@ -46,7 +46,7 @@ class DashboardFinances extends Component {
    render() {
       const { finances, balances } = this.context
       const filteredBalance = balances.filter(data => data.user_id === 1 ? data : '')
-      const displayFinancesSorted = finances.sort((a,b) => new Date(a.date) - new Date(b.date))
+      const displayFinancesSorted = finances.sort((a,b) => new Date(b.date) - new Date(a.date)).slice(0,10)
       const { showFinance } = this.state
       return (
             <section className={`content finances-section ${showFinance ? 'content-visible' : ''}`}> 

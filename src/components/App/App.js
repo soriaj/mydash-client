@@ -21,6 +21,7 @@ import EditListItemDetails from '../EditListItemDetails/EditListItemDetails'
 import EditEventItem from '../EditEventItem/EditEventItem';
 import Events from '../Events/Events'
 import Finance from '../Finance/Finance'
+import Transactions from '../Transactions/Transactions'
 import AddFinanceTransaction from '../AddFinanceTransaction/AddFinanceTransaction'
 
 class App extends Component {
@@ -37,17 +38,17 @@ class App extends Component {
     this.setState({ hasToken: TokenService.hasAuthToken() })
   }
 
+  // Load initial app state data
   setupItems = (list, event, finance, balance) => {
     this.setState({
       lists: list,
-      // events: event.sort((a, b) => a - b),
       events: event,
       finances: finance,
       balances: balance
     })
   }
 
-  // List methods to update state
+  // List items
   setListItems = list => {
     this.setState({ lists: list })
   }
@@ -63,7 +64,8 @@ class App extends Component {
       this.setState({ lists: newLists })
     }, 200)
   }
-  // Event methods to update state
+
+  // Event items
   setEventItems = event => {
     this.setState({ events: event })
   }
@@ -85,6 +87,7 @@ class App extends Component {
     })
   }
 
+  // Finance Items
   setFinanceItems = finanace => {
     this.setState({ finances: finanace })
   }
@@ -96,7 +99,6 @@ class App extends Component {
   }
 
   render() {
-    // console.log(this.state.finances)
     // Global context for App
     const contextValue = {
       hasToken: this.state.hasToken,
@@ -142,14 +144,11 @@ class App extends Component {
               <PrivateRoute exact path='/events' component={Events} />
               <PrivateRoute path='/events/:event_id' component={EditEventItem} />
               <PrivateRoute path='/add-event' component={AddEventForm} />
-
-              {/* TRIP COMPONENT ROUTES */}
-              {/* <PrivateRoute path='/trips/:trip_id' component={TripItemDetails} />
-              <PrivateRoute path='/add-trips' component={AddTripsForm} /> */}
               
               {/* FINANCE COMPONENT ROUTES */}
               <PrivateRoute exact path='/finances' component={Finance} />
               <PrivateRoute path='/add-transaction' component={AddFinanceTransaction} />
+              <PrivateRoute path='/transactions' component={Transactions} />
               
               {/* NOT FOUND ROUTE */}
               <Route component={NotFound} />

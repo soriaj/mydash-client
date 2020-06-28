@@ -4,7 +4,12 @@ import TravelerContext from '../../context/TravlerContext'
 import LoadingSpinner from '../LoadingSpinner/LoadingSpinner'
 import './ListItemDetails.css'
 import BackToDashboard from '../BackToDashboard/BackToDashboard'
-import SaveButton from '../SaveButton/SaveButton'
+
+/*
+ListItemDetails displays the items in lists. Each item can be 
+marked complete, striking it through, removed or additional items
+added to the list
+*/
 
 export default class ListItemDetails extends Component {
     state = {
@@ -111,7 +116,6 @@ export default class ListItemDetails extends Component {
     }
     removeItem = (e, list_id) => {
         e.stopPropagation();
-        alert('Are you sure you want to delete this item?')
         const currentItems = this.state.items
         const newItems = currentItems.filter(item => item.id !== list_id)
         this.removeItemAPI(list_id)
@@ -152,11 +156,11 @@ export default class ListItemDetails extends Component {
                                 <div className='back-to-dashboard'>
                                     <BackToDashboard backToDashboard={this.backToDashboard}/>       
                                 </div>
-                                <SaveButton />
+                                <button className='save-btn events' ><FaPlus /><span>Add Item</span></button>
                             </div>
                             <div className='input-wrapper'>
                                 <FaPlus className="fa-plus icon"></FaPlus>
-                                <label htmlFor="new_item" className='no-view'>Add Item</label>
+                                <label htmlFor="new_item" className='no-view'>Add Item To List</label>
                                 <input 
                                     type="text" 
                                     name="new_item" 
