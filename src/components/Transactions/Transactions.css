@@ -1,0 +1,24 @@
+.transaction-container {
+   list-style: none;
+   margin-bottom: 150px;
+   margin-top: 25px;
+   margin-left: auto;
+   margin-right: auto;
+}
+.add-list-item > h4 {
+   padding-left: 10px;
+}
+
+@media screen and (min-width: 1000px) {
+   .transaction-container {
+      width: 800px;
+   }
+   .list-detail-controls {
+      width: 800px;
+   }
+   .add-list-item {
+      width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+   }
+}

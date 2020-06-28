@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import LoadingSpinner from '../LoadingSpinner/LoadingSpinner'
 import BackToDashboard from '../BackToDashboard/BackToDashboard'
-import TravlerContext from '../../context/TravlerContext'
 import EventsTimeline from '../EventsTimeline/EventsTimeLine'
 import { FaSearch, FaPlus } from 'react-icons/fa'
 
@@ -9,8 +8,23 @@ export default class Events extends Component {
    state = {
       loading: false,
       searchTerm: '',
+      events: []
    }
-   static contextType = TravlerContext
+   
+   async componentDidMount() {
+      this.setState({ loading: true })
+      try {
+          const eventsAPI = await fetch(`${process.env.REACT_APP_API_ENDPOINT}/events`)
+          if(!eventsAPI.ok) {
+              throw Error(eventsAPI.statusText)
+          }
+          const eventsRes = await eventsAPI.json()
+          this.setState({ events: [...eventsRes], loading: false })
+      } catch (error) {
+          console.log(error)
+      }
+   }
+
    // Handles search filter selection
    handleSearchTerm = ev => {
       this.setState({ searchTerm: ev.target.value })
@@ -22,8 +36,7 @@ export default class Events extends Component {
       this.props.history.push(`/add-event`)
    }
    render() {
-      const { loading, searchTerm } = this.state
-      const { events } = this.context
+      const { loading, searchTerm, events } = this.state
       const displayEventSorted = events.sort((a,b) => new Date(b.date) - new Date(a.date))
       return (
          <>
@@ -32,7 +45,7 @@ export default class Events extends Component {
                : (
                <>
                <div className='list-details-title'>
-                  <h3>All Events</h3>
+                  <h3>Events</h3>
                </div>
 
                <div className='add-list-item'>
@@ -59,7 +72,7 @@ export default class Events extends Component {
                         </div>
                   </form>
                </div>
-               <div className=' list-container'>
+               <div className='list-container'>
                   <div className='events-timeline'>
                      <ul className='timeline-list'>
                         {/* filter sorted events array and only show events that match selected name */}

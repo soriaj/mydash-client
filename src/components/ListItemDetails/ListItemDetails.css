@@ -129,6 +129,9 @@
    .list-container {
       width: 800px;
    }
+   .list-container ul {
+      padding: 0px;
+   }
    .list-detail-controls {
       width: 800px;
    }
