@@ -64,7 +64,7 @@ class DashboardFinances extends Component {
                <div className={`content-finance-cards ${showFinance ? 'finance-cards-visible' : 'finance-cards-hidden'}`}>
                   <div className='list-details-title'>
                      {filteredBalance.map((item, idx) => (
-                        <p key={idx}>Current Balance: {`${new Intl.NumberFormat("en-US", { style: "currency", currency: "USD" }).format(item.balance)}`}</p>
+                        <p key={idx} className='current-balance'>Current Balance: {`${new Intl.NumberFormat("en-US", { style: "currency", currency: "USD" }).format(item.balance)}`}</p>
                      ))}
                   </div>
                   <ul className='finanaces-wrapper'>

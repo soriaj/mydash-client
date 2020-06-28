@@ -53,8 +53,6 @@ export default class DashboardEvents extends Component {
     }
     render() {
         const { events } = this.context
-        // Sort events by newest
-        const displayEventSorted = events.sort((a,b) => new Date(b.date) - new Date(a.date))
         const { showEvents, startDate } = this.state
         return (
             <section className={`content events-section ${showEvents ? 'content-visible' : ''}`}>
@@ -74,8 +72,7 @@ export default class DashboardEvents extends Component {
                     <h4>Filter By Date:</h4>
                     <SearchBox handleDateFilter={selected => this.handleDateChange(selected)} />
                     <ul className='timeline-list'>
-                        {/* filter sorted evets array and only show events that match selected date */}
-                        {/* {displayEventSorted.filter(item => item.date.includes(moment(startDate).utc().local().format().slice(0,10))) */}
+                        {/* filter evets array and only show events that match selected date */}
                         {events.filter(item => item.date.includes(moment(startDate).utc().local().format().slice(0,10)))
                             .map((event,idx) =>
                                 <EventsTimeline 
