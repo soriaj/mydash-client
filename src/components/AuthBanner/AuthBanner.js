@@ -14,7 +14,7 @@ class AuthBanner extends Component {
     renderWelcome() {
         return (
             <div className='banner-title-container'>
-                <div className='main-banner-title'>Welcome Traveler</div>
+                <div className='main-banner-title'>Welcome To MyDash</div>
             </div>
         )
     }

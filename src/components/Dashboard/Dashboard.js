@@ -12,35 +12,61 @@ export default class Dashboard extends Component {
     }
     static contextType = TravelerContext
     
-    async componentDidMount() {
-        this.setState({ loading: true })
-        try {
-            const listsAPI = await fetch(`${process.env.REACT_APP_API_ENDPOINT}/lists`)
-            if(!listsAPI.ok) {
-                throw Error(listsAPI.statusText)
-            }
-            const financesAPI = await fetch(`${process.env.REACT_APP_API_ENDPOINT}/finances`)
-            if(!financesAPI.ok) {
-                throw Error(financesAPI.statusText)
-            }
-            const balancesAPI = await fetch(`${process.env.REACT_APP_API_ENDPOINT}/balances`)
-            if(!balancesAPI.ok) {
-                throw Error(balancesAPI.statusText)
-            }
-            const eventsAPI = await fetch(`${process.env.REACT_APP_API_ENDPOINT}/events`)
-            if(!eventsAPI.ok) {
-                throw Error(eventsAPI.statusText)
-            }
-            const listsRes = await listsAPI.json()
-            const financesRes = await financesAPI.json()
-            const balancesRes = await balancesAPI.json()
-            const eventsRes = await eventsAPI.json()
+    // async componentDidMount() {
+    //     this.setState({ loading: true })
+    //     try {
+    //         const listsAPI = await fetch(`${process.env.REACT_APP_API_ENDPOINT}/lists`)
+    //         if(!listsAPI.ok) {
+    //             throw Error(listsAPI.statusText)
+    //         }
+    //         const financesAPI = await fetch(`${process.env.REACT_APP_API_ENDPOINT}/finances`)
+    //         if(!financesAPI.ok) {
+    //             throw Error(financesAPI.statusText)
+    //         }
+    //         const balancesAPI = await fetch(`${process.env.REACT_APP_API_ENDPOINT}/balances`)
+    //         if(!balancesAPI.ok) {
+    //             throw Error(balancesAPI.statusText)
+    //         }
+    //         const eventsAPI = await fetch(`${process.env.REACT_APP_API_ENDPOINT}/events`)
+    //         if(!eventsAPI.ok) {
+    //             throw Error(eventsAPI.statusText)
+    //         }
+    //         const listsRes = await listsAPI.json()
+    //         const financesRes = await financesAPI.json()
+    //         const balancesRes = await balancesAPI.json()
+    //         const eventsRes = await eventsAPI.json()
+    //         const { setupItems } = this.context
+    //         setupItems(listsRes, eventsRes, financesRes, balancesRes)
+    //         this.setState({ loading: false })
+    //     } catch (error) {
+    //         console.log(error)
+    //     }
+    // }
+    componentDidMount(){
+        Promise.all([
+            fetch(`${process.env.REACT_APP_API_ENDPOINT}/lists`),
+            fetch(`${process.env.REACT_APP_API_ENDPOINT}/events`),
+            fetch(`${process.env.REACT_APP_API_ENDPOINT}/finances`),
+            fetch(`${process.env.REACT_APP_API_ENDPOINT}/balances`)
+        ])
+        .then(([listsRes, eventsRes, financesRes, balancesRes]) => {
+            if(!listsRes.ok)
+                return listsRes.json().then(e => Promise.reject(e));
+            if(!eventsRes.ok)
+                return eventsRes.json().then(e => Promise.reject(e));
+            if(!financesRes.ok)
+                return financesRes.json().then(e => Promise.reject(e));
+            if(!balancesRes.ok)
+                return balancesRes.json().then(e => Promise.reject(e));
+            return Promise.all([listsRes.json(), eventsRes.json(), financesRes.json(),  balancesRes.json()]);
+        })
+        .then(([lists, events, finances, balances]) => {
             const { setupItems } = this.context
-            setupItems(listsRes, eventsRes, financesRes, balancesRes)
-            this.setState({ loading: false })
-        } catch (error) {
+            setupItems(lists, events, finances, balances)
+        })
+        .catch( error => {
             console.log(error)
-        }
+        })
     }
     renderDashboard() {
         return (
