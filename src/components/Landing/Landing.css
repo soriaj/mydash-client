@@ -1,0 +1,68 @@
+@import url('https://fonts.googleapis.com/css?family=Lobster+Two|Open+Sans&display=swap');
+
+.font-landing {
+   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+.sections-container {
+   display: flex;
+   justify-content: center;
+}
+.section-one {
+   padding-left: 10px;
+   border: 1px solid red;
+   line-height: 1.5;
+}
+
+.section-one h2 {
+   font-size: 2.7em;
+}
+
+.section-one p {
+   margin: 0 0 2em 0;
+   font-size: 1.2em;
+}
+
+.btn-one {
+   background-color: transparent;
+   box-shadow: inset 0 0 0 2px #3171e7;
+   color: #3171e7 !important;
+   padding: 15px 30px;
+   text-decoration: none;
+   text-align: center;
+   text-transform: uppercase;
+   font-weight: 700;
+   transition: background-color .5s;
+}
+
+.btn-one:hover {
+   background-color: #3171e736;
+}
+
+
+/* @media screen and (min-width: 768px) {
+   .nav-container {
+       padding-right: 50px;
+       padding-left: 50px;
+   }
+   .logo {
+       padding-left: 0;
+   }
+   .hidden-menu-icon {
+       display: none;
+   }
+   .hidden-items {
+       display: inline-flex;
+   }
+   .section-two .inner, .section-three .inner {
+       flex-direction: row;
+   }
+   .section-two .inner article {
+       width: 50%;
+   }
+   .section-two .inner article:first-child {
+       padding-right: 6em;
+   }
+   .section-two .inner article:last-child {
+       padding-left: 6em;
+   }
+} */
