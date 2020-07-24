@@ -2,30 +2,34 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import { FaUser, FaKey, FaEnvelope } from 'react-icons/fa';
 import Loading from '../Loading/Loading'
+import AuthService from '../../services/auth-service'
 
 export default class Signup extends Component {
     state = {
         error: null, 
         loading: false
     }
+
     handleSubmit = ev => {
         ev.preventDefault();
         this.setState({ loading: true })
-        const { 
-            username, 
-            password, 
-            repeat_password, 
-            email
-        } = ev.target
-        username.value = ''
-        password.value = ''
-        repeat_password.value = ''
-        email.value = ''
-        setTimeout(() => {
-            const { history } = this.props
-            history.push('/login')
-        }, 2000)
+        const { full_name, email, user_name, password } = ev.target
 
+        AuthService.newUser({ 
+            full_name: full_name.value,
+            email: email.value,
+            user_name: user_name.value,
+            password: password.value
+        })
+        .then(user => {
+            full_name.value = ''
+            email.value = ''
+            user_name.value = ''
+            password.value = ''
+            this.setState({ loading: false })
+            this.props.history.push('/login')
+        })
+        .catch(res => this.setState({ error: res.error, loading: false }))
     }
     render() {
         const { error, loading } = this.state
@@ -44,41 +48,14 @@ export default class Signup extends Component {
                                 <FaUser className="fa fa-user icon"></FaUser>
                                 <input 
                                     type="text"
-                                    name="username" 
-                                    id="username" 
-                                    placeholder='Username' 
+                                    name="full_name" 
+                                    id="full_name" 
+                                    placeholder='Enter Full Name' 
                                     className='input-field'
                                     required 
                                     />
                                 <span className="focus-input-field"></span>
                             </div>
-        
-                            <div className='input-wrapper'>
-                                <FaKey className="fa fa-key icon"></FaKey> 
-                                <input 
-                                    type="password" 
-                                    name="password" 
-                                    id="password" 
-                                    placeholder="Password" 
-                                    className='input-field' 
-                                    required
-                                    />
-                                <span className="focus-input-field"></span>
-                            </div>
-        
-                            <div className='input-wrapper'>
-                                <FaKey className="fa fa-key icon"></FaKey> 
-                                <input 
-                                    type="password" 
-                                    name="repeat_password" 
-                                    id="repeat_password" 
-                                    placeholder="Re-enter Password" 
-                                    className='input-field' 
-                                    required
-                                    />
-                                <span className="focus-input-field"></span>
-                            </div>
-                            
                             <div className='input-wrapper'>
                                 <FaEnvelope className="fa fa-envelope icon"></FaEnvelope> 
                                 <input 
@@ -86,6 +63,30 @@ export default class Signup extends Component {
                                     name="email" 
                                     id="email" 
                                     placeholder="your.email@mail.com" 
+                                    className='input-field' 
+                                    required
+                                    />
+                                <span className="focus-input-field"></span>
+                            </div>
+                            <div className='input-wrapper'>
+                                <FaUser className="fa fa-user icon"></FaUser>
+                                <input 
+                                    type="text"
+                                    name="user_name" 
+                                    id="user_name" 
+                                    placeholder='Enter Username' 
+                                    className='input-field'
+                                    required 
+                                    />
+                                <span className="focus-input-field"></span>
+                            </div>        
+                            <div className='input-wrapper'>
+                                <FaKey className="fa fa-key icon"></FaKey> 
+                                <input 
+                                    type="password" 
+                                    name="password" 
+                                    id="password" 
+                                    placeholder="Enter Password" 
                                     className='input-field' 
                                     required
                                     />
