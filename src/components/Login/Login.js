@@ -5,6 +5,7 @@ import './Login.css'
 import TravelerContext from '../../context/TravlerContext'
 import Loading from '../Loading/Loading'
 import TokenService from '../../services/token-service'
+import AuthService from '../../services/auth-service'
 
 class Login extends Component {
     static defaultProps = {
@@ -21,15 +22,20 @@ class Login extends Component {
         this.setState({ error: null, loading: true })
         const { handleTokenChange } = this.context
         const { username, password } = ev.target
-        TokenService.saveAuthToken(TokenService.makeBasicAuthToken(username.value, password.value))
-
-        username.value = ''
-        password.value = ''
-        
-        setTimeout(() => {
-            handleTokenChange()
-            this.props.onLoginSuccess()
-        }, 1000)
+        AuthService.Login({user_name: username.value, password: password.value})
+            .then(res => {
+                username.value = ''
+                password.value = ''
+                TokenService.saveAuthToken(res.authToken)
+                handleTokenChange()
+                this.props.onLoginSuccess()
+                this.setState({ loading: false })
+            })
+            .catch(res => {
+                username.value = ''
+                password.value = ''
+                this.setState({ error: res.error, loading: false })
+            })
     }
     componentWillUnmount() {
         this.setState({ loading: false })
