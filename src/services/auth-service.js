@@ -9,7 +9,7 @@ const AuthService = {
          },
          body: JSON.stringify(creds)
       })
-      .then(res => !res.ok ? res.json().then(err => Promise.reject(err)) : res.json()) 
+      .then(res => !res.ok ? res.json().then(err => Promise.reject(err)) : res.json())
    },
    newUser(user) {
       return fetch(`${config.API_ENDPOINT}/users`, {

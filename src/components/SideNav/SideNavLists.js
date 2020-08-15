@@ -5,6 +5,7 @@ import TravelerContext from  '../../context/TravlerContext'
 // import SideNavListsItems from '../SideNavListsItems/SideNavListsItems';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 // import config from '../../config'
+import ApiListsService from '../../services/api-lists-service'
 
 class SideNavLists extends Component {
     state = {
@@ -18,11 +19,9 @@ class SideNavLists extends Component {
 
     async componentDidMount() {
         try {
-            const { setListItems } = this.context
-            const listsAPI = await fetch(`${process.env.REACT_APP_API_ENDPOINT}/lists`)
-            const listsRes = await listsAPI.json()
-            // this.setState({ lists: listsRes })
-            setListItems(listsRes)
+            await ApiListsService.getLists()
+                .then(this.context.setListItems)
+
          } catch (error) {
             console.log(error)
          }

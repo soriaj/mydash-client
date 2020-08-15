@@ -13,7 +13,8 @@ export default function FinanaceItems(props) {
                <p>{props.description}</p>
             </div>
             <div className='finance-item-amount'>
-               <p><span className={`${props.type === 'credit' ? 'amount-positive' : 'amount-negative'}`}>{`${new Intl.NumberFormat("en-US", { style: "currency", currency: "USD" }).format(props.amount)}`}</span></p>
+               {/* <p><span className={`${props.type === 'credit' ? 'amount-positive' : 'amount-negative'}`}>{`${new Intl.NumberFormat("en-US", { style: "currency", currency: "USD" }).format(props.amount)}`}</span></p> */}
+               <p><span className={`${props.type === 'credit' ? 'amount-positive' : 'amount-negative'}`}>{`${props.amount}`}</span></p>
             </div>
          </li>
       </>

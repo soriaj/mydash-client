@@ -36,6 +36,7 @@ export default class DashboardLists extends Component {
             <h3 className='content-header-title'>Lists</h3>            
         )
     }
+    // Will direct user to AddListForm component
     addNewList = () => {
         this.props.history.push(`/add-list`)
     }
@@ -60,12 +61,11 @@ export default class DashboardLists extends Component {
                         <FaPlus className='fas fa-plus'></FaPlus>
                     </div>
                 </div>
-                {/* <div className={`content-list-cards ${showLists ? 'list-cards-visible' : 'list-cards-hidden'}`}> */}
                 <div className={showLists ? 'list-cards-visible' : 'list-cards-hidden'}>
                     <ul className='list-wrapper'>
-                        {lists.map(item => 
+                        {lists.map((item, idx) => 
                             <ListItems 
-                                key={item.id}
+                                key={idx}
                                 id={item.id}
                                 name={item.name}    
                                 content={item.content}

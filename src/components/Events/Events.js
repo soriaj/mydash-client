@@ -3,6 +3,7 @@ import LoadingSpinner from '../LoadingSpinner/LoadingSpinner'
 import BackToDashboard from '../BackToDashboard/BackToDashboard'
 import EventsTimeline from '../EventsTimeline/EventsTimeLine'
 import { FaSearch, FaPlus } from 'react-icons/fa'
+import ApiEventsService from '../../services/api-events-service'
 
 export default class Events extends Component {
    state = {
@@ -11,17 +12,14 @@ export default class Events extends Component {
       events: []
    }
    
-   async componentDidMount() {
+   componentDidMount() {
       this.setState({ loading: true })
       try {
-          const eventsAPI = await fetch(`${process.env.REACT_APP_API_ENDPOINT}/events`)
-          if(!eventsAPI.ok) {
-              throw Error(eventsAPI.statusText)
-          }
-          const eventsRes = await eventsAPI.json()
-          this.setState({ events: [...eventsRes], loading: false })
-      } catch (error) {
-          console.log(error)
+         ApiEventsService.getEvents()
+            .then(data => this.setState({ events: data, loading: false }))
+      }
+      catch(error) {
+         this.setState({ error: error })
       }
    }
 

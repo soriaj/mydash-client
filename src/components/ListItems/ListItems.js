@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { FaRegTrashAlt, FaList } from 'react-icons/fa';
 import TravelerContext from '../../context/TravlerContext'
+import ApiListsService from '../../services/api-lists-service'
 import './ListItems.css'
 
 /*
@@ -21,27 +22,11 @@ class ListItems extends Component {
         }
     }
 
-    deleteList(list_id) {
-        return fetch(`${process.env.REACT_APP_API_ENDPOINT}/lists/${list_id}`, {
-            method: 'DELETE',
-            headers: {
-                'content-type': 'application/json',
-            }
-        })
-        .then(res => {
-            if(!res.ok) {
-                return Promise.reject(res.error)
-            }
-        })
-    }
-
     handleDeleteListItem = ev => {
         ev.stopPropagation()
         const list_id = this.props.id
-        this.deleteList(list_id)
-        .then(() => {
-            this.context.deleteListItem(list_id)
-        })
+        this.context.deleteListItem(list_id)
+        ApiListsService.deleteList(list_id)
     }
 
     handleDeleteListItemByKey = ev => {
