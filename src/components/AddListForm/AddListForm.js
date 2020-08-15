@@ -5,6 +5,7 @@ import Loading from '../Loading/Loading'
 // import config from '../../config'
 import BackToDashboard from '../BackToDashboard/BackToDashboard'
 import SaveButton from '../SaveButton/SaveButton'
+import ApiListsService from '../../services/api-lists-service'
 
 // const uuidv4 = require('uuid/v4')
 
@@ -34,14 +35,12 @@ export default class NewListForm extends Component {
         ev.preventDefault()
         const { name } = ev.target
         const { addListItem } = this.context
-        let count = Math.floor(Math.random() * 10000)
         const newList = {
-            id: count,
-            name: name.value,
+            name: name.value
         }
         this.setState({ error: null })
 
-        this.addList(newList)
+        ApiListsService.postList(newList)
         .then(data => {
             name.value = ''
             addListItem(data)

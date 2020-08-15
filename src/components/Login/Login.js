@@ -20,16 +20,14 @@ class Login extends Component {
     handleSubmit = ev => {
         ev.preventDefault();
         this.setState({ error: null, loading: true })
-        const { handleTokenChange } = this.context
         const { username, password } = ev.target
         AuthService.Login({user_name: username.value, password: password.value})
             .then(res => {
                 username.value = ''
                 password.value = ''
                 TokenService.saveAuthToken(res.authToken)
-                handleTokenChange()
+                this.context.handleTokenChange()
                 this.props.onLoginSuccess()
-                this.setState({ loading: false })
             })
             .catch(res => {
                 username.value = ''
@@ -37,9 +35,7 @@ class Login extends Component {
                 this.setState({ error: res.error, loading: false })
             })
     }
-    componentWillUnmount() {
-        this.setState({ loading: false })
-    }
+
     render() {
         const { error, loading } = this.state
         return (
@@ -63,7 +59,7 @@ class Login extends Component {
                                     id="username" 
                                     placeholder='Username' 
                                     className='input-field'
-                                    // required
+                                    required
                                     />
                                 <span className="focus-input-field"></span>
                             </div>
@@ -77,7 +73,7 @@ class Login extends Component {
                                     id="password" 
                                     placeholder="Password" 
                                     className='input-field'
-                                    // required
+                                    required
                                     />
                                 <span className="focus-input-field"></span>
                             </div>

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { FaTimes } from 'react-icons/fa';
+import { FaTimes, FaHome } from 'react-icons/fa';
 import './SideNav.css';
 import TravelerContext from '../../context/TravlerContext'
 import SideNavLists from './SideNavLists'
@@ -11,6 +11,8 @@ import TokenService from '../../services/token-service'
 class SideNav extends Component {
     state = {
         listsShown: false,
+        fullName: '',
+        error: null
     }
     static contextType = TravelerContext
 
@@ -23,7 +25,7 @@ class SideNav extends Component {
             <>
             <div className='sidenav-account'>
                 <div className='sidenav-account-title'>
-                    <Link to={'/dashboard'}><h1 className='sidenav-heading'>{'Hi Username'}</h1></Link>
+                    <Link to={'/dashboard'}><h1 className='sidenav-heading'><FaHome ></FaHome> {'Home'}</h1></Link>
                 </div>
             </div>
             <div className='sidenav-list'>

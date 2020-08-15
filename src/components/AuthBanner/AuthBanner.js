@@ -7,7 +7,8 @@ import Weather from '../Weather/Weather'
 class AuthBanner extends Component {
     state = {
         location: null,
-        loading: false
+        loading: false,
+        fullName: ''
     }
     static contextType = TravelerContet
 
@@ -19,10 +20,12 @@ class AuthBanner extends Component {
         )
     }
     renderContent() {
+        const { user } = this.context
+        const usersName = user.map(name => name.full_name)
         return (
             <>
             <div className='banner-title-container'>
-                <div className='main-banner-title'>Welcome Username</div>
+                <div className='main-banner-title'>{`Welcome ${usersName}`}</div>
             </div>
             <div className='main-banner-items'>
                 <div className='banner-item'>

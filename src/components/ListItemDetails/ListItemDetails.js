@@ -4,6 +4,8 @@ import TravelerContext from '../../context/TravlerContext'
 import LoadingSpinner from '../LoadingSpinner/LoadingSpinner'
 import './ListItemDetails.css'
 import BackToDashboard from '../BackToDashboard/BackToDashboard'
+import ApiListsService from '../../services/api-lists-service'
+import ApiListsItemsService from '../../services/api-lists-items-service'
 
 /*
 ListItemDetails displays the items in lists. Each item can be 
@@ -19,22 +21,15 @@ export default class ListItemDetails extends Component {
     }
 
     static contextType = TravelerContext
-
-    loadAllData = async (listId) => {
-        try {
-            let response = await fetch(`${process.env.REACT_APP_API_ENDPOINT}/lists_items`)
-            let data = await response.json()
-            this.setState({ 
-                items: data.filter(list => list.list_id === parseInt(listId) ? list : '')
-            })
-        }
-        catch (error) {
-            console.log(error)
-        }
+    loadAllData = list_id => {
+        ApiListsService.getListWithId(list_id)
+            .then(data => this.setState({ items: [...data]}))
+            .catch(error => console.log(error))
     }
     componentDidMount() {
         const { list_id } = this.props.match.params
         this.loadAllData(list_id)
+        
     }
     componentDidUpdate(prevProps) { 
         const { list_id } = this.props.match.params
@@ -46,7 +41,7 @@ export default class ListItemDetails extends Component {
     completedListItem = (todo) => {
         const markItem = {
             ...todo,
-            isComplete: !todo.isComplete
+            iscomplete: !todo.iscomplete
         }
         // Make API call to update id with update tasks
         this.patchItemAPI(todo.id, markItem)
@@ -57,44 +52,21 @@ export default class ListItemDetails extends Component {
             this.completedListItem(todo)
         }
     }
-    patchItemAPI = async (listId, markItem) => {
-        try {
-            await fetch(`${process.env.REACT_APP_API_ENDPOINT}/lists_items/${listId}`, {
-                method: 'PATCH',
-                body: JSON.stringify(markItem),
-                headers: {
-                    'content-type': 'application/json',
-                }
-            })
-        } catch (error) {
-            console.log(error)
-        }
+    patchItemAPI = async (itemId, markItem) => {
+            ApiListsItemsService.patchListsItem(markItem, itemId)
+                .catch(error => console.log(error))
     }
     postItemAPI = async (newItem) => {
-        try {
-            await fetch(`${process.env.REACT_APP_API_ENDPOINT}/lists_items`, {
-                method: 'POST',
-                body: JSON.stringify(newItem),
-                headers: {
-                    'content-type': 'application/json',
-                }
-            })
-        } catch(error) {
-            console.log(error)
-        }
+        const { list_id } = this.props.match.params
+        ApiListsItemsService.postListsItems(newItem)
+            .then(setTimeout(() => {
+                this.loadAllData(list_id)
+            }), 200)
+            .catch(error => console.log(error))
     }
-    removeItemAPI = async (list_id) => {
-        return await fetch(`${process.env.REACT_APP_API_ENDPOINT}/lists_items/${list_id}`, {
-            method: 'DELETE',
-            headers: {
-                'content-type': 'application/json',
-            }
-        })
-        .then(res => {
-            if(!res.ok){
-                return Promise.reject(res.error)
-            }
-        })
+    removeItemAPI = async (list_itemId) => {
+        ApiListsItemsService.deleteListsItem(list_itemId)
+            .catch(error => console.log(error))
     }
     handleAddListItem = ev => {
         ev.preventDefault();
@@ -103,10 +75,8 @@ export default class ListItemDetails extends Component {
         // Create new item object with list_id equal to params id
         const { new_item } = ev.target
         const newItem = {
-            id: Math.floor(Math.random() * 1000),
             name: new_item.value,
             list_id: Number(list_id),
-            isComplete: false
         }
         // Make API call to PUT new item into items
         this.postItemAPI(newItem)
@@ -114,11 +84,11 @@ export default class ListItemDetails extends Component {
         // Update state
         this.setState({ items: [...this.state.items, newItem] })
     }
-    removeItem = (e, list_id) => {
+    removeItem = (e, list_itemId) => {
         e.stopPropagation();
         const currentItems = this.state.items
-        const newItems = currentItems.filter(item => item.id !== list_id)
-        this.removeItemAPI(list_id)
+        const newItems = currentItems.filter(item => item.id !== list_itemId)
+        this.removeItemAPI(list_itemId)
         .then(() => {
             this.setState({ items: newItems })
         })
@@ -178,7 +148,7 @@ export default class ListItemDetails extends Component {
                             {items.map((todo, idx) => (
                                 <li key={idx} id={todo.id} tabIndex="0" onClick={() => this.completedListItem(todo)} className={`list-items-container`} onKeyPress={(ev) => this.completedListItemByKey(ev,todo)}>
                                     <div className={`check-box`}  >
-                                        {todo.isComplete ? 
+                                        {todo.iscomplete ? 
                                             <FaRegCheckSquare className='fa-reg-check'/>
                                             : <FaRegSquare className='fa-reg-square'/>}
                                     </div>

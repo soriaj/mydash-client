@@ -23,6 +23,7 @@ import Events from '../Events/Events'
 import Finance from '../Finance/Finance'
 import Transactions from '../Transactions/Transactions'
 import AddFinanceTransaction from '../AddFinanceTransaction/AddFinanceTransaction'
+import moment from 'moment'
 
 class App extends Component {
   state = {
@@ -30,7 +31,8 @@ class App extends Component {
     lists: [],
     events: [],
     finances: [],
-    balances: []
+    balances: [],
+    user: []
   }
   static contextType = TravelerContext
 
@@ -38,16 +40,20 @@ class App extends Component {
     this.setState({ hasToken: TokenService.hasAuthToken() })
   }
 
-  // Load initial app state data
-  setupItems = (list, event, finance, balance) => {
-    this.setState({
-      lists: list,
-      events: event,
-      finances: finance,
-      balances: balance
-    })
-  }
+  // // Load initial app state data
+  // setupItems = (list, event, finance, balance) => {
+  //   this.setState({
+  //     lists: list,
+  //     events: event,
+  //     finances: finance,
+  //     balances: balance
+  //   })
+  // }
 
+  // User Items
+  setUserItems = users => {
+    this.setState({ user: users })
+  }
   // List items
   setListItems = list => {
     this.setState({ lists: list })
@@ -67,7 +73,19 @@ class App extends Component {
 
   // Event items
   setEventItems = event => {
-    this.setState({ events: event })
+    let eventsDateUpdated = []
+    for(const {id, date, event_name, event_loc, description} of event) {
+      eventsDateUpdated.push(
+        {
+          id, 
+          date: moment(date).utc().local().format(), 
+          event_name, 
+          event_loc, 
+          description
+        }
+      )
+    }
+    this.setState({ events: eventsDateUpdated })
   }
   addEventItem = event => {
     this.setState({ events: [...this.state.events, event ]})
@@ -94,8 +112,18 @@ class App extends Component {
   addFinananceItem = transaction => {
     this.setState({ finances: [...this.state.finances, transaction] })
   }
-  updateBalanceItem = balance => {
-    console.log(balance)
+
+  // Balance Items
+  setBalanceItems = balance => {
+    this.setState({ balances: balance })
+  }
+
+  editBalance = updatedBalance => {
+    this.setState({
+      balances: this.state.balances.map(balance => 
+        (balance.id !== updatedBalance.id) ? balance : updatedBalance
+      )
+    })
   }
 
   render() {
@@ -106,14 +134,17 @@ class App extends Component {
       events: this.state.events,
       finances: this.state.finances,
       balances: this.state.balances,
+      user: this.state.user,
       handleTokenChange: this.handleTokenChange,
+      setUserItems: this.setUserItems,
       setListItems: this.setListItems,
       setEventItems: this.setEventItems,
       setFinanceItems: this.setFinanceItems,
+      setBalanceItems: this.setBalanceItems,
+      editBalance: this.editBalance,
       addListItem: this.addListItem,
       addEventItem: this.addEventItem,
       addFinananceItem: this.addFinananceItem,
-      setupItems: this.setupItems,
       deleteListItem: this.deleteListItem,
       deleteEventItem: this.deleteEventItem,
       editEventItem: this.editEventItem,

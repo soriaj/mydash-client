@@ -3,8 +3,14 @@ import './Dashboard.css';
 import DashboardLists from './DashboardLists'
 import DashboardFinances from './DashboardFinances'
 import DashboardEvents from './DashboardEvents';
-import TravelerContext from '../../context/TravlerContext'
+import TravelerContext from '../../context/TravlerContext';
 import LoadingSpinner from '../LoadingSpinner/LoadingSpinner';
+import ApiListsService from '../../services/api-lists-service';
+import ApiEventsService from '../../services/api-events-service';
+import ApiUsersService from '../../services/api-users-service';
+import ApiBalancesService from '../../services/api-balance-service';
+import ApiFinancesService from '../../services/api-finance-service';
+// import TokenService from '../../services/token-service'
 
 export default class Dashboard extends Component {
     state = {
@@ -12,61 +18,24 @@ export default class Dashboard extends Component {
     }
     static contextType = TravelerContext
     
-    // async componentDidMount() {
-    //     this.setState({ loading: true })
-    //     try {
-    //         const listsAPI = await fetch(`${process.env.REACT_APP_API_ENDPOINT}/lists`)
-    //         if(!listsAPI.ok) {
-    //             throw Error(listsAPI.statusText)
-    //         }
-    //         const financesAPI = await fetch(`${process.env.REACT_APP_API_ENDPOINT}/finances`)
-    //         if(!financesAPI.ok) {
-    //             throw Error(financesAPI.statusText)
-    //         }
-    //         const balancesAPI = await fetch(`${process.env.REACT_APP_API_ENDPOINT}/balances`)
-    //         if(!balancesAPI.ok) {
-    //             throw Error(balancesAPI.statusText)
-    //         }
-    //         const eventsAPI = await fetch(`${process.env.REACT_APP_API_ENDPOINT}/events`)
-    //         if(!eventsAPI.ok) {
-    //             throw Error(eventsAPI.statusText)
-    //         }
-    //         const listsRes = await listsAPI.json()
-    //         const financesRes = await financesAPI.json()
-    //         const balancesRes = await balancesAPI.json()
-    //         const eventsRes = await eventsAPI.json()
-    //         const { setupItems } = this.context
-    //         setupItems(listsRes, eventsRes, financesRes, balancesRes)
-    //         this.setState({ loading: false })
-    //     } catch (error) {
-    //         console.log(error)
-    //     }
-    // }
-    componentDidMount(){
-        Promise.all([
-            fetch(`${process.env.REACT_APP_API_ENDPOINT}/lists`),
-            fetch(`${process.env.REACT_APP_API_ENDPOINT}/events`),
-            fetch(`${process.env.REACT_APP_API_ENDPOINT}/finances`),
-            fetch(`${process.env.REACT_APP_API_ENDPOINT}/balances`)
-        ])
-        .then(([listsRes, eventsRes, financesRes, balancesRes]) => {
-            if(!listsRes.ok)
-                return listsRes.json().then(e => Promise.reject(e));
-            if(!eventsRes.ok)
-                return eventsRes.json().then(e => Promise.reject(e));
-            if(!financesRes.ok)
-                return financesRes.json().then(e => Promise.reject(e));
-            if(!balancesRes.ok)
-                return balancesRes.json().then(e => Promise.reject(e));
-            return Promise.all([listsRes.json(), eventsRes.json(), financesRes.json(),  balancesRes.json()]);
-        })
-        .then(([lists, events, finances, balances]) => {
-            const { setupItems } = this.context
-            setupItems(lists, events, finances, balances)
-        })
-        .catch( error => {
+    async componentDidMount() {
+        try {
+            this.setState({ loading: true })
+            await ApiListsService.getLists()
+                .then(this.context.setListItems)
+            await ApiEventsService.getEvents()
+                .then(this.context.setEventItems)
+            await ApiUsersService.getFullName()
+                .then(this.context.setUserItems)
+            await ApiBalancesService.getBalances()
+                .then(this.context.setBalanceItems)
+            await ApiFinancesService.getFinances()
+                .then(this.context.setFinanceItems)
+                .then(this.setState({ loading: false }))
+        }
+        catch(error) {
             console.log(error)
-        })
+        }
     }
     renderDashboard() {
         return (

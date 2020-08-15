@@ -8,6 +8,7 @@ import SaveButton from '../SaveButton/SaveButton'
 import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css';
 import moment from 'moment'
+import ApiEventsService from '../../services/api-events-service'
 
 // Form to enter new events into calendar
 export default class NewListForm extends Component {
@@ -17,44 +18,20 @@ export default class NewListForm extends Component {
         startDate: new Date()
     }
     static contextType = TravelerContext
-
-    addEvent(newEvent) {
-        return fetch(`${process.env.REACT_APP_API_ENDPOINT}/events`, {
-            method: 'POST',
-            body: JSON.stringify(newEvent),
-            headers: {
-                'content-type': 'application/json',
-            }
-        })
-        .then(res => 
-            (!res.ok)
-            ? res.json().then(e => Promise.reject(e))
-            : res.json()
-        )
-    }
-    formatNewDate = date => {
-        let year = date.getFullYear()
-        let month = (1 + date.getMonth()).toString()
-        month = month.length > 1 ? month : `0${month}`
-        let day = date.getDate().toString()
-        day = day.length > 1 ? day : `0${day}`
-        return `${month}/${day}/${year}`
-    }  
-    onSubmit = ev => {
+ 
+    handleSubmit = ev => {
         ev.preventDefault()
         const { event_name, event_loc, description } = ev.target
         const { startDate } = this.state
         const { addEventItem } = this.context
-        let count = Math.floor(Math.random() * 10000)
         const newEvent = {
-            id: count,
             date: moment(startDate).utc().local().format(),
             event_name: event_name.value,
             event_loc: event_loc.value,
             description: description.value
         }
         this.setState({ error: null })
-        this.addEvent(newEvent)
+        ApiEventsService.addEvent(newEvent)
         .then(data => {
             addEventItem(data)
         })
@@ -75,7 +52,7 @@ export default class NewListForm extends Component {
             <article className='main-content'>
                 <section className='form-container'>
                     <div className='login-form'>
-                        <form className='form-field' onSubmit={this.onSubmit}>
+                        <form className='form-field' onSubmit={this.handleSubmit}>
                             <div>
                                 <h1>Add New Event</h1>
                             </div>

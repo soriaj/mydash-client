@@ -8,9 +8,10 @@ class DashboardFinances extends Component {
       showFinance: true,
    }
    static contextType = TravelerContext
+
    componentDidMount() {
       this.updatePredicate();
-      window.addEventListener("resize", this.updatePredicate);
+      window.addEventListener("resize", this.updatePredicate);    
    }
 
    componentWillUnmount() {
@@ -32,12 +33,14 @@ class DashboardFinances extends Component {
    }
    disableChevronClick = () => {
       return (
-          <h3 className='content-header-title'>Lists</h3>            
+          <h3 className='content-header-title'>Finance</h3>            
       )
    }
+   // Directs user to AddFinanceTransaction component
    addItem = () => {
       this.props.history.push(`/add-transaction`)
    }
+   
    showFinanceItems = () => {
       this.setState({
           showFinance: !this.state.showFinance
@@ -45,7 +48,6 @@ class DashboardFinances extends Component {
    }
    render() {
       const { finances, balances } = this.context
-      const filteredBalance = balances.filter(data => data.user_id === 1 ? data : '')
       const displayFinancesSorted = finances.sort((a,b) => new Date(b.date) - new Date(a.date)).slice(0,10)
       const { showFinance } = this.state
       return (
@@ -63,7 +65,7 @@ class DashboardFinances extends Component {
                </div>
                <div className={`content-finance-cards ${showFinance ? 'finance-cards-visible' : 'finance-cards-hidden'}`}>
                   <div className='list-details-title'>
-                     {filteredBalance.map((item, idx) => (
+                     {balances.map((item, idx) => (
                         <p key={idx} className='current-balance'>Current Balance: {`${new Intl.NumberFormat("en-US", { style: "currency", currency: "USD" }).format(item.balance)}`}</p>
                      ))}
                   </div>
