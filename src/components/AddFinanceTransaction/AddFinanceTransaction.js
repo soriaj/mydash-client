@@ -22,29 +22,23 @@ export default class AddFinanceTransaction extends Component {
    static contextType = TravelerContext
    abortController = new AbortController()
 
+   // Loads current balance to state
    componentDidMount() {
       this.setState({ loading: true })
       ApiBalancesService.getBalances()
          .then(balance => this.setState({ balances: balance, loading: false }))
-         // .catch(error => this.setState({ error: error }))
-         // .catch(error => console.log(error))
-         .catch(error => {
-            throw new Error(error)
-         })
+         .catch(error => new Error(error))
    }
 
+   // Adds new transaction to the database
    addTransaction(newTrasaction) {
       const { addFinananceItem } = this.context
       ApiFinancesService.addTransaction(newTrasaction)
          .then(trx => addFinananceItem(trx))
-         // .catch(error => this.setState({ error: error }))
-         // .catch(error => console.log(error))      
-         // .catch(error => new Error(error))
-         .catch(error => {
-            throw new Error(error)
-         })
+         .catch(error => new Error(error))
    }
 
+   // Updates current balance
    updateCurrentBalance(updatedBalance) {
       const { balances } = this.state
       const { editBalance } = this.context
@@ -53,12 +47,7 @@ export default class AddFinanceTransaction extends Component {
          .then(() => {
             editBalance(updatedBalance)
          })
-         // .catch(error => this.setState({ error: error }))
-         // .catch(error => console.log(error))
-         // .catch(error => new Error(error))
-         .catch(error => {
-            throw new Error(error)
-         })
+         .catch(error => new Error(error))
    }
 
    handleSubmit = ev => {

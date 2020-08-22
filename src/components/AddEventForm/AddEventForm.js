@@ -94,7 +94,6 @@ export default class NewListForm extends Component {
                                     id='event_loc' 
                                     placeholder='Enter Location Name' 
                                     className='input-field'
-                                    // required
                                     />
                                 <span className='focus-input-field'></span>
                             </div>
@@ -108,7 +107,6 @@ export default class NewListForm extends Component {
                                     id='description' 
                                     placeholder='Enter Description of Event' 
                                     className='input-field'
-                                    // required
                                     />
                                 <span className='focus-input-field'></span>
                             </div>

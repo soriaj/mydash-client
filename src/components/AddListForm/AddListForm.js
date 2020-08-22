@@ -2,12 +2,9 @@ import React, { Component } from 'react'
 import { FaList } from 'react-icons/fa'
 import TravelerContext from '../../context/TravlerContext'
 import Loading from '../Loading/Loading'
-// import config from '../../config'
 import BackToDashboard from '../BackToDashboard/BackToDashboard'
 import SaveButton from '../SaveButton/SaveButton'
 import ApiListsService from '../../services/api-lists-service'
-
-// const uuidv4 = require('uuid/v4')
 
 export default class NewListForm extends Component {
     state = {
@@ -15,21 +12,6 @@ export default class NewListForm extends Component {
         loading: false
     }
     static contextType = TravelerContext
-    addList(newList) {
-        // return fetch(`${config.API_ENDPOINT}/lists`, {
-        return fetch(`${process.env.REACT_APP_API_ENDPOINT}/lists`, {
-           method: 'POST',
-           body: JSON.stringify(newList),
-           headers: {
-            'content-type': 'application/json',
-           }
-        })
-        .then(res => 
-           (!res.ok)
-           ? res.json().then(e => Promise.reject(e))
-           : res.json()
-        )
-     }
 
     handleSubmit = ev => {
         ev.preventDefault()
