@@ -8,6 +8,12 @@
 .add-list-item > h4 {
    padding-left: 10px;
 }
+.date-range-filter {
+   display: flex;
+   justify-content: space-around;
+   flex-direction: column;
+   padding: 8px;
+}
 
 @media screen and (min-width: 1000px) {
    .transaction-container {
@@ -20,5 +26,9 @@
       width: 800px;
       margin-left: auto;
       margin-right: auto;
+   }
+   .date-range-filter {
+      flex-direction: row;
+      padding: 0px;
    }
 }

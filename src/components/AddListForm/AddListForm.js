@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { FaList } from 'react-icons/fa'
 import TravelerContext from '../../context/TravlerContext'
-import Loading from '../Loading/Loading'
 import BackToDashboard from '../BackToDashboard/BackToDashboard'
 import SaveButton from '../SaveButton/SaveButton'
 import ApiListsService from '../../services/api-lists-service'
@@ -9,7 +8,6 @@ import ApiListsService from '../../services/api-lists-service'
 export default class NewListForm extends Component {
     state = {
         error: null,
-        loading: false
     }
     static contextType = TravelerContext
 
@@ -36,7 +34,7 @@ export default class NewListForm extends Component {
     }
 
     render() {
-        const { error, loading } = this.state
+        const { error } = this.state
         return (
             <article className='main-content'>
                 <section className='form-container'>
@@ -63,11 +61,8 @@ export default class NewListForm extends Component {
                             </div>
 
                             <div className="btn-container">
-                                {loading && (<Loading />)}
-                                {!loading && <>
-                                    <BackToDashboard backToDashboard={this.backToDashboard}/>
-                                    <SaveButton />
-                                </>}
+                                <BackToDashboard backToDashboard={this.backToDashboard}/>
+                                <SaveButton />
                             </div>
                         </form>
                     </div>

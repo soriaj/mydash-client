@@ -23,17 +23,23 @@ class DashboardFinances extends Component {
    }
    enableChevronClick = () => {
       return (
+         <>
           <h3 
               className='content-header-title' 
               onClick={this.showFinanceItems}>
               {this.state.showFinance ? <FaChevronCircleUp className='title-chevron'/> : <FaChevronCircleDown className='title-chevron'/>}
               Finanace 
           </h3>
+          <h4 className='sub-content-header'>(last 10 transactions)</h4>
+          </>
       )
    }
    disableChevronClick = () => {
       return (
-          <h3 className='content-header-title'>Finance</h3>            
+         <>
+          <h3 className='content-header-title'>Finance</h3>
+          <h4  className='sub-content-header'>(last 10 transactions)</h4>
+          </>
       )
    }
    // Directs user to AddFinanceTransaction component
@@ -51,7 +57,7 @@ class DashboardFinances extends Component {
       const displayFinancesSorted = finances.sort((a,b) => new Date(b.date) - new Date(a.date)).slice(0,10)
       const { showFinance } = this.state
       return (
-            <section className={`content finances-section ${showFinance ? 'content-visible' : ''}`}> 
+            <section className={`content finances-section ${showFinance ? 'content-visible' : ''}`}>
                <div className='content-header'>
                   <div className='content-titles'>
                      {this.state.isDesktop

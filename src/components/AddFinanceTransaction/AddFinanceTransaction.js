@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import TravelerContext from '../../context/TravlerContext'
-import Loading from '../Loading/Loading'
 import BackToDashboard from '../BackToDashboard/BackToDashboard'
 import SaveButton from '../SaveButton/SaveButton'
 import { FaMoneyBillAlt, FaFileInvoice, FaClock, FaCaretSquareDown} from 'react-icons/fa'
@@ -14,7 +13,6 @@ export default class AddFinanceTransaction extends Component {
 
    state = {
       error: null,
-      loading: false,
       startDate: new Date(),
       option: 'debit',
       balances: []
@@ -24,9 +22,8 @@ export default class AddFinanceTransaction extends Component {
 
    // Loads current balance to state
    componentDidMount() {
-      this.setState({ loading: true })
       ApiBalancesService.getBalances()
-         .then(balance => this.setState({ balances: balance, loading: false }))
+         .then(balance => this.setState({ balances: balance }))
          .catch(error => new Error(error))
    }
 
@@ -89,7 +86,7 @@ export default class AddFinanceTransaction extends Component {
       this.setState({ option: ev.target.value })
    }
    render() {
-      const { error, loading } = this.state
+      const { error } = this.state
       return (
          <article className='main-content'>
             <section className='form-container'>
@@ -161,11 +158,8 @@ export default class AddFinanceTransaction extends Component {
                      </div>
 
                      <div className="btn-container">
-                        {loading && (<Loading />)}
-                        {!loading && <>
-                              <BackToDashboard backToDashboard={this.backToDashboard}/>
-                              <SaveButton />
-                        </>}
+                        <BackToDashboard backToDashboard={this.backToDashboard}/>
+                        <SaveButton />
                      </div>
                   </form>
                </div>

@@ -12,7 +12,6 @@ export default class SearchBox extends Component {
   }
 
    render() {
-      // console.log(this.state.startDate)
       return (
          <>
          <div className='login-form'>

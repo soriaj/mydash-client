@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { FaTimes, FaHome } from 'react-icons/fa';
+import { FaTimes } from 'react-icons/fa';
 import './SideNav.css';
 import TravelerContext from '../../context/TravlerContext'
 import SideNavLists from './SideNavLists'
@@ -25,12 +25,12 @@ class SideNav extends Component {
             <>
             <div className='sidenav-account'>
                 <div className='sidenav-account-title'>
-                    <Link to={'/dashboard'}><h1 className='sidenav-heading'><FaHome ></FaHome> {'Home'}</h1></Link>
+                    <Link to={'/dashboard'}><h1 className='sidenav-heading'>{'Dashboard'}</h1></Link>
                 </div>
             </div>
             <div className='sidenav-list'>
                 <ul className='sidenav-list-items'>
-                    <SideNavLists />
+                    <SideNavLists history={this.props.history}/>
                     <SideNavEvents />
                     <SideNavFinance />
                 </ul>

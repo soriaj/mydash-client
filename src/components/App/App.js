@@ -39,17 +39,7 @@ class App extends Component {
   handleTokenChange = () => {
     this.setState({ hasToken: TokenService.hasAuthToken() })
   }
-
-  // // Load initial app state data
-  // setupItems = (list, event, finance, balance) => {
-  //   this.setState({
-  //     lists: list,
-  //     events: event,
-  //     finances: finance,
-  //     balances: balance
-  //   })
-  // }
-
+  
   // User Items
   setUserItems = users => {
     this.setState({ user: users })
@@ -58,11 +48,11 @@ class App extends Component {
   setListItems = list => {
     this.setState({ lists: list })
   }
-
+  // Add Items
   addListItem = list => {
     this.setState({ lists: [list, ...this.state.lists ]})
   }
-
+  // Delete Items
   deleteListItem = list_id => {
     const currrentLists = this.state.lists
     const newLists = currrentLists.filter(list => list.id !== list_id)

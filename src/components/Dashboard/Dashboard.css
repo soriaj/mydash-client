@@ -95,6 +95,9 @@
 .content-header a:hover {
     color: lightgrey;
 }
+.sub-content-header {
+    font-size: 14px;
+}
 .content-titles {
     display: flex;
     align-items: center;
@@ -368,5 +371,8 @@
     }
     .current-balance {
         font-size: 24px;
-    }    
+    }
+    .sub-content-header {
+        font-size: 18px;
+    }
 }

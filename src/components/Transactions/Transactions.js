@@ -2,45 +2,37 @@ import React, { Component } from 'react'
 import LoadingSpinner from '../LoadingSpinner/LoadingSpinner'
 import BackToDashboard from '../BackToDashboard/BackToDashboard'
 import TravlerContext from '../../context/TravlerContext'
-import { FaPlus } from 'react-icons/fa'
-import SearchBox from '../SearchBox/SearchBox'
+import { FaPlus, FaClock } from 'react-icons/fa'
 import './Transactions.css'
-import FinanceItems from '../FinanaceItems/FinanceItems'
+import ApiBalancesService from '../../services/api-balance-service'
+import ApiFinancesService from '../../services/api-finance-service'
+import FinanaceItems from '../FinanaceItems/FinanceItems'
+import moment from 'moment'
+import DatePicker from 'react-datepicker'
 
 export default class Transactions extends Component {
    state = {
       loading: false,
       startDate: new Date(),
-      searchTerm: '',
+      endDate: new Date(),
       finances: [],
       balances: []
    }
    static contextType = TravlerContext
 
-   async componentDidMount(){
+   async componentDidMount() {
       this.setState({ loading: true })
       try {
-         const financesAPI = await fetch(`${process.env.REACT_APP_API_ENDPOINT}/finances`)
-         if(!financesAPI.ok) {
-               throw Error(financesAPI.statusText)
-         }
-         const balancesAPI = await fetch(`${process.env.REACT_APP_API_ENDPOINT}/balances`)
-         if(!balancesAPI.ok) {
-               throw Error(balancesAPI.statusText)
-         }
-         const financesRes = await financesAPI.json()
-         const balancesRes = await balancesAPI.json()
-         this.setState({ finances: [...financesRes], balances: [...balancesRes], loading: false })
+          await ApiBalancesService.getBalances()
+            .then(balance => this.setState({ balances: balance }))
+          await ApiFinancesService.getFinances()
+            .then(finance => this.setState({ finances: finance, loading: false }))
       }
-      catch (error) {
-         console.log(error)
+      catch(error) {
+          console.log(error)
       }
    }
 
-   // Handles search filter selection
-   handleSearchTerm = ev => {
-      this.setState({ searchTerm: ev.target.value })
-   }
    backToDashboard = () => {
       this.props.history.push('/dashboard')
    }
@@ -48,14 +40,16 @@ export default class Transactions extends Component {
       this.props.history.push('/add-transaction')
    }
    // Handles selected date filter selection
-   handleDateChange = (date) => {
+   handleStartDateChange = (date) => {
       this.setState({ startDate: date })
-  }
+   }
+   handleEndDateChange = (date) => {
+      this.setState({ endDate: date })
+   }
+
    render() {
-      const { loading } = this.state
-      const { finances, balances } = this.state
-      const filteredBalance = balances.filter(data => data.user_id === 1 ? data : '')
-      const displayFinancesSorted = finances.sort((a,b) => new Date(b.date) - new Date(a.date))
+      const { loading, finances, balances, startDate, endDate } = this.state
+      const sortedFinances = finances.sort((a, b) => new Date(b.date) - new Date(a.date))
       return (
          <>
             {loading
@@ -72,15 +66,53 @@ export default class Transactions extends Component {
                               <div className='back-to-dashboard'>
                                  <BackToDashboard backToDashboard={this.backToDashboard}/>       
                               </div>
-                              <button className='save-btn events' onClick={this.addNewTransaction}><FaPlus /><span>Add Transaction</span></button>
+                              <button className='save-btn events' onClick={this.addNewTransaction}><FaPlus /><span>Transaction</span></button>
                            </div>
                         </form>
                      
-                        <h4>Filter By Date:</h4>
-                        <SearchBox handleDateFilter={selected => this.handleDateChange(selected)} />
+                        <div className='date-range-filter'>
+                           <h4>Start Date:</h4>
+                           <div className='login-form'>
+                              <form className='form-field'>
+                                 <div className='input-wrapper'>
+                                 <FaClock className='fa-user icon'></FaClock>
+                                    <label htmlFor='date' className='no-view'>Date</label>
+                                       <DatePicker 
+                                          selected={startDate} 
+                                          onChange={this.handleStartDateChange}
+                                          selectsStart
+                                          startDate={startDate}
+                                          endDate={endDate}
+                                          name='date'>
+                                       </DatePicker>
+                                    <span className='focus-input-field'></span>
+                                 </div>
+                              </form>
+                           </div>
+
+                           <h4>End Date:</h4>
+                           <div className='login-form'>
+                              <form className='form-field'>
+                                 <div className='input-wrapper'>
+                                 <FaClock className='fa-user icon'></FaClock>
+                                    <label htmlFor='date' className='no-view'>Date</label>
+                                       <DatePicker 
+                                          selected={endDate} 
+                                          onChange={this.handleEndDateChange}
+                                          selectsEnd
+                                          startDate={startDate}
+                                          endDate={endDate}
+                                          minDate={startDate}
+                                          name='date'>
+                                       </DatePicker>
+                                    <span className='focus-input-field'></span>
+                                 </div>
+                              </form>
+                           </div>
+                        </div>
                      </div>
                      <div className='list-details-title'>
-                        {filteredBalance.map((item, idx) => (
+                        {balances.map((item, idx) => (
                            <p key={idx} className='current-balance'>Current Balance: {`${new Intl.NumberFormat("en-US", { style: "currency", currency: "USD" }).format(item.balance)}`}</p>
                         ))}
                      </div>
@@ -90,16 +122,17 @@ export default class Transactions extends Component {
                            <div className='type-header'>Transaction</div>
                            <div className='amount-header'>Amount</div>
                         </li>
-                        {displayFinancesSorted.map((transaction, idx) => 
-                           <FinanceItems
-                              key={idx}
-                              id={transaction.id}
-                              date={transaction.date}
-                              type={transaction.type}
-                              description={transaction.description}
-                              amount={transaction.amount}
-                           />
-                        )}
+                        {sortedFinances.filter(item => moment(startDate).utc().local().format().slice(0,10) < item.date && item.date < moment(endDate).add(1, 'days').utc().local().format().slice(0,10))
+                           .map((trx, idx) => 
+                              <FinanaceItems
+                                 key={idx}
+                                 id={trx.id}
+                                 date={trx.date}
+                                 type={trx.type}
+                                 description={trx.description}
+                                 amount={trx.amount}
+                              />
+                           )}
                      </ul>
                   </div>
                </div>
