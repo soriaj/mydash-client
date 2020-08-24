@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { FaCalendarPlus, FaLocationArrow, FaEdit, FaClock } from 'react-icons/fa'
 import TravelerContext from '../../context/TravlerContext'
-import Loading from '../Loading/Loading'
 import BackToDashboard from '../BackToDashboard/BackToDashboard'
 import './AddEventForm.css'
 import SaveButton from '../SaveButton/SaveButton'
@@ -14,7 +13,6 @@ import ApiEventsService from '../../services/api-events-service'
 export default class NewListForm extends Component {
     state = {
         error: null,
-        loading: false,
         startDate: new Date()
     }
     static contextType = TravelerContext
@@ -47,7 +45,7 @@ export default class NewListForm extends Component {
     }
 
     render() {
-        const { error, loading} = this.state
+        const { error } = this.state
         return (
             <article className='main-content'>
                 <section className='form-container'>
@@ -113,11 +111,8 @@ export default class NewListForm extends Component {
         
         
                             <div className='btn-container'>
-                                {loading && (<Loading />)}
-                                {!loading && <>
-                                    <BackToDashboard backToDashboard={this.backToDashboard}/>
-                                    <SaveButton />
-                                </>}
+                                <BackToDashboard backToDashboard={this.backToDashboard}/>
+                                <SaveButton />
                             </div>
                         </form>
                     </div>

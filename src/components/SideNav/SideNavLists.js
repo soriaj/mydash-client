@@ -2,9 +2,7 @@ import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom'
 import { FaChevronCircleUp, FaChevronCircleDown, FaList } from 'react-icons/fa'
 import TravelerContext from  '../../context/TravlerContext'
-// import SideNavListsItems from '../SideNavListsItems/SideNavListsItems';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
-// import config from '../../config'
 import ApiListsService from '../../services/api-lists-service'
 
 class SideNavLists extends Component {
@@ -16,7 +14,6 @@ class SideNavLists extends Component {
     renderListsItems = () => {
         this.setState({ showItems: !this.state.showItems, show: !this.state.show })
     }
-
     async componentDidMount() {
         try {
             await ApiListsService.getLists()
@@ -48,7 +45,7 @@ class SideNavLists extends Component {
                     classNames="fade"
                 ><li className='list-sub-items'>
                     {lists.map(list => 
-                        <div key={list.id} className='list-item'>
+                        <div key={list.id} className='list-item' >
                             <span><FaList className='fas fa-file'></FaList></span>
                             <span className='list-item-title'>
                                 <NavLink to={`/lists/${list.id}`}>

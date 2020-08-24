@@ -10,7 +10,6 @@ import ApiEventsService from '../../services/api-events-service';
 import ApiUsersService from '../../services/api-users-service';
 import ApiBalancesService from '../../services/api-balance-service';
 import ApiFinancesService from '../../services/api-finance-service';
-// import TokenService from '../../services/token-service'
 
 export default class Dashboard extends Component {
     state = {
