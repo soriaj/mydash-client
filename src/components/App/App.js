@@ -12,46 +12,47 @@ import PrivateRoute from '../../utils/PrivateRoute';
 import PublicRoute from '../../utils/PublicRoute';
 import Dashboard from '../Dashboard/Dashboard';
 import ListItemDetails from  '../ListItemDetails/ListItemDetails';
-import TripItemDetails from '../TripItemDetails/TripItemDetails';
 import AddListForm from '../AddListForm/AddListForm';
 import AddEventForm from '../AddEventForm/AddEventForm';
-import AddTripsForm from '../AddTripsForm/AddTripsForm'
 import LoginPage from '../../routes/LoginPage';
 import TokenService from '../../services/token-service'
 import LandingPage from '../../routes/LandingPage';
 import EditListItemDetails from '../EditListItemDetails/EditListItemDetails'
 import EditEventItem from '../EditEventItem/EditEventItem';
+import Events from '../Events/Events'
+import Finance from '../Finance/Finance'
+import Transactions from '../Transactions/Transactions'
+import AddFinanceTransaction from '../AddFinanceTransaction/AddFinanceTransaction'
+import moment from 'moment'
 
 class App extends Component {
   state = {
     hastToken: TokenService.hasAuthToken(),
     lists: [],
     events: [],
-    trips: [],
+    finances: [],
+    balances: [],
+    user: []
   }
   static contextType = TravelerContext
-
 
   handleTokenChange = () => {
     this.setState({ hasToken: TokenService.hasAuthToken() })
   }
-  setupItems = (list, event, trip) => {
-    this.setState({
-      lists: list,
-      events: event.sort((a, b) => b - a),
-      trips: trip
-    })
+  
+  // User Items
+  setUserItems = users => {
+    this.setState({ user: users })
   }
-
-  // List methods to update state
+  // List items
   setListItems = list => {
     this.setState({ lists: list })
   }
-
+  // Add Items
   addListItem = list => {
     this.setState({ lists: [list, ...this.state.lists ]})
   }
-
+  // Delete Items
   deleteListItem = list_id => {
     const currrentLists = this.state.lists
     const newLists = currrentLists.filter(list => list.id !== list_id)
@@ -59,12 +60,25 @@ class App extends Component {
       this.setState({ lists: newLists })
     }, 200)
   }
-  // Event methods to update state
+
+  // Event items
   setEventItems = event => {
-    this.setState({ events: event })
+    let eventsDateUpdated = []
+    for(const {id, date, event_name, event_loc, description} of event) {
+      eventsDateUpdated.push(
+        {
+          id, 
+          date: moment(date).utc().local().format(), 
+          event_name, 
+          event_loc, 
+          description
+        }
+      )
+    }
+    this.setState({ events: eventsDateUpdated })
   }
   addEventItem = event => {
-    this.setState({ events: [event, ...this.state.events ]})
+    this.setState({ events: [...this.state.events, event ]})
   }
   deleteEventItem = event_id => {
     const currrentEvents = this.state.events
@@ -81,9 +95,25 @@ class App extends Component {
     })
   }
 
-  // Trip methods to update state
-  setTripItems = trip => {
-    this.setState({ trips: trip })
+  // Finance Items
+  setFinanceItems = finanace => {
+    this.setState({ finances: finanace })
+  }
+  addFinananceItem = transaction => {
+    this.setState({ finances: [...this.state.finances, transaction] })
+  }
+
+  // Balance Items
+  setBalanceItems = balance => {
+    this.setState({ balances: balance })
+  }
+
+  editBalance = updatedBalance => {
+    this.setState({
+      balances: this.state.balances.map(balance => 
+        (balance.id !== updatedBalance.id) ? balance : updatedBalance
+      )
+    })
   }
 
   render() {
@@ -92,14 +122,19 @@ class App extends Component {
       hasToken: this.state.hasToken,
       lists: this.state.lists,
       events: this.state.events,
-      trips: this.state.trips,
+      finances: this.state.finances,
+      balances: this.state.balances,
+      user: this.state.user,
       handleTokenChange: this.handleTokenChange,
+      setUserItems: this.setUserItems,
       setListItems: this.setListItems,
       setEventItems: this.setEventItems,
-      setTripItems: this.setTripItems,
+      setFinanceItems: this.setFinanceItems,
+      setBalanceItems: this.setBalanceItems,
+      editBalance: this.editBalance,
       addListItem: this.addListItem,
       addEventItem: this.addEventItem,
-      setupItems: this.setupItems,
+      addFinananceItem: this.addFinananceItem,
       deleteListItem: this.deleteListItem,
       deleteEventItem: this.deleteEventItem,
       editEventItem: this.editEventItem,
@@ -127,12 +162,14 @@ class App extends Component {
 
               {/* EVENT COMPONENT ROUTES */}
               {/* <PrivateRoute path='/events/:event_id' component={EventItemDetails} /> */}
+              <PrivateRoute exact path='/events' component={Events} />
               <PrivateRoute path='/events/:event_id' component={EditEventItem} />
               <PrivateRoute path='/add-event' component={AddEventForm} />
-
-              {/* TRIP COMPONENT ROUTES */}
-              <PrivateRoute path='/trips/:trip_id' component={TripItemDetails} />
-              <PrivateRoute path='/add-trips' component={AddTripsForm} />
+              
+              {/* FINANCE COMPONENT ROUTES */}
+              <PrivateRoute exact path='/finances' component={Finance} />
+              <PrivateRoute path='/add-transaction' component={AddFinanceTransaction} />
+              <PrivateRoute path='/transactions' component={Transactions} />
               
               {/* NOT FOUND ROUTE */}
               <Route component={NotFound} />

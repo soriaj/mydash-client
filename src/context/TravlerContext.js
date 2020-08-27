@@ -3,18 +3,23 @@ import React from 'react'
 const TravelerContext = React.createContext({
     hasToken: false,
     lists: [],
-    trips: [],
     events: [],
+    finances: [],
+    balances: [],
+    user: [],
     handleTokenChange: () => {},
+    setUserItems: () => {},
     setListItems: () => {},
     addListItem: () => {},
     deleteListItem: () => {},
     setEventItems: () => {},
-    setTripItems: () => {},
     addEventItem: () => {},
-    setupItems: () => {},
     deleteEventItem: () => {},
     editEventItem: () => {},
+    setFinanceItems: () => {},
+    addFinananceItem: () => {},
+    setBalanceItems:  () => {},
+    editBalance: () => {}
 })
 
 export default TravelerContext;

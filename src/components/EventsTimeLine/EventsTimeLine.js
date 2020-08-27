@@ -4,6 +4,7 @@ import { FaCalendarDay, FaRegTrashAlt, FaPencilAlt } from 'react-icons/fa'
 import './EventsTimeline.css'
 // import config from '../../config'
 import moment from 'moment'
+import ApiEventsService from '../../services/api-events-service'
 
 export default class EventsTimeline extends Component {
     state = {
@@ -12,36 +13,38 @@ export default class EventsTimeline extends Component {
     }
     static contextType = TravelerContext
 
-    deleteEvent(event_id) {
-        return fetch(`${process.env.REACT_APP_API_ENDPOINT}/events/${event_id}`, {
-            method: 'DELETE',
-            headers: {
-                'content-type': 'application/json',
-            }
-        })
-        .then(res => {
-            if(!res.ok) {
-                return Promise.reject(res.error)
-            }
-        })
-    }
+    // deleteEvent(event_id) {
+    //     return fetch(`${process.env.REACT_APP_API_ENDPOINT}/events/${event_id}`, {
+    //         method: 'DELETE',
+    //         headers: {
+    //             'content-type': 'application/json',
+    //         }
+    //     })
+    //     .then(res => {
+    //         if(!res.ok) {
+    //             return Promise.reject(res.error)
+    //         }
+    //     })
+    // }
 
     handleDeleteEvent = ev => {
         ev.stopPropagation()
         const event_id = this.props.id
-        this.deleteEvent(event_id)
+        // this.deleteEvent(event_id)
+        ApiEventsService.deleteEvent(event_id)
             .then(() => {
                 this.context.deleteEventItem(event_id)
             })
 
     }
+    // Will direct user to EditEventItem Component
     handleEditEvent = ev => {
         const event_id = this.props.id
         this.props.history.push(`/events/${event_id}`)
     }
     render() {
         const { name, date, description, event_loc } = this.props
-        let formatDates = moment(date).format("MM/DD/YY")
+        let formatDates = moment(date).utc().local().format("MM/DD/YYYY")
         return (
             <li className='timeline-block'>
                 <div className='timeline-icon'>
