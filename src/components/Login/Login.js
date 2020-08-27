@@ -5,6 +5,7 @@ import './Login.css'
 import TravelerContext from '../../context/TravlerContext'
 import Loading from '../Loading/Loading'
 import TokenService from '../../services/token-service'
+import AuthService from '../../services/auth-service'
 
 class Login extends Component {
     static defaultProps = {
@@ -19,21 +20,22 @@ class Login extends Component {
     handleSubmit = ev => {
         ev.preventDefault();
         this.setState({ error: null, loading: true })
-        const { handleTokenChange } = this.context
         const { username, password } = ev.target
-        TokenService.saveAuthToken(TokenService.makeBasicAuthToken(username.value, password.value))
+        AuthService.Login({user_name: username.value, password: password.value})
+            .then(res => {
+                username.value = ''
+                password.value = ''
+                TokenService.saveAuthToken(res.authToken)
+                this.context.handleTokenChange()
+                this.props.onLoginSuccess()
+            })
+            .catch(res => {
+                username.value = ''
+                password.value = ''
+                this.setState({ error: res.error, loading: false })
+            })
+    }
 
-        username.value = ''
-        password.value = ''
-        
-        setTimeout(() => {
-            handleTokenChange()
-            this.props.onLoginSuccess()
-        }, 1000)
-    }
-    componentWillUnmount() {
-        this.setState({ loading: false })
-    }
     render() {
         const { error, loading } = this.state
         return (
@@ -57,7 +59,7 @@ class Login extends Component {
                                     id="username" 
                                     placeholder='Username' 
                                     className='input-field'
-                                    // required
+                                    required
                                     />
                                 <span className="focus-input-field"></span>
                             </div>
@@ -71,7 +73,7 @@ class Login extends Component {
                                     id="password" 
                                     placeholder="Password" 
                                     className='input-field'
-                                    // required
+                                    required
                                     />
                                 <span className="focus-input-field"></span>
                             </div>

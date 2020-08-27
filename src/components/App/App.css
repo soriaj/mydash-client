@@ -4,8 +4,10 @@
     grid-template-columns: 100%;
     grid-template-rows: 50px 1fr 50px;
     grid-template-areas: 'header' 'main' 'footer';
-    height: 100vh;
+    min-height: 100vh;
     overflow-x: hidden;
+    padding-bottom: 50px;
+    background-color: rgb(241, 241, 241);
 }
 .grid--noscroll {
     overflow-y: hidden;
@@ -20,5 +22,9 @@ a {
         grid-template-rows: 50px 1fr 50px;
         grid-template-areas: 'sidenav header' 'sidenav main' 'sidenav footer';
         height: 100vh;
+        padding-bottom: 0;
+    }
+    .main {
+        margin-left: 20px;
     }
 }

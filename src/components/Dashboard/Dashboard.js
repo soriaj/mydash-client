@@ -1,13 +1,15 @@
 import React, { Component } from 'react';
 import './Dashboard.css';
 import DashboardLists from './DashboardLists'
-import DashboardTrips from './DashboardTrips';
+import DashboardFinances from './DashboardFinances'
 import DashboardEvents from './DashboardEvents';
-// import LoadingDashboard from '../LoadingDashboard/LoadingDashboard';
-import TravelerContext from '../../context/TravlerContext'
-// import data from '../../mockData/data.json'
-// import config from '../../config'
+import TravelerContext from '../../context/TravlerContext';
 import LoadingSpinner from '../LoadingSpinner/LoadingSpinner';
+import ApiListsService from '../../services/api-lists-service';
+import ApiEventsService from '../../services/api-events-service';
+import ApiUsersService from '../../services/api-users-service';
+import ApiBalancesService from '../../services/api-balance-service';
+import ApiFinancesService from '../../services/api-finance-service';
 
 export default class Dashboard extends Component {
     state = {
@@ -16,41 +18,35 @@ export default class Dashboard extends Component {
     static contextType = TravelerContext
     
     async componentDidMount() {
-        this.setState({ loading: true })
         try {
-            const listsAPI = await fetch(`${process.env.REACT_APP_API_ENDPOINT}/lists`)
-            if(!listsAPI.ok) {
-                throw Error(listsAPI.statusText)
-            }
-            const tripsAPI = await fetch(`${process.env.REACT_APP_API_ENDPOINT}/trips`)
-            if(!tripsAPI.ok) {
-                throw Error(tripsAPI.statusText)
-            }
-            const eventsAPI = await fetch(`${process.env.REACT_APP_API_ENDPOINT}/events`)
-            if(!eventsAPI.ok) {
-                throw Error(eventsAPI.statusText)
-            }
-            const listsRes = await listsAPI.json()
-            const tripsRes = await tripsAPI.json()
-            const eventsRes = await eventsAPI.json()
-            const { setupItems } = this.context
-            setupItems(listsRes, eventsRes, tripsRes)
-            this.setState({ loading: false })
-        } catch (error) {
+            this.setState({ loading: true })
+            await ApiListsService.getLists()
+                .then(this.context.setListItems)
+            await ApiEventsService.getEvents()
+                .then(this.context.setEventItems)
+            await ApiUsersService.getFullName()
+                .then(this.context.setUserItems)
+            await ApiBalancesService.getBalances()
+                .then(this.context.setBalanceItems)
+            await ApiFinancesService.getFinances()
+                .then(this.context.setFinanceItems)
+                .then(this.setState({ loading: false }))
+        }
+        catch(error) {
             console.log(error)
         }
-   }
+    }
     renderDashboard() {
         return (
             <>
-                <DashboardLists history={this.props.history} />
+            <DashboardLists history={this.props.history} />
 
-                <section className='content events trips'>
-                    <div className='main-content-events'>
-                        <DashboardEvents history={this.props.history} />
-                        <DashboardTrips history={this.props.history} />
-                    </div>
-                </section>
+            <section className='content events finances'>
+                <div className='main-content-events'>
+                    <DashboardEvents history={this.props.history} />
+                    <DashboardFinances history={this.props.history} />
+                </div>
+            </section>
             </>
         )
     }

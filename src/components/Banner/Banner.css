@@ -10,7 +10,7 @@
     height: 300px;
     background-size: cover;
     background-repeat: no-repeat;
-    background-image: linear-gradient(rgba(19, 19, 19, 0.45), rgba(90, 90, 90, 0.45)), url('../../img/world-map.jpg');
+    background-image: linear-gradient(rgba(19, 19, 19, 0.45), rgba(90, 90, 90, 0.45)), url('../../img/ocean-pier.jpg');
     margin-bottom: 20px;
     box-shadow: 1px 1px gray;
 }
