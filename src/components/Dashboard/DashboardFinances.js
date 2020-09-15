@@ -89,6 +89,7 @@ class DashboardFinances extends Component {
                            type={transaction.type}
                            description={transaction.description}
                            amount={transaction.amount}
+                           history={this.props.history}
                         />
                      )}
                   </ul>
