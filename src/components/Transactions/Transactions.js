@@ -6,17 +6,18 @@ import { FaPlus, FaClock } from 'react-icons/fa'
 import './Transactions.css'
 import ApiBalancesService from '../../services/api-balance-service'
 import ApiFinancesService from '../../services/api-finance-service'
-import FinanaceItems from '../FinanaceItems/FinanceItems'
 import moment from 'moment'
 import DatePicker from 'react-datepicker'
+import FinanceTransactionItems from '../FinanceTransactionItems/FinanceTransactionItems'
 
 export default class Transactions extends Component {
    state = {
+      error: null,
       loading: false,
       startDate: new Date(),
       endDate: new Date(),
       finances: [],
-      balances: []
+      balances: [],
    }
    static contextType = TravlerContext
 
@@ -29,9 +30,9 @@ export default class Transactions extends Component {
             .then(finance => this.setState({ finances: finance, loading: false }))
       }
       catch(error) {
-          console.log(error)
+         this.setState({ error: error })
       }
-   }
+   } 
 
    backToDashboard = () => {
       this.props.history.push('/dashboard')
@@ -46,9 +47,31 @@ export default class Transactions extends Component {
    handleEndDateChange = (date) => {
       this.setState({ endDate: date })
    }
+   deleteFinanceItem = transaction_id => {
+      const currrentFinances = this.state.finances
+      const newFinances = currrentFinances.filter(trx => trx.id !== transaction_id)
+      setTimeout(() => {
+        this.setState({ finances: newFinances })
+      }, 200)
+   }
+   setBalanceItems = balance => {
+      this.setState({ balances: balance })
+   }
+   updateBalance = () => {
+      ApiBalancesService.getBalances()
+        .then(balance => this.setBalanceItems(balance))
+        .catch(error => console.log(error))
+   }
+   handleDelete = id => {
+      ApiFinancesService.deleteTransaction(id)
+         .then(() => {
+            this.updateBalance()
+            this.deleteFinanceItem(id)
+         })
+   }
 
    render() {
-      const { loading, finances, balances, startDate, endDate } = this.state
+      const { loading, finances, startDate, endDate, balances } = this.state
       const sortedFinances = finances.sort((a, b) => new Date(b.date) - new Date(a.date))
       return (
          <>
@@ -124,13 +147,14 @@ export default class Transactions extends Component {
                         </li>
                         {sortedFinances.filter(item => moment(startDate).utc().local().format().slice(0,10) < item.date && item.date < moment(endDate).add(1, 'days').utc().local().format().slice(0,10))
                            .map((trx, idx) => 
-                              <FinanaceItems
+                              <FinanceTransactionItems
                                  key={idx}
                                  id={trx.id}
                                  date={trx.date}
                                  type={trx.type}
                                  description={trx.description}
                                  amount={trx.amount}
+                                 handleDelete={this.handleDelete}
                               />
                            )}
                      </ul>

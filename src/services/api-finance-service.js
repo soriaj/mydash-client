@@ -32,7 +32,21 @@ const ApiFinancesService = {
          }
       })
       .then(res => !res.ok ? res.json().then(e => Promise.reject(e)) : res.json())
-   }
+   },
+   deleteTransaction(transaction_id) {
+      return fetch(`${config.API_ENDPOINT}/finances/${transaction_id}`, {
+         method: 'DELETE',
+         headers: {
+            'content-type': 'application/json',
+            'authorization': `basic ${TokenService.getAuthToken()}`
+         }
+      })
+      .then(res => {
+         if(!res.ok) {
+            return Promise.reject(res.error)
+         }
+      })
+   },
 }
 
 export default ApiFinancesService

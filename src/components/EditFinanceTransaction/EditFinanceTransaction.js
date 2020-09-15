@@ -5,26 +5,47 @@ import SaveButton from '../SaveButton/SaveButton'
 import { FaMoneyBillAlt, FaFileInvoice, FaClock, FaCaretSquareDown} from 'react-icons/fa'
 import DatePicker from 'react-datepicker'
 import moment from 'moment'
-import './AddFinanceTransaction.css'
+import './EditFinanceTransaction.css'
 import ApiFinancesService from '../../services/api-finance-service'
 import ApiBalancesService from '../../services/api-balance-service'
+import LoadingSpinner from '../LoadingSpinner/LoadingSpinner'
 
-export default class AddFinanceTransaction extends Component {
-
-   state = {
-      error: null,
-      startDate: new Date(),
-      option: 'debit',
-      balances: []
+export default class EditFinanceTransaction extends Component {
+   constructor(props) {
+      super(props)
+      this.state = {
+         error: null,
+         loading: false,
+         startDate: new Date(),
+         option: 'debit',
+         description: '',
+         amount: '',
+         balances: []
+      }
    }
+   
    static contextType = TravelerContext
-   abortController = new AbortController()
 
    // Loads current balance to state
-   componentDidMount() {
-      ApiBalancesService.getBalances()
-         .then(balance => this.setState({ balances: balance }))
-         .catch(error => new Error(error))
+   async componentDidMount() {
+      try {
+         this.setState({ loading: true })
+         const { transaction_id } = this.props.match.params
+         ApiBalancesService.getBalances()
+            .then(balance => this.setState({ balances: balance }))
+         ApiFinancesService.getFinancestByID(transaction_id)
+            .then(data => {
+               this.setState({
+                  option: data.option,
+                  description: data.description,
+                  amount: Number(data.amount.replace(/[^0-9.-]+/g,"")),      
+                  loading: false            
+               })
+            })
+      }
+      catch {
+         throw new Error()
+      }
    }
 
    // Adds new transaction to the database
@@ -85,15 +106,25 @@ export default class AddFinanceTransaction extends Component {
    handleOptionChange = ev => {
       this.setState({ option: ev.target.value })
    }
+   handleDescriptionChange = ev => {
+      this.setState({ amount: ev.target.value })
+   }
+   handleAmountChange = ev => {
+      this.setState({ amount: ev.target.value })
+   }
    render() {
-      const { error } = this.state
+      const { error, option, description, amount, loading } = this.state
       return (
+         <>
+         {loading 
+            ? <LoadingSpinner />
+            : (
          <article className='main-content'>
             <section className='form-container'>
                <div className='login-form'>
                   <form className='form-field' onSubmit={this.handleSubmit}>
                      <div>
-                        <h1>Add New Transaction</h1>
+                        <h1>Edit Transaction</h1>
                      </div>
                      <div role='alert'>
                         {error && <p className='red'>{error}</p>}
@@ -118,7 +149,7 @@ export default class AddFinanceTransaction extends Component {
                            id="type" 
                            placeholder='Select Transaction Type' 
                            className='input-field select-options'
-                           value={this.state.option}
+                           value={option}
                            onChange={this.handleOptionChange}
                            required
                         >
@@ -133,7 +164,9 @@ export default class AddFinanceTransaction extends Component {
                         <input 
                            type="text" 
                            name="description" 
-                           id="description" 
+                           id="description"
+                           value={description} 
+                           onChange={this.handleDescriptionChange}
                            placeholder='Enter Transaction Description' 
                            className='input-field'
                            required
@@ -149,7 +182,9 @@ export default class AddFinanceTransaction extends Component {
                            step="0.01"
                            pattern="^\d+\.\d{0,3}$"
                            name="amount" 
-                           id="amount" 
+                           id="amount"
+                           value={amount} 
+                           onChange={this.handleAmountChange}
                            placeholder='Enter Transaction Amount' 
                            className='input-field'
                            required
@@ -165,6 +200,8 @@ export default class AddFinanceTransaction extends Component {
                </div>
             </section>
          </article>
+         )}
+         </>
       )
   }
 }

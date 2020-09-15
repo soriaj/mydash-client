@@ -18,8 +18,10 @@ const TravelerContext = React.createContext({
     editEventItem: () => {},
     setFinanceItems: () => {},
     addFinananceItem: () => {},
+    deleteFinanceItem: () => {},
     setBalanceItems:  () => {},
-    editBalance: () => {}
+    editBalance: () => {},
+    updateBalance: () => {}
 })
 
 export default TravelerContext;

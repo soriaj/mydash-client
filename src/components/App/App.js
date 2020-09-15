@@ -23,7 +23,9 @@ import Events from '../Events/Events'
 import Finance from '../Finance/Finance'
 import Transactions from '../Transactions/Transactions'
 import AddFinanceTransaction from '../AddFinanceTransaction/AddFinanceTransaction'
+import EditFinanceTransaction from '../EditFinanceTransaction/EditFinanceTransaction'
 import moment from 'moment'
+import ApiBalancesService from '../../services/api-balance-service'
 
 class App extends Component {
   state = {
@@ -102,6 +104,13 @@ class App extends Component {
   addFinananceItem = transaction => {
     this.setState({ finances: [...this.state.finances, transaction] })
   }
+  deleteFinanceItem = transaction_id => {
+    const currrentFinances = this.state.finances
+    const newFinances = currrentFinances.filter(trx => trx.id !== transaction_id)
+    setTimeout(() => {
+      this.setState({ finances: newFinances })
+    }, 200)
+  }
 
   // Balance Items
   setBalanceItems = balance => {
@@ -114,6 +123,11 @@ class App extends Component {
         (balance.id !== updatedBalance.id) ? balance : updatedBalance
       )
     })
+  }
+  updateBalance = () => {
+    ApiBalancesService.getBalances()
+      .then(balance => this.setBalanceItems(balance))
+      .catch(error => console.log(error))
   }
 
   render() {
@@ -135,9 +149,11 @@ class App extends Component {
       addListItem: this.addListItem,
       addEventItem: this.addEventItem,
       addFinananceItem: this.addFinananceItem,
+      deleteFinanceItem: this.deleteFinanceItem,
       deleteListItem: this.deleteListItem,
       deleteEventItem: this.deleteEventItem,
       editEventItem: this.editEventItem,
+      updateBalance: this.updateBalance
     }
     return (
       <div className='App grid'>
@@ -169,6 +185,7 @@ class App extends Component {
               {/* FINANCE COMPONENT ROUTES */}
               <PrivateRoute exact path='/finances' component={Finance} />
               <PrivateRoute path='/add-transaction' component={AddFinanceTransaction} />
+              <PrivateRoute path='/transactions/:transaction_id' component={EditFinanceTransaction} />
               <PrivateRoute path='/transactions' component={Transactions} />
               
               {/* NOT FOUND ROUTE */}

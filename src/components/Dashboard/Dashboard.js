@@ -14,6 +14,7 @@ import ApiFinancesService from '../../services/api-finance-service';
 export default class Dashboard extends Component {
     state = {
         loading: false,
+        error: null
     }
     static contextType = TravelerContext
     
@@ -33,7 +34,7 @@ export default class Dashboard extends Component {
                 .then(this.setState({ loading: false }))
         }
         catch(error) {
-            console.log(error)
+            this.setState({error: error })
         }
     }
     renderDashboard() {
