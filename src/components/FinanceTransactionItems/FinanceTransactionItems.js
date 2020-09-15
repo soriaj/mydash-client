@@ -1,11 +1,9 @@
 import React, { Component } from 'react'
 import { FaRegTrashAlt } from 'react-icons/fa';
 import moment from 'moment'
-import './FinanceItems.css'
-import ApiFinancesService from '../../services/api-finance-service'
 import TravelerContext from '../../context/TravlerContext'
 
-export default class FinanaceItems extends Component {
+export default class FinanceTransactionItems extends Component {
    constructor(props) {
       super(props);
       this.state = {
@@ -23,12 +21,7 @@ export default class FinanaceItems extends Component {
    handleDelete = ev => {
       ev.stopPropagation()
       const transaction_id = this.props.id
-      ApiFinancesService.deleteTransaction(transaction_id)
-         .then(() => {
-            this.context.updateBalance()
-            this.context.deleteFinanceItem(transaction_id)
-         })
-         .catch(error => console.log(error))
+      this.props.handleDelete(transaction_id)
 
    }
    render() {

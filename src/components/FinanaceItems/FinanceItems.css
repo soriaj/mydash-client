@@ -28,6 +28,28 @@
    display: flex;
    justify-content: flex-end;
 }
+.finance-item-edit,
+.finance-item-remove {
+   opacity: 1;
+   margin-right: 10px;
+   padding-left: 10px;
+   padding-right: 10px;
+   font-size: 45px;
+   font-weight: bold;
+   transition: opacity 2s ease-in-out;
+}
+.finance-item-edit:hover {
+   color: whitesmoke;
+   background-color: royalblue;
+   border-radius: 50px;
+   transition: all 200ms ease-in;
+}
+.finance-item-remove:hover {
+   color: whitesmoke;
+   background-color: red;
+   border-radius: 50px;
+   transition: all 200ms ease-in;
+}
 .date-header,
 .type-header,
 .amount-header {
@@ -51,5 +73,9 @@
 @media screen and (min-width: 768px){
    .finance-item-type {
       justify-content: flex-start;
+   }
+   .finance-item-edit,
+   .finance-item-remove {
+      font-size: 30px;
    }
 }
