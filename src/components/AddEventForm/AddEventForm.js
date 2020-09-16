@@ -23,7 +23,8 @@ export default class NewListForm extends Component {
         const { startDate } = this.state
         const { addEventItem } = this.context
         const newEvent = {
-            date: moment(startDate).utc().local().format(),
+            date: moment.utc(startDate).local().format(),
+            // date: moment(startDate).utc().local().format(),
             event_name: event_name.value,
             event_loc: event_loc.value,
             description: description.value

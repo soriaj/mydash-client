@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import TravelerContext from '../../context/TravlerContext'
 import { FaCalendarDay, FaRegTrashAlt, FaPencilAlt } from 'react-icons/fa'
 import './EventsTimeline.css'
-// import config from '../../config'
 import moment from 'moment'
 import ApiEventsService from '../../services/api-events-service'
 
@@ -16,7 +15,6 @@ export default class EventsTimeline extends Component {
     handleDeleteEvent = ev => {
         ev.stopPropagation()
         const event_id = this.props.id
-        // this.deleteEvent(event_id)
         ApiEventsService.deleteEvent(event_id)
             .then(() => {
                 this.context.deleteEventItem(event_id)
@@ -30,7 +28,7 @@ export default class EventsTimeline extends Component {
     }
     render() {
         const { name, date, description, event_loc } = this.props
-        let formatDates = moment(date).utc().local().format("MM/DD/YYYY")
+        let formatDates = moment.utc(date).format("MM/DD/YYYY")
         return (
             <li className='timeline-block'>
                 <div className='timeline-icon'>
