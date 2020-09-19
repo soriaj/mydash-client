@@ -70,7 +70,6 @@ class App extends Component {
       eventsDateUpdated.push(
         {
           id, 
-          // date: moment().utc(date).local().format(), 
           date,
           event_name, 
           event_loc, 
