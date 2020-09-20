@@ -24,7 +24,6 @@ import Finance from '../Finance/Finance'
 import Transactions from '../Transactions/Transactions'
 import AddFinanceTransaction from '../AddFinanceTransaction/AddFinanceTransaction'
 import EditFinanceTransaction from '../EditFinanceTransaction/EditFinanceTransaction'
-import moment from 'moment'
 import ApiBalancesService from '../../services/api-balance-service'
 
 class App extends Component {

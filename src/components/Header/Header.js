@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
-import { FaBars, FaUserAlt, FaSignOutAlt, FaSignInAlt, FaUserPlus, FaChevronCircleDown, FaChevronCircleUp } from 'react-icons/fa';
+import { FaBars, FaSignOutAlt, FaSignInAlt, FaUserPlus, FaChevronCircleDown, FaChevronCircleUp } from 'react-icons/fa';
 import './Header.css'
 import TravelerContext from '../../context/TravlerContext'
 import TokenService from '../../services/token-service'
