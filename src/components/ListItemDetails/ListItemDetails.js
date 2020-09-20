@@ -109,7 +109,6 @@ export default class ListItemDetails extends Component {
     }
     renderListsItemDetails() {
         const { loading, items } = this.state
-
         return (
             <>
             {loading 
@@ -153,9 +152,9 @@ export default class ListItemDetails extends Component {
                                             : <FaRegSquare className='fa-reg-square'/>}
                                     </div>
                                     <div className={`list-items-content`}>
-                                        <p className={`${todo.isComplete ? 'complete' : ''}`}>{todo.name}</p>
+                                        <p className={`${todo.iscomplete ? "complete" : ''}`}>{todo.name}</p>
                                     </div>
-                                    <div tabIndex="0" className={`control-bar ${todo.isComplete ? 'complete' : ''}`} 
+                                    <div tabIndex="0" className={`control-bar ${todo.iscomplete ? 'complete' : ''}`} 
                                         onClick={(ev) => this.removeItem(ev, todo.id)}
                                         onKeyPress={(ev) => this.removeItemByKeyPress(ev, todo.id)}
                                     >
