@@ -51,10 +51,6 @@ class Header extends Component {
         return (
             <>
             <li className='dropdown-list-item'>
-                <span className='dropdown-icon'><FaUserAlt /></span>
-                <span className='dropdown-label'><Link to='/account' onClick={this.closeOnRouteChange}>Account</Link></span>
-            </li>
-            <li className='dropdown-list-item'>
                 <span className='dropdown-icon'><FaSignOutAlt /></span>
                 <span className='dropdown-label'><Link to='/login' onClick={this.handleOnLogout}>Log Out</Link></span>
             </li> 
