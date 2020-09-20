@@ -9,59 +9,22 @@
 }
 .section-one {
    padding-left: 10px;
-   line-height: 1.5;
+   line-height: 1.1;
 }
-
 .section-one h2 {
    font-size: 2.7em;
 }
-
 .section-one p {
    margin: 0 0 2em 0;
    font-size: 1.2em;
 }
-
-.btn-one {
-   background-color: transparent;
-   box-shadow: inset 0 0 0 2px #3171e7;
-   color: #3171e7 !important;
-   padding: 15px 30px;
-   text-decoration: none;
-   text-align: center;
-   text-transform: uppercase;
-   font-weight: 700;
-   transition: background-color .5s;
+.last-landing-title {
+    margin-bottom: 80px;
 }
-
-.btn-one:hover {
-   background-color: #3171e736;
+@media screen and (min-width: 768px) {
+    .login-btn-container.login-btn-landing {
+        margin-left: auto;
+        margin-right: auto;
+        width: 350px;
+    }
 }
-
-
-/* @media screen and (min-width: 768px) {
-   .nav-container {
-       padding-right: 50px;
-       padding-left: 50px;
-   }
-   .logo {
-       padding-left: 0;
-   }
-   .hidden-menu-icon {
-       display: none;
-   }
-   .hidden-items {
-       display: inline-flex;
-   }
-   .section-two .inner, .section-three .inner {
-       flex-direction: row;
-   }
-   .section-two .inner article {
-       width: 50%;
-   }
-   .section-two .inner article:first-child {
-       padding-right: 6em;
-   }
-   .section-two .inner article:last-child {
-       padding-left: 6em;
-   }
-} */
