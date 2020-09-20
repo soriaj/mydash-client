@@ -22,6 +22,7 @@ export default class NewListForm extends Component {
         const { event_name, event_loc, description } = ev.target
         const { startDate } = this.state
         const { addEventItem } = this.context
+        // Creates newEvent object to be sent to DB
         const newEvent = {
             date: moment.utc(startDate).local().format(),
             event_name: event_name.value,
@@ -29,6 +30,7 @@ export default class NewListForm extends Component {
             description: description.value
         }
         this.setState({ error: null })
+        // Add event API call
         ApiEventsService.addEvent(newEvent)
         .then(data => {
             addEventItem(data)
