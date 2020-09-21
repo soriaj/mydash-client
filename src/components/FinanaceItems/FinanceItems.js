@@ -6,17 +6,16 @@ import ApiFinancesService from '../../services/api-finance-service'
 import TravelerContext from '../../context/TravlerContext'
 
 export default class FinanaceItems extends Component {
-   constructor(props) {
-      super(props);
-      this.state = {
-         selected: true,
-      }
+   state = {
+      selected: true,
    }
    static contextType = TravelerContext
 
+   // On hover will will update to show delete icon
    onHover = () => {
       this.setState({ selected: false })
    }
+   // On mouse exit will hide delete icon
    onExit = () =>  {
       this.setState({ selected: true })
    }

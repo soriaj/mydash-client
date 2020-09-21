@@ -20,9 +20,11 @@ export default class DashboardEvents extends Component {
     componentWillUnmount() {
         window.removeEventListener("resize", this.updatePredicate);
     }
+    // Set isDesktop state based on screen size
     updatePredicate = () => {
         this.setState({ isDesktop: window.innerWidth > 1024 });
     }
+    // Change chevron arrows based on selection
     enableChevronClick = () => {
         return (
             <h3 
@@ -33,15 +35,17 @@ export default class DashboardEvents extends Component {
             </h3>
         )
     }
+    // If on desktop view, disable chevron arrows to hide sections
     disableChevronClick = () => {
         return (
             <h3 className='content-header-title'>Events</h3>            
         )
     }
+    // Direct user Add Event Form
     addNewEvent = () => {
         this.props.history.push(`/add-event`)
     }
-    // On click handler to change state of showing events
+    // Control mobile hide or show events section
     showEventItems = () => {
         this.setState({
             showEvents: !this.state.showEvents
@@ -72,7 +76,7 @@ export default class DashboardEvents extends Component {
                     <h4>Filter By Date:</h4>
                     <SearchBox handleDateFilter={selected => this.handleDateChange(selected)} />
                     <ul className='timeline-list'>
-                        {/* filter evets array and only show events that match selected date */}
+                        {/* filter events array and only show events that match selected date */}
                         {events.filter(item => item.date.includes(moment.utc(startDate).local().format().slice(0,10)))
                             .map((event,idx) =>
                                 <EventsTimeline 

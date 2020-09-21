@@ -4,11 +4,13 @@ import BackToDashboard from '../BackToDashboard/BackToDashboard'
 import SaveButton from '../SaveButton/SaveButton'
 import { FaMoneyBillAlt, FaFileInvoice, FaClock, FaCaretSquareDown} from 'react-icons/fa'
 import DatePicker from 'react-datepicker'
-import moment from 'moment'
 import './AddFinanceTransaction.css'
 import ApiFinancesService from '../../services/api-finance-service'
 import ApiBalancesService from '../../services/api-balance-service'
 
+
+// Component that adds new income or purchases to transactions
+// Updates the associated user balance based on these transactions
 export default class AddFinanceTransaction extends Component {
 
    state = {
@@ -51,15 +53,17 @@ export default class AddFinanceTransaction extends Component {
       ev.preventDefault()
       const { description, amount } = ev.target
       const { startDate, option, balances } = this.state
+      // Create newTransaction object to be sent to DB
       const newTrasaction = {
-         date: moment(startDate).utc().local().format(),
+         date: startDate,
          type: option,
          description: description.value,
          amount: Number(amount.value),
       }
       this.setState({ error: null })
+      // Call Add Transaction function
       this.addTransaction(newTrasaction)
-
+      // Update balances based on type 'income' or 'purchase'
       if(option === 'debit') {
          let updatedBalance = {
             balance: balances[0].balance - Number(amount.value)
@@ -82,6 +86,7 @@ export default class AddFinanceTransaction extends Component {
    handleDateChange = date => {
       this.setState({ startDate: date })
    }
+   // Keeps track of transaction type credit (income) or debit (purchase)
    handleOptionChange = ev => {
       this.setState({ option: ev.target.value })
    }

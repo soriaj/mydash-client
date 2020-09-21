@@ -17,14 +17,11 @@ import AddEventForm from '../AddEventForm/AddEventForm';
 import LoginPage from '../../routes/LoginPage';
 import TokenService from '../../services/token-service'
 import LandingPage from '../../routes/LandingPage';
-import EditListItemDetails from '../EditListItemDetails/EditListItemDetails'
 import EditEventItem from '../EditEventItem/EditEventItem';
 import Events from '../Events/Events'
-import Finance from '../Finance/Finance'
 import Transactions from '../Transactions/Transactions'
 import AddFinanceTransaction from '../AddFinanceTransaction/AddFinanceTransaction'
 import EditFinanceTransaction from '../EditFinanceTransaction/EditFinanceTransaction'
-import moment from 'moment'
 import ApiBalancesService from '../../services/api-balance-service'
 
 class App extends Component {
@@ -127,7 +124,7 @@ class App extends Component {
   updateBalance = () => {
     ApiBalancesService.getBalances()
       .then(balance => this.setBalanceItems(balance))
-      .catch(error => console.log(error))
+      .catch(error => this.setState({error : error }))
   }
 
   render() {
@@ -166,24 +163,21 @@ class App extends Component {
               <Route exact path='/' component={LandingPage} />
               
               {/* PUBLIC ROUTES */}
-              <PublicRoute path='/login' component={LoginPage} />
-              <PublicRoute path='/signup' component={Signup} />
+              <PublicRoute exact path='/login' component={LoginPage} />
+              <PublicRoute exact path='/signup' component={Signup} />
               
               {/* PRIVATE ROUTE */}
               <PrivateRoute exact path='/dashboard' component={Dashboard} />
               {/* LIST COMPONENT ROUTES */}
               <PrivateRoute path='/lists/:list_id' component={ListItemDetails} />
               <PrivateRoute path='/add-list' component={AddListForm} />
-              <PrivateRoute path='/edit/:list_id' component={EditListItemDetails} />
 
               {/* EVENT COMPONENT ROUTES */}
-              {/* <PrivateRoute path='/events/:event_id' component={EventItemDetails} /> */}
               <PrivateRoute exact path='/events' component={Events} />
               <PrivateRoute path='/events/:event_id' component={EditEventItem} />
               <PrivateRoute path='/add-event' component={AddEventForm} />
               
               {/* FINANCE COMPONENT ROUTES */}
-              <PrivateRoute exact path='/finances' component={Finance} />
               <PrivateRoute path='/add-transaction' component={AddFinanceTransaction} />
               <PrivateRoute path='/transactions/:transaction_id' component={EditFinanceTransaction} />
               <PrivateRoute path='/transactions' component={Transactions} />

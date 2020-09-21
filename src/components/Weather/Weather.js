@@ -29,7 +29,7 @@ export default class Weather extends Component {
             }
         }
         catch (error) {
-            console.log(error)
+            this.setState({error})
         }
     }    
     componentDidMount() {
@@ -43,7 +43,7 @@ export default class Weather extends Component {
                 this.getWeather(updateLocation)
             })
         } else {
-            console.log(`Can't get your location`)
+            console.log(`Refresh and allow location to get current weather`)
             this.setState({ temp: '', description: '', icon: '' })
         } 
     }

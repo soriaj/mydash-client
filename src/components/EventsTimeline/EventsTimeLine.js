@@ -22,7 +22,7 @@ export default class EventsTimeline extends Component {
 
     }
     // Will direct user to EditEventItem Component
-    handleEditEvent = ev => {
+    handleEditEvent = () => {
         const event_id = this.props.id
         this.props.history.push(`/events/${event_id}`)
     }

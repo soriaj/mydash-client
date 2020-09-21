@@ -42,7 +42,7 @@ class SideNav extends Component {
         return (
             <div className='sidenav-account'>
                 <div className='sidenav-account-title'>
-                    <h1 className='sidenav-heading'>{'Welcome'}</h1>
+                    <Link to={'/'}><h1 className='sidenav-heading'>{'Welcome'}</h1></Link>
                 </div>
             </div>
         )

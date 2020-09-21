@@ -21,16 +21,18 @@ export default class ListItemDetails extends Component {
     }
 
     static contextType = TravelerContext
+    // Calls API lists endpoint to get users lists
     loadAllData = list_id => {
         ApiListsService.getListWithId(list_id)
             .then(data => this.setState({ items: [...data]}))
-            .catch(error => console.log(error))
+            .catch(error => this.setState({error}))
     }
     componentDidMount() {
         const { list_id } = this.props.match.params
         this.loadAllData(list_id)
         
     }
+    // Ensure lists are updated when link is selected from sidenav
     componentDidUpdate(prevProps) { 
         const { list_id } = this.props.match.params
         if(prevProps.match.params.list_id !== list_id) {
@@ -47,15 +49,18 @@ export default class ListItemDetails extends Component {
         this.patchItemAPI(todo.id, markItem)
         this.setState({ items: this.state.items.map(item => (item.id !== todo.id) ? item : markItem ) })
     }
+    // Check item as completed with keypress
     completedListItemByKey = (ev, todo) => {
         if(ev.charCode === parseInt('13') || ev.charCode === parseInt('32')){
             this.completedListItem(todo)
         }
     }
+    // API call to patch list item on select
     patchItemAPI = async (itemId, markItem) => {
             ApiListsItemsService.patchListsItem(markItem, itemId)
                 .catch(error => console.log(error))
     }
+    // API call to listsitems with new todo item
     postItemAPI = async (newItem) => {
         const { list_id } = this.props.match.params
         ApiListsItemsService.postListsItems(newItem)
@@ -64,10 +69,12 @@ export default class ListItemDetails extends Component {
             }), 200)
             .catch(error => console.log(error))
     }
+    // API call to remove list item from selected list
     removeItemAPI = async (list_itemId) => {
         ApiListsItemsService.deleteListsItem(list_itemId)
             .catch(error => console.log(error))
     }
+    // Add new item to the selected list
     handleAddListItem = ev => {
         ev.preventDefault();
         // Get current lists items
@@ -84,6 +91,7 @@ export default class ListItemDetails extends Component {
         // Update state
         this.setState({ items: [...this.state.items, newItem] })
     }
+    // Delete item from selected list
     removeItem = (e, list_itemId) => {
         e.stopPropagation();
         const currentItems = this.state.items
@@ -93,11 +101,13 @@ export default class ListItemDetails extends Component {
             this.setState({ items: newItems })
         })
     }
+    // Delete item with keypress
     removeItemByKeyPress = (ev, id) => {
         if(ev.charCode === parseInt('13') || ev.charCode === parseInt('32')){
             this.removeItem(ev, id)
         }
     }
+    // Get the selected lists title
     getListsTitle() {
         const { lists } = this.context
         const { list_id } = this.props.match.params
@@ -109,7 +119,6 @@ export default class ListItemDetails extends Component {
     }
     renderListsItemDetails() {
         const { loading, items } = this.state
-
         return (
             <>
             {loading 
@@ -153,9 +162,9 @@ export default class ListItemDetails extends Component {
                                             : <FaRegSquare className='fa-reg-square'/>}
                                     </div>
                                     <div className={`list-items-content`}>
-                                        <p className={`${todo.isComplete ? 'complete' : ''}`}>{todo.name}</p>
+                                        <p className={`${todo.iscomplete ? "complete" : ''}`}>{todo.name}</p>
                                     </div>
-                                    <div tabIndex="0" className={`control-bar ${todo.isComplete ? 'complete' : ''}`} 
+                                    <div tabIndex="0" className={`control-bar ${todo.iscomplete ? 'complete' : ''}`} 
                                         onClick={(ev) => this.removeItem(ev, todo.id)}
                                         onKeyPress={(ev) => this.removeItemByKeyPress(ev, todo.id)}
                                     >

@@ -6,7 +6,6 @@ import BackToDashboard from '../BackToDashboard/BackToDashboard'
 import SaveButton from '../SaveButton/SaveButton'
 import Loading from '../Loading/Loading'
 import moment from 'moment';
-// import config from '../../config'
 import ApiEventsService from '../../services/api-events-service'
 import LoadingSpinner from '../LoadingSpinner/LoadingSpinner';
 
@@ -43,7 +42,7 @@ class EditEventItem extends Component {
       const { event_id } = this.props.match.params
       this.loadEventData(event_id)
    }
-
+   // Ensure content is updated correctly based on selected event
    componentDidUpdate(prevProps) {
       const { event_id } = this.props.match.params
       if(prevProps.match.params.event_id !== event_id) {
@@ -68,8 +67,8 @@ class EditEventItem extends Component {
       this.props.history.push('/dashboard')
    }
 
-   handleEditEvent = e => {
-      e.preventDefault()
+   handleEditEvent = ev => {
+      ev.preventDefault()
       const { event_id } = this.props.match.params
       const { event_name, startDate, event_loc, description } = this.state
       const updatedEvent = {
@@ -78,7 +77,7 @@ class EditEventItem extends Component {
          event_loc: event_loc,
          description: description,
       }
-
+      // API call to patch selected event
       ApiEventsService.editEvent(event_id, updatedEvent)
          .then(() => {
             this.setState({
@@ -151,7 +150,6 @@ class EditEventItem extends Component {
                                  value={event_loc}
                                  onChange={this.handleEventLocationChange}
                                  className='input-field'
-                                 // required
                                  />
                               <span className='focus-input-field'></span>
                            </div>
@@ -167,7 +165,6 @@ class EditEventItem extends Component {
                                  value={description} 
                                  onChange={this.handleDescriptionChange}
                                  className='input-field'
-                                 // required
                                  />
                               <span className='focus-input-field'></span>
                            </div>
