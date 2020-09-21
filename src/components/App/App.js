@@ -163,8 +163,8 @@ class App extends Component {
               <Route exact path='/' component={LandingPage} />
               
               {/* PUBLIC ROUTES */}
-              <PublicRoute path='/login' component={LoginPage} />
-              <PublicRoute path='/signup' component={Signup} />
+              <PublicRoute exact path='/login' component={LoginPage} />
+              <PublicRoute exact path='/signup' component={Signup} />
               
               {/* PRIVATE ROUTE */}
               <PrivateRoute exact path='/dashboard' component={Dashboard} />
