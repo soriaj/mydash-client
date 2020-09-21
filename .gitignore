@@ -24,3 +24,4 @@ yarn-error.log*
 .env
 sample.json
 ..bfg-report/*
+.vercel

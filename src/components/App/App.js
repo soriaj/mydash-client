@@ -34,6 +34,18 @@ class App extends Component {
     user: []
   }
   static contextType = TravelerContext
+  componentDidMount() {
+      this.updatePredicate();
+      window.addEventListener("resize", this.updatePredicate);    
+  }
+
+  componentWillUnmount() {
+      window.removeEventListener("resize", this.updatePredicate);
+  }
+  // Set isDesktop state based on screen size
+  updatePredicate = () => {
+      this.setState({ isDesktop: window.innerWidth > 1024 });
+  }
 
   handleTokenChange = () => {
     this.setState({ hasToken: TokenService.hasAuthToken() })
@@ -187,7 +199,7 @@ class App extends Component {
             </Switch>
           </main>
         </TravelerContext.Provider>
-        <Footer />
+        {this.state.isDesktop && <Footer />}
       </div>
     );
   }
