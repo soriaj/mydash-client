@@ -12,9 +12,11 @@ export default class FinanceTransactionItems extends Component {
    }
    static contextType = TravelerContext
 
+   // On hover will will update to show delete icon
    onHover = () => {
       this.setState({ selected: false })
    }
+   // On mouse exit will hide delete icon
    onExit = () =>  {
       this.setState({ selected: true })
    }
@@ -22,7 +24,6 @@ export default class FinanceTransactionItems extends Component {
       ev.stopPropagation()
       const transaction_id = this.props.id
       this.props.handleDelete(transaction_id)
-
    }
    render() {
       const { idx, id, date, description, amount, type } = this.props

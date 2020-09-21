@@ -4,7 +4,6 @@ import BackToDashboard from '../BackToDashboard/BackToDashboard'
 import SaveButton from '../SaveButton/SaveButton'
 import { FaMoneyBillAlt, FaFileInvoice, FaClock, FaCaretSquareDown} from 'react-icons/fa'
 import DatePicker from 'react-datepicker'
-import moment from 'moment'
 import './AddFinanceTransaction.css'
 import ApiFinancesService from '../../services/api-finance-service'
 import ApiBalancesService from '../../services/api-balance-service'
@@ -56,7 +55,7 @@ export default class AddFinanceTransaction extends Component {
       const { startDate, option, balances } = this.state
       // Create newTransaction object to be sent to DB
       const newTrasaction = {
-         date: moment(startDate).utc().local().format(),
+         date: startDate,
          type: option,
          description: description.value,
          amount: Number(amount.value),

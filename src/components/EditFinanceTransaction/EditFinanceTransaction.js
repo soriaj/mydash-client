@@ -5,23 +5,19 @@ import SaveButton from '../SaveButton/SaveButton'
 import { FaMoneyBillAlt, FaFileInvoice, FaClock, FaCaretSquareDown} from 'react-icons/fa'
 import DatePicker from 'react-datepicker'
 import moment from 'moment'
-import './EditFinanceTransaction.css'
 import ApiFinancesService from '../../services/api-finance-service'
 import ApiBalancesService from '../../services/api-balance-service'
 import LoadingSpinner from '../LoadingSpinner/LoadingSpinner'
 
 export default class EditFinanceTransaction extends Component {
-   constructor(props) {
-      super(props)
-      this.state = {
-         error: null,
-         loading: false,
-         startDate: new Date(),
-         option: 'debit',
-         description: '',
-         amount: '',
-         balances: []
-      }
+   state = {
+      error: null,
+      loading: false,
+      startDate: new Date(),
+      option: 'debit',
+      description: '',
+      amount: '',
+      balances: []
    }
    
    static contextType = TravelerContext
@@ -73,7 +69,7 @@ export default class EditFinanceTransaction extends Component {
       const { description, amount } = ev.target
       const { startDate, option, balances } = this.state
       const newTrasaction = {
-         date: moment(startDate).utc().local().format(),
+         date: moment.utc(startDate).local().format(),
          type: option,
          description: description.value,
          amount: Number(amount.value),
@@ -81,6 +77,7 @@ export default class EditFinanceTransaction extends Component {
       this.setState({ error: null })
       this.addTransaction(newTrasaction)
 
+      // Update balance type based on option income (credit), purchase (debit)
       if(option === 'debit') {
          let updatedBalance = {
             balance: balances[0].balance - Number(amount.value)

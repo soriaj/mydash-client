@@ -17,10 +17,11 @@ export default class DashboardLists extends Component {
     componentWillUnmount() {
         window.removeEventListener("resize", this.updatePredicate);
     }
-    
+    // Set isDesktop state based on screen size
     updatePredicate = () => {
         this.setState({ isDesktop: window.innerWidth > 1024 });
     }
+    // Change chevron arrows based on selection
     enableChevronClick = () => {
         return (
             <h3 
@@ -31,6 +32,7 @@ export default class DashboardLists extends Component {
             </h3>
         )
     }
+    // If on desktop view, disable chevron arrows to hide sections
     disableChevronClick = () => {
         return (
             <h3 className='content-header-title'>Lists</h3>            
@@ -40,6 +42,7 @@ export default class DashboardLists extends Component {
     addNewList = () => {
         this.props.history.push(`/add-list`)
     }
+    // Control mobile hide or show lists section
     showListItems = () => {
         this.setState({
             showLists: !this.state.showLists

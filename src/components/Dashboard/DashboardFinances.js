@@ -17,10 +17,11 @@ class DashboardFinances extends Component {
    componentWillUnmount() {
       window.removeEventListener("resize", this.updatePredicate);
    }
-  
+   // Set isDesktop state based on screen size
    updatePredicate = () => {
       this.setState({ isDesktop: window.innerWidth > 1024 });
    }
+   // Change chevron arrows based on selection
    enableChevronClick = () => {
       return (
          <>
@@ -34,6 +35,7 @@ class DashboardFinances extends Component {
           </>
       )
    }
+   // If on desktop view, disable chevron arrows to hide sections
    disableChevronClick = () => {
       return (
          <>
@@ -46,7 +48,7 @@ class DashboardFinances extends Component {
    addItem = () => {
       this.props.history.push(`/add-transaction`)
    }
-   
+   // Control mobile hide or show finance section
    showFinanceItems = () => {
       this.setState({
           showFinance: !this.state.showFinance

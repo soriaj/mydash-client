@@ -14,7 +14,7 @@ class AuthBanner extends Component {
     componentDidMount() {
         ApiUsersService.getFullName()
             .then(user => this.setState({ user: user, loading: false }))
-            .catch(error => console.log(error))       
+            .catch(error => this.setState({ error: error }))       
     }
     render() {
         const { user, loading } = this.state

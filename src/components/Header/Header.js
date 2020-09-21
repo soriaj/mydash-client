@@ -12,23 +12,25 @@ class Header extends Component {
     }
     static contextType = TravelerContext;
 
+    // Handles when user logs out
     handleOnLogout = () => {
         const { handleTokenChange } = this.context
         TokenService.clearAuthToken()
         handleTokenChange()
         this.showMenu()
     }
-
+    // Will show sideNav (used for mobile view)
     showSideNav = () => {
         let showSideNav = document.getElementById('sidenav')
         showSideNav.classList.add('sidenav-active')
     }
+    // Will Login/Sign Up/Logout menu
     showMenu = () => {
         this.setState({ show: !!this.state.show })
         let showMenu = document.querySelector('.header-dropdown-menu')
         showMenu.classList.toggle('header-dropdown-menu-active')
     }
-
+    // Closes showMenu when the route changes
     closeOnRouteChange = () => {
         this.showMenu()
     }

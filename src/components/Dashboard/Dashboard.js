@@ -18,6 +18,7 @@ export default class Dashboard extends Component {
     }
     static contextType = TravelerContext
     
+    // Call API to get lists, events, balances, user full name, and finances
     async componentDidMount() {
         try {
             this.setState({ loading: true })
@@ -37,6 +38,7 @@ export default class Dashboard extends Component {
             this.setState({error: error })
         }
     }
+    // Load Dashboard lists, events and finances
     renderDashboard() {
         return (
             <>

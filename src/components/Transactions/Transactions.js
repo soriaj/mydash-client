@@ -47,6 +47,7 @@ export default class Transactions extends Component {
    handleEndDateChange = (date) => {
       this.setState({ endDate: date })
    }
+   // Removes transaction from finance state
    deleteFinanceItem = transaction_id => {
       const currrentFinances = this.state.finances
       const newFinances = currrentFinances.filter(trx => trx.id !== transaction_id)
@@ -54,9 +55,11 @@ export default class Transactions extends Component {
         this.setState({ finances: newFinances })
       }, 200)
    }
+   // Sets balance state
    setBalanceItems = balance => {
       this.setState({ balances: balance })
    }
+   // Get updated balance
    updateBalance = () => {
       ApiBalancesService.getBalances()
         .then(balance => this.setBalanceItems(balance))
