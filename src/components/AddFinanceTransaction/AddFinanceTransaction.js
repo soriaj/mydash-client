@@ -55,7 +55,7 @@ export default class AddFinanceTransaction extends Component {
       const { startDate, option, balances } = this.state
       // Create newTransaction object to be sent to DB
       const newTrasaction = {
-         date: startDate,
+         date: moment.utc(startDate).local().format(),
          type: option,
          description: description.value,
          amount: Number(amount.value),
