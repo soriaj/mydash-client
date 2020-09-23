@@ -7,7 +7,7 @@ import DatePicker from 'react-datepicker'
 import './AddFinanceTransaction.css'
 import ApiFinancesService from '../../services/api-finance-service'
 import ApiBalancesService from '../../services/api-balance-service'
-
+import moment from 'moment'
 
 // Component that adds new income or purchases to transactions
 // Updates the associated user balance based on these transactions

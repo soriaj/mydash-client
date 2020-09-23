@@ -33,7 +33,7 @@ export default class FinanceTransactionItems extends Component {
             <li key={idx} id={id} className='finance-item' onMouseEnter={this.onHover} onMouseLeave={this.onExit}>
                {!selected && <FaRegTrashAlt className='finance-item-remove' onClick={this.handleDelete}/>}
                <div className='finance-item-date'>
-                  <p className=''>{moment(date).utc().local().format("MM/DD")}</p>
+                  <p className=''>{moment.utc(date).local().format("MM/DD")}</p>
                </div>
                <div className='finance-item-type'>
                   <p>{description}</p>

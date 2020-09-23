@@ -148,7 +148,7 @@ export default class Transactions extends Component {
                            <div className='type-header'>Transaction</div>
                            <div className='amount-header'>Amount</div>
                         </li>
-                        {sortedFinances.filter(item => moment(startDate).utc().local().format().slice(0,10) < item.date && item.date < moment(endDate).add(1, 'days').utc().local().format().slice(0,10))
+                        {sortedFinances.filter(item => moment(startDate).utc().local().format().slice(0,10) < item.date && item.date < moment(endDate).add(2, 'days').utc().local().format().slice(0,10))
                            .map((trx, idx) => 
                               <FinanceTransactionItems
                                  key={idx}
