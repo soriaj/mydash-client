@@ -7,6 +7,7 @@ const ApiEventsService = {
          method: 'GET',
          headers: {
             'content-type': 'application/json',
+            // 'authorization': `basic ${TokenService.getAuthToken()}`
             'authorization': `bearer ${TokenService.getAuthToken()}`,
          }
       })
@@ -18,6 +19,7 @@ const ApiEventsService = {
          headers: {
             'content-type': 'application/json',
             'authorization': `bearer ${TokenService.getAuthToken()}`,
+            // 'authorization': `basic ${TokenService.getAuthToken()}`
          }
       })
       .then(res => !res.ok ? res.json().then(e => Promise.reject(e)) : res.json())
@@ -29,6 +31,7 @@ const ApiEventsService = {
          headers: {
             'content-type': 'application/json',
             'authorization': `bearer ${TokenService.getAuthToken()}`,
+            // 'authorization': `basic ${TokenService.getAuthToken()}`
          }
       })
       .then(res => !res.ok ? res.json().then(e => Promise.reject(e)) : res.json())
@@ -39,6 +42,7 @@ const ApiEventsService = {
          headers: {
             'content-type': 'application/json',
             'authorization': `bearer ${TokenService.getAuthToken()}`,
+            // 'authorization': `basic ${TokenService.getAuthToken()}`
          }
       })
       .then(res => {
@@ -54,6 +58,7 @@ const ApiEventsService = {
          headers: {
             'content-type': 'application/json',
             'authorization': `bearer ${TokenService.getAuthToken()}`,
+            // 'authorization': `basic ${TokenService.getAuthToken()}`
          }
       })
       .then(res => {

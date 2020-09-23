@@ -43,7 +43,7 @@ class Login extends Component {
             <article className='main-content'>
                 <section className='form-container'>
                     <div className='login-form'>
-                        <form className='form-field' onSubmit={this.handleJwtAuthSubmit} disabled={loading}>
+                        <form className='form-field' onSubmit={this.handleJwtAuthSubmit}>
                             <div>
                                 <h1>Login</h1>
                             </div>
