@@ -17,7 +17,7 @@ class Login extends Component {
     }
     static contextType = TravelerContext
 
-    handleSubmit = ev => {
+    handleJwtAuthSubmit = ev => {
         ev.preventDefault();
         this.setState({ error: null, loading: true })
         const { username, password } = ev.target
@@ -43,7 +43,7 @@ class Login extends Component {
             <article className='main-content'>
                 <section className='form-container'>
                     <div className='login-form'>
-                        <form className='form-field' onSubmit={this.handleSubmit}>
+                        <form className='form-field' onSubmit={this.handleJwtAuthSubmit} disabled={loading}>
                             <div>
                                 <h1>Login</h1>
                             </div>

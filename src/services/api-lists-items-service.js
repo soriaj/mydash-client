@@ -8,7 +8,7 @@ const ApiListsItemsService = {
          body: JSON.stringify(newItem),
          headers: {
             'content-type': 'application/json',
-            'authorization': `basic ${TokenService.getAuthToken()}`
+            'authorization': `bearer ${TokenService.getAuthToken()}`,
          }
       })
       .then(res => !res.ok ? res.json().then(e => Promise.reject(e)) : res.json())
@@ -19,7 +19,7 @@ const ApiListsItemsService = {
          body: JSON.stringify(udpatedItem),
          headers: {
              'content-type': 'application/json',
-             'authorization': `basic ${TokenService.getAuthToken()}`
+            'authorization': `bearer ${TokenService.getAuthToken()}`,
          }
      })
    },
@@ -28,7 +28,7 @@ const ApiListsItemsService = {
          method: 'DELETE',
          headers: {
             'content-type': 'application/json',
-            'authorization': `basic ${TokenService.getAuthToken()}`
+            'authorization': `bearer ${TokenService.getAuthToken()}`,
          }
       })
       .then(res => {
