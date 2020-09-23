@@ -7,7 +7,7 @@ const ApiBalancesService = {
          method: 'GET',
          headers: {
             'content-type': 'application/json',
-            'authorization': `basic ${TokenService.getAuthToken()}`
+            'authorization': `bearer ${TokenService.getAuthToken()}`,
          }
       })
       .then(res => !res.ok ? res.json().then(e => Promise.reject(e)) : res.json())
@@ -17,7 +17,7 @@ const ApiBalancesService = {
          method: 'GET',
          headers: {
             'content-type': 'application/json',
-            'authorization': `basic ${TokenService.getAuthToken()}`
+            'authorization': `bearer ${TokenService.getAuthToken()}`,
          }
       })
       .then(res => !res.ok ? res.json().then(e => Promise.reject(e)) : res.json())
@@ -28,7 +28,7 @@ const ApiBalancesService = {
          body: JSON.stringify(updatedBalance),
          headers: {
             'content-type': 'application/json',
-            'authorization': `basic ${TokenService.getAuthToken()}`
+            'authorization': `bearer ${TokenService.getAuthToken()}`,
          }
       })
       .then(res => {

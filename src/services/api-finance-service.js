@@ -7,7 +7,7 @@ const ApiFinancesService = {
          method: 'GET',
          headers: {
             'content-type': 'application/json',
-            'authorization': `basic ${TokenService.getAuthToken()}`
+            'authorization': `bearer ${TokenService.getAuthToken()}`,
          }
       })
       .then(res => !res.ok ? res.json().then(e => Promise.reject(e)) : res.json())
@@ -17,7 +17,7 @@ const ApiFinancesService = {
          method: 'GET',
          headers: {
             'content-type': 'application/json',
-            'authorization': `basic ${TokenService.getAuthToken()}`
+            'authorization': `bearer ${TokenService.getAuthToken()}`,
          }
       })
       .then(res => !res.ok ? res.json().then(e => Promise.reject(e)) : res.json())
@@ -28,7 +28,7 @@ const ApiFinancesService = {
          body: JSON.stringify(newTransaction),
          headers: {
             'content-type': 'application/json',
-            'authorization': `basic ${TokenService.getAuthToken()}`
+            'authorization': `bearer ${TokenService.getAuthToken()}`,
          }
       })
       .then(res => !res.ok ? res.json().then(e => Promise.reject(e)) : res.json())
@@ -38,7 +38,7 @@ const ApiFinancesService = {
          method: 'DELETE',
          headers: {
             'content-type': 'application/json',
-            'authorization': `basic ${TokenService.getAuthToken()}`
+            'authorization': `bearer ${TokenService.getAuthToken()}`,
          }
       })
       .then(res => {

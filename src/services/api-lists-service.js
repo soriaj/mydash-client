@@ -7,7 +7,7 @@ const ApiListsService = {
          method: 'GET',
          headers: {
             'content-type': 'application/json',
-            'authorization': `basic ${TokenService.getAuthToken()}`
+            'authorization': `bearer ${TokenService.getAuthToken()}`,
          }
       })
       .then(res => !res.ok ? res.json().then(e => Promise.reject(e)) : res.json())
@@ -17,7 +17,7 @@ const ApiListsService = {
          method: 'GET',
          headers: {
             'content-type': 'application/json',
-            'authorization': `basic ${TokenService.getAuthToken()}`
+            'authorization': `bearer ${TokenService.getAuthToken()}`,
          }
       })
       .then(res => !res.ok ? res.json().then(e => Promise.reject(e)) : res.json())
@@ -28,7 +28,7 @@ const ApiListsService = {
          body: JSON.stringify(newList),
          headers: {
             'content-type': 'application/json',
-            'authorization': `basic ${TokenService.getAuthToken()}`
+            'authorization': `bearer ${TokenService.getAuthToken()}`,
          }
       })
       .then(res => !res.ok ? res.json().then(e => Promise.reject(e)) : res.json())
@@ -39,7 +39,7 @@ const ApiListsService = {
          body: JSON.stringify(newItem),
          headers: {
             'content-type': 'application/json',
-            'authorization': `basic ${TokenService.getAuthToken()}`
+            'authorization': `bearer ${TokenService.getAuthToken()}`,
          }
       })
       .then(res => !res.ok ? res.json().then(e => Promise.reject(e)) : res.json())
@@ -49,7 +49,7 @@ const ApiListsService = {
          method: 'DELETE',
          headers: {
             'content-type': 'application/json',
-            'authorization': `basic ${TokenService.getAuthToken()}`
+            'authorization': `bearer ${TokenService.getAuthToken()}`,
          }
       })
       .then(res => {
